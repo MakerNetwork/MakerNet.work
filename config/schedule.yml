@@ -1,0 +1,27 @@
+subscription_expire_in_7_days:
+  cron: "0 0 * * *"
+  class: "SubscriptionExpireWorker"
+  queue: default
+  args: [7]
+
+subscription_is_expired:
+  cron: "0 23 * * *"
+  class: "SubscriptionExpireWorker"
+  queue: default
+  args: [0]
+
+generate_statistic:
+  cron: "0 1 * * *"
+  class: "StatisticWorker"
+  queue: default
+
+open_api_trace_calls_count:
+  cron: "0 4 * * 0" # every sunday at 4am
+  class: "OpenAPITraceCallsCountWorker"
+
+reservation_reminder:
+  cron: "1 * * * *"
+  class: "ReservationReminderWorker"
+  queue: default
+
+<%= PluginRegistry.insert_code('yml.schedule') %>
