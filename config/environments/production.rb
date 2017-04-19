@@ -98,7 +98,7 @@ Rails.application.configure do
   }
 
   # use :smtp for switch prod
-  method = Rails.application.secrets.delivery_method || "email"
-  config.action_mailer.delivery_method = Rails.application.secrets.delivery_method.to_sym 
+  emethod = Rails.application.secrets.delivery_method || "email"
+  config.action_mailer.delivery_method = emethod
 
 end
