@@ -38,13 +38,15 @@ group :development, :test do
   gem 'railroady'
 end
 
+
+  gem "puma"
+  gem 'foreman'
+
 group :development do
   # Preview mail in the browser
   gem 'letter_opener'
   gem 'awesome_print'
 
-  gem "puma"
-  gem 'foreman'
 
   gem 'capistrano'
   gem 'rvm-capistrano', require: false
