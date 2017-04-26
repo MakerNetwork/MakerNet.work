@@ -37,8 +37,6 @@ group :development, :test do
 
   gem 'railroady'
 end
-
-
   gem "puma"
   gem 'foreman'
 
