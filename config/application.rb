@@ -75,7 +75,7 @@ module Fablab
     end
 
     FabManager.activate_plugins!
-    config.serve_static_assets = true
+    config.serve_static_files = true
     config.after_initialize do
       if plugins = FabManager.plugins
         plugins.each { |plugin| plugin.notify_after_initialize }
