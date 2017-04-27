@@ -80,4 +80,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
     generated
   end
+  
 end
