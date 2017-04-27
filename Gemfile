@@ -63,7 +63,6 @@ group :test do
   gem 'minitest-reporters'
   gem 'webmock'
   gem 'vcr'
-  gem 'byebug'
   gem 'pdf-reader'
 end
 
@@ -79,7 +78,7 @@ gem 'pg'
 gem 'devise'
 gem 'devise-async'
 
-gem 'omniauth', '1.3.1'
+gem 'omniauth'
 gem 'omniauth-oauth2'
 
 gem 'rolify'
