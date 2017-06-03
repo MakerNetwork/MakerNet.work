@@ -38,7 +38,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 <a name="software-stack"></a>
 ## Software stack
 
-FabManager is a Ruby on Rails / AngularJS web application that runs on the following software:
+MakerNet is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
@@ -75,7 +75,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager.git
+   git clone https://github.com/dangersorus/mnw-fab-man.git
    ```
 
 3. Install the software dependencies.
@@ -139,7 +139,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
    foreman s -p 3000
    ```
 
-11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+11. You should now be able to access your local development MakerNet instance by accessing `http://localhost:3000` in your web browser.
 
 12. You can login as the default administrator using the following credentials:
     - user: admin@fab-manager.com
