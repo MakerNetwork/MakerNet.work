@@ -1,6 +1,6 @@
-# Contributing to FabManager
+# Contributing to MakerNet
 
-♥ [FabManager](http://www.fab-manager.com) and want to get involved?
+♥ [MakerNet](http://www.makernet.work) and want to get involved?
 Thanks! There are plenty of ways you can help!
 
 Please take a moment to review this document in order to make the contribution process easy and effective for everyone 
@@ -13,10 +13,9 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/LaCasemate/fab-manager/issues) is the preferred channel for [bug reports](#bugs)
+The [issue tracker](https://github.com/dangersorus/mnw-fab-man) is the preferred channel for [bug reports](#bugs)
 and [submitting pull requests](#pull-requests), but please respect the following restrictions:
 
-* Please **do not** use the issue tracker for personal support requests (use [the forum](https://forum.fab-manager.com)).
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and respect the opinions of others.
 
@@ -92,11 +91,11 @@ Adhering to the following process is the best way to get your work included in t
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/fab-manager.git
+   git clone https://github.com/<your-username>/mnw-fab-man.git
    # Navigate to the newly cloned directory
    cd fab-manager
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/LaCasemate/fab-manager.git
+   git remote add upstream https://github.com/dangersorus/mnw-fab-man.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -131,4 +130,4 @@ Adhering to the following process is the best way to get your work included in t
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/) with a clear title and description.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work under the terms of 
-the [GNU Affero General Public License](LICENSE.md).
+the [GNU General Public License](LICENSE.md).

@@ -1,6 +1,6 @@
-# FabManager
+# MakerNet
 
-FabManager is the FabLab management solution. It is web-based, open-source and totally free.
+MakerNet is the FabLab management solution. It is web-based, open-source and totally free.
 
 
 ##### Table of Contents  
@@ -13,12 +13,12 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
-5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)<br/>
+5.3. [Setup the MakerNet database in PostgreSQL](#setup-MakerNet-in-postgresql)<br/>
 5.4. [PostgreSQL Limitations](#postgresql-limitations)
 6. [ElasticSearch](#elasticsearch)<br/>
 6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
 6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)<br/>
+6.3. [Setup ElasticSearch for the MakerNet](#setup-MakerNet-in-elasticsearch)<br/>
 6.4. [Backup and Restore](#backup-and-restore-elasticsearch)
 7. [Internationalization (i18n)](#i18n)<br/>
 7.1. [Translation](#i18n-translation)<br/>
@@ -121,7 +121,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-MakerNet-in-postgresql) before, if you don't already had done it.
 
    ```bash
    rake db:setup
@@ -322,7 +322,7 @@ Otherwise, please follow the official instructions on the project's website.
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   ```
 
-<a name="setup-fabmanager-in-postgresql"></a>
+<a name="setup-MakerNet-in-postgresql"></a>
 ### Setup the MakerNet database in PostgreSQL
 
 Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
@@ -355,11 +355,11 @@ To create it, please follow these instructions:
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-4. Then, create the fabmanager_development and fabmanager_test databases
+4. Then, create the MakerNet_development and MakerNet_test databases
 
    ```sql
-   CREATE DATABASE fabmanager_development OWNER sleede;
-   CREATE DATABASE fabmanager_test OWNER sleede;
+   CREATE DATABASE MakerNet_development OWNER sleede;
+   CREATE DATABASE MakerNet_test OWNER sleede;
    ```
 
 5. To finish, attribute a password to this user
@@ -401,7 +401,7 @@ To create it, please follow these instructions:
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module and to perform searches in projects.
+In MakerNet, it is used for the admin's statistics module and to perform searches in projects.
 
 <a name="elasticsearch-on-debian"></a>
 ### Install ElasticSearch on Ubuntu/Debian
@@ -458,7 +458,7 @@ brew update
 brew install homebrew/versions/elasticsearch17
 ```
 
-<a name="setup-fabmanager-in-elasticsearch"></a>
+<a name="setup-MakerNet-in-elasticsearch"></a>
 ### Setup ElasticSearch for MakerNet
 
 1. Launch the associated rake tasks in the project folder.
@@ -680,7 +680,7 @@ Developers may find information on how to implement their own authentication pro
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
-  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
+  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the MakerNet database in PostgreSQL](#setup-MakerNet-in-postgresql) for an example).
   Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
 
         ALTER ROLE sleede WITH SUPERUSER;
