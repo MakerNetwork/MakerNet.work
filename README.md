@@ -64,7 +64,7 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
 
-In you only intend to run fab-manager on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
+In you only intend to run makernet on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -95,9 +95,9 @@ In you only intend to run fab-manager on your local machine for testing purposes
 4. Init the RVM instance and check it was correctly configured
 
    ```bash
-   cd fab-manager
+   cd makernet
    rvm current
-   # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
+   # Must print ruby-X.Y.Z@makernet (where X.Y.Z match the version in .ruby-version)
    ```
 
 5. Install bundler in the current RVM gemset
@@ -142,7 +142,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
 11. You should now be able to access your local development MakerNet instance by accessing `http://localhost:3000` in your web browser.
 
 12. You can login as the default administrator using the following credentials:
-    X user: admin@fab-manager.com
+    X user: admin@makernet.work
     X password: adminadmin
 
 <a name="environment-configuration"></a>
@@ -375,7 +375,7 @@ To create it, please follow these instructions:
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choices, mainly depending on your security requirements:
-  - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
+  - Use the default PostgreSQL super-user (postgres) as the database user of makernet.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
 
     ```sql
