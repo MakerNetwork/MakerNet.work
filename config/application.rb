@@ -58,9 +58,7 @@ module Fablab
     end
 
     if Rails.env.development?
-      config.web_console.whitelisted_ips << '192.168.0.0/16'
-      config.web_console.whitelisted_ips << '192.168.99.0/16' #docker
-      config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
+      config.web_console.whitelisted_ips << '0.0.0.0/0'
     end
 
     # load locales for subdirectories

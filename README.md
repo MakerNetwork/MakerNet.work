@@ -38,7 +38,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 <a name="software-stack"></a>
 ## Software stack
 
-FabManager is a Ruby on Rails / AngularJS web application that runs on the following software:
+MakerNet is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
@@ -58,7 +58,7 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 <a name="setup-a-production-environment"></a>
 ## Setup a production environment
 
-To run fab-manager as a production application, this is highly recommended to use [Docker](https://www.docker.com/).
+To run MakerNet as a production application, this is highly recommended to use [Docker](https://www.docker.com/).
 The procedure to follow is described in the [docker readme](docker/README.md).
 
 <a name="setup-a-development-environment"></a>
@@ -75,7 +75,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager.git
+   git clone https://github.com/dangersorus/mnw-fab-man.git
    ```
 
 3. Install the software dependencies.
@@ -139,11 +139,11 @@ In you only intend to run fab-manager on your local machine for testing purposes
    foreman s -p 3000
    ```
 
-11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+11. You should now be able to access your local development MakerNet instance by accessing `http://localhost:3000` in your web browser.
 
 12. You can login as the default administrator using the following credentials:
-    - user: admin@fab-manager.com
-    - password: adminadmin
+    X user: admin@fab-manager.com
+    X password: adminadmin
 
 <a name="environment-configuration"></a>
 ### Environment Configuration
@@ -159,7 +159,7 @@ This value is only used when deploying with Docker, otherwise this is configured
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
+Please see [Setup the MakerNet database in PostgreSQL](#setup-makernet-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
 
     REDIS_HOST
@@ -323,7 +323,7 @@ Otherwise, please follow the official instructions on the project's website.
   ```
 
 <a name="setup-fabmanager-in-postgresql"></a>
-### Setup the FabManager database in PostgreSQL
+### Setup the MakerNet database in PostgreSQL
 
 Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
@@ -459,7 +459,7 @@ brew install homebrew/versions/elasticsearch17
 ```
 
 <a name="setup-fabmanager-in-elasticsearch"></a>
-### Setup ElasticSearch for the FabManager
+### Setup ElasticSearch for MakerNet
 
 1. Launch the associated rake tasks in the project folder.
    This will create the fields mappings in ElasticSearch DB
@@ -488,7 +488,7 @@ Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhos
 <a name="i18n"></a>
 ## Internationalization (i18n)
 
-The FabManager application can only run in a single language but this language can easily be changed.
+The MakerNet application can only run in a single language but this language can easily be changed.
 
 <a name="i18n-translation"></a>
 ### Translation
@@ -623,16 +623,6 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
-
-If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
-
-To start using this awesome feature, there are a few steps:
-- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
-- fill in the value of the keys in your `application.yml`
-- start your fab-manager app
-- export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
-
 **IMPORTANT: please run your server in production mode.**
 
 Go to your projects gallery and enjoy seeing your projects available from everywhere ! That's all.
@@ -640,25 +630,23 @@ Go to your projects gallery and enjoy seeing your projects available from everyw
 <a name="plugins"></a>
 ## Plugins
 
-Fab-manager has a system of plugins mainly inspired by [Discourse](https://github.com/discourse/discourse) architecture.
+MakerNet has a system of plugins mainly inspired by [Discourse](https://github.com/discourse/discourse) architecture.
 
 It enables you to write plugins which can:
 - have its proper models and database tables
 - have its proper assets (js & css)
-- override existing behaviours of Fab-manager
+- override existing behaviours of MakerNet
 - add features by adding views, controllers, ect...
 
-To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
-
-You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
+To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of MakerNet.
 
 <a name="sso"></a>
 ## Single Sign-On
 
-Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
+MakerNet can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
 Currently OAuth 2 is the only supported protocol for SSO authentication.
 
-For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+For an example of how to use configure a SSO in MakerNet, please read [sso_with_github.md](doc/sso_with_github.md).
 Developers may find information on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
