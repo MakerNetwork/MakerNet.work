@@ -13,7 +13,7 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/dangersorus/mnw-fab-man) is the preferred channel for [bug reports](#bugs)
+The [issue tracker](https://github.com/MakerNetwork/MakerNet.work) is the preferred channel for [bug reports](#bugs)
 and [submitting pull requests](#pull-requests), but please respect the following restrictions:
 
 
@@ -95,7 +95,7 @@ Adhering to the following process is the best way to get your work included in t
    # Navigate to the newly cloned directory
    cd fab-manager
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/dangersorus/mnw-fab-man.git
+   git remote add upstream https://github.com/MakerNetwork/MakerNet.work.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:

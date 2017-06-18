@@ -75,7 +75,7 @@ In you only intend to run makernet on your local machine for testing purposes or
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/dangersorus/mnw-fab-man.git
+   git clone https://github.com/MakerNetwork/MakerNet.work.git
    ```
 
 3. Install the software dependencies.
