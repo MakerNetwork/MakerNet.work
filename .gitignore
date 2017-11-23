@@ -39,9 +39,11 @@
 
 .vagrant
 .docker
+.envrc
 
 # Do not versionate coveralls token
 .coveralls.yml
 
 # Plugins are versioned is their own repository
 /plugins/*
+/.gtm/
