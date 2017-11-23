@@ -3,12 +3,13 @@
 MakerNet is the FabLab management solution. It is web-based, open-source and totally free.
 
 
-##### Table of Contents  
+##### Table of Contents
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
-4.1. [General Guidelines](#general-guidelines)<br/>
+4.1  [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
+4.1. [Manual Instructions](#manual-instructions)<br/>
 4.2. [Environment Configuration](#environment-configuration)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
@@ -66,8 +67,79 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 
 In you only intend to run makernet on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
 
-<a name="general-guidelines"></a>
-### General Guidelines
+<a name="virtual-machine-instructions"></a>
+### Virtual Machine Instructtions
+
+Using a virtual machine most of the software dependencies get installed automatically and it avoids
+installing a lot of software and services directly on the development machine.
+
+1. Install [Vagrant][0] and [Virtual Box][1] (with the extension package).
+
+2. Retrieve the project from Git
+
+   ```bash
+   git clone https://github.com/MakerNetwork/MakerNet.work.git
+   ```
+
+3. Get a copy from the `.envrc` file that contains environment values to be used by the aplication
+   and place it at the root directory of the project. (Ask for it to one of the collaborators).
+
+4. From the project directory, run:
+
+   ```bash
+   vagrant up
+   ```
+
+5. Once the virtual machine finished building, log into it with:
+
+   ```bash
+   vagrant ssh
+   ```
+
+6. While logged in, navigate to the project folder and install the Gemfile
+   dependencies:
+
+   ```bash
+   cd /vagrant
+   bundle install
+   ```
+
+7. Allow Direnv to load `.envrc` values as environment variables:
+
+   ```bash
+   direnv allow .
+   ```
+
+
+8. Set a directory for Sidekick pids:
+
+   ```bash
+   mkdir -p tmp/pids
+   ```
+
+9. Copy the default configuration files:
+
+   ```bash
+   cp config/database.yml.default config/database.yml
+   cp config/application.yml.default config/application.yml
+   ```
+
+10. Set up the databases:
+
+   ```bash
+   bundle exec rake db:setup
+   bundle exec rake fablab:es_build_stats
+   ```
+
+11. Start the application and visit `localhost:3000` on your browser to check that it works:
+
+   ```bash
+   bundle exec foreman s -p 3000
+   ```
+
+
+<a name="manual-instructions"></a>
+### Manual Instructions
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
@@ -261,7 +333,7 @@ Please consider that allowing file archives (eg. application/zip) or binary exec
 
     MAX_IMAGE_SIZE
 
-Maximum size (in bytes) allowed for image uploaded on the platform. 
+Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
 
@@ -671,12 +743,12 @@ Developers may find information on how to implement their own authentication pro
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
 
         Error:
-        ...                                                               
-        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."      
-        DETAIL:  Key (group_id)=(1) is not present in table "groups".                                                                                                   
-        : ...                                                                                                
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
+        ...
+        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."
+        DETAIL:  Key (group_id)=(1) is not present in table "groups".
+        : ...
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
