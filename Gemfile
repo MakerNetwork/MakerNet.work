@@ -130,7 +130,7 @@ gem 'notify_with'
 
 gem 'pundit'
 
-gem 'oj'
+gem 'oj', '~> 3.3.9'
 
 gem 'actionpack-page_caching'
 gem 'rails-observers'
