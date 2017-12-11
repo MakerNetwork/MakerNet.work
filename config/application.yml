@@ -1,0 +1,7 @@
+# Add application configuration variables here.
+#
+# If the values can be subject of constant changes, refer the values to
+# environment variables. Else, if the values usually don't change or should
+# not change once set, write its value directly.
+
+# STRIPE_CURRENCY: 'usd' # Once the currency is set, the currency should not change to avoid errors with payments.
