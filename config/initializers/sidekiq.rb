@@ -4,8 +4,7 @@ else
   namespace = "fablab"
 end
 
-redis_host = ENV["REDIS_HOST"] || 'localhost'
-redis_url = "redis://#{redis_host}:6379"
+redis_url = ENV["REDIS_HOST"] || 'redis://localhost:6379'
 
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url, namespace: namespace }
