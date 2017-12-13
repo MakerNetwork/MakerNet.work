@@ -75,10 +75,11 @@ end
 
 if Group.count == 0
   Group.create!([
-    {name: 'standard, association', slug: 'standard'},
-    {name: "étudiant, - de 25 ans, enseignant, demandeur d'emploi", slug: 'student'},
-    {name: 'artisan, commerçant, chercheur, auto-entrepreneur', slug: 'merchant'},
-    {name: 'PME, PMI, SARL, SA', slug: 'business'}
+    {name: 'standard member', slug: 'standard'},
+    {name: 'student, senior, veteran, first responder, unemployed', slug: 'student'},
+    {name: 'supporter member (limited use)', slug: 'merchant'},
+    {name: 'resident maker, volunteer', slug: 'business'},
+    {name: 'paused membership', slug: 'paused-membership'}
   ])
 end
 
@@ -110,34 +111,34 @@ end
 
 if Licence.count == 0
   Licence.create!([
-    {name: 'Attribution (BY)', description: 'Le titulaire des droits autorise toute exploitation de l’œuvre, y compris à des fins commerciales, ainsi que la création d’œuvres dérivées, dont la distribution est également autorisé sans restriction, à condition de l’attribuer à son l’auteur en citant son nom. Cette licence est recommandée pour la diffusion et l’utilisation maximale des œuvres.'},
-    {name: 'Attribution + Pas de modification (BY ND)', description: 'Le titulaire des droits autorise toute utilisation de l’œuvre originale (y compris à des fins commerciales), mais n’autorise pas la création d’œuvres dérivées.'},
-    {name: "Attribution + Pas d'Utilisation Commerciale + Pas de Modification (BY NC ND)", description: 'Le titulaire des droits autorise l’utilisation de l’œuvre originale à des fins non commerciales, mais n’autorise pas la création d’œuvres dérivés.'},
-    {name: "Attribution + Pas d'Utilisation Commerciale (BY NC)", description: 'Le titulaire des droits autorise l’exploitation de l’œuvre, ainsi que la création d’œuvres dérivées, à condition qu’il ne s’agisse pas d’une utilisation commerciale (les utilisations commerciales restant soumises à son autorisation).'},
-    {name: "Attribution + Pas d'Utilisation Commerciale + Partage dans les mêmes conditions (BY NC SA)", description: 'Le titulaire des droits autorise l’exploitation de l’œuvre originale à des fins non commerciales, ainsi que la création d’œuvres dérivées, à condition qu’elles soient distribuées sous une licence identique à celle qui régit l’œuvre originale.'},
-    {name: 'Attribution + Partage dans les mêmes conditions (BY SA)', description: 'Le titulaire des droits autorise toute utilisation de l’œuvre originale (y compris à des fins commerciales) ainsi que la création d’œuvres dérivées, à condition qu’elles soient distribuées sous une licence identique à celle qui régit l’œuvre originale. Cette licence est souvent comparée aux licences « copyleft » des logiciels libres. C’est la licence utilisée par Wikipedia.'}
+    {name: 'Attribution (BY)', description: 'The owner of the rights authorizes any exploitation of the work, including for commercial purposes, as well as the creation of derivative works, the distribution of which is also authorized without restriction, provided that it is attributed to its author by quoting his name. This license is recommended for the dissemination and maximum use of works.'},
+    {name: 'Attribution + No modifications (BY ND)', description: 'The rights holder authorizes any use of the original work (including for commercial purposes), but does not authorize the creation of derivative works.'},
+    {name: "Attribution + No Commercial Use + No Modification (BY NC ND)", description: 'The rights holder authorizes the use of the original work for non-commercial purposes, but does not authorize the creation of derivative works.'},
+    {name: "Attribution + No Commercial Use (BY NC)", description: 'The owner of the rights authorizes the exploitation of the work, as well as the creation of derivative works, provided that it is not a commercial use (the commercial uses remaining subject to its authorization).'},
+    {name: "Attribution + No Commercial Use + Sharing under the same conditions (BY NC SA)", description: 'The rights holder authorizes the exploitation of the original work for non-commercial purposes, as well as the creation of derivative works, provided that they are distributed under a license identical to that governing the original work.'},
+    {name: 'Attribution + Sharing under the same conditions (BY SA)', description: 'The rights holder authorizes any use of the original work (including for commercial purposes) as well as the creation of derivative works, provided that they are distributed under a license identical to that governing the original work. This license is often compared to copyleft licenses for free software. This is the license used by Wikipedia.'}
   ])
 end
 
 if Theme.count == 0
   Theme.create!([
-    {name: 'Vie quotidienne'},
-    {name: 'Robotique'},
-    {name: 'Arduine'},
-    {name: 'Capteurs'},
-    {name: 'Musique'},
-    {name: 'Sport'},
-    {name: 'Autre'}
+    {name: 'Everyday life'},
+    {name: 'Robotics'},
+    {name: 'Arduino'},
+    {name: 'Sensors'},
+    {name: 'Music'},
+    {name: 'Sports'},
+    {name: 'Other'}
   ])
 end
 
 if Training.count == 0
   Training.create!([
-    {name: 'Formation Imprimante 3D', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'},
-    {name: 'Formation Laser / Vinyle', description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
-    {name: 'Formation Petite fraiseuse numerique', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'},
-    {name: 'Formation Shopbot Grande Fraiseuse', description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
-    {name: 'Formation logiciel 2D', description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'}
+    {name: '3D Printer Training', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'},
+    {name: 'Laser / Vinyl Training', description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
+    {name: 'Small Digital Milling Machine Training', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'},
+    {name: 'Shopbot Training Large Milling Machine', description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    {name: '2D Software Training', description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'}
   ])
 
   TrainingsPricing.all.each do |p|
@@ -147,12 +148,12 @@ end
 
 if Machine.count == 0
   Machine.create!([
-    {name: 'Découpeuse laser', description: "Préparation à l'utilisation de l'EPILOG Legend 36EXT\r\nInformations générales    \r\n      Pour la découpe, il suffit d'apporter votre fichier vectorisé type illustrator, svg ou dxf avec des \"lignes de coupe\" d'une épaisseur inférieur à 0,01 mm et la machine s'occupera du reste!\r\n     La gravure est basée sur le spectre noir et blanc. Les nuances sont obtenues par différentes profondeurs de gravure correspondant aux niveaux de gris de votre image. Il suffit pour cela d'apporter une image scannée ou un fichier photo en noir et blanc pour pouvoir reproduire celle-ci sur votre support! \r\nQuels types de matériaux pouvons nous graver/découper?\r\n     Du bois au tissu, du plexiglass au cuir, cette machine permet de découper et graver la plupart des matériaux sauf les métaux. La gravure est néanmoins possible sur les métaux recouverts d'une couche de peinture ou les aluminiums anodisés. \r\n        Concernant l'épaisseur des matériaux découpés, il est préférable de ne pas dépasser 5 mm pour le bois et 6 mm pour le plexiglass.\r\n", spec: "Puissance: 40W\r\nSurface de travail: 914x609 mm \r\nEpaisseur maximale de la matière: 305mm\r\nSource laser: tube laser type CO2\r\nContrôles de vitesse et de puissance: ces deux paramètres sont ajustables en fonction du matériau (de 1% à 100%) .\r\n", slug: 'decoupeuse-laser'},
-    {name: 'Découpeuse vinyle', description: "Préparation à l'utilisation de la Roland CAMM-1 GX24\r\nInformations générales        \r\n     Envie de réaliser un tee shirt personnalisé ? Un sticker à l'effigie votre groupe préféré? Un masque pour la réalisation d'un circuit imprimé? Pour cela, il suffit simplement de venir avec votre fichier vectorisé (ne pas oublier de vectoriser les textes) type illustrator svg ou dxf.\r\n \r\nMatériaux utilisés:\r\n    Cette machine permet de découper principalement du vinyle,vinyle réfléchissant, flex.\r\n", spec: "Largeurs de support acceptées: de 50 mm à 700 mm\r\nVitesse de découpe: 50 cm/sec\r\nRésolution mécanique: 0,0125 mm/pas\r\n", slug: 'decoupeuse-vinyle'},
-    {name: 'Shopbot / Grande fraiseuse', description: "La fraiseuse numérique ShopBot PRS standard\r\nInformations générales\r\nCette machine est un fraiseuse 3 axes idéale pour l'usinage de pièces de grandes dimensions. De la réalisation d'une chaise ou d'un meuble jusqu'à la construction d'une maison ou d'un assemblage immense, le ShopBot ouvre de nombreuses portes à votre imagination! \r\nMatériaux usinables\r\nLes principaux matériaux usinables sont le bois, le plastique, le laiton et bien d'autres.\r\nCette machine n'usine pas les métaux.\r\n", spec: "Surface maximale de travail: 2440x1220x150 (Z) mm\r\nLogiciel utilisé: Partworks 2D & 3D\r\nRésolution mécanique: 0,015 mm\r\nPrécision de la position: +/- 0,127mm\r\nFormats acceptés: DXF, STL \r\n", slug: 'shopbot-grande-fraiseuse'},
-    {name: 'Imprimante 3D', description: "L'utimaker est une imprimante 3D  low cost utilisant une technologie FFF (Fused Filament Fabrication) avec extrusion thermoplastique.\r\nC'est une machine idéale pour réaliser rapidement des prototypes 3D dans des couleurs différentes.\r\n", spec: "Surface maximale de travail: 210x210x220mm \r\nRésolution méchanique: 0,02 mm \r\nPrécision de position: +/- 0,05 \r\nLogiciel utilisé: Cura\r\nFormats de fichier acceptés: STL \r\nMatériaux utilisés: PLA (en stock).", slug: 'imprimante-3d'},
-    {name: 'Petite Fraiseuse', description: "La fraiseuse numérique Roland Modela MDX-20\r\nInformations générales\r\nCette machine est utilisée  pour l'usinage et le scannage 3D de précision. Elle permet principalement d'usiner des circuits imprimés et des moules de petite taille. Le faible diamètre des fraises utilisées (Ø 0,3 mm à  Ø 6mm) induit que certains temps d'usinages peuvent êtres long (> 12h), c'est pourquoi cette fraiseuse peut être laissée en autonomie toute une nuit afin d'obtenir le plus précis des usinages au FabLab.\r\nMatériaux usinables:\r\nLes principaux matériaux usinables sont le bois, plâtre, résine, cire usinable, cuivre.\r\n", spec: "Taille du plateau X/Y : 220 mm x 160 mm\r\nVolume maximal de travail: 203,2 mm (X), 152,4 mm (Y), 60,5 mm (Z)\r\nPrécision usinage: 0,00625 mm\r\nPrécision scannage: réglable de 0,05 à 5 mm (axes X,Y) et 0,025 mm (axe Z)\r\nVitesse d'analyse (scannage): 4-15 mm/sec\r\n \r\n \r\nLogiciel utilisé pour le fraisage: Roland Modela player 4 \r\nLogiciel utilisé pour l'usinage de circuits imprimés: Cad.py (linux)\r\nFormats acceptés: STL,PNG 3D\r\nFormat d'exportation des données scannées: DXF, VRML, STL, 3DMF, IGES, Grayscale, Point Group et BMP\r\n", slug: 'petite-fraiseuse'},
-    {name: 'FORM1+ imprimante 3D', description: "Form 1+, imprimante 3D stéréolithographie.\n\nLa photopolymérisation est le premier procédé de prototypage rapide à avoir été développé dans les années 1980. Le nom de SLA (pour StereoLithography Apparatus) lui a été donné. Il repose sur les propriétés qu'ont certaines résines à se polymériser sous l'effet de la lumière et de la chaleur. (Source : <a href=\"http://fr.wikipedia.org/wiki/St%C3%A9r%C3%A9olithographie\" target=\"_blank\"> wikipédia</a>)\n\n<i>Possibilité d'utiliser 3 résines de couleurs différentes au Lab : noir, blanc et translucide.</i>\n\n<a href=\"http://formlabs.com/fr/products/materials/standard/\" Title=\"http://formlabs.com/fr/products/materials/standard/\" target=\"_blank\">Plus d'infos sur le site web de Formlab</a>", spec: "Imprimante :\n- Dimensions : 30 × 28 × 45 cm\n- Poids : 8 kg\n- Température d'utilisation : 18–28° C\n- Alimentation : 100–240 V ; 1.5 A 50/60 Hz ; 60 W.\n\nCaractéristiques du laser :\n- EN 60825-1:2007 certifié\n- Class 1 Laser Product\n- 405nm violet laser\n\nPropriétés d'impression :\n- Technologie stéréolithographie (SLA)\n- Volume d'impression : 125 × 125 × 165 mm\n- Dimension minimale : 300 microns\n- Épaisseur des couches (Résolution verticale) : 25, 50, 100 microns\n- Ressources Générées automatiquement\n- Facilement amovible", slug: 'form1-imprimante-3d'}
+    {name: 'Laser Cutting Machine', description: "Preparing to use the EPILOG Legend 36EXT General information For cutting, simply bring your vector file illustrator, svg or dxf with \"cut lines\" of a thickness less than 0.01 mm and the machine will take care of the rest!\r\nThe engraving is based on the black and white spectrum. Shades are obtained by different engraving depths corresponding to the gray levels of your image. Simply bring a scanned image or a photo file in black and white to reproduce it on your support! What types of materials can we engrave/cut? From wood to fabric, from plexiglass to leather, this machine can cut and engrave most materials except metals. Engraving is nevertheless possible on the metals covered with a layer of paint or the anodized aluminum. Regarding the thickness of the cut materials, it is preferable not to exceed 5 mm for wood and 6 mm for plexiglass.\r\n", spec: "Power: 40W Working surface: 914x609mm Maximum thickness of the material: 305mm Laser source: CO2-type laser tube Speed and power controls: these two parameters are adjustable according to the material (from 1% to 100%).\r\n", slug: 'laser-cutter'},
+    {name: 'Vinyl Cutter', description: "Preparing to use the Roland CAMM-1 GX24 General Information Want to make a custom t-shirt? A sticker with the effigy your favorite band? A mask for the realization of a printed circuit? For that, it is enough simply to come with your vectorized file (do not forget to vectorize the texts) type illustrator svg or dxf. Materials used: This machine makes it possible to cut mainly vinyl, reflective vinyl, flex.\r\n", spec: "Accepted support widths: from 50 mm to 700 mm Cutting speed: 50 cm / sec Mechanical resolution: 0.0125 mm / pitch\r\n", slug: 'vinyl-cutter'},
+    {name: 'Shopbot/Large Milling Machine', description: "The standard ShopBot PRS digital milling machine \r\nGeneral information\r\nThis machine is a 3-axis milling machine ideal for machining large workpieces. From the creation of a chair or a piece of furniture to the construction of a huge house or assembly, the ShopBot opens many doors to your imagination! Machinable Materials The main machinable materials are wood, plastic, brass and many others. This machine does not machine metals.\r\n", spec: "Maximum working area: 2440x1220x150 (Z) mm Software used: 2D & 3D parts Mechanical resolution: 0.015 mm Position accuracy: +/- 0.127mm Accepted formats: DXF, STL \r\n", slug: 'shopbot-large-milling'},
+    {name: '3D Printer', description: "The utimaker is a low cost 3D printer using FFF (Fused Filament Fabrication) technology with thermoplastic extrusion.\r\nIt is an ideal machine to quickly make 3D prototypes in different colors.\r\n", spec: "Maximum working surface: 210x210x220mm Mechanical resolution: 0.02 mm Position accuracy: +/- 0.05 Software used: Cura \r\n Accepted file formats: STL \r\n Materials used : PLA (in stock).", slug: '3d-printer'},
+    {name: 'Small Milling Machine', description: "Roland Modela MDX-20 Digital Milling Machine General Information This machine is used for precision machining and 3D scanning. It mainly makes it possible to machine printed circuits and small molds. The small diameter of the cutters used (Ø 0.3 mm to Ø 6 mm) induces that some machining times can be long (> 12h), which is why this milling machine can be left in autonomy all night to obtain the more precise machining at FabLab. Machinable Materials: The main machinable materials are wood, plaster, resin, machinable wax, copper.\r\n", spec: "X / Y table size: 220 mm x 160 mm Maximum working volume: 203.2 mm (X), 152.4 mm (Y), 60.5 mm (Z) Machining accuracy: 0.00625 mm Scanning accuracy: adjustable from 0.05 to 5 mm (X, Y axes) and 0.025 mm (Z axis) Scanning speed: 4-15 mm / sec Software used for milling: Roland Modela player 4 Software used for PCB machining: Cad.py (linux) Accepted formats: STL, PNG 3D Export format of scanned data: DXF, VRML, STL, 3DMF, IGES, Grayscale, Point Group and BMP\r\n", slug: 'small-milling-machine'},
+    {name: 'FORM1 + 3D Printer', description: "Form 1+, stereolithography 3D printer. \n\n Colopolymerization is the first rapid prototyping process to have been developed in the 1980s. The name of SLA (for StereoLithography Apparatus) was given to it. It is based on the properties of certain resins to polymerize under the effect of light and heat. (Source: <a href=\"http://en.wikipedia.org/wiki/Stampolography,\" target=\"_blank\">wikipedia</a>) \n\n <i>Ability to use 3 resins of different colors at Lab: black, white and translucent. </i> \n\n <a href=\"http://formlabs.com/en/products/materials/standard/\" Title=\"http://formlabs.com/en/products/materials/standard/\" target=\"_blank\"> More information on the Formlab website </a>", spec: "Printer: \n- Dimensions: 30 × 28 × 45 cm \n- Weight: 8 kg \n- Operating temperature: 18-28 ° C \n- Power supply: 100-240 V; 1.5 at 50/60 Hz; 60 W. \n \nLaser Features: \n- EN 60825-1: 2007 Certified \n- Class 1 Laser Product \n- 405nm Purple Laser \n \nPrint Properties: \n- Stereolithography Technology (SLA) \n- Print volume: 125 × 125 × 165 mm \n- Minimum size: 300 microns \n- Thickness of layers (vertical resolution): 25, 50, 100 microns \n- Automatically generated resources \n- Easily removable", slug: 'form1-3d-printer'}
   ])
 
   Price.all.each do |p|
@@ -170,8 +171,8 @@ end
 
 if Category.count == 0
   Category.create!([
-    {name: 'Stage'},
-    {name: 'Atelier'}
+    {name: 'Training'},
+    {name: 'Workshop'}
   ])
 end
 
