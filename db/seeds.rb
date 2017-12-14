@@ -178,16 +178,11 @@ end
 
 unless Setting.find_by(name: 'about_body').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_body')
-  setting.value = "<p>Le Fab Lab de <a href=\"http://lacasemate.fr\" target=\"_blank\">La Casemate</a> est un"+
-  ' atelier de fabrication numérique où l’on peut utiliser des machines de découpe, des imprimantes 3D,… permettant'+
-  ' de travailler sur des matériaux variés : plastique, bois, carton, vinyle, … afin de créer toute sorte d’objet grâce'+
-  ' à la conception assistée par ordinateur ou à l’électronique.  Mais le Fab Lab est aussi un lieu d’échange de'+
-  ' compétences technique. </p>'+
-  " <p>Le Fab Lab de <a href=\"http://lacasemate.fr\" target=\"_blank\">La Casemate</a> est un espace"+
-  ' permanent : ouvert à tous, il offre la possibilité de réaliser des objets soi-même, de partager ses'+
-  ' compétences et d’apprendre au contact des médiateurs du Fab Lab et des autres usagers. </p>'+
-  '<p>La formation au Fab Lab s’appuie sur des projets et le partage de connaissances : vous devez prendre'+
-  ' part à la capitalisation des connaissances et à l’instruction des autres utilisateurs.</p>'
+  setting.value = "We are a community of inventive, creative, artistic, innovative, fun and welcoming people who love to make things and have a great time doing it. Make Nashville is a member-led organization that was founded in 2012 to be the focal point of the maker movement in the region and became a registered federal 501(c)(3) nonprofit in 2015. Our purpose is to provide the community, training, tools, and opportunity for everyone to experience the transformative experience of making. We want to help more people make, and to help makers make more.
+
+  We’ve been putting on the Nashville Mini Maker Faire for the last four years, sharing STEAM education and our passion for making with as many as 6,000 people. This year’s Faire will be held at Vanderbilt University on September 30th and October 1st and will feature Bot Battles, Competitive PowerWheels Exhibitions, and Drone Competitions along with dozens of maker exhibits, workshops, demonstrations, and performances, both inside and out!
+
+  Around a year and a half ago, after years of planning, fundraising, and the efforts of dozens of volunteers we opened Nashville’s first all-ages non-profit makerspace! This over 9,500 square foot facility shared with two nonprofit partners enables us to host workshops, builds, events, and provide members with the space and equipment to create some truly amazing things. In the last year, we have seen inspiring art installations, amazing concerts, innovative inventions, incredible feats of science and technology, market-changing entrepreneurial prototypes, skill-strengthening projects, crazy and fun maker builds, and awesome feats of education in the space. We hope you will join us! Become a member today!"
   setting.save
 end
 
@@ -199,52 +194,55 @@ end
 
 unless Setting.find_by(name: 'about_contacts').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_contacts')
-  setting.value = '<dl>'+
-  '<dt>Manager Fab Lab :</dt>'+
-  '<dd>jean-michel.molenaar@lacasemate.fr</dd>'+
-  '  <dt>Responsable médiation :</dt>'+
-  '  <dd>catherine.demarcq@lacasemate.fr</dd>'+
-  '    <dt>Animateur scientifique :</dt>'+
-  '    <dd>diego.scharager@lacasemate.fr</dd>'+
-  '    </dl>'+
-  '<br><br>'+
-  "<p><a href='http://lacasemate.fr'>Visitez le site de La Casemate</a></p>"
+  setting.value = 'Information:
+  info@makenashville.org
+
+  Member Experience:
+  Joel Lindsey
+  joel@makenashville.org
+
+  Workshops Lead:
+  Jenn Deafenbaugh
+  jenn@makenashville.org
+
+  Facilities Director:
+  Jonathan Taufer
+  jonathan@makenashville.org
+
+  Makerspace President:
+  Matt Kenigson
+  matt@makenashville.org
+
+  Visit the Make Nashville Website'
   setting.save
 end
 
 unless Setting.find_by(name: 'twitter_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'twitter_name')
-  setting.value = 'fablabgrenoble'
+  setting.value = 'makenashville'
   setting.save
 end
 
 unless Setting.find_by(name: 'machine_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'machine_explications_alert')
-  setting.value = "Tout achat d'heure machine est définitif. Aucune"+
-  ' annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez en'+
-  " modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais,"+
-  ' aucun changement ne pourra être effectué.'
+  setting.value = 'Any purchase of machine time is final. No cancellation can be made, however no later than 24 hours before the fixed window, you can change the date and time at your convenience and according to the proposed schedule. After this time, no change can be made.'
   setting.save
 end
 
 unless Setting.find_by(name: 'training_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_explications_alert')
-  setting.value = 'Toute réservation de formation est définitive.'+
-  ' Aucune annulation ne pourra être effectuée, néanmoins au plus tard 24h avant le créneau fixé, vous pouvez'+
-  " en modifier la date et l'horaire à votre convenance et en fonction du calendrier proposé. Passé ce délais,"+
-  ' aucun changement ne pourra être effectué.'
+  setting.value = 'Any reservation of training is final. No cancellation can be made, however no later than 24 hours before the fixed window, you can change the date and time at your convenience and according to the proposed schedule. After this time, no change can be made.'
   setting.save
 end
 
 unless Setting.find_by(name: 'subscription_explications_alert').try(:value)
   setting = Setting.find_or_initialize_by(name: 'subscription_explications_alert')
-  setting.value = '<p><b>Règle sur la date de début des abonnements</b><br></p><ul><li>'+
-  " <span style=\"font-size: 1.6rem; line-height: 2.4rem;\">Si vous êtes un nouvel utilisateur - i.e aucune "+
-  " formation d'enregistrée sur le site - votre abonnement débutera à la date de réservation de votre première "+
-  " formation.</span><br></li><li><span style=\"font-size: 1.6rem; line-height: 2.4rem;\">Si vous avez déjà une "+
-  " formation ou plus de validée, votre abonnement débutera à la date de votre achat d'abonnement.</span></li>"+
-  " </ul><p>Merci de bien prendre ses informations en compte, et merci de votre compréhension. L'équipe du Fab Lab.<br>"+
-  ' </p><p></p>'
+  setting.value = 'Rule on the start date of subscriptions
+
+  If you are a new user - i.e no registration training on the site - your subscription will start on the date of booking your first training.
+  If you already have a training or more validated, your subscription will start on the date of your subscription purchase.
+
+  Thank you for taking this information into account, and thank you for your understanding. The Make Nashville team.'
   setting.save
 end
 
@@ -358,15 +356,14 @@ Stylesheet.build_sheet!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_information_message')
-  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui"+
-                  ' proposent des conditions avantageuses sur le prix des formations et les heures machines.'
+  setting.value = 'Before booking a course, we advise you to consult our subscription offers that offer advantageous conditions on the price of training and machine hours.'
   setting.save
 end
 
 
 unless Setting.find_by(name: 'fablab_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'fablab_name')
-  setting.value = 'Fab Lab de La Casemate'
+  setting.value = 'Make Nashville'
   setting.save
 end
 
