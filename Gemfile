@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc #TODO remove unused ?
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
+gem 'puma'
+gem 'foreman'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,10 +44,6 @@ group :development do
   # Preview mail in the browser
   gem 'mailcatcher'
   gem 'awesome_print'
-
-  gem 'puma'
-  gem 'foreman'
-
   gem 'capistrano'
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq', require: false
