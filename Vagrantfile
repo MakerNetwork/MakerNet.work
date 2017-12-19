@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     3000, # rails/puma
     9200, # elasticsearch
     5432, # postgres
-    5000  # mailcatcher
+    1080  # mailcatcher
   ].each do |port|
     config.vm.network "forwarded_port", guest: port, host: port
   end
