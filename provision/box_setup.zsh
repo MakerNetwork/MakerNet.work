@@ -6,6 +6,18 @@ echo "***************************************************"
 echo "Checking for NVM... "
 echo "***************************************************"
 if [[ ! -x "$HOME/.nvm" ]]; then
+
+  # Set language configuration
+  echo '# Set locale configuration' >> ~/.profile
+  echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
+  echo 'export LANG=en_US.UTF-8' >> ~/.profile
+  echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
+  echo "\n" >>  ~/.profile
+
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+  export LANGUAGE=en_US.UTF-8
+
   wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
   echo '# Node Version Manager' >> ~/.profile
