@@ -8,11 +8,31 @@ echo "***************************************************"
 if [[ ! -x "$HOME/.nvm" ]]; then
   wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
-  echo '# Node Version Manager'  >> ~/.profile
-  echo 'export NVM_DIR="$HOME/.nvm"'  >> ~/.profile
-  echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'  >> ~/.profile
-  echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'  >> ~/.profile
+  echo '# Node Version Manager' >> ~/.profile
+  echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.profile
+  echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.profile
+  echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.profile
   echo "\n" >>  ~/.profile
+  echo 'autoload -U add-zsh-hook' >> ~/.profile
+  echo 'load-nvmrc() {' >> ~/.profile
+  echo '  local node_version="$(nvm version)"' >> ~/.profile
+  echo '  local nvmrc_path="$(nvm_find_nvmrc)"' >> ~/.profile
+  echo "\n" >>  ~/.profile
+  echo '  if [ -n "$nvmrc_path" ]; then' >> ~/.profile
+  echo '    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")' >> ~/.profile
+  echo "\n" >>  ~/.profile
+  echo '    if [ "$nvmrc_node_version" = "N/A" ]; then' >> ~/.profile
+  echo '      nvm install' >> ~/.profile
+  echo '    elif [ "$nvmrc_node_version" != "$node_version" ]; then' >> ~/.profile
+  echo '      nvm use' >> ~/.profile
+  echo '    fi' >> ~/.profile
+  echo '  elif [ "$node_version" != "$(nvm version default)" ]; then' >> ~/.profile
+  echo '    echo "Reverting to nvm default version"' >> ~/.profile
+  echo '    nvm use default' >> ~/.profile
+  echo '  fi' >> ~/.profile
+  echo '}' >> ~/.profile
+  echo 'add-zsh-hook chpwd load-nvmrc' >> ~/.profile
+  echo 'load-nvmrc' >> ~/.profile
 
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -28,8 +48,8 @@ echo "***************************************************"
 echo "Checking for Node.js... "
 echo "***************************************************"
 if ! node --version; then
-  nvm install 6.11
-  nvm use 6.11
+  nvm install 8.9
+  nvm use 8.9
 else
   echo 'OK'
 fi
