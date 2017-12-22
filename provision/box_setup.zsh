@@ -12,6 +12,7 @@ if [[ ! -x "$HOME/.nvm" ]]; then
   echo 'export NVM_DIR="$HOME/.nvm"'  >> ~/.profile
   echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'  >> ~/.profile
   echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'  >> ~/.profile
+  echo "\n" >>  ~/.profile
 
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -104,7 +105,7 @@ else
 fi
 
 
-# Install ElasticSearch #######################################################
+# Install Elastic Search ######################################################
 
 echo "***************************************************"
 echo "Checking ElasticSearch installation..."
@@ -115,6 +116,7 @@ if ! dpkg -s elasticsearch; then
   echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
   sudo apt-get update && sudo apt-get install -y elasticsearch
 
+  # This configuration is used to include the Elastic Search
   sudo echo "node.master: true" >> /etc/elasticsearch/elasticsearch.yml
   sudo echo "node.data: false" >> /etc/elasticsearch/elasticsearch.yml
   sudo sed -i 's/#bootstrap.memory_lock: true/bootstrap.memory_lock: true/g' /etc/elasticsearch/elasticsearch.yml
@@ -154,4 +156,19 @@ if ! direnv; then
   echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 else
   echo 'OK'
+fi
+
+
+# Install Ngrok exposer ######################################################
+
+echo "***************************************************"
+echo "Checking for Ngrok... "
+echo "***************************************************"
+if ! ngrok; then
+  sudo apt-get install -y unzip
+  wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+  sudo unzip ngrok-stable-linux-amd64.zip -d /usr/local/bin
+  rm -rf ngrok-stable-linux-amd64.zip
+else
+  echo "OK"
 fi
