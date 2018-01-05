@@ -10,6 +10,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Environment Configuration](#environment-configuration)
+4.3  [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -69,7 +70,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
-   If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before. 
+   If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
 
 2. Retrieve the project from Git
 
@@ -288,6 +289,79 @@ See the [Open Projects](#open-projects) section for a detailed description of th
 
 See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.
 
+<a name="virtual-machine-instructions"></a>
+### Virtual Machine Instructtions
+
+Using a virtual machine most of the software dependencies get installed automatically and it avoids
+installing a lot of software and services directly on the development machine.
+
+**Note:** The provision scripts configure the sofware dependencies to play nice with each other while
+they are inside the same virtual development environment but this means that said configuration is not
+optimized for a production environment.
+
+1. Install [Vagrant][0] and [Virtual Box][1] (with the extension package).
+
+2. Retrieve the project from Git
+
+   ```bash
+   git clone https://github.com/MakerNetwork/MakerNet.work.git
+   ```
+
+3. Get a copy from the `.envrc` file that contains environment values to be used by the aplication
+   and place it at the root directory of the project. (Ask for it to one of the collaborators).
+
+4. From the project directory, run:
+
+   ```bash
+   vagrant up
+   ```
+
+5. Once the virtual machine finished building, log into it with:
+
+   ```bash
+   vagrant ssh
+   ```
+
+6. While logged in, navigate to the project folder and install the Gemfile
+   dependencies:
+
+   ```bash
+   cd /vagrant
+   bundle install
+   ```
+
+7. Allow Direnv to load `.envrc` values as environment variables:
+
+   ```bash
+   direnv allow .
+   ```
+
+
+8. Set a directory for Sidekick pids:
+
+   ```bash
+   mkdir -p tmp/pids
+   ```
+
+9. Copy the default configuration files:
+
+   ```bash
+   cp config/database.yml.default config/database.yml
+   cp config/application.yml.default config/application.yml
+   ```
+
+10. Set up the databases:
+
+   ```bash
+   bundle exec rake db:setup
+   bundle exec rake fablab:es_build_stats
+   ```
+
+11. Start the application and visit `localhost:3000` on your browser to check that it works:
+
+   ```bash
+   bundle exec foreman s -p 3000
+   ```
 
 <a name="postgresql"></a>
 ## PostgreSQL
