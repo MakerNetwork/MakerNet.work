@@ -106,9 +106,9 @@ en:
 
       trainings_reserve:
         # book a training
-        trainings_planning: "Trainings planning"
+        trainings_planning: "Woekshops planning"
         planning_of: "Planning of"   # followed by the training name (eg. "Planning of 3d printer training")
-        all_trainings: "All trainings"
+        all_trainings: "All workshops"
         cancel_my_selection: "Cancel my selection"
         i_ve_reserved: "I've reserved"
 

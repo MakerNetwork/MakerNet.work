@@ -24,22 +24,22 @@ en:
         # various translations used many times in the application
         group: "Group"
         subscription: "Subscription"
-        trainings: "Trainings"
-        no_trainings: "No trainings"
-        confirmation_required: "Confirmation required"
+        trainings: "Workshops"
+        no_trainings: "No Workshops"
+        confirmation_required: "Confirmation Required"
         description: "Description"
         machines: "Machines"
         events: "Events"
         materials: "Materials"
         date: "Date"
         price: "Price"
-        download_the_invoice: "Download the invoice"
-        download_the_credit_note: "Download the credit note"
+        download_the_invoice: "Download Invoice"
+        download_the_credit_note: "Download Credit Note"
         no_invoices_for_now: "No invoices for now."
-        email_address: "Email address"
+        email_address: "Email Address"
         user: "User"
         pseudonym: "Pseudonym"
-        all_day: "All day"
+        all_day: "All Day"
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         title: "Title"
         total_: "TOTAL :"
@@ -73,7 +73,7 @@ en:
         standard: "Standard"
         year: "Year"
         month: "Month"
-        subscription_price: "Subscription price"
+        subscription_price: "Subscription Price"
         model: "Model"
         from_date: "From" # context: date. eg: "from 01/01 to 01/05"
         from_time: "From" # context: time. eg. "from 18:00 to 21:00"
@@ -86,9 +86,9 @@ en:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
-        add_a_project: "Add a project"
+        add_a_project: "Add Project"
         illustration: "Illustration"
-        add_an_illustration: "Add an illustration."
+        add_an_illustration: "Add Illustration."
         book: "Book"
         description_is_required: "Description is required."
         name_is_required: "Name is required."
@@ -107,8 +107,8 @@ en:
 
       user:
         # user edition form
-        add_an_avatar: "Add an avatar"
-        pseudonym: "Pseudonym"
+        add_an_avatar: "Add Avatar"
+        pseudonym: "Nickname"
         email_address_is_required: "E-mail address is required."
         change_password: "Change password"
         new_password: "New password"
@@ -126,7 +126,7 @@ en:
       project:
         # project edition form
         illustration: "Illustration"
-        add_an_illustration: "Add an illustration"
+        add_an_illustration: "Add Illustration"
         CAD_file: "CAD file"
         allowed_extensions: "Allowed extensions:"
         add_a_new_file: "Add a new file"
@@ -148,7 +148,7 @@ en:
         attached_files_(pdf): "Attached files (pdf)"
         attach_a_file: "Attach a file"
         add_an_attachment: "Add an attachment"
-        validate_your_machine: "Validate your machine"
+        validate_your_machine: "Validate Machine"
 
       plan_subscribe:
         # frame to select a plan to subscribe
@@ -239,19 +239,19 @@ en:
           name: "Name"
           name_is_required: "Name is required."
           illustration: "Illustration"
-          add_an_illustration: "Add an illustration"
+          add_an_illustration: "Add Illustration"
           description: "Description"
           description_is_required: "Description is required."
-          add_a_new_training: "Add a new training"
-          validate_your_training: "Validate your training"
+          add_a_new_training: "Add Workshop"
+          validate_your_training: "Validate Workshop"
           associated_machines: "Associated machines"
           number_of_tickets: "Number of tickets"
           public_page: "Show in training lists"
-          disable_training: "Disable the training"
+          disable_training: "Disable Workshop"
 
       user_admin:
         # partial form to edit/create an user (admin view)
-        user_profile: "Profil utilisateur"
+        user_profile: "User Profile"
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
         group_is_required: "Group is required"
@@ -259,7 +259,7 @@ en:
         no_more_invoices_will_be_generated_for_: "No more invoices will be generated for"
         _the_payments_carried_out_at_the_reception_: "the payments carried out at the reception"
         _regarding_this_user: "regarding this user."
-        trainings: "Trainings"
+        trainings: "Workshops"
 
       authentication:
         # partial form to edit/create an authentication provider (SSO)
@@ -306,14 +306,14 @@ en:
       request_training_modal:
         # modal introducing that a training is requested before booking a machine
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{{MACHINE}}\" you must have completed the {{TRAINING}}."  # angular interpolation
-        register_for_the_training: "Enroll in the training"
+        register_for_the_training: "Enroll in the workshop"
         i_dont_want_to_register_now: "I don't want to enroll now"
 
       training_reservation_modal:
         # modal introducing that a user must wait for his training being validated before booking a machine
-        machine_reservation: "Machine reservation"
-        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
-        your_training_will_occur_: "Your training will occur"
+        machine_reservation: "Machine Reservation"
+        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Your workshop is being validated by the makerspace team to book this machine."
+        your_training_will_occur_: "Your workshop has been set"
 
       public_profile:
         # user public profile
@@ -358,9 +358,9 @@ en:
         wallet_pay_reservation: "You can pay direct your reservation"
         client_wallet_pay_reservation: "Client can pay direct reservation"
         debit_subscription: "Debit by subscription"
-        debit_reservation_training: "Debit by reservation of training"
-        debit_reservation_machine: "Debit by reservation of machine"
-        debit_reservation_event: "Debit by reservation of event"
+        debit_reservation_training: "Debit by workshop reservation"
+        debit_reservation_machine: "Debit by machine reservation"
+        debit_reservation_event: "Debit by event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
 
       coupon:
@@ -405,7 +405,7 @@ en:
           name: "Name"
           name_is_required: "Name is required."
           illustration: "Illustration"
-          add_an_illustration: "Add an illustration"
+          add_an_illustration: "Add Illustration"
           description: "Description"
           description_is_required: "Description is required."
           characteristics: "Characteristics"
@@ -415,7 +415,7 @@ en:
           add_an_attachment: "Add an attachment"
           default_places: "Default maximum tickets"
           default_places_is_required: "Default maximum tickets is required."
-          disable_space: "Disable space"
+          disable_space: "Disable Space"
 
       cart:
         # module de panier d'achat de réservations
@@ -433,26 +433,26 @@ en:
           or: "or"
           you_ve_just_selected_a_: "You've just selected a"
           _subscription: "subscription"
-          cost_of_the_subscription: "Cost of the subscription"
-          confirm_and_pay: "Confirm and pay"
+          cost_of_the_subscription: "Subscription Cost"
+          confirm_and_pay: "Confirm Payment"
           you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "You have settled a"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
-          your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
+          your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon from your"
           dashboard: "Dashboard"
           i_want_to_change_the_following_reservation: "I want to change the following reservation:"
-          cancel_my_modification: "Cancel my modification"
+          cancel_my_modification: "Discard Changes"
           select_a_new_slot_in_the_calendar: "Select a new slot in the calendar"
-          cancel_my_selection: "Cancel my selection"
+          cancel_my_selection: "Cancel Selection"
           tags_of_the_original_slot: "Tags of the original slot:"
           tags_of_the_destination_slot: "Tags of the destination slot:"
-          confirm_my_modification: "Confirm my modification"
+          confirm_my_modification: "Confirm Changes"
           your_booking_slot_was_successfully_moved_from_: "Your booking slot was successfully moved from"
           to_date: "to" # context: date. eg: "from 01/01 to 01/05"
           please_select_a_member_first: "Please select a member first"
           unable_to_change_the_reservation: "Unable to change the reservation"
-          confirmation_required: "Confirmation required"
+          confirmation_required: "Confirmation is required"
           do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
           reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
           cancellation_failed: "Cancellation failed."

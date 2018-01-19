@@ -37,7 +37,7 @@ en:
         public_calendar: "Calendar"
 
         # left menu (admin)
-        trainings_monitoring: "Workshops Management"
+        trainings_monitoring: "Manage Workshops"
         select_a_training: "Select Workshop"
         manage_the_calendar: "Manage Calendar"
         manage_the_users: "Manage Users"
