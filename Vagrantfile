@@ -28,8 +28,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Provisioning
-  config.vm.provision "shell", privileged: false, run: "always",
+  config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
-  config.vm.provision "shell", privileged: false, run: "always",
+  config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/box_setup.zsh"
 end
