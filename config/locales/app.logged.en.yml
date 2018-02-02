@@ -59,9 +59,9 @@ en:
           collaborator: "Collaborator"
         trainings:
           # dashboard: my trainings
-          your_next_trainings: "Your next trainings"
-          your_previous_trainings: "Your previous trainings"
-          your_approved_trainings: "Your approved trainings"
+          your_next_trainings: "Your next workshops"
+          your_previous_trainings: "Your previous workshops"
+          your_approved_trainings: "Your approved workshops"
         events:
           # dashboard: my events
           your_next_events: "Your next events"
@@ -79,7 +79,7 @@ en:
 
       members:
         # list of members accepting to be contacted
-        the_fablab_members: "The Fab Lab members"
+        the_fablab_members: "Members"
         display_more_members: "Display more members..."
         no_members_for_now: "No members for now"
         avatar: "Avatar"
@@ -106,9 +106,9 @@ en:
 
       trainings_reserve:
         # book a training
-        trainings_planning: "Trainings planning"
+        trainings_planning: "Woekshops planning"
         planning_of: "Planning of"   # followed by the training name (eg. "Planning of 3d printer training")
-        all_trainings: "All trainings"
+        all_trainings: "All workshops"
         cancel_my_selection: "Cancel my selection"
         i_ve_reserved: "I've reserved"
 
@@ -121,7 +121,7 @@ en:
           i_change: "I change"
 
       notifications:
-        notifications_center: "Notifications center"
+        notifications_center: "Notifications Center"
         mark_all_as_read: "Mark all as read"
         notif_title: "Title"
         no_new_notifications: "No new notifications."

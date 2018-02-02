@@ -13,7 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     3000, # rails/puma
     9200, # elasticsearch
     5432, # postgres
-    1080  # mailcatcher
+    1080, # mailcatcher web ui
+    4040  # ngrok web ui
   ].each do |port|
     config.vm.network "forwarded_port", guest: port, host: port
   end
@@ -27,8 +28,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Provisioning
-  config.vm.provision "shell", privileged: false, run: "always",
+  config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
-  config.vm.provision "shell", privileged: false, run: "always",
+  config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/box_setup.zsh"
 end

@@ -78,11 +78,11 @@ if ! ruby -v; then
   \curl -sSL https://get.rvm.io | bash
   source /home/ubuntu/.rvm/scripts/rvm
   rvm get head
-  rvm install ruby-2.4.2
-  rvm use ruby-2.4.2@global
+  rvm install ruby-2.4.3
+  rvm use ruby-2.4.3@global
   gem update --system --no-ri --no-rdoc
   gem update --no-ri --no-rdoc
-  rvm use ruby-2.4.2 --default
+  rvm use ruby-2.4.3 --default
   sudo apt-get autoremove
 else
   echo 'OK'

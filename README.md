@@ -41,8 +41,8 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 
 FabManager is a Ruby on Rails / AngularJS web application that runs on the following software:
 
-- Ubuntu LTS 14.04+ / Debian 8+
-- Ruby 2.3
+- Ubuntu LTS 16.04+ / Debian 8+
+- Ruby 2.4.x
 - Git 1.9.1+
 - Redis 2.8.4+
 - Sidekiq 3.3.4+

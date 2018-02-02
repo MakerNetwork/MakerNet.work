@@ -15,7 +15,7 @@ en:
         # manage the trainings & machines slots
         admin_calendar:
           calendar_management: "Calendar management"
-          trainings: "Trainings"
+          trainings: "Workshops"
           machines: "Machines"
           spaces: "Spaces"
           availabilities: "Availabilities"
@@ -34,7 +34,7 @@ en:
           deletion_failed: "Deletion failed."
           DATE_slot: "{{DATE}} slot:"  # angular interpolation
           what_kind_of_slot_do_you_want_to_create: "What kind of slot do you want to create?"
-          training: "Training"
+          training: "Workshop"
           machine: "Machine"
           space: "Space"
           next: "Next >"
@@ -72,16 +72,16 @@ en:
 
       trainings:
         # track and monitor the trainings
-        training: "Training"
-        add_a_new_training: "Add a new training"
+        training: "Workshops"
+        add_a_new_training: "Add new workshop"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
         year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Month of {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
         none: "None"
-        training_validation: "Training validation"
-        training_of_the_ : "Training of the "  # context: date. eg. "training of the september 1st 2012"
+        training_validation: "Workshop validation"
+        training_of_the_ : "Workshop of the "  # context: date. eg. "training of the september 1st 2012"
         you_can_validate_the_training_of_the_following_members: "You can validate the training of the following members:"
         no_reservation: "No reservation"
         validate_the_trainings: "Validate the trainings"
@@ -99,18 +99,18 @@ en:
       trainings_new:
         # create a new training
         trainings_new:
-          add_a_new_training: "Add a new training"
-          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
-          dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
+          add_a_new_training: "Add a new workshop"
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a workshop, its reservation prices are initialized at zero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this workshop."
 
       events:
         # events tracking and management
-        events_monitoring: "Events monitoring"
+        events_monitoring: "Events management"
         manage_filters: "Manage filters"
         fablab_events: "Fablab events"
         all_events: "All events"
-        passed_events: "Passed events"
-        events_to_come: "Events to come"
+        passed_events: "Past events"
+        events_to_come: "Upcoming Events"
         from_DATE: "From {{DATE}}"  # angular interpolation
         from_TIME: "From {{TIME}}"  # angular interpolation
         view_reservations: "View reservations"
@@ -146,7 +146,7 @@ en:
       events_new:
         # add a new event
         none: "None"
-        every_days: "Every days"
+        every_days: "Everyday"
         every_week: "Every week"
         every_month: "Every month"
         every_year: "Every year"
@@ -167,7 +167,7 @@ en:
       pricing:
         # subscriptions, prices, credits and coupons management
         pricing:
-          pricing_management: "Pricing management"
+          pricing_management: "Pricing Management"
           subscriptions: "Subscriptions"
           trainings: "Trainings"
           list_of_the_subscription_plans: "List of the subscription plans"
