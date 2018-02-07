@@ -5,9 +5,9 @@ class EventImageUploader < CarrierWave::Uploader::Base
   include UploadHelper
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
+  storage :fog
   after :remove, :delete_empty_dirs
-  # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
