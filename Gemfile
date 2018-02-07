@@ -22,6 +22,7 @@ gem 'kaminari' # Customizable and sophisticated paginator for Ruby webapps
 gem 'figaro' # Simple Rails app configuration using ENV and a single YAML file
 gem 'mini_magick' # Image processing ruby wrapper for ImageMagick
 gem 'carrierwave' # File uploads for Ruby web frameworks
+gem 'fog-aws' # Support for AWS file storage
 gem 'notify_with' # Very simple notification system
 gem 'rails-observers' # Respond to life cycle callbacks to implement trigger-like behavior
 gem 'actionpack-page_caching' # action output is stored as a HTML file
