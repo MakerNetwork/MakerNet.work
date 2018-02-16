@@ -5,12 +5,13 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 
 ##### Table of Contents
 1. [Software stack](#software-stack)
+1.1. [Requirements](#requirements)
 2. [Contributing](#contributing)
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Environment Configuration](#environment-configuration)
-4.3  [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
+4.3. [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -48,6 +49,19 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 - Sidekiq 3.3.4+
 - Elasticsearch 1.7
 - PostgreSQL 9.4
+
+<a name="requirements"></a>
+### Requirements
+
+- Minimum
+1 core
+2GB RAM + 2GB swap (min 1GB Ram + 3GB swap! But not recommended except for testing)
+30GB (SSD if possible or drive 7200RPM)
+
+- Recommended (ex: up to 1000 users)
+2 core
+4GB RAM + 2GB
+60GB swap (SSD if possible or 7200RPM disk)
 
 <a name="contributing"></a>
 ## Contributing
@@ -316,9 +330,10 @@ optimized for a production environment.
    vagrant up
    ```
 
-5. Once the virtual machine finished building, log into it with:
+5. Once the virtual machine finished building, reload it and log into it with:
 
    ```bash
+   vagrant reload
    vagrant ssh
    ```
 
@@ -330,10 +345,10 @@ optimized for a production environment.
    bundle install
    ```
 
-7. Allow Direnv to load `.envrc` values as environment variables:
+7. Load `.envrc` values as environment variables:
 
    ```bash
-   direnv allow .
+   source .envrc
    ```
 
 
@@ -343,21 +358,14 @@ optimized for a production environment.
    mkdir -p tmp/pids
    ```
 
-9. Copy the default configuration files:
+9. Set up the databases:
 
    ```bash
-   cp config/database.yml.default config/database.yml
-   cp config/application.yml.default config/application.yml
-   ```
-
-10. Set up the databases:
-
-   ```bash
-   bundle exec rake db:setup
+   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword bundle exec rake db:setup
    bundle exec rake fablab:es_build_stats
    ```
 
-11. Start the application and visit `localhost:3000` on your browser to check that it works:
+10. Start the application and visit `localhost:3000` on your browser to check that it works:
 
    ```bash
    bundle exec foreman s -p 3000
