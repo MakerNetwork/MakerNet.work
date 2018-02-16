@@ -12,7 +12,7 @@ development: &development
 # Do not set this db to the same as development or production.
 test:
   <<: *development
-  database: makernet_test
+  database: fabmanager_test
 
 production: &production
   adapter: postgresql
