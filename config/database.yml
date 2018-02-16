@@ -16,14 +16,13 @@ test:
 
 production: &production
   adapter: postgresql
-  host: ENV['DATABASE_HOST']
+  host: <%= ENV['DATABASE_HOST'] %>
   encoding: unicode
   database: fabmanager_production
   pool: 25
-  username: ENV['DATABASE_USER']
-  password: ENV['DATABASE_PASS']
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASS'] %>
 
 staging:
   <<: *production
   database: fabmanager_staging
-

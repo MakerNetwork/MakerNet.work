@@ -99,7 +99,7 @@ class Plan < ActiveRecord::Base
       amount: amount,
       interval: interval,
       interval_count: interval_count,
-      name: "#{base_name} - #{group.name} - #{interval}",
+      product: { name: "#{base_name} - #{group.name} - #{interval}" },
       currency: Rails.application.secrets.stripe_currency,
       id: "#{base_name.parameterize}-#{group.slug}-#{interval}-#{DateTime.now.to_s(:number)}"
     )

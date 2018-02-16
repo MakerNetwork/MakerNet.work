@@ -62,7 +62,7 @@ gem 'api-pagination' # Link header pagination for Rails and Grape APIs
 gem 'apipie-rails' # API documentation tool
 gem 'twitter' # Interface to the Twitter API
 gem 'twitter-text' # Standardize parsing of Tweet text
-gem 'stripe', '1.30.2' # Library for the Stripe API
+gem 'stripe' # Library for the Stripe API
 gem 'openlab_ruby' # Consume json API of Openlab-Projects
 
 group :development, :test do

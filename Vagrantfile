@@ -21,13 +21,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Provider-specific configuration
   config.vm.provider 'virtualbox' do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '1536']
+    vb.customize ['modifyvm', :id, '--memory', '2048']
   end
 
   # If you are using Windows o Linux with an encrypted volume
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Provisioning
+  config.vm.provision "shell", privileged: true, run: "always" do |s|
+    s.inline = "export LC_ALL=en_US.UTF-8\n" \
+               "export LANG=en_US.UTF-8\n" \
+               "export LANGUAGE=en_US.UTF-8"
+  end
+
   config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
   config.vm.provision "shell", privileged: false, run: "once",

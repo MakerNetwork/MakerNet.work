@@ -90,12 +90,13 @@ Rails.application.configure do
   # config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    :address   => Rails.application.secrets.smtp_address,
-    :port      => Rails.application.secrets.smtp_port,
-    :user_name => Rails.application.secrets.smtp_user_name,
-    :password  => Rails.application.secrets.smtp_password,
-    :authentication       => 'plain',
-    :enable_starttls_auto => true
+    user_name: ENV["SMTP_USER_NAME"],
+    password:  ENV["SMTP_PASSWORD"],
+    domain:    ENV["DEFAULT_HOST"],
+    address:   ENV["SMTP_ADDRESS"],
+    port:      ENV["SMTP_PORT"],
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
 
   # use :smtp for switch prod
