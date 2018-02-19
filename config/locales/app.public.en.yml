@@ -139,7 +139,7 @@ en:
         # projects gallery
         the_fablab_projects: "Makerspace Projects"
         search_over_the_whole_network: "Search over the whole MakerNet"
-        tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
+        tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every maker space using this feature!"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
         reset_all_filters: "Reset all filters"
@@ -176,7 +176,7 @@ en:
       machines_list:
         # list of machines
         machines_list:
-          the_22212_s_machines: "Machines"
+          the_fablab_s_machines: "Machines"
           add_a_machine: "Add a Machine"
           book: "Book"
           _or_the_: " or the "
