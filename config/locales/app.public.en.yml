@@ -238,7 +238,7 @@ en:
         # details and booking of an event
         event_description: "Event Description"
         downloadable_documents: "Downloadable Documents"
-        informations_and_booking: "Informations and Booking"
+        information_and_booking: "Information and Booking"
         beginning: "Beginning:"
         ending: "Ending:"
         opening_hours: "Opening hours:"
