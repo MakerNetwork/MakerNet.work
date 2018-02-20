@@ -257,9 +257,9 @@ en:
         group: "Group"
         group_is_required: "Group is required"
         disable_invoices_generation: "Disable invoices generation:"
-        no_more_invoices_will_be_generated_for_: "No more invoices will be generated for"
-        _the_payments_carried_out_at_the_reception_: "the payments carried out at the reception"
-        _regarding_this_user: "regarding this user."
+        no_more_invoices_will_be_generated_for_: "No invoices will be generated for"
+        _the_payments_carried_out_at_the_reception_: "the payments carried out by"
+        _regarding_this_user: "this user."
         trainings: "Workshops"
 
       authentication:
