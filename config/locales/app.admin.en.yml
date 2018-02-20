@@ -518,7 +518,7 @@ en:
         end: "End:"
         custom_filter: "Custom filter"
         NO_: "NO"
-        criterion: "Criterion:"
+        criterion: "Criteria:"
         value: "Value:"
         exclude: "Exclude"
         entries: "Entries:"
