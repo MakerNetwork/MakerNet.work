@@ -192,6 +192,7 @@ en:
         _and_ends_on: "and ends on"
         prices_and_availabilities: "Prices and availabilities"
         standard_rate: "Standard rate"
+        add_a_rate: "Add rate"
         0_=_free: "0 = free"
         tickets_available: "Tickets available"
         event_theme: "Event theme"
