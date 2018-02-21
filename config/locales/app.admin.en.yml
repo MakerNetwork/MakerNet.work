@@ -519,6 +519,7 @@ en:
         custom_filter: "Custom filter"
         NO_: "NO"
         criterion: "Criteria:"
+        duration: "Duration"
         value: "Value:"
         exclude: "Exclude"
         entries: "Entries:"
