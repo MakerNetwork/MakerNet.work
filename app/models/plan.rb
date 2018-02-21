@@ -87,7 +87,8 @@ class Plan < ActiveRecord::Base
     stat_index = StatisticIndex.where({es_type_key: 'subscription'})
     type = StatisticType.find_by(statistic_index_id: stat_index.first.id, key: self.duration.to_i)
     if type == nil
-      type = StatisticType.create!({statistic_index_id: stat_index.first.id, key: self.duration.to_i, label: 'Durée : '+self.human_readable_duration, graph: true, simple: true})
+      label_fragment = I18n.t('app.admin.statistics.duration') + ': '
+      type = StatisticType.create!({statistic_index_id: stat_index.first.id, key: self.duration.to_i, label: label_fragment + self.human_readable_duration, graph: true, simple: true})
     end
     subtype = create_statistic_subtype
     create_statistic_association(type, subtype)
