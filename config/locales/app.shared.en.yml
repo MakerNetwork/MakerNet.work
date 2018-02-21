@@ -207,7 +207,7 @@ en:
           type: "Type"
           type_is_required: "Type is required."
           group: "Group"
-          transversal_(all_groups): "Transversal (all groups)"
+          transversal_(all_groups): "All groups"
           group_is_required: "Group is required."
           number_of_periods: "Number of periods"
           number_of_periods_is_required: "Number of periods is required."
