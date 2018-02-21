@@ -104,7 +104,7 @@ class Plan < ActiveRecord::Base
       currency: Rails.application.secrets.stripe_currency,
       id: "#{base_name.parameterize}-#{group.slug}-#{interval}-#{DateTime.now.to_s(:number)}"
     )
-    update_columns(stp_plan_id: stripe_plan.id, name: stripe_plan.name)
+    update_columns(stp_plan_id: stripe_plan.id, name: stripe_plan.product)
     stripe_plan
   end
 
