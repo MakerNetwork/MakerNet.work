@@ -137,13 +137,14 @@ en:
 
       projects_list:
         # projects gallery
-        the_fablab_projects: "Makerspace Projects"
+        the_fablab_projects: "Projects"
         search_over_the_whole_network: "Search over the whole MakerNet"
         tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every maker space using this feature!"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
         reset_all_filters: "Reset all filters"
         search: "Search"
+        keywords: "Keywords"
         all_projects: "All projects"
         my_projects: "My projects"
         projects_to_whom_i_take_part_in: "Projects to whom I take part in"
