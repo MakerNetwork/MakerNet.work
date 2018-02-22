@@ -110,7 +110,7 @@ en:
         fablab_events: "Events"
         all_events: "All events"
         passed_events: "Past events"
-        events_to_come: "Future Events"
+        events_to_come: "Next Events"
         from_DATE: "From {{DATE}}"  # angular interpolation
         from_TIME: "From {{TIME}}"  # angular interpolation
         view_reservations: "View reservations"
@@ -460,14 +460,14 @@ en:
         user_has_no_current_subscription: "User has no current subscription."
         subscribe_to_a_plan: "Subscribe to a plan"
         next_trainings: "Next trainings"
-        passed_trainings: "Passed trainings"
+        passed_trainings: "Past trainings"
         validated_trainings: "Validated trainings"
         events: "Events"
         next_events: "Next events"
         no_upcoming_events: "No upcoming events"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
         NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation
-        passed_events: "Passed events"
+        passed_events: "Past events"
         invoices: "Invoices"
         invoice_#: "Invoice #"
         download_the_refund_invoice: "Download the refund invoice"
@@ -478,7 +478,7 @@ en:
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "You successfully changed the expiration date of the user's subscription"
         a_problem_occurred_while_saving_the_date: "A problem occurred while saving the date."
         new_subscription: "New subscription"
-        you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription to {{NAME}}."  # angular interpolation
+        you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription for {{NAME}}."  # angular interpolation
         subscription_successfully_purchased: "Subscription successfully purchased."
         a_problem_occurred_while_taking_the_subscription: "A problem occurred while taking the subscription"
 
