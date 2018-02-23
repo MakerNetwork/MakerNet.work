@@ -125,8 +125,8 @@ en:
         discover_members: "Discover members"
 
         # next events summary on the home page
-        fablab_s_next_events: "Makerspace's next events"
-        every_events: "All the events"
+        fablab_s_next_events: "Future events"
+        every_events: "All events"
         from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
         on_the_date: "On the {{DATE}}"  # angular interpolation
         from_time_to_time: "From {{START}} to {{END}}"  # angular interpolation
