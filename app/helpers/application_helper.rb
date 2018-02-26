@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-	include Twitter::Autolink
+	include Twitter::TwitterText::Autolink
 	require 'message_format'
 
 	## machine/spaces availabilities are divided in multiple slots of 60 minutes
