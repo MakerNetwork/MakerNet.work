@@ -125,8 +125,8 @@ en:
         discover_members: "Discover members"
 
         # next events summary on the home page
-        fablab_s_next_events: "Makerspace's next events"
-        every_events: "Every events"
+        fablab_s_next_events: "Future events"
+        every_events: "All events"
         from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
         on_the_date: "On the {{DATE}}"  # angular interpolation
         from_time_to_time: "From {{START}} to {{END}}"  # angular interpolation
@@ -137,13 +137,14 @@ en:
 
       projects_list:
         # projects gallery
-        the_fablab_projects: "Makerspace Projects"
+        the_fablab_projects: "Projects"
         search_over_the_whole_network: "Search over the whole MakerNet"
-        tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
+        tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every maker space using this feature!"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
         reset_all_filters: "Reset all filters"
         search: "Search"
+        keywords: "Keywords"
         all_projects: "All projects"
         my_projects: "My projects"
         projects_to_whom_i_take_part_in: "Projects to whom I take part in"
@@ -176,7 +177,7 @@ en:
       machines_list:
         # list of machines
         machines_list:
-          the_22212_s_machines: "Machines"
+          the_fablab_s_machines: "Machines"
           add_a_machine: "Add a Machine"
           book: "Book"
           _or_the_: " or the "
@@ -238,7 +239,7 @@ en:
         # details and booking of an event
         event_description: "Event Description"
         downloadable_documents: "Downloadable Documents"
-        informations_and_booking: "Informations and Booking"
+        information_and_booking: "Information and Booking"
         beginning: "Beginning:"
         ending: "Ending:"
         opening_hours: "Opening hours:"

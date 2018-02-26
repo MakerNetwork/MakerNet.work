@@ -38,11 +38,12 @@
                />
         {{ searchOverWholeNetwork }}
       </span>
+
       <form class="form-inline m-t text-center" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input type="search" class="form-control" placeholder="Mots-clés" ng-model="search.q"/>
+            <input type="search" class="form-control" placeholder="<%= I18n.t 'app.public.projects_list.keywords' %>" ng-model="search.q"/>
             <div class="input-group-btn">
               <button type="submit" class="btn btn-warning" translate>{{ 'search' }}</button>
             </div>
@@ -50,6 +51,7 @@
         </div>
       </form>
     </div>
+
     <span ng-if="!openlab.searchOverWholeNetwork">
       <div class="col-md-3 m-b" ng-show="isAuthenticated()">
         <select ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
