@@ -358,10 +358,14 @@ optimized for a production environment.
    mkdir -p tmp/pids
    ```
 
-9. Set up the databases:
+9. Set up the databases. (Note that you should provide the desired admin credentials and that these
+    specific set of commands must be used to set up the database as some raw SQL instructions are
+    included in the migrations):
 
    ```bash
-   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword bundle exec rake db:setup
+   bundle exec rake db:create
+   bundle exec rake db:migrate
+   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword bundle exec rake db:seed
    bundle exec rake fablab:es_build_stats
    ```
 
