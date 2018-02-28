@@ -1,5 +1,19 @@
 #!/usr/bin/env zsh
 
+# Set environmen values #######################################################
+
+  # Virtual environment flag
+  echo '# Set virtual environment flag' >> ~/.profile
+  echo 'export VIRTUAL_DEV_ENV=true' >> ~/.profile
+  echo "\n" >>  ~/.profile
+
+  # Language configuration
+  echo '# Set locale configuration' >> ~/.profile
+  echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
+  echo 'export LANG=en_US.UTF-8' >> ~/.profile
+  echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
+  echo "\n" >>  ~/.profile
+
 # Install and setup PostgreSQL ################################################
 
 echo "***************************************************"
@@ -93,14 +107,6 @@ echo "***************************************************"
 echo "Checking for NVM... "
 echo "***************************************************"
 if [[ ! -x "$HOME/.nvm" ]]; then
-
-  # Set language configuration
-  echo '# Set locale configuration' >> ~/.profile
-  echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
-  echo 'export LANG=en_US.UTF-8' >> ~/.profile
-  echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
-  echo "\n" >>  ~/.profile
-
   wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
   echo '# Node Version Manager' >> ~/.profile
@@ -158,15 +164,15 @@ echo 'Cheking for Ruby... '
 echo "***************************************************"
 if ! ruby -v; then
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  sudo apt install -y libxml2 libxml2-dev libxslt1-dev libpq-dev libidn11-dev
+  sudo apt install -y libxml2 libxml2-dev libxslt1-dev libpq-dev
   \curl -sSL https://get.rvm.io | bash
   source /home/vagrant/.rvm/scripts/rvm
   rvm get head
-  rvm install ruby-2.4.3
-  rvm use ruby-2.4.3@global
+  rvm install ruby-2.3.6
+  rvm use ruby-2.3.6@global
   gem update --system --no-ri --no-rdoc
   gem update --no-ri --no-rdoc
-  rvm use ruby-2.4.3 --default
+  rvm use ruby-2.3.6 --default
 else
   echo 'OK'
 fi
@@ -178,4 +184,4 @@ echo "***************************************************"
 echo 'Removing unused software... '
 echo "***************************************************"
 rvm cleanup all
-sudo apt autoremove -y
+sudo apt autoremove
