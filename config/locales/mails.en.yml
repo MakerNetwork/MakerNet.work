@@ -1,7 +1,7 @@
 en:
   layouts:
     notifications_mailer:
-      see_you_later: "See you soon in {GENDER, select, other{the}} space"  # messageFormat interpolation
+      see_you_later: "See you soon at"  # messageFormat interpolation
       sincerely: "Sincerely,"
       signature: "The MakerNet.work team."
       do_not_reply: "Please do not reply to this email."
