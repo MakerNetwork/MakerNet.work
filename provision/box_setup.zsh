@@ -168,11 +168,11 @@ if ! ruby -v; then
   \curl -sSL https://get.rvm.io | bash
   source /home/vagrant/.rvm/scripts/rvm
   rvm get head
-  rvm install ruby-2.3.6
-  rvm use ruby-2.3.6@global
+  rvm install ruby-2.4.3
+  rvm use ruby-2.4.3@global
   gem update --system --no-ri --no-rdoc
   gem update --no-ri --no-rdoc
-  rvm use ruby-2.3.6 --default
+  rvm use ruby-2.4.3 --default
 else
   echo 'OK'
 fi
