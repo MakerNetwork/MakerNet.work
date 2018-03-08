@@ -28,14 +28,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Provisioning
-  config.vm.provision "shell", privileged: true, run: "once" do |s|
-    s.inline = "export LC_ALL=en_US.UTF-8\n" \
-               "export LANG=en_US.UTF-8\n" \
-               "export LANGUAGE=en_US.UTF-8"
-  end
-
   config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
+
   config.vm.provision "shell", privileged: false, run: "once",
-    path: "provision/box_setup.zsh"
+    path: "provision/box_setup.zsh",
+    env: {
+      "LC_ALL"   => "en_US.UTF-8",
+      "LANG"     => "en_US.UTF-8",
+      "LANGUAGE" => "en_US.UTF-8",
+    }
 end
