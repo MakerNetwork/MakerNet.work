@@ -8,12 +8,13 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
     @notification = notification
     @recipient = notification.receiver
     @attached_object = notification.attached_object
+    @fablab_name = Setting.find_by(name: 'fablab_name').value
 
     if !respond_to?(notification.notification_type)
       class_eval %Q{
         def #{notification.notification_type}
           mail to: @recipient.email,
-               subject: t('notifications_mailer.#{notification.notification_type}.subject'),
+               subject: t('notifications_mailer.#{notification.notification_type}.subject', {FABLAB: @fablab_name}),
                template_name: '#{notification.notification_type}',
                content_type: 'text/html'
         end
