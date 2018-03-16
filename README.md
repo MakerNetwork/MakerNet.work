@@ -77,7 +77,8 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
 
-In you only intend to run fab-manager on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
+In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker installation method](docker/README.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -141,7 +142,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```bash
    rake db:create
    rake db:migrate
-   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword rake db:seed
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -375,16 +376,91 @@ optimized for a production environment.
    bundle exec foreman s -p 3000
    ```
 
+<a name="virtual-machine-instructions"></a>
+### Virtual Machine Instructtions
+
+These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
+machine, with most of the software dependencies installed automatically and avoiding to install a lot
+of software and services directly on the host computer.
+
+**Note:** The provision scripts configure the sofware dependencies to play nice with each other while
+they are inside the same virtual environment but said configuration is not optimized for a production
+environment.
+
+1. Install [Vagrant][vagrant] and [Virtual Box][virtualbox] (with the extension package).
+
+2. Retrieve the project from Git
+
+   ```bash
+   git clone https://github.com/LaCasemate/fab-manager
+   ```
+
+3. From the project directory, run:
+
+   ```bash
+   vagrant up
+   ```
+
+4. Once the virtual machine finished building, reload it with:
+
+   ```bash
+   vagrant reload
+   ```
+
+5. Log into the virtual machine with:
+
+   ```bash
+   vagrant ssh
+   ```
+
+6. While logged in, navigate to the project folder and install the Gemfile
+   dependencies:
+
+   ```bash
+   cd /vagrant
+   bundle install
+   ```
+
+7. Set a directory for Sidekick pids:
+
+   ```bash
+   mkdir -p tmp/pids
+   ```
+
+8. Copy the default configuration files:
+
+   ```bash
+   cp config/database.yml.virtual config/database.yml
+   cp config/application.yml.default config/application.yml
+   ```
+
+10. Set up the databases. (Note that you should provide the desired admin credentials and that these
+    specific set of commands must be used to set up the database as some raw SQL instructions are
+    included in the migrations):
+
+   ```bash
+   rake db:create
+   rake db:migrate
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
+   rake fablab:es_build_stats
+   ```
+
+11. Start the application and visit `localhost:3000` on your browser to check that it works:
+
+   ```bash
+   foreman s -p 3000
+   ```
+
 <a name="postgresql"></a>
 ## PostgreSQL
 
 <a name="postgresql-on-debian"></a>
 ### Install PostgreSQL 9.4 on Ubuntu/Debian
 
-1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one the following lines:
-   - `deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main` (Ubuntu 14.04 Trusty)
-   - `deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main` (Ubuntu 16.04 Xenial)
-   - `deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main` (Debian 8 Jessie)
+1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one your distribution source:
+   ```bash
+   sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+   ```
 
 
 2. Import the repository signing key, and update the package lists
@@ -526,7 +602,7 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    sudo apt-get install elasticsearch
    ```
 
-4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8/Ubuntu 16.04), you will need to run:
+4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
 
    ```bash
    # System V
@@ -819,3 +895,8 @@ Developers may find information on how to implement their own authentication pro
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 1.7](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index.html)
+
+
+---
+[vagrant]: https://www.vagrantup.com/downloads.html
+[virtualbox]: https://www.virtualbox.org/wiki/Downloads

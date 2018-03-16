@@ -1,5 +1,43 @@
 # Changelog Fab Manager
 
+## next release
+
+## v2.6.4 2018 March 15
+
+- Ability to share trainings on social medias
+- Fix a bug: a reminder notification were sent for canceled reservations
+- Fix a bug: sharing an event on facebook has HTML tags in the description
+- fix stripe api version, all fabmanagers has to use this version because codebase relies on it
+- updates omniauth to ~> 1.3.2 (security vulnerability)
+- updates rack-protection to 1.5.5 (security vulnerability) see [this link](https://github.com/sinatra/sinatra/issues/1408) and [this link](https://github.com/sinatra/rack-protection/pull/122)
+- updates twitter gem in order to get rid of security warning from gem "http"
+
+## v2.6.3 2018 January 2
+
+- Fix a bug: wrong docker-compose url in setup script (#98)
+- Typo correction in docker README (#97)
+
+## v2.6.2 2017 December 21
+
+- Support for internet explorer 11
+- Fix a bug: events order in public list
+- Fix a bug: unable to create a training credit
+- Corrected typos in documentation (#96)
+- Improved test suite coverage
+
+## v2.6.1 2017 December 14
+
+- Updated Portuguese translations (#91)
+- Added Spanish translations (#87)
+- Added Central Africa & Cameroon currency symbol (#90)
+- Fix nginx configuration to allow initial Let's Encrypt configuration (#92)
+- Events: open api and monitor improvement (#79)
+- Fix a bug: refund an invoice with a subscription and disabling it a the same time cause the resulting PDF to display the wrong dates
+- Fix a bug: unable to successfully run the test suite after wednesday
+- Fix a security issue: in development environments, web-console has a vulnerability as described in CVE-2015-3224
+- Fixed deploy instructions with docker-compose
+- Updated docker installation instructions
+
 ## v2.6.0 2017 November 13
 
 - Additional button to delete a slot, allowing to delete slots masked by others
