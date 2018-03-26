@@ -42,7 +42,7 @@ gem 'rolify' # Role management with resource scoping
 gem 'pundit' # Minimal authorization through OO design
 gem 'has_secure_token' # Generate uniques random tokens for any model
 
-gem 'pg' # Interface to the PostgreSQL RDBMS
+gem 'pg', '~> 0.21.0' # Interface to the PostgreSQL RDBMS
 gem 'seed_dump' # Task to dump your data to db/seeds.rb
 gem 'friendly_id', '~> 5.1.0' # create pretty URL’s and human-friendly strings
 gem 'elasticsearch-rails'
