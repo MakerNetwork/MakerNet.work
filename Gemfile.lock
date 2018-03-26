@@ -385,6 +385,8 @@ GEM
       activesupport
       i18n
     redis (4.0.1)
+    redis-namespace (1.6.0)
+      redis (>= 3.0.4)
     ref (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -566,6 +568,7 @@ DEPENDENCIES
   rails-observers
   rails_12factor
   recurrence
+  redis-namespace
   responders (~> 2.0)
   rolify
   rvm-capistrano
