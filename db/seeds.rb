@@ -96,16 +96,20 @@ end
 
 if Component.count == 0
   Component.create!([
-    {name: 'Silicone'},
-    {name: 'Vinyle'},
-    {name: 'Bois Contre plaqué'},
-    {name: 'Bois Medium'},
-    {name: 'Plexi / PMMA'},
-    {name: 'Flex'},
-    {name: 'Vinyle'},
-    {name: 'Parafine'},
-    {name: 'Fibre de verre'},
-    {name: 'Résine'}
+    {name: 'Silicon'},
+    {name: 'Vinyl'},
+    {name: 'Plywood'},
+    {name: 'Medium Grade Wood'},
+    {name: 'Plexiglass'},
+    {name: 'Plastic'},
+    {name: 'Sticker Backed Vinyl'},
+    {name: 'Clay'},
+    {name: 'Fiberglass'},
+    {name: 'Resin'},
+    {name: 'PLA Filament'},
+    {name: 'ABS Filament'},
+    {name: 'T-Glaze Filament'},
+    {name: 'Specialty Filament (wood, etc) '},
   ])
 end
 
@@ -122,7 +126,7 @@ end
 
 if Theme.count == 0
   Theme.create!([
-    {name: 'Everyday life'},
+    {name: 'Everyday Life'},
     {name: 'Robotics'},
     {name: 'Arduino'},
     {name: 'Sensors'},
