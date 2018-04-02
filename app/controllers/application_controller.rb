@@ -27,15 +27,35 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) <<
-      {profile_attributes: [:phone, :last_name, :first_name,
-        :gender, :birthday, :interest, :software_mastered,
-        organization_attributes: [:name, address_attributes: [:address]]]}
-    devise_parameter_sanitizer.for(:sign_up).concat [:username, :is_allow_contact, :is_allow_newsletter, :cgu, :group_id]
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      {
+        profile_attributes: [
+          :phone,
+          :last_name,
+          :first_name,
+          :gender,
+          :birthday,
+          :interest,
+          :software_mastered,
+          organization_attributes: [
+            :name,
+            address_attributes: [:address]
+          ]
+        ]
+      },
+      :username,
+      :is_allow_contact,
+      :is_allow_newsletter,
+      :cgu,
+      :group_id
+    ])
   end
 
   def default_url_options
-    { :host => Rails.application.secrets.default_host, protocol: Rails.application.secrets.default_protocol }
+    {
+      host: Rails.application.secrets.default_host,
+      protocol: Rails.application.secrets.default_protocol
+    }
   end
 
   def permission_denied
