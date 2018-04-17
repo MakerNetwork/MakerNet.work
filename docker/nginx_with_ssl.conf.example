@@ -1,5 +1,5 @@
 upstream puma {
-  server fabmanager:3000;
+  server makernet:3000;
 }
 
 server {
