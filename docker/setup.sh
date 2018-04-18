@@ -17,7 +17,7 @@ prepare_config()
   \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/0d8809730eabe6f8ee4712efabd42ef02fc9848b/webroot.ini.example > "$MAKERNET_PATH/example/webroot.ini.example"
 
   # docker-compose
-  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/87378c73d8772a521c3663bb652145f7a2cabbdc/docker-compose.yml > "$MAKERNET_PATH/docker-compose.yml"
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/8bf24055ea654fbfc43b144cc7fc2c4b5be242c7/docker-compose.yml > "$MAKERNET_PATH/docker-compose.yml"
 }
 
 prepare_config "$@"

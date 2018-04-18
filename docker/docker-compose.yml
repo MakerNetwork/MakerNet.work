@@ -1,7 +1,7 @@
 version: '2'
 services:
   makernet:
-    image: akaiiro/makernet
+    image: akaiiro/makernet-sample
     environment:
       RAILS_ENV: production
       RACK_ENV: production
