@@ -1,7 +1,8 @@
-# FabManager
+# MakerNet
 
-FabManager is the FabLab management solution. It is web-based, open-source and totally free.
-
+MakerNet is a management solution for maker spaces, fab-labs and any kind of
+community driven innovation space. It is web-based, open-source and totally
+free.
 
 ##### Table of Contents
 1. [Software stack](#software-stack)
