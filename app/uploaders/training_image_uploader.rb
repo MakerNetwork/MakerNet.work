@@ -5,8 +5,8 @@ class TrainingImageUploader < CarrierWave::Uploader::Base
   include UploadHelper
 
   # Choose what kind of storage to use for this uploader:
-  # storage :file
-  storage :fog
+  # storage :file (local) or :fog (remote)
+  storage ENV['FILES_STORAGE'].to_sym
   after :remove, :delete_empty_dirs
 
   # Override the directory where uploaded files will be stored.
@@ -54,5 +54,10 @@ class TrainingImageUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     "training_image.#{file.extension}" if original_filename
+  end
+
+  # return an array like [width, height]
+  def dimensions
+    ::MiniMagick::Image.open(file.file)[:dimensions]
   end
 end

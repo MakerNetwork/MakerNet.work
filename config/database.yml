@@ -2,7 +2,7 @@ development: &development
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: fabmanager_development
+  database: makernet_development
   pool: 25
   username: ubuntu
   password: ubuntu
@@ -12,17 +12,17 @@ development: &development
 # Do not set this db to the same as development or production.
 test:
   <<: *development
-  database: fabmanager_test
+  database: makernet_test
 
 production: &production
   adapter: postgresql
   host: <%= ENV['DATABASE_HOST'] %>
   encoding: unicode
-  database: fabmanager_production
+  database: makernet_production
   pool: 25
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASS'] %>
 
 staging:
   <<: *production
-  database: fabmanager_staging
+  database: makernet_staging

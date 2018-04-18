@@ -42,9 +42,10 @@ gem 'rolify' # Role management with resource scoping
 gem 'pundit' # Minimal authorization through OO design
 gem 'has_secure_token' # Generate uniques random tokens for any model
 
-gem 'pg' # Interface to the PostgreSQL RDBMS
+gem 'pg', '~> 0.21.0' # Interface to the PostgreSQL RDBMS
 gem 'seed_dump' # Task to dump your data to db/seeds.rb
 gem 'friendly_id', '~> 5.1.0' # create pretty URL’s and human-friendly strings
+gem 'redis-namespace'
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-persistence'
@@ -70,8 +71,8 @@ group :development, :test do
   # comment over to use visual debugger (eg. RubyMine), uncomment to use manual debugging
   gem 'byebug'
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-  # Spring speeds up development by keeping your application running in the background
+  gem 'web-console', '~> 2.1.3'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'forgery' # Easy and customizable generation of forged data
 end
@@ -103,5 +104,5 @@ group :production do
   gem 'rails_12factor'
 end
 
-# bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
