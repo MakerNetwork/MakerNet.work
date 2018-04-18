@@ -1,5 +1,5 @@
-FROM ruby:2.3
-MAINTAINER peng@sleede.com
+FROM ruby:2.4.4-strech
+MAINTAINER info@makernet.work
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
@@ -53,5 +53,5 @@ EXPOSE 3000
 # The main command to run when the container starts. Also
 # tell the Rails dev server to bind to all interfaces by
 # default.
-COPY docker/supervisor.conf /etc/supervisor/conf.d/fablab.conf
+COPY docker/supervisor.conf /etc/supervisor/conf.d/makernet.conf
 CMD ["/usr/bin/supervisord"]
