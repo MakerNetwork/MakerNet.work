@@ -2,22 +2,22 @@
 
 prepare_config()
 {
-  FABMANAGER_PATH=${1:-/apps/fabmanager}
+  MAKERNET_PATH=${1:-/apps/makernet}
 
-  mkdir -p "$FABMANAGER_PATH/example"
+  mkdir -p "$MAKERNET_PATH/example"
 
-  # fab-manager environment variables
-  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/env.example > "$FABMANAGER_PATH/example/env.example"
+  # MakerNet environment variables
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/0d8809730eabe6f8ee4712efabd42ef02fc9848b/env.example > "$MAKERNET_PATH/example/env.example"
 
   # nginx configuration
-  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/nginx_with_ssl.conf.example > "$FABMANAGER_PATH/example/nginx_with_ssl.conf.example"
-  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/nginx.conf.example > "$FABMANAGER_PATH/example/nginx.conf.example"
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/0d8809730eabe6f8ee4712efabd42ef02fc9848b/nginx_with_ssl.conf.example > "$MAKERNET_PATH/example/nginx_with_ssl.conf.example"
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/0d8809730eabe6f8ee4712efabd42ef02fc9848b/nginx.conf.example > "$MAKERNET_PATH/example/nginx.conf.example"
 
   # let's encrypt configuration
-  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/webroot.ini.example > "$FABMANAGER_PATH/example/webroot.ini.example"
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/0d8809730eabe6f8ee4712efabd42ef02fc9848b/webroot.ini.example > "$MAKERNET_PATH/example/webroot.ini.example"
 
   # docker-compose
-  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/87378c73d8772a521c3663bb652145f7a2cabbdc/docker-compose.yml > "$MAKERNET_PATH/docker-compose.yml"
 }
 
 prepare_config "$@"
