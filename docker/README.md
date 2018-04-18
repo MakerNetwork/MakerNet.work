@@ -95,14 +95,14 @@ Before installing MakerNet, we recommend you to:
 You can run the following script as root to easily perform all these operations:
 
 ```bash
-\curl -sSL prepare-vps.sleede.com | bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/633276a9d8868b61f8649353951d620bb144f792/prepare-vps.sh | bash
 ```
 
 <a name="retrieve-config-files"></a>
 ### Retrieve the initial configuration files
 
 ```bash
-\curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/setup.sh | bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/46bf893a6e25abea5a3136ca021e93004e707f53/setup.sh | bash
 ```
 
 ### Setup folders and env file
