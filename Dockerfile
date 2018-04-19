@@ -16,8 +16,9 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN gem install bundler
-RUN bundle install --binstubs
+RUN gem update --system
+RUN gem update
+RUN bundle install
 
 # Clean up APT when done.
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
