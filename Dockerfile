@@ -16,6 +16,7 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
+RUN gem install bundler
 RUN bundle install --binstubs
 
 # Clean up APT when done.
