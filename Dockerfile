@@ -7,7 +7,13 @@ MAINTAINER info@makernet.work
 RUN apt-get update && \
     apt-get install -y \
       nodejs \
-      supervisor
+      supervisor \
+      libxml2 \
+      libxml2-dev \
+      libxslt1-dev \
+      libpq-dev \
+      libidn11 \
+      libidn11-dev
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
@@ -16,9 +22,7 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN gem update --system
-RUN gem update
-RUN bundle install
+RUN bundle install --binstubs
 
 # Clean up APT when done.
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
