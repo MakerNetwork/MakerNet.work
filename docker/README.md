@@ -114,6 +114,7 @@ and edit it:
 mkdir -p /apps/makernet/config
 cd /apps/makernet
 cp example/env.example config/env
+ln -s config/env .env
 vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
@@ -242,19 +243,19 @@ docker-compose pull
 ### setup database
 
 ```bash
-docker-compose run --rm fabmanager bundle exec rake db:create # create the database
-docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
+docker-compose run --rm makernet bundle exec rake db:create # create the database
+docker-compose run --rm makernet bundle exec rake db:migrate # run all the migrations
 # replace xxx with your default admin email/password
-docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed # seed the database
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed # seed the database
 ```
 
 ### build assets
 
-`docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+`docker-compose run --rm makernet bundle exec rake assets:precompile`
 
 ### prepare Elasticsearch (search engine)
 
-`docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
+`docker-compose run --rm makernet bundle exec rake fablab:es_build_stats`
 
 ### start all services
 
