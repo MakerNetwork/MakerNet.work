@@ -1,4 +1,4 @@
-FROM ruby:2.4.4-stretch
+FROM ruby:2.4.4-slim-stretch
 MAINTAINER info@makernet.work
 
 # Install apt based dependencies required to run Rails as

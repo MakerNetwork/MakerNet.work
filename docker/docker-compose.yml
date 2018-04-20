@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   makernet:
     image: akaiiro/makernet-sample
@@ -21,25 +21,35 @@ services:
     restart: always
 
   postgres:
-    image: postgres:10.3
+    image: postgres:10.3-alpine
     volumes:
       - ${PWD}/postgresql:/var/lib/postgresql/data
     restart: always
 
   elasticsearch:
-    image: elasticsearch:5.6.8
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
     volumes:
       - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
     restart: always
 
   redis:
-    image: redis:3.2.11
+    image: redis:3.2.11-alpine
     volumes:
       - ${PWD}/redis:/data
     restart: always
 
   nginx:
-    image: nginx:1.13.12
+    image: nginx:1.13.12-alpine
     ports:
       - "80:80"
       - "443:443"
