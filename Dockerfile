@@ -6,14 +6,21 @@ MAINTAINER info@makernet.work
 # Debian image, we use apt-get to install those.
 RUN apt-get update && \
     apt-get install -y \
+      build-essential \
+      git \
       nodejs \
       supervisor \
+      patch \
+      ruby-dev \
+      zlib1g-dev \
+      liblzma-dev \
       libxml2 \
       libxml2-dev \
       libxslt1-dev \
       libpq-dev \
       libidn11 \
-      libidn11-dev
+      libidn11-dev \
+      libsqlite3-dev
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
