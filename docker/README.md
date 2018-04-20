@@ -243,11 +243,14 @@ docker-compose pull
 ### setup database
 
 ```bash
-docker-compose run --rm makernet bundle exec rake db:create # create the database
-docker-compose run --rm makernet bundle exec rake db:migrate # run all the migrations
-docker-compose run --rm makernet bundle exec rake fablab:es_build_stats
-# replace xxx with your default admin email/password
-docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed # seed the database
+# create the database
+docker-compose run --rm makernet bundle exec rake db:create
+
+# run all the migrations
+docker-compose run --rm makernet bundle exec rake db:migrate
+
+# seed the database: replace xxx with your default admin email/password
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed
 ```
 
 ### build assets
