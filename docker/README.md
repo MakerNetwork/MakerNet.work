@@ -102,7 +102,7 @@ You can run the following script as root to easily perform all these operations:
 ### Retrieve the initial configuration files
 
 ```bash
-\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/ee7dd56ce8d797f1e8e83ac8038195031bce1efc/setup.sh | bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/63332d2788ceea1c76d41f0e7ce8339fc2d9e944/setup.sh | bash
 ```
 
 ### Setup folders and env file
