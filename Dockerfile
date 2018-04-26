@@ -10,6 +10,7 @@ RUN apt-get update && \
       curl \
       git \
       nodejs \
+      imagemagick \
       supervisor \
       patch \
       ruby-dev \
