@@ -14,7 +14,6 @@ echo 'export LANG=en_US.UTF-8' >> ~/.profile
 echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
 echo "\n" >>  ~/.profile
 
-
 echo "***************************************************"
 echo 'Updating system packages... '
 echo "***************************************************"
@@ -34,3 +33,5 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-compose
 sudo usermod -a -G docker $USER
+
+echo "Docker installation has finished. Now, reboot the system."
