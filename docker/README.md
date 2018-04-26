@@ -86,11 +86,13 @@ with `ssh root@your-domain-name`.
 
 ### Prepare the server
 
-Before installing MakerNet, we recommend you to:
+Before installing MakerNet, we recommend you to perform the following steps:
+
 - Upgrade your system
 - Setup the server timezone
 - Add at least 2GB of swap memory
-- Protect your SSH connection by forcing it through a RSA key
+- Protect your SSH connection by forcing it through a RSA key (unless you're
+  using AWS, as it already provides certificates for connections).
 
 You can run the following script as root to easily perform all these operations:
 
@@ -102,7 +104,7 @@ You can run the following script as root to easily perform all these operations:
 ### Retrieve the initial configuration files
 
 ```bash
-\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/63332d2788ceea1c76d41f0e7ce8339fc2d9e944/setup.sh | bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/537540591b62e6172b640a6c491289667b0ae5df/setup.sh | bash
 ```
 
 ### Setup folders and env file
