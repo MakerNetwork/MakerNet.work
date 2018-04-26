@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# This script is useful to set up a VPS when the provider does not provide
+# tools for this goal.
+#
+# It is not required when working with:
+#  - EC2 AWS instances
+
 # Make sure only root can run our script
 if [[ "$(id -u)" -ne 0 ]]
  then
