@@ -49,7 +49,7 @@ RUN mkdir -p /usr/src/app/tmp/pids
 
 WORKDIR /usr/src/app
 
-COPY config/database.yml /usr/src/app/config/database.yml
+COPY docker/database.yml /usr/src/app/config/database.yml
 
 COPY . /usr/src/app
 
