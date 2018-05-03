@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script is useful to set up a VPS when the provider does not provide
-# tools for this goal.
+# This script is useful to set up security and timezone configuration on a VPS
+# when the provider does not provide tools for this goal.
 #
 # It is not required when working with:
 #  - EC2 AWS instances
