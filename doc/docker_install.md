@@ -109,7 +109,7 @@ You can run the following script as root to easily perform all these operations:
 ### Retrieve the initial configuration files
 
 ```bash
-\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/e9083335083900a58d0a55ada4f915c18b9ccca3/setup.sh | bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/a6cfc84214503de09bf188c4d14f99a77c8c0641/setup.sh | bash
 ```
 
 ### Setup folders and env file
@@ -136,7 +136,9 @@ Create the nginx folder, copy the example configuration file and edit it:
 
 ```bash
 mkdir -p /apps/makernet/config/nginx
-# whether you want you fab-manager to use SSL encryption or not, you should copy one of the following file
+# whether you want you makernet to use SSL encryption or not, you should copy
+# one of the following file
+
 ### with SSL ###
 cp example/nginx_with_ssl.conf.example config/nginx/makernet.conf
 ### OR without SSL ###
