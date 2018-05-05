@@ -1,28 +1,27 @@
-FROM ruby:2.4.4-slim-stretch
+FROM ruby:2.4.4-alpine3.7
 MAINTAINER info@makernet.work
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
-RUN apt-get update && \
-    apt-get install -y \
-      build-essential \
-      curl \
-      git \
-      nodejs \
-      imagemagick \
-      supervisor \
-      patch \
-      ruby-dev \
-      zlib1g-dev \
-      liblzma-dev \
-      libxml2 \
-      libxml2-dev \
-      libxslt1-dev \
-      libpq-dev \
-      libidn11 \
-      libidn11-dev \
-      libsqlite3-dev
+RUN apk update && apk upgrade
+RUN apk add --no-cache --update alpine-sdk \
+  build-base \
+  linux-headers \
+  curl \
+  git \
+  nodejs \
+  imagemagick \
+  supervisor \
+  patch \
+  libc-dev \
+  ruby-dev \
+  zlib-dev \
+  xz-dev \
+  postgresql-dev \
+  libxml2-dev \
+  libxslt-dev \
+  libidn-dev
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
@@ -31,10 +30,23 @@ RUN bundle config --global frozen 1
 WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
-RUN bundle install --binstubs
+RUN bundle install --binstubs --without development test doc
 
-# Clean up APT when done.
-#RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Clean up when done.
+RUN apk del alpine-sdk \
+  build-base \
+  linux-headers \
+  patch \
+  libc-dev \
+  ruby-dev \
+  zlib-dev \
+  xz-dev \
+  postgresql-dev \
+  libxml2-dev \
+  libxslt-dev \
+  libidn-dev
+
+RUN rm -rf /tmp/* /var/tmp/*
 
 # Web app
 RUN mkdir -p /usr/src/app
@@ -61,12 +73,10 @@ VOLUME /usr/src/app/public/uploads
 VOLUME /usr/src/app/public/assets
 VOLUME /var/log/supervisor
 
-# Expose port 3000 to the Docker host, so we can access it
-# from the outside.
+# Expose port 3000 to the Docker host, so we can access it from the outside.
 EXPOSE 3000
 
-# The main command to run when the container starts. Also
-# tell the Rails dev server to bind to all interfaces by
-# default.
+# The main command to run when the container starts. Also tell the Rails dev
+# server to bind to all interfaces by default.
 COPY docker/supervisor.conf /etc/supervisor/conf.d/makernet.conf
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/makernet.conf"]
