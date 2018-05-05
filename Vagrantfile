@@ -22,6 +22,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Port forwarding
     config.vm.network "forwarded_port", guest: 80, host: 3000
 
+    config.vm.provision "shell", privileged: true, run: "once",
+      path: "provision/system_tuning.sh"
+
     config.vm.provision "shell", privileged: false, run: "once",
       path: "provision/docker_setup.sh",
       env: {

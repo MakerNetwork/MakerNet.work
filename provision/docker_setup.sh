@@ -36,14 +36,19 @@ docker()
 
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   sudo apt-get update
-  sudo apt-get install -y docker-ce docker-compose
+  sudo apt-get install -y docker-ce
   sudo usermod -a -G docker $USER
+
+  sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
 }
 
 ###
 # Fetch configuration files
 examples()
 {
+  echo "* Fetching example conf files... ************************************* "
+
   \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/e9083335083900a58d0a55ada4f915c18b9ccca3/setup.sh | sudo bash
 
   sudo mkdir -p /apps/makernet/config
