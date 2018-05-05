@@ -33,19 +33,6 @@ COPY Gemfile.lock /tmp/
 RUN bundle install --binstubs --without development test doc
 
 # Clean up when done.
-RUN apk del alpine-sdk \
-  build-base \
-  linux-headers \
-  patch \
-  libc-dev \
-  ruby-dev \
-  zlib-dev \
-  xz-dev \
-  postgresql-dev \
-  libxml2-dev \
-  libxslt-dev \
-  libidn-dev
-
 RUN rm -rf /tmp/* /var/tmp/*
 
 # Web app
