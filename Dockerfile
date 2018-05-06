@@ -6,14 +6,7 @@ RUN apk update && apk upgrade
 RUN apk add --update curl \
   nodejs \
   imagemagick \
-  supervisor
-
-# Install buildtime apk based dependencies.
-RUN apk add --update --no-cache --virtual .build-deps alpine-sdk \
-  build-base \
-  linux-headers \
-  git \
-  patch \
+  supervisor \
   libc-dev \
   ruby-dev \
   zlib-dev \
@@ -22,6 +15,13 @@ RUN apk add --update --no-cache --virtual .build-deps alpine-sdk \
   libxml2-dev \
   libxslt-dev \
   libidn-dev
+
+# Install buildtime apk based dependencies.
+RUN apk add --update --no-cache --virtual .build-deps alpine-sdk \
+  build-base \
+  linux-headers \
+  git \
+  patch
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
