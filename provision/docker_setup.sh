@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-# Set environmen values
+# Set environment values
 environment()
 {
   echo "* Setting env language... ******************************************** "
@@ -22,6 +22,7 @@ environment()
 docker()
 {
   echo "* Updating system packages... **************************************** "
+
   sudo apt update && sudo apt upgrade -y
 
   echo "* Setting up Docker... *********************************************** "
@@ -41,6 +42,8 @@ docker()
   sudo apt-get install -y docker-ce
   sudo usermod -a -G docker $USER
 
+  echo "* Setting up Docker Compose ****************************************** "
+
   sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
 }
@@ -52,6 +55,8 @@ examples()
   echo "* Fetching example conf files... ************************************* "
 
   \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/a6cfc84214503de09bf188c4d14f99a77c8c0641/setup.sh | sudo bash
+
+  echo "* Placing basic configuration... ************************************* "
 
   sudo mkdir -p /apps/makernet/config
   sudo ln -s /apps/makernet makernet
