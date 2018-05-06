@@ -27,6 +27,8 @@ docker()
   echo "* Setting up Docker... *********************************************** "
 
   sudo apt-get install -y curl \
+    ntp \
+    ntpdate \
     ca-certificates \
     apt-transport-https \
     software-properties-common
@@ -49,7 +51,7 @@ examples()
 {
   echo "* Fetching example conf files... ************************************* "
 
-  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/e9083335083900a58d0a55ada4f915c18b9ccca3/setup.sh | sudo bash
+  \curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/a6cfc84214503de09bf188c4d14f99a77c8c0641/setup.sh | sudo bash
 
   sudo mkdir -p /apps/makernet/config
   sudo ln -s /apps/makernet makernet
