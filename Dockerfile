@@ -7,6 +7,7 @@ RUN apk add --update curl \
   nodejs \
   imagemagick \
   supervisor \
+  tzdata \
   libc-dev \
   ruby-dev \
   zlib-dev \
