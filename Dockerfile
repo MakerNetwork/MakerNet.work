@@ -1,18 +1,18 @@
 FROM ruby:2.4.4-alpine3.7
 MAINTAINER info@makernet.work
 
-# Install apt based dependencies required to run Rails as
-# well as RubyGems. As the Ruby image itself is based on a
-# Debian image, we use apt-get to install those.
+# Install runtime apk based dependencies.
 RUN apk update && apk upgrade
-RUN apk add --no-cache --update alpine-sdk \
-  build-base \
-  linux-headers \
-  curl \
-  git \
+RUN apk add --update curl \
   nodejs \
   imagemagick \
-  supervisor \
+  supervisor
+
+# Install buildtime apk based dependencies.
+RUN apk add --update --no-cache --virtual .build-deps alpine-sdk \
+  build-base \
+  linux-headers \
+  git \
   patch \
   libc-dev \
   ruby-dev \
@@ -33,6 +33,7 @@ COPY Gemfile.lock /tmp/
 RUN bundle install --binstubs --without development test doc
 
 # Clean up when done.
+RUN apk del .build-deps
 RUN rm -rf /tmp/* /var/tmp/*
 
 # Web app
