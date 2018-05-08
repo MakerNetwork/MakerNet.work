@@ -1,0 +1,247 @@
+# MakerNet Development Environment Instructions
+
+- [MakerNet Development Environment Instructions](#makernet-development-environment-instructions)
+  - [Development Virtual Machine](#development-virtual-machine)
+    - [Instructions](#instructions)
+  - [Emulated Production Environment](#emulated-production-environment)
+    - [Instructions](#instructions)
+    - [Optional configuration](#optional-configuration)
+    - [Docker commands with docker-compose](#docker-commands-with-docker-compose)
+      - [Restart app](#restart-app)
+      - [Stop app](#stop-app)
+      - [Restart all containers](#restart-all-containers)
+      - [Stop all containers](#stop-all-containers)
+      - [Start all containers](#start-all-containers)
+      - [Start all containers as daemon](#start-all-containers-as-daemon)
+      - [Open a bash in the app context](#open-a-bash-in-the-app-context)
+      - [Show services status](#show-services-status)
+      - [Restart nginx container](#restart-nginx-container)
+      - [Example of command passing env variables](#example-of-command-passing-env-variables)
+
+
+## Development Virtual Machine
+
+Using a virtual machine most of the software dependencies get installed automatically and it avoids
+installing a lot of software and services directly on the development machine.
+
+**Note:** The provision scripts configure the sofware dependencies to play nice with each other
+while they are inside the same virtual development environment but this means that said
+configuration is not optimized for a production environment.
+
+### Instructions
+
+1. Install [Vagrant][0] and [Virtual Box][1] (with the extension package).
+
+2. Retrieve the project from Git
+
+   ```bash
+   git clone https://github.com/MakerNetwork/MakerNet.work.git
+   ```
+
+3. Get a copy from the `.envrc` file that contains environment values to be used by the aplication
+   and place it at the root directory of the project. (Ask for it to one of the collaborators).
+
+4. From the project directory, run:
+
+   ```bash
+   vagrant up
+   ```
+
+5. Once the virtual machine finished building, reload it and log into it with:
+
+   ```bash
+   vagrant reload
+   vagrant ssh
+   ```
+
+6. While logged in, navigate to the project folder and install the Gemfile dependencies:
+
+   ```bash
+   cd /vagrant
+   bundle install
+   ```
+
+7. Load `.envrc` values as environment variables:
+
+   ```bash
+   source .envrc
+   ```
+
+8. Set a directory for Sidekick pids:
+
+   ```bash
+   mkdir -p tmp/pids
+   ```
+
+9. Set up the databases. (Note that you should provide the desired admin credentials and that these
+   specific set of commands must be used to set up the database as some raw SQL instructions are
+   included in the migrations):
+
+   ```bash
+   # create database
+   bundle exec rake db:create
+   # apply migrations
+   bundle exec rake db:migrate
+   # include seed data
+   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword bundle exec rake db:seed
+   # build elasticsearch stats
+   bundle exec rake fablab:es_build_stats
+   ```
+
+10. Start the application and visit `http://localhost:3000` on your browser to check that it
+    works:
+
+   ```bash
+   bundle exec foreman s -p 3000
+   ```
+
+11. Email notifications will be caught by MailCatcher. To see the emails sent by the platform, open
+    your web browser at `http://localhost:1080` to access the MailCatcher interface.
+
+
+## Emulated Production Environment
+
+The virtual machine can also emulate the production environment using Docker.
+
+**Note**: Although Docker can be used alone on a developmen system, it is recomended to work with
+this virtual machine as the production environment applies optimizations in the host system that may not be suitable for everyday work systems.
+
+### Instructions
+
+1. Install [Vagrant][0] and [Virtual Box][1] (with the extension package).
+
+2. Retrieve the project from Git
+
+   `git clone https://github.com/MakerNetwork/MakerNet.work.git`
+
+3. Open the `Vagrant` file with your editor and change the value to use the Docker provision
+   scripts.
+
+   `USE_DOCKER_VERSION = true`
+
+4. From the project directory, run:
+
+   `vagrant up`
+
+5. Once the virtual machine finished building, reload it and log into it with:
+
+   ```bash
+   vagrant reload
+   vagrant ssh
+   ```
+
+6. Login with your Docker credentials. (Note that you must be added as project collaborator over
+   Docker Hub beforehand).
+
+   `docker login`
+
+6. Navigate to the project folder and pull the project images. _Note_: By default, the command will
+   fetch the most recent build from the maser branch of the project. If using a different build is
+   needed, edit the `makernet/docker-compose.yml` file and add the desired tag to the image name.
+
+   ```bash
+   cd makernet
+   docker-compose pull
+   ```
+
+7. It is required to set the Rails and Devise secret in the env file, that can be done by running
+   the following commands from the project folder:
+
+   ```bash
+   # Generate a new secret string
+   docker-compose run --rm makernet bundle exec rake secret
+   # Copy the ouput value and place it in the env file
+   sudo nano .env
+   ```
+
+8. Prepare the database. (Running the migrations manually is required):
+
+   ```bash
+   # create the database
+   docker-compose run --rm makernet bundle exec rake db:create
+
+   # run all the migrations
+   docker-compose run --rm makernet bundle exec rake db:migrate
+
+   # seed the database: replace xxx with your default admin email/password
+   docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed
+   ```
+
+9. Build assets
+
+   `docker-compose run --rm makernet bundle exec rake assets:precompile`
+
+10. Prepare ElasticSearch
+
+   `docker-compose run --rm makernet bundle exec rake fablab:es_build_stats`
+
+11. Start the application and visit `http://localhost:3000` on your browser to check that it
+    works:
+
+    `docker-compose up -d`
+
+### Optional configuration
+
+12. Set up email provider in the `env` file to receive email notifications:
+
+   ```env
+   SMTP_ADDRESS=<your provider server url>
+   SMTP_PORT=<usually port 587>
+   SMTP_USER_NAME=<service user>
+   SMTP_PASSWORD=<service password>
+   ```
+
+   Restart the application with `docker-compose restart makernet`
+
+13. Set the desired time zone in the virtual machine:
+
+   `sudo dpkg-reconfigure tzdata`
+
+   Then, edit the `env` file to set the same value in the `TIME_ZONE` variable and restart the
+   application with `docker-compose restart makernet`.
+
+### Docker commands with docker-compose
+
+#### Restart app
+
+`docker-compose restart makernet`
+
+#### Stop app
+
+`docker-compose down makernet`
+
+#### Restart all containers
+
+`docker-compose restart`
+
+#### Stop all containers
+
+`docker-compose down`
+
+#### Start all containers
+
+`docker-compose up`
+
+#### Start all containers as daemon
+
+`docker-compose up -d`
+
+#### Open a bash in the app context
+
+`docker-compose run --rm makernet bash`
+
+#### Show services status
+
+`docker-compose ps`
+
+#### Restart nginx container
+
+`docker-compose restart nginx`
+
+#### Example of command passing env variables
+
+`docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed`
+
+---
+[0]: https://www.vagrantup.com/downloads.html
+[1]: https://www.virtualbox.org/wiki/Downloads
