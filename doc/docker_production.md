@@ -12,9 +12,28 @@ operating system (Ubuntu 16.04/Debian 8).
 In order to make it work, please use the same directories structure as described in this guide in
 your MakerNet instance folder. You will need to be root through the rest of the setup.
 
-- [Setup the server](#setup-the-server)
-  - [Install Docker](#install-docker)
-  - [Set the Time Zone](#set-the-time-zone)
+- [Setup MakerNet in production with Docker](#setup-makernet-in-production-with-docker)
+  - [Setup the server](#setup-the-server)
+    - [Basic Configuration](#basic-configuration)
+      - [Install Docker](#install-docker)
+      - [Set the Time Zone](#set-the-time-zone)
+      - [Pull the application images](#pull-the-application-images)
+      - [Set the env variables](#set-the-env-variables)
+        - [Generate and set secrets](#generate-and-set-secrets)
+      - [Prepare the database](#prepare-the-database)
+      - [Build the assets](#build-the-assets)
+      - [Prepare ElasticSearch stats](#prepare-elasticsearch-stats)
+      - [Run the application with the Dockcer daemon](#run-the-application-with-the-dockcer-daemon)
+    - [Advancec configuration with SSL](#advancec-configuration-with-ssl)
+      - [Setup the domain name](#setup-the-domain-name)
+      - [Connect through SSH](#connect-through-ssh)
+      - [Set up configuration files](#set-up-configuration-files)
+        - [Environment](#environment)
+        - [NginX](#nginx)
+      - [Set up certificates](#set-up-certificates)
+      - [SSL certificate with LetsEncrypt](#ssl-certificate-with-letsencrypt)
+  - [Docker Utilities](#docker-utilities)
+
 
 ## Setup the server
 
@@ -246,3 +265,7 @@ sudo systemctl start letsencrypt.timer
 # check status with
 sudo systemctl list-timers
 ```
+
+## Docker Utilities
+
+Check the [list of commands](docker_utils.md) that will help you manage the application containers.

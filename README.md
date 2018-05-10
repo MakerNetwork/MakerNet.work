@@ -34,6 +34,6 @@ Docker [production install instructions](doc/docker_production.md).
 
 ## Setup a development environment
 
-In you intend to run MakerNet on your local machine to contribute to the
-project development, you can set it up with the virtual environment
+In you intend to run MakerNet on your local machine to contribute to the project development, you
+can set it up with the virtual environment
 [instructions](doc/virtual_dev_env.md).

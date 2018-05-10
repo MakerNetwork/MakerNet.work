@@ -1,21 +1,12 @@
 # MakerNet Development Environment Instructions
 
-- [Development Virtual Machine](#development-virtual-machine)
-  - [Instructions](#instructions)
-- [Emulated Production Environment](#emulated-production-environment)
-  - [Instructions](#instructions)
-  - [Optional configuration](#optional-configuration)
-  - [Docker commands with docker-compose](#docker-commands-with-docker-compose)
-    - [Restart app](#restart-app)
-    - [Stop app](#stop-app)
-    - [Restart all containers](#restart-all-containers)
-    - [Stop all containers](#stop-all-containers)
-    - [Start all containers](#start-all-containers)
-    - [Start all containers as daemon](#start-all-containers-as-daemon)
-    - [Open a bash in the app context](#open-a-bash-in-the-app-context)
-    - [Show services status](#show-services-status)
-    - [Restart nginx container](#restart-nginx-container)
-    - [Example of command passing env variables](#example-of-command-passing-env-variables)
+- [MakerNet Development Environment Instructions](#makernet-development-environment-instructions)
+    - [Development Virtual Machine](#development-virtual-machine)
+        - [Instructions](#instructions)
+    - [Emulated Production Environment](#emulated-production-environment)
+        - [Instructions](#instructions)
+        - [Optional configuration](#optional-configuration)
+        - [Docker Utilities](#docker-utilities)
 
 
 ## Development Virtual Machine
@@ -199,47 +190,11 @@ this virtual machine as the production environment applies optimizations in the 
    Then, edit the `env` file to set the same value in the `TIME_ZONE` variable and restart the
    application with `docker-compose restart makernet`.
 
-### Docker commands with docker-compose
 
-#### Restart app
+### Docker Utilities
 
-`docker-compose restart makernet`
+Check the [list of commands](docker_utils.md) that will help you manage the application containers.
 
-#### Stop app
-
-`docker-compose down makernet`
-
-#### Restart all containers
-
-`docker-compose restart`
-
-#### Stop all containers
-
-`docker-compose down`
-
-#### Start all containers
-
-`docker-compose up`
-
-#### Start all containers as daemon
-
-`docker-compose up -d`
-
-#### Open a bash in the app context
-
-`docker-compose run --rm makernet bash`
-
-#### Show services status
-
-`docker-compose ps`
-
-#### Restart nginx container
-
-`docker-compose restart nginx`
-
-#### Example of command passing env variables
-
-`docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle exec rake db:seed`
 
 ---
 [0]: https://www.vagrantup.com/downloads.html
