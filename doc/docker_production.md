@@ -109,3 +109,140 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx makernet bundle
 `docker-compose up -d`
 
 ### Advancec configuration with SSL
+
+#### Setup the domain name
+
+This assumes that you have adquired a domain name and have access to the configuration for it.
+
+1. Replace the IP address of the domain with the IP address of your VPS (This is
+   a DNS record type A)
+2. **Do not** try to access your domain name right away, DNS are not aware of
+   the change yet so **WAIT** and be patient.
+
+#### Connect through SSH
+
+Check that you can connect to the server with this command: `ssh root@your-domain-name`.
+
+Then, you can proceed with the following configuration steps.
+
+#### Set up configuration files
+
+##### Environment
+
+Open the `env` (`sudo nano .env`), set the domain name in the `DEFAULT_HOST` variable and setvthe
+`DEFAULT_PROTOCOL` to `https`.
+
+##### NginX
+
+* Remove the `makernet.conf` file from the NginX configuration:
+
+  `sudo rm config/nginx/makernet.conf`
+
+* Copy the example NgniX with SSL configuration file:
+
+  `sudo cp example/nginx_with_ssl.conf.example config/nginx/makernet.conf`
+
+* Open the configuration file (`sudo nano config/nginx/makernet.conf`) an edit the following values:
+
+  - Replace all the ocurrendes of **MAIN_DOMAIN** (example: my-domain.com).
+  - Replace **URL_WITH_PROTOCOL_HTTPS** (example: https://www.my-domain.com).
+  - If you have extra domains thas point to your server, you can add them by replacing the values in
+    **ANOTHER_URL_1**, **ANOTHER_URL_2** (example: .my-domain.us)
+
+#### Set up certificates
+
+**Note**: The application MUST be running with the basic configuration (without SSL) before running
+the LetsEncrypt software.
+
+#### SSL certificate with LetsEncrypt
+
+Let's Encrypt is a new Certificate Authority that is free, automated, and open. Let’s Encrypt
+certificates expire after 90 days, so automation of renewing your certificates is important. Here is
+the setup for a systemd timer and service to renew the certificates and reboot the app Docker
+container:
+
+* Generate the `dhparam.pem` file. (This may take some hours):
+
+```bash
+sudo mkdir -p /apps/makernet/config/nginx/ssl
+cd /apps/makernet/config/nginx/ssl
+sudo openssl dhparam -out dhparam.pem 4096
+```
+
+* Copy the initial configuration file:
+
+```bash
+sudo mkdir -p /apps/makernet/letsencrypt/config/
+sudo mkdir -p /apps/makernet/letsencrypt/etc/webrootauth
+
+sudo cp example/webroot.ini.example /apps/makernet/letsencrypt/config/webroot.ini
+```
+
+* Edit the `webroot.ini` file:
+
+```bash
+# Replace `email` with the admin contact email
+# Replace `domains` with the main domain and any other additional domains
+
+sudo nano letsencrypt/config/webroot.ini
+```
+
+* Run `docker pull quay.io/letsencrypt/letsencrypt:latest`
+
+* Create file (with sudo) /etc/systemd/system/letsencrypt.service and paste the following
+  configuration into it:
+
+```systemd
+[Unit]
+Description=letsencrypt cert update oneshot
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/apps/makernet/log:/var/log/letsencrypt" -v "/apps/makernet/letsencrypt/etc:/etc/letsencrypt" -v "/apps/makernet/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
+ExecStartPost=-/usr/bin/docker restart makernet_nginx_1
+```
+
+* Create file (with sudo) /etc/systemd/system/letsencrypt.timer and paste the following
+  configuration into it:
+
+```systemd
+[Unit]
+Description=letsencrypt oneshot timer
+Requires=docker.service
+
+[Timer]
+OnCalendar=*-*-1 06:00:00
+Persistent=true
+Unit=letsencrypt.service
+
+[Install]
+WantedBy=timers.target
+```
+
+* Start letsencrypt service:
+
+```bash
+sudo systemctl start letsencrypt.service
+```
+
+* If there were no errors, remove your app container and run your app to apply the changes running
+  the following commands:
+
+```bash
+docker-compose down
+docker-compose up -d
+```
+
+* Visit the domain with using the HTTPS in your browser to check that the site works fine and that
+  the encryption is enabled. (A `verified` icon should appear beside the browser address bar).
+
+* Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the
+  month :
+
+```bash
+sudo systemctl enable letsencrypt.timer
+sudo systemctl start letsencrypt.timer
+# check status with
+sudo systemctl list-timers
+```
