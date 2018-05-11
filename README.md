@@ -3,6 +3,13 @@
 MakerNet is a management solution for maker spaces, fab-labs and any kind of
 community driven innovation space.
 
+- [MakerNet](#makernet)
+  - [Software stack](#software-stack)
+    - [Requirements](#requirements)
+  - [Setup a production environment](#setup-a-production-environment)
+  - [Setup a development environment](#setup-a-development-environment)
+  - [Additional Information](#additional-information)
+
 ## Software stack
 
 MakerNet is a Ruby on Rails / AngularJS web application that runs on the following software:
@@ -37,3 +44,12 @@ Docker [production install instructions](doc/docker_production.md).
 In you intend to run MakerNet on your local machine to contribute to the project development, you
 can set it up with the virtual environment
 [instructions](doc/virtual_dev_env.md).
+
+## Additional Information
+
+Review the following links to learn more about the workings of MakerNet.
+
+* [Environment Configuration](env_configuration.md)
+* [Localization (Language and Time Settings)](localization.md)
+* [Notes on the Software Stack](stack_notes.md)
+* [Additional Capabilities](additional_capabilities.md)
