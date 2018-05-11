@@ -12,7 +12,7 @@ community driven innovation space.
 
 ## Software stack
 
-MakerNet is a Ruby on Rails / AngularJS web application that runs on the following software:
+This is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 16.04 / Debian 8
 - Ruby 2.4.x & Rails 4.2.x

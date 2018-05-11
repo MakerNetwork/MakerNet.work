@@ -229,7 +229,27 @@ See https://support.microsoft.com/en-us/kb/264372 for a list a available formats
 
 ## Virtual Environment Variables
 
+The following variables are active under the virtual development environment to help the application
+to with some issues.
 
+    VIRTUAL_DEV_ENV
+
+Applies configuration settings to improve the performance of the application when it is run under
+the virtual development environment. It must be set to `true`.
+
+    RACK_ENV
+
+Sets the environment behaviour for some dependencies. It must be set to `development`.
+
+    SSL_CERT_DIR
+
+Indicates the default route to the directory where certificates are stored. For the virtualized
+Ubuntu environment it is `/etc/ssl/certs`.
+
+    SSL_CERT_FILE
+
+Indicates the default file name  where certificates are stored. For the virtualized Ubuntu
+environment it is `ca-certificates.crt`.
 
 ## Additional Configuration
 
