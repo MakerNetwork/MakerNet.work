@@ -6,7 +6,6 @@ gem 'sass-rails', '5.0.1' # Use SCSS for stylesheets
 gem 'compass-rails', '2.0.4' # CSS Authoring Framework
 gem 'uglifier', '~> 4.0.1' # Compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.1.0' # For .js.coffee assets and views
-gem 'therubyracer', '= 0.12.3', platforms: :ruby # Embed the V8 JavaScript interpreter
 gem 'jquery-rails' # Main JavaScript library
 gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease
 gem 'jbuilder_cache_multi' # Retrieve fragments for a collection of objects from the cache

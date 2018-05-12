@@ -1,45 +1,67 @@
-version: '2'
+version: '3.6'
+
+volumes:
+  assets:
+  uploads:
+  invoices:
+  exports:
+  plugins:
+  log:
+
 services:
-  fabmanager:
-    image: sleede/fab-manager
+  makernet:
+    image: mattkenigson/makernet.work
     environment:
       RAILS_ENV: production
       RACK_ENV: production
     env_file:
       - ${PWD}/config/env
     volumes:
-      - ${PWD}/public/assets:/usr/src/app/public/assets
-      - ${PWD}/public/uploads:/usr/src/app/public/uploads
-      - ${PWD}/invoices:/usr/src/app/invoices
-      - ${PWD}/exports:/usr/src/app/exports
-      - ${PWD}/log:/var/log/supervisor
-      - ${PWD}/plugins:/usr/src/app/plugins
+      - assets:/usr/src/app/public/assets
+      - uploads:/usr/src/app/public/uploads
+      - invoices:/usr/src/app/invoices
+      - exports:/usr/src/app/exports
+      - log:/var/log/supervisor
+      - plugins:/usr/src/app/plugins
     depends_on:
       - postgres
       - redis
       - elasticsearch
+      - nodejs
     restart: always
 
   postgres:
-    image: postgres:9.4
+    image: postgres:10.3-alpine
     volumes:
       - ${PWD}/postgresql:/var/lib/postgresql/data
     restart: always
 
   elasticsearch:
-    image: elasticsearch:1.7
+    image: elasticsearch:5.6.9-alpine
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
     volumes:
       - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
     restart: always
 
   redis:
-    image: redis:3.0
+    image: redis:3.2.11-alpine
+    sysctls:
+      net.core.somaxconn: 1024
     volumes:
       - ${PWD}/redis:/data
     restart: always
 
   nginx:
-    image: nginx:1.9
+    image: nginx:1.13.12-alpine
     ports:
       - "80:80"
       - "443:443"
@@ -47,8 +69,12 @@ services:
       - ${PWD}/config/nginx:/etc/nginx/conf.d
       - ${PWD}/letsencrypt/etc:/etc/letsencrypt
       - ${PWD}/log:/var/log/nginx
-    volumes_from:
-      - fabmanager:ro
+      - assets:/usr/src/app/public/assets:ro
+      - uploads:/usr/src/app/public/uploads:ro
+      - invoices:/usr/src/app/invoices:ro
+      - exports:/usr/src/app/exports:ro
+      - log:/var/log/supervisor:ro
+      - plugins:/usr/src/app/plugins:ro
     links:
-      - fabmanager:fabmanager
+      - makernet:makernet
     restart: always
