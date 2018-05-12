@@ -28,6 +28,9 @@ invoices
 Vagrantfile
 
 .git*
+.gtm
 
 Dockerfile
 docker-compose*
+
+.envrc
