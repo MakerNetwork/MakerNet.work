@@ -47,7 +47,7 @@ Login into the system as administrator with SSH (`ssh root@server-ip`) and insta
 it with the following script:
 
 ```bash
-\curl -sSL https://gist.githubusercontent.com/MakerNetwork/bf04812f4df19f192d6d6d429561fd57/raw/e43c18b619caf628acd00db784ad6b10e8b3ef43/docker_setup.sh | sudo bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/e89c11dca63905541f25c7edbec51cbaaef3ec05/docker_setup.sh | sudo bash
 ```
 
 It will
