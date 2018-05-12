@@ -177,6 +177,9 @@ else
   echo 'OK'
 fi
 
+# Fetch example .envrc  #######################################################
+
+curl -sSL https://gist.githubusercontent.com/MakerNetwork/bae611f9f249735ab521f3b0aeea576a/raw/eba0ff7bf005d5164a98937e9b847c92e839e0c1/.envrc > ".envrc"
 
 # Cleaning up #################################################################
 

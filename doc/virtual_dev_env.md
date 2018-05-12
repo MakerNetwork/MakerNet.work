@@ -28,42 +28,41 @@ configuration is not optimized for a production environment.
    git clone https://github.com/MakerNetwork/MakerNet.work.git
    ```
 
-3. Get a copy from the `.envrc` file that contains environment values to be used by the aplication
-   and place it at the root directory of the project. (Ask for it to one of the collaborators).
-
-4. From the project directory, run:
+3. From the project directory, run:
 
    ```bash
    vagrant up
    ```
 
-5. Once the virtual machine finished building, reload it and log into it with:
+4. Once the virtual machine finished building, reload it and log into it with:
 
    ```bash
    vagrant reload
    vagrant ssh
    ```
 
-6. While logged in, navigate to the project folder and install the Gemfile dependencies:
+5. While logged in, navigate to the project folder and install the Gemfile dependencies:
 
    ```bash
    cd /vagrant
    bundle install
    ```
 
-7. Load `.envrc` values as environment variables:
+6. Load `.envrc` values as environment variables:
 
    ```bash
-   source .envrc
+   source ~/.envrc
    ```
 
-8. Set a directory for Sidekick pids:
+   Be sure to check the information about setting up values for the [configuration variables](env_configuration.md).
+
+7. Set a directory for Sidekick pids:
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-9. Set up the databases. (Note that you should provide the desired admin credentials and that these
+8. Set up the databases. (Note that you should provide the desired admin credentials and that these
    specific set of commands must be used to set up the database as some raw SQL instructions are
    included in the migrations):
 
@@ -78,14 +77,14 @@ configuration is not optimized for a production environment.
    bundle exec rake fablab:es_build_stats
    ```
 
-10. Start the application and visit `http://localhost:3000` on your browser to check that it
+9. Start the application and visit `http://localhost:3000` on your browser to check that it
     works:
 
    ```bash
    bundle exec foreman s -p 3000
    ```
 
-11. Email notifications will be caught by MailCatcher. To see the emails sent by the platform, open
+10. Email notifications will be caught by MailCatcher. To see the emails sent by the platform, open
     your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
 
