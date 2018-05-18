@@ -3,6 +3,7 @@
 - [MakerNet Development Environment Instructions](#makernet-development-environment-instructions)
     - [Development Virtual Machine](#development-virtual-machine)
         - [Instructions](#instructions)
+    - [Development Workflow](#development-workflow)
     - [Emulated Production Environment](#emulated-production-environment)
         - [Instructions](#instructions)
         - [Optional configuration](#optional-configuration)
@@ -87,6 +88,33 @@ configuration is not optimized for a production environment.
 10. Email notifications will be caught by MailCatcher. To see the emails sent by the platform, open
     your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
+## Development Workflow
+
+These are the recomended set of steps when making changes to the MaketNet codebase. Try to follow
+them as much as posible to facilitate the integration of features and fixes into the codebase.
+
+1. Checkout the branch that will be the base for the changes. It is usually the `development` branch,
+   but better ask the lead developer.
+
+2. Create a new branch prefixing it with `feature/` for new features or `fix/` to work with bugs.
+   Then, checkout your new branch.
+
+3. Start the following processes in different terminals from the `/vagrant` directory of the virtual environment. (Don't forget to run `source ~/.envrc`):
+   - `bundle exec mailcatcher --foreground --ip=0.0.0.0`
+   - `bundle exec sidekiq -C ./config/sidekiq.yml`
+   - `bundle exec rails s -b 0.0.0.0`
+
+4. Star coding! Remember the follwing:
+   - Check the application opening a browser at http://localhost:3000 (a private window is
+     suggested).
+   - Check the emails opening a browser tab at http://localhost:1080
+   - You can stop the execution of the application at a certain point using the instruction `byebug`
+     inside the application code. Then, a session with the variables and at that point of the
+     execution will be avaiable at the Rails terminal. Check the [ByeBug docs][2] to learn more.
+   - Use TDD as much as posible.
+
+5. When finished, rebase your branch with the most recent changes in its parent branch, push to
+   your branch and issue a pull request to its parent branch.
 
 ## Emulated Production Environment
 
@@ -198,3 +226,4 @@ Check the [list of commands](docker_utils.md) that will help you manage the appl
 ---
 [0]: https://www.vagrantup.com/downloads.html
 [1]: https://www.virtualbox.org/wiki/Downloads
+[2]: https://github.com/deivid-rodriguez/byebug
