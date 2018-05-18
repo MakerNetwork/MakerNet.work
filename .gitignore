@@ -41,6 +41,7 @@
 .vagrant
 .docker
 .envrc
+.byebug_history
 
 # Do not versionate coveralls token
 .coveralls.yml
