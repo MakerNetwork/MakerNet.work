@@ -184,8 +184,7 @@ container:
 
 ```bash
 sudo mkdir -p /apps/makernet/config/nginx/ssl
-cd /apps/makernet/config/nginx/ssl
-sudo openssl dhparam -out dhparam.pem 4096
+sudo openssl dhparam -out /apps/makernet/config/nginx/ssl/dhparam.pem 4096
 ```
 
 * Copy the initial configuration file:
