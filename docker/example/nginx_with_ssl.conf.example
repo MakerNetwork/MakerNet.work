@@ -4,6 +4,7 @@ upstream puma {
 
 server {
   listen 443 ssl;
+  listen [::]:443 ssl;
   server_name MAIN_DOMAIN;
   root /usr/src/app/public;
   ssl on;
@@ -79,6 +80,7 @@ server {
 
 server {
   listen 80;
+  listen [::]:80;
   server_name MAIN_DOMAIN ANOTHER_DOMAIN_1 ANOTHER_DOMAIN_2;
-  rewrite ^ URL_WITH_PROTOCOL_HTTPS$request_uri? permanent;
+  rewrite ^ URL_WITH_PROTOCOL_HTTPS$request_uri?;
 }
