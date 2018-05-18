@@ -4,7 +4,7 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 # Use the standard version or the dockerized version
-USE_DOCKER_VERSION = true
+USE_DOCKER_VERSION = false
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Provider-specific configuration
