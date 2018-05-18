@@ -15,7 +15,7 @@ Devise.setup do |config|
   config.mailer_sender = ENV['DEFAULT_MAIL_FROM']
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = "Devise::Async::Proxy"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -137,7 +137,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 8..1000
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly

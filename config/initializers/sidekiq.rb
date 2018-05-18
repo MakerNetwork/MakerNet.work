@@ -21,3 +21,5 @@ end
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url, namespace: namespace }
 end
+
+Sidekiq::Extensions.enable_delay!

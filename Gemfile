@@ -33,7 +33,7 @@ gem 'sidekiq-cron' # Recurring jobs for Sidekiq
 gem 'sinatra', require: false # DSL for quickly creating web applications
 gem 'recurrence' # A simple library that handles recurring events
 
-gem 'devise' # Flexible authentication solution
+gem 'devise', '~> 3' # Flexible authentication solution
 gem 'devise-async' # Send Devise's emails in background
 gem 'omniauth' # Standardized Multi-Provider Authentication
 gem 'omniauth-oauth2' # Generic OAuth2 strategy for OmniAuth
