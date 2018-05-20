@@ -8,7 +8,7 @@ en:
 
   users_mailer:
     notify_user_account_created:
-      subject: "Your %{FABLAB}'s MakerNet.work account has been successfully created"
+      subject: "MakerNet: You have a new account on %{FABLAB}"
       body:
         hello: "Hello %{NAME},"
         intro: "An account has just been created for you on the {FABLAB} website:"  # messageFormat interpolation
@@ -23,7 +23,7 @@ en:
 
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "You have changed your %{FABLAB} group"
+      subject: "Your %{FABLAB} group has been changed"
       body:
         warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
 
@@ -113,19 +113,19 @@ en:
         old_date: "Previous slot"
 
     notify_admin_when_user_is_created:
-      subject: "A user account has been created on %{FABLAB}"
+      subject: "New user account has been created on %{FABLAB}"
       body:
         new_account_created: "A new user account has been created on the website:"
         account_for_organization: "This account manage an organization:"
         invoicing_disabled_html: "Invoicing generation is <strong>disabled</strong> for this user."
 
     notify_admin_subscribed_plan:
-      subject: "A subscription has been purchased on %{FABLAB}"
+      subject: "Subscription purchased on %{FABLAB}"
       body:
         plan_subscribed_html: "A plan <strong><em>%{PLAN}</em></strong> has been subscribed by user <strong><em>%{NAME}</strong></em>."
 
     notify_member_invoice_ready:
-      subject: "Your %{FABLAB} MakerNet.work's invoice"
+      subject: "Your %{FABLAB} invoice"
       body:
         please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html:  "You can access your invoice in %{DASHBOARD} on the Fab Lab website."

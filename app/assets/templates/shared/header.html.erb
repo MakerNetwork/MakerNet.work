@@ -48,14 +48,18 @@
     </li>
     <% active_provider = AuthProvider.active %>
     <% if active_provider.providable_type == DatabaseProvider.name %>
-      <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
       <li ng-if="!isAuthenticated()">
-          <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+        <a href="#" class="font-sbold text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a>
+      </li>
+      <li ng-if="!isAuthenticated()">
+        <a href="#" class="font-sbold text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
       </li>
     <% else %>
-        <li ng-if="!isAuthenticated()"><a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold label text-md"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
         <li ng-if="!isAuthenticated()">
-            <a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+          <a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold text-md"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a>
+        </li>
+        <li ng-if="!isAuthenticated()">
+          <a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
         </li>
     <% end %>
   </ul>
