@@ -647,6 +647,18 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.public.calendar']).$promise
           ]
 
+      # innovation map
+      .state 'app.public.innovation_map',
+        url: '/innovation_map'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "innovation_map/index.html" %>'
+            controller: 'InnovationMapController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.innovation_map']).$promise
+          ]
+
       # --- namespace /admin/... ---
       # calendar
       .state 'app.admin.calendar',
