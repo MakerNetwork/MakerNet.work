@@ -1,15 +1,18 @@
 'use strict'
 
-### COMMON CODE ###
+Application.Controllers.controller "InnovationMapController", ["$scope", "$rootScope", "$state", "$window", "_t", "CSRF", "Session"
+, ($scope, $rootScope, $state, $window, _t, CSRF, Session) ->
 
-##
-# Provides a set of common properties and methods to the $scope parameter. They are used
-# in the various projects' admin controllers.
-#
-# Provides :
-#
-# Requires :
-#
-##
-class InnovationMapController
-  constructor: ($scope, $state)->
+  ### PUBLIC SCOPE ###
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
+
+]
