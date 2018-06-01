@@ -301,4 +301,4 @@ en:
 
       innovation_map:
         # show data from places displayed in the map
-        none: 'None'
+        innovation_map: 'Atlas of Innovation'
