@@ -19,6 +19,17 @@
   </div>
 
   <section>
-    <h1>Here, the map will show!</h1>
+    <div id="map-container">
+      <div id="map"></div>
+      <div id="loading">
+          <div class="loader"></div>
+          <h3 class="loader-text">Finding Spaces...</h3>
+      </div>
+    </div>
+
   </section>
+
+  <div id="filter-bar"></div>
+  <div id="info-bar"></div>
+  <%= javascript_include_tag 'innovation-map' %>
 </section>
