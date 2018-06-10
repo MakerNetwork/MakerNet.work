@@ -16,26 +16,24 @@
  *= require angular-aside/dist/css/angular-aside
  */
 
-@import "bootstrap";
-@import "app.functions";
-@import "bootstrap-compass";
 @import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-compass";
 @import "compass";
-@import "bootstrap_and_overrides";
-
-@import "app.utilities";
-@import "app.colors";
+@import "bootstrap-overrides";
 
 @import "app.base";
+@import "app.functions";
+@import "app.utilities";
+@import "app.colors";
 @import "app.layout";
 @import "app.nav";
-
 @import "app.buttons";
 @import "app.components";
 @import "app.plugins";
-@import "modules/invoice";
-
 @import "app.responsive";
+
+@import "modules/invoice";
 
 <% PluginRegistry.stylesheets.each do |stylesheet| %>
   <% basename = File.basename(stylesheet,'.scss') %>
