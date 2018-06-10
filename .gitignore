@@ -42,6 +42,7 @@
 .docker
 .envrc
 .byebug_history
+.buildconfig
 
 # Do not versionate coveralls token
 .coveralls.yml
