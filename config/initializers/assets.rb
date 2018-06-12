@@ -17,7 +17,10 @@ Rails.application.config.assets.precompile += %w(
   fontawesome-webfont.ttf
 )
 
-Rails.application.config.assets.precompile += %w( app.printer.css )
+Rails.application.config.assets.precompile += %w(
+  app.printer.css
+  map.stylesheet.css
+)
 
 Rails.application.config.assets.precompile += %w(
   angular-i18n/angular-locale_*.js
