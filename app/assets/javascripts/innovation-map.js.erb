@@ -3,21 +3,26 @@ var map = L.map('map', {
 	minZoom: 2,
 	worldCopyJump: true
 }).setView([20,0], 2);
+
 L.tileLayer('https://api.mapbox.com/styles/v1/albiebrown/civehqtub00022ikc7sgmp1n2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWxiaWVicm93biIsImEiOiJjaXZlaDh1a2MwMWl6MnlwZDJldzFvYjNxIn0.d04rCBRG42H2JkkiID2qpA', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    attribution: 'Innovation Spaces data by the <a href="http://atlasofinnovation.com">Ananse Group</a>, Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
 }).addTo(map);
 
-// const?
-var markerClusters = L.markerClusterGroup({
+map.refresh = function(timeout){
+	window.setTimeout(function(){
+		map.invalidateSize();
+	},timeout);
+};
+
+const markerClusters = L.markerClusterGroup({
 		spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     zoomToBoundsOnClick: true,
     maxClusterRadius: 40
 });
 
-// const?
-var allTypes = {
+const allTypes = {
 	"hub": "Hub",
 	"workshop": "Workshop",
 	"event": "Event",
@@ -33,9 +38,12 @@ var allTypes = {
 	"": "Hub"
 };
 
-// const?
-var myIcon = L.icon({
-    iconUrl: 'http://atlasofinnovation.com/static/images/pin1.png',
+const marker = '<%= asset_path("marker.png") %>';
+const marker_small = '<%= asset_path("marker_small.png") %>';
+const space_image = '<%= asset_path("space_image.png") %>';
+
+const myIcon = L.icon({
+    iconUrl: marker,
     iconSize: [23, 30],
     iconAnchor: [11, 29],
     popupAnchor: [0, -30]
@@ -69,8 +77,10 @@ function buildMarkers(allSpaces) {
 			noLocation.push(space);
 		}
 	}
+
 	map.addLayer(markerClusters, {"chunkedLoading": true});
 	$("#loading").fadeOut();
+	map.refresh(0);
 }
 
 function createPopup(space) {
@@ -78,10 +88,7 @@ function createPopup(space) {
 	var popupText = "<div class='popup-header'>";
 	popupText += "<h3>"+space.name+"</h3>";
 	popupText += "</div>";
-	popupText += "<p><img src='http://atlasofinnovation.com/static/images/pin2.png' \
-						  height='14' \
-						  class='popup-location-text'>\
-				   <span style='margin-bottom:3px;position:fixed;'>";
+	popupText += "<p><img src='" + marker_small + "'" + " height='14' class='popup-location-text'><span style='margin-bottom:3px;position:fixed;'>";
 
 	if (space.city) {
 		popupText += space.city+", "+space.country;
@@ -99,7 +106,7 @@ function createPopup(space) {
 	if (space.short_description){
 		popupText += "<p>"+space.short_description+"</p>";
 	}
-	popupText += "<a href='http://atlasofinnovation.com/space/"+space.id+"'><img src='http://atlasofinnovation.com/static/images/space_page.png' class='space-page-button'></a>";
+	popupText += "<a href='http://atlasofinnovation.com/space/"+space.id+"'><img src='" + space_image + "' class='space-page-button'></a>";
 
 	return popupText;
  }
@@ -130,7 +137,6 @@ function matchesFilter(marker) {
 }
 
 $(document).ready(function() {
-
 	// Button handlers
 	$("#filter-bar .filter-bar-button").click(function(e) {
 		e.preventDefault();
