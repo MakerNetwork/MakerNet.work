@@ -11,13 +11,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
-  fontawesome-webfont.eot
-  fontawesome-webfont.woff
-  fontawesome-webfont.svg
-  fontawesome-webfont.ttf
-)
-
-Rails.application.config.assets.precompile += %w(
   app.printer.css
   map.stylesheet.css
 )
