@@ -38,12 +38,12 @@ const allTypes = {
 	"": "Hub"
 };
 
-const marker = '<%= asset_path("marker.png") %>';
-const marker_small = '<%= asset_path("marker_small.png") %>';
-const space_image = '<%= asset_path("space_image.png") %>';
+const markerImage = '<%= asset_path("marker.png") %>';
+const markerImageSmall = '<%= asset_path("marker_small.png") %>';
+const spacePageImage = '<%= asset_path("space_page.png") %>';
 
 const myIcon = L.icon({
-    iconUrl: marker,
+    iconUrl: markerImage,
     iconSize: [23, 30],
     iconAnchor: [11, 29],
     popupAnchor: [0, -30]
@@ -90,71 +90,24 @@ function createPopup(space) {
 	var popupText = "<div class='popup-header'>";
 	popupText += "<h3>"+space.name+"</h3>";
 	popupText += "</div>";
-	popupText += "<p><img src='" + marker_small + "'" + " height='14' class='popup-location-text'><span style='margin-bottom:3px;position:fixed;'>";
+	popupText += "<p><img src='" + markerImageSmall + "'" + " height='14' class='popup-location-text'><span style='margin-bottom:3px;position:fixed;'>";
 
 	if (space.city) {
 		popupText += space.city+", "+space.country;
  	} else {
 		popupText += space.country;
  	}
- 	popupText += "</span></p>"
- 	if (space.website){
-		popupText += "<a class='popup-website-link' \
-						target='_blank' \
-						href='http://"+space.website+"'>"
-						+ space.website + "</a>";
-	}
 
-	if (space.short_description){
+	popupText += "</span></p>"
+
+ 	if (space.website) {
+		popupText += "<a class='popup-website-link target='_blank' href='http://" + space.website + "'>" + space.website + "</a>";
+	}
+	if (space.short_description) {
 		popupText += "<p>"+space.short_description+"</p>";
 	}
-	popupText += "<a href='http://atlasofinnovation.com/space/"+space.id+"'><img src='" + space_image + "' class='space-page-button'></a>";
+
+	popupText += "<a href='http://atlasofinnovation.com/space/"+space.id+"'><img src='" + spacePageImage + "' class='space-page-button'></a>";
 
 	return popupText;
- }
-
-var appliedFilters = [];
-
-function runFilter() {
-	markerClusters.clearLayers();
-	for(var i = 0; i < allMarkers.length; i++) {
-		if(matchesFilter(allMarkers[i])) {
-			markerClusters.addLayer(allMarkers[i]);
-		}
-	}
-	map.addLayer(markerClusters, {"chunkedLoading": true});
 }
-
-function matchesFilter(marker) {
-	for(var i = 0; i < appliedFilters.length; i++) {
-		if(appliedFilters[i][1] == 'all') {
-			return true;
-		}
-
-		if(!marker.placeData[appliedFilters[i][0]] || marker.placeData[appliedFilters[i][0]].toLowerCase() !== appliedFilters[i][1].toLowerCase()) {
-			return false;
-		}
-	}
-	return true;
-}
-
-$(document).ready(function() {
-	// Button handlers
-	$("#filter-bar .filter-bar-button").click(function(e) {
-		e.preventDefault();
-		$("#filter-bar a.active").not(this).removeClass('active');
-		$(this).toggleClass('active');
-		var filterType = $(this).data('filter');
-		$("#filters .active").not($("#"+filterType+"-filter")).removeClass('active');
-		$("#"+filterType+"-filter").toggleClass('active');
-	});
-
-	$(".filter-item").click(function(e) {
-		e.preventDefault();
-		appliedFilters = [];
-		var filterType = $(this).data('filterGroup');
-		var filter = $(this).data('filterItem');
-		appliedFilters.push([filterType, filter]);
-		runFilter();
-	});
-});
