@@ -35,6 +35,7 @@ en:
         projects_gallery: "Projects Gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
+        innovation_map: "Atlas of Innovation"
 
         # left menu (admin)
         trainings_monitoring: "Manage Workshops"
@@ -297,3 +298,7 @@ en:
           characteristics: "Characteristics"
           files_to_download: "Files to download"
           projects_using_the_space: "Projects using the space"
+
+      innovation_map:
+        # show data from places displayed in the map
+        innovation_map: 'Atlas of Innovation'

@@ -12,14 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require polyfill
-//= require jquery-ui/ui/jquery.ui.core
-//= require jquery-ui/ui/jquery.ui.widget
-//= require jquery-ui/ui/jquery.ui.mouse
-//= require jquery-ui/ui/jquery.ui.draggable
-//= require jquery-ui/ui/jquery.ui.droppable
-//= require jquery-ui/ui/jquery.ui.resizable
 //= require angular
 //= require angular-cookies
 //= require angular-resource
@@ -70,11 +65,11 @@
 //= require ngFitText/dist/ng-FitText.min
 //= require angular-aside/dist/js/angular-aside
 //= require ngCapsLock/ng-caps-lock
+//= require leaflet
+//= require leaflet.markercluster
 //= require_tree ./controllers
 //= require_tree ./services
 //= require_tree ./directives
 //= require_tree ./filters
 
-<%
-PluginRegistry.javascripts.each { |js| require_asset(js) }
-%>
+<% PluginRegistry.javascripts.each { |js| require_asset(js) } %>
