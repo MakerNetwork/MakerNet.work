@@ -101,13 +101,13 @@ function createPopup(space) {
 	popupText += "</span></p>"
 
  	if (space.website) {
-		popupText += "<a class='popup-website-link target='_blank' href='http://" + space.website + "'>" + space.website + "</a>";
+		popupText += "<a class='popup-website-link' target='_blank' href='http://" + space.website + "'>" + space.website + "</a>";
 	}
 	if (space.short_description) {
 		popupText += "<p>"+space.short_description+"</p>";
 	}
 
-	popupText += "<a href='http://atlasofinnovation.com/space/"+space.id+"'><img src='" + spacePageImage + "' class='space-page-button'></a>";
+	popupText += "<a href='http://atlasofinnovation.com/space/" + space.id + "' target='_blank'><img src='" + spacePageImage + "' class='space-page-button'></a>";
 
 	return popupText;
 }
