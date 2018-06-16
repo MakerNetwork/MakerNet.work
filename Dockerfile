@@ -6,6 +6,7 @@ RUN apk update && apk upgrade
 RUN apk add --update curl \
   bash \
   bash-completion \
+  nano \
   nodejs \
   imagemagick \
   supervisor \

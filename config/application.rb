@@ -38,8 +38,7 @@ module Fablab
     config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
     config.assets.paths += [
-      Rails.root.join('vendor/assets/components').to_s,
-      #Rails.root.join('public/uploads'          ).to_s,
+      Rails.root.join('vendor/assets/components').to_s
     ]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
