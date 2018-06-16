@@ -39,7 +39,7 @@ module Fablab
 
     config.assets.paths += [
       Rails.root.join('vendor/assets/components').to_s,
-      Rails.root.join('public/uploads'          ).to_s,
+      #Rails.root.join('public/uploads'          ).to_s,
     ]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
