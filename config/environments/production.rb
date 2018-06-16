@@ -23,9 +23,7 @@ Rails.application.configure do
   config.serve_static_files = false
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  # if you want disable variable name mangling
-  config.assets.js_compressor = Uglifier.new(mangle: false)
+  config.assets.js_compressor = Uglifier.new(harmony: true, mangle: false)
 
   # config.assets.css_compressor = :sass
 
