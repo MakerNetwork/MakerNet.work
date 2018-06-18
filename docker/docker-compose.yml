@@ -1,13 +1,5 @@
 version: '3.6'
 
-volumes:
-  assets:
-  uploads:
-  invoices:
-  exports:
-  plugins:
-  log:
-
 services:
   makernet:
     image: mattkenigson/makernet.work
@@ -17,12 +9,12 @@ services:
     env_file:
       - ${PWD}/config/env
     volumes:
-      - assets:/usr/src/app/public/assets
-      - uploads:/usr/src/app/public/uploads
-      - invoices:/usr/src/app/invoices
-      - exports:/usr/src/app/exports
-      - log:/var/log/supervisor
-      - plugins:/usr/src/app/plugins
+      - ${PWD}/assets:/usr/src/app/public/assets
+      - ${PWD}/uploads:/usr/src/app/public/uploads
+      - ${PWD}/invoices:/usr/src/app/invoices
+      - ${PWD}/exports:/usr/src/app/exports
+      - ${PWD}/log:/var/log/supervisor
+      - ${PWD}/plugins:/usr/src/app/plugins
     depends_on:
       - postgres
       - redis
@@ -68,12 +60,12 @@ services:
       - ${PWD}/config/nginx:/etc/nginx/conf.d
       - ${PWD}/letsencrypt/etc:/etc/letsencrypt
       - ${PWD}/log:/var/log/nginx
-      - assets:/usr/src/app/public/assets:ro
-      - uploads:/usr/src/app/public/uploads:ro
-      - invoices:/usr/src/app/invoices:ro
-      - exports:/usr/src/app/exports:ro
-      - log:/var/log/supervisor:ro
-      - plugins:/usr/src/app/plugins:ro
+      - ${PWD}/assets:/usr/src/app/public/assets:ro
+      - ${PWD}/uploads:/usr/src/app/public/uploads:ro
+      - ${PWD}/invoices:/usr/src/app/invoices:ro
+      - ${PWD}/exports:/usr/src/app/exports:ro
+      - ${PWD}/log:/var/log/supervisor:ro
+      - ${PWD}/plugins:/usr/src/app/plugins:ro
     links:
       - makernet:makernet
     restart: always
