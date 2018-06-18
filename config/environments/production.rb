@@ -21,11 +21,11 @@ Rails.application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_files = false
+  # config.serve_static_assets = false
+  # config.public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  # if you want disable variable name mangling
-  config.assets.js_compressor = Uglifier.new(mangle: false)
+  config.assets.js_compressor = Uglifier.new(harmony: true, mangle: false)
 
   # config.assets.css_compressor = :sass
 
@@ -81,8 +81,6 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  # config.serve_static_assets = true
 
   config.action_mailer.default_url_options = { :host => Rails.application.secrets.default_host, :protocol => Rails.application.secrets.default_protocol }
   # config.action_mailer.perform_deliveries = true

@@ -4,6 +4,9 @@ MAINTAINER info@makernet.work
 # Install runtime apk based dependencies.
 RUN apk update && apk upgrade
 RUN apk add --update curl \
+  bash \
+  bash-completion \
+  nano \
   nodejs \
   imagemagick \
   supervisor \
