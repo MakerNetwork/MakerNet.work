@@ -7,6 +7,8 @@ VAGRANTFILE_API_VERSION = '2'
 USE_DOCKER_VERSION = false
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = 'ubuntu/bionic64'
+
   # Provider-specific configuration
   config.vm.provider 'virtualbox' do |vb|
     vb.customize ['modifyvm', :id, '--memory', '4096']
@@ -16,7 +18,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   if USE_DOCKER_VERSION
-    config.vm.box = 'ubuntu/xenial64'
     config.vm.define 'makernetwork-docker'
 
     # Port forwarding
@@ -33,7 +34,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "LANGUAGE" => "en_US.UTF-8",
       }
   else
-    config.vm.box = 'ubuntu/bionic64'
     config.vm.define 'makernetwork-devbox'
 
     # Port forwarding
