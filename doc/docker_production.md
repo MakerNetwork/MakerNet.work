@@ -39,7 +39,7 @@ your MakerNet instance folder. You will need to be root through the rest of the 
 
 ### Basic Configuration
 
-You will need at least 2GB of addressable memory (RAM + swap) to install and use MakerNet. 4 GB RAM are recommended for larger communities.
+You will need at least 2GB of addressable memory to install and use MakerNet. 4 GB RAM are recommended for larger communities.
 
 #### Install Docker
 
@@ -47,7 +47,7 @@ Login into the system as administrator with SSH (`ssh root@server-ip`) and insta
 it with the following script:
 
 ```bash
-\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/e89c11dca63905541f25c7edbec51cbaaef3ec05/docker_setup.sh | sudo bash
+\curl -sSL https://gist.githubusercontent.com/MakerNetwork/1393013db25bfe9bf1ccf3dfab49cead/raw/f36f5d96de5fd56de4c4a99e9634b9204f3077da/docker_setup.sh | sudo bash
 ```
 
 It will
@@ -62,8 +62,7 @@ Once this process has finished, reboot the system:
 
 #### Set the Time Zone
 
-Once the system has rebooted and you can login again, check the time zone where the facilities of
-the fablab are located and run:
+Once the system has rebooted and you can login again, check the time zone where the facilities of the fablab are located and run:
 
 `sudo dpkg-reconfigure tzdata`
 
@@ -80,21 +79,17 @@ Navigate to the application directory and pull the images with:
 
 The following step requires to set the configuration values of the application in the `env` file.
 
-At the veary least, if it is and instance for demo purposes, the values for `SECRET_KEY_BASE` and
-`DEVISE_SECRET_KEY` must be set.
+At the veary least, if it is and instance for demo purposes, the values for `SECRET_KEY_BASE` and `DEVISE_SECRET_KEY` must be set.
 
-Check the [environment configuration values document](env_configuration.md) for a description of the
-values that can be set in the `env` file and how them affect the behaviour of the application.
+Check the [environment configuration values document](env_configuration.md) for a description of the values that can be set in the `env` file and how them affect the behaviour of the application.
 
 ##### Generate and set secrets
 
-Run the following command TWICE from the application directory to obtain randomly generated strings
-that can be used as secrets for the application:
+Run the following command TWICE from the application directory to obtain randomly generated strings that can be used as secrets for the application:
 
 `docker-compose run --rm makernet bundle exec rake secret`
 
-Then, open the `env` file and place one string as value for `SECRET_KEY_BASE` and the other as value
-for `DEVISE_SECRET_KEY`. (Don't forget to remove the leading `#` character to uncomment the line).
+Then, open the `env` file and place one string as value for `SECRET_KEY_BASE` and the other as value for `DEVISE_SECRET_KEY`. (Don't forget to remove the leading `#` character to uncomment the line).
 
 You can open the file for edition with:
 
@@ -148,8 +143,7 @@ Then, you can proceed with the following configuration steps.
 
 ##### Environment
 
-Open the `env` (`sudo nano .env`), set the domain name in the `DEFAULT_HOST` variable and setvthe
-`DEFAULT_PROTOCOL` to `https`.
+Open the `env` (`sudo nano .env`), set the domain name in the `DEFAULT_HOST` variable and set the `DEFAULT_PROTOCOL` to `https`.
 
 ##### NginX
 
@@ -159,7 +153,7 @@ Open the `env` (`sudo nano .env`), set the domain name in the `DEFAULT_HOST` var
 
 * Copy the example NgniX with SSL configuration file:
 
-  `sudo cp example/nginx_with_ssl.conf.example config/nginx/makernet.conf`
+  `sudo cp example/nginx_ssl.conf config/nginx/makernet.conf`
 
 * Open the configuration file (`sudo nano config/nginx/makernet.conf`) an edit the following values:
 
@@ -170,15 +164,13 @@ Open the `env` (`sudo nano .env`), set the domain name in the `DEFAULT_HOST` var
 
 #### Set up certificates
 
-**Note**: The application MUST be running with the basic configuration (without SSL) before running
-the LetsEncrypt software.
+**Note**: The application MUST be running with the basic configuration (without SSL) before running the LetsEncrypt software.
 
 #### SSL certificate with LetsEncrypt
 
-Let's Encrypt is a new Certificate Authority that is free, automated, and open. Let’s Encrypt
-certificates expire after 90 days, so automation of renewing your certificates is important. Here is
-the setup for a systemd timer and service to renew the certificates and reboot the app Docker
-container:
+Let's Encrypt is a new Certificate Authority that is free, automated, and open. Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
+
+Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container:
 
 * Generate the `dhparam.pem` file. (This may take some hours):
 
@@ -193,7 +185,7 @@ sudo openssl dhparam -out /apps/makernet/config/nginx/ssl/dhparam.pem 4096
 sudo mkdir -p /apps/makernet/letsencrypt/config/
 sudo mkdir -p /apps/makernet/letsencrypt/etc/webrootauth
 
-sudo cp example/webroot.ini.example /apps/makernet/letsencrypt/config/webroot.ini
+sudo cp example/webroot.ini /apps/makernet/letsencrypt/config/webroot.ini
 ```
 
 * Edit the `webroot.ini` file:
@@ -252,11 +244,9 @@ docker-compose down
 docker-compose up -d
 ```
 
-* Visit the domain with using the HTTPS in your browser to check that the site works fine and that
-  the encryption is enabled. (A `verified` icon should appear beside the browser address bar).
+* Visit the domain with using the HTTPS in your browser to check that the site works fine and that the encryption is enabled. (A `verified` icon should appear beside the browser address bar).
 
-* Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the
-  month :
+* Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
 
 ```bash
 sudo systemctl enable letsencrypt.timer
