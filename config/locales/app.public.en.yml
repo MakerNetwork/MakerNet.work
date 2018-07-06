@@ -181,7 +181,7 @@ en:
         machines_list:
           the_fablab_s_machines: "Machines"
           add_a_machine: "Add a Machine"
-          book: "Book"
+          book: "Schedule"
           _or_the_: " or the "
           status_enabled: "Enabled"
           status_disabled: "Disabled"
