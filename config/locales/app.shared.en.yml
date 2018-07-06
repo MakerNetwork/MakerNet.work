@@ -372,6 +372,7 @@ en:
         debit_reservation_machine: "Debit by machine reservation"
         debit_reservation_event: "Debit by event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+        info_is_invoice: "Is this an invoice?"
 
       coupon:
         # promotional coupon (creation/edition form)
