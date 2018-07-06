@@ -348,7 +348,7 @@ en:
         amount: 'Amount'
         credit: 'Credit'
         debit: 'Debit'
-        credit_title: 'Credit wallet'
+        credit_title: 'Wallet'
         credit_label: 'Set the amount to be credited'
         confirm_credit_label: 'Confirm the amount to be credited'
         generate_a_refund_invoice: "Generate a refund invoice"
