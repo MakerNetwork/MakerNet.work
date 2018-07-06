@@ -61,7 +61,7 @@ en:
         first_name: "First Name"
         address: "Address"
         interests: "Interests"
-        CAD_softwares_mastered: "Software Mastered"
+        CAD_softwares_mastered: "Software Proficiencies"
         name: "Name"
         step_N: "Step {{INDEX}}"  # angular interpolation
         themes: "Themes"
