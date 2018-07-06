@@ -12,6 +12,7 @@
   <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
     <div class="text-right amountGroup m-r-md">
       <label for="amount" class="beforeAmount" translate>{{ 'credit_label' }}</label>
+      <span class="afterAmount">{{currencySymbol}}</span>
       <input class="form-control m-l"
              type="number"
              id="amount"
@@ -19,12 +20,12 @@
              ng-model="amount"
              required min="1"
              step="any">
-      <span class="afterAmount">{{currencySymbol}}</span>
       <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'amount_is_required'}}</span>
       <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }} {{currencySymbol}}.</span>
     </div>
     <div class="text-right amountGroup m-t m-r-md" ng-class="{'has-error': walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$invalid }">
       <label for="amount_confirm" class="beforeAmount" translate>{{ 'confirm_credit_label' }}</label>
+      <span class="afterAmount">{{currencySymbol}}</span>
       <input class="form-control m-l"
              type="number"
              id="amount_confirm"
@@ -34,7 +35,6 @@
              min="1"
              step="any"
              ng-pattern="amount.toString()">
-      <span class="afterAmount">{{currencySymbol}}</span>
       <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'amount_confirm_is_required'}}</span>
       <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.pattern">{{ 'amount_confirm_does_not_match' | translate }}</span>
     </div>
