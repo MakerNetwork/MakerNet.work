@@ -52,9 +52,6 @@ RUN mkdir -p /usr/src/app/tmp/sockets
 RUN mkdir -p /usr/src/app/tmp/pids
 
 WORKDIR /usr/src/app
-
-COPY docker/database.yml /usr/src/app/config/database.yml
-
 COPY . /usr/src/app
 
 # Volumes
