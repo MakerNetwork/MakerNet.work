@@ -560,8 +560,8 @@ padding: 10px;
     font-size: 1.2em;
     line-height: 0;
   }
+
   .afterAmount {
-    margin-left: -35px;
     font-weight: bold;
     color: $green;
     font-size: 1.2em;
@@ -599,11 +599,14 @@ padding: 10px;
   }
 }
 
-.reservable-card {
+/* NOTE: This causes cards to overlap in some cases.
+ * It is better to allow the elements to adjust their height.
+ .reservable-card {
   @media only screen and (min-width: 768px) {
     height: 24em;
   }
 }
+*/
 
 .disabled-reservable {
   opacity: 0.5 !important;

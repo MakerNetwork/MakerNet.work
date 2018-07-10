@@ -61,7 +61,7 @@ en:
         first_name: "First Name"
         address: "Address"
         interests: "Interests"
-        CAD_softwares_mastered: "Software Mastered"
+        CAD_softwares_mastered: "Software Proficiencies"
         name: "Name"
         step_N: "Step {{INDEX}}"  # angular interpolation
         themes: "Themes"
@@ -348,7 +348,7 @@ en:
         amount: 'Amount'
         credit: 'Credit'
         debit: 'Debit'
-        credit_title: 'Credit wallet'
+        credit_title: 'Wallet'
         credit_label: 'Set the amount to be credited'
         confirm_credit_label: 'Confirm the amount to be credited'
         generate_a_refund_invoice: "Generate a refund invoice"
@@ -372,6 +372,7 @@ en:
         debit_reservation_machine: "Debit by machine reservation"
         debit_reservation_event: "Debit by event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+        info_is_invoice: "Is this an invoice?"
 
       coupon:
         # promotional coupon (creation/edition form)

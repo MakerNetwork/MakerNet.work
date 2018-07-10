@@ -83,7 +83,7 @@ en:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize the makerspace users, registered on the site, to contact me"
-        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the makerspace"
+        i_accept_to_receive_information_from_the_fablab: "I agree to receive information from the makerspace"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the makerspace policy"
 
@@ -181,7 +181,7 @@ en:
         machines_list:
           the_fablab_s_machines: "Machines"
           add_a_machine: "Add a Machine"
-          book: "Book"
+          book: "Schedule"
           _or_the_: " or the "
           status_enabled: "Enabled"
           status_disabled: "Disabled"
