@@ -29,6 +29,7 @@ doc/*
 docker/*
 Dockerfile
 docker-compose.yml
+!docker/supervisor.conf
 
 # Vagrant related files
 .vagrant/*

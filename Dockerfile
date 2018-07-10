@@ -51,7 +51,6 @@ RUN mkdir -p /usr/src/app/public/assets
 RUN mkdir -p /usr/src/app/tmp/sockets
 RUN mkdir -p /usr/src/app/tmp/pids
 
-WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Volumes
