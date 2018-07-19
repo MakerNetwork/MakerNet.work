@@ -92,9 +92,9 @@ en:
         your_new_password: "Your new password"
         your_password_was_successfully_changed: "Your password was successfully changed."
 
-        # connection modal
-        connection: "Connection"
-        password_forgotten: "Forgotten password?"
+        # Login modal
+        connection: "Log-In"
+        password_forgotten: "Forgot your password?"
         not_registered_to_the_fablab: "Not registered to the makerspace?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."

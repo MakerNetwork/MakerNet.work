@@ -67,7 +67,6 @@
 
 
 .heading {
-
 	.heading-btn {
 		a {
 			width: 100%;
@@ -81,20 +80,25 @@
 			i:before { content: "\f177"; }
 		}
 	}
+
   .heading-icon {
     width: 100%;
     padding: 35px 40%;
     display: inline-block;
     color: black;
-  }
+	}
+
 	.heading-title {
-		//overflow: hidden;
 		height: 94px;
+		display: flex;
+		align-items: center;
+
 		h1 {
-		  margin: 0 0 0 15px;
-		  padding: 36px 15px;
+			padding-left: 25px;
+			font-size: 32px;
 		}
 	}
+
 	.heading-actions {
 		height: 94px;
 		text-align: center;

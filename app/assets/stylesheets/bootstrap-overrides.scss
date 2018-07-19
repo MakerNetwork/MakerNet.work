@@ -556,11 +556,12 @@ $tooltip-fallback-color:	  rgba(0,0,0,.9) !default;
 //== Arrow
 // add by sleede
 //##
+
 $arrow-width:         			 7px;
 $arrow-color:         			 #fff;
 $arrow-outer-width:   			 ($arrow-width + 1);
 $arrow-outer-color:   			 rgba(0,0,0,.1);
-$arrow-outer-fallback-color:  	 #eee;
+$arrow-outer-fallback-color: #eee;
 
 
 //== Popovers
