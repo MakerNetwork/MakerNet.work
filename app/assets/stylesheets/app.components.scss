@@ -616,6 +616,15 @@ padding: 10px;
   }
 }
 
+#login-panel, #recovery-panel {
+  height: auto;
+  padding: 15px;
+
+  #recovery-link {
+    margin-top: 15px;
+  }
+}
+
 .disabled-reservable {
   opacity: 0.5 !important;
 }

@@ -94,7 +94,7 @@ en:
 
         # connection modal
         connection: "Connection"
-        password_forgotten: "Forgotten password?"
+        password_forgotten: "Forgot your password?"
         not_registered_to_the_fablab: "Not registered to the makerspace?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
