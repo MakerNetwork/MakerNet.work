@@ -599,31 +599,33 @@ padding: 10px;
   }
 }
 
-.panel-default {
-  width: 100%;
 
-  .panel-body {
-    padding: 0;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.gallery-item {
+  .panel-default {
+    width: 100%;
 
-    h1 {
-      font-size: 1.5rem;
+    .panel-body {
+      padding: 0;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   }
 }
 
-#login-panel, #recovery-panel {
-  height: auto;
-  padding: 15px;
 
+#login-panel {
   #recovery-link {
     margin-top: 15px;
   }
 }
+
 
 .disabled-reservable {
   opacity: 0.5 !important;
