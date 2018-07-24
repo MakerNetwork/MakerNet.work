@@ -25,12 +25,42 @@
   <table class="table">
     <thead>
     <tr>
-      <th style="width:15%"><a href="" ng-click="setOrderMember('last_name')">{{ 'surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='last_name', 'fa fa-sort-alpha-desc': member.order=='-last_name', 'fa fa-arrows-v': member.order }"></i></a></th>
-      <th style="width:15%"><a href="" ng-click="setOrderMember('first_name')">{{ 'first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='first_name', 'fa fa-sort-alpha-desc': member.order=='-first_name', 'fa fa-arrows-v': member.order }"></i></a></th>
-      <th style="width:15%" class="hidden-xs"><a href="" ng-click="setOrderMember('email')">{{ 'email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='email', 'fa fa-sort-alpha-desc': member.order=='-email', 'fa fa-arrows-v': member.order }"></i></a></th>
-      <th style="width:10%" class="hidden-xs hidden-sm hidden-md"><a href="" ng-click="setOrderMember('phone')">{{ 'phone' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': member.order=='phone', 'fa fa-sort-numeric-desc': member.order=='-phone', 'fa fa-arrows-v': member.order }"></i></a></th>
-      <th style="width:20%" class="hidden-xs hidden-sm"><a href="" ng-click="setOrderMember('group')">{{ 'user_type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='group', 'fa fa-sort-alpha-desc': member.order=='-group', 'fa fa-arrows-v': member.order }"></i></a></th>
-      <th style="width:15%" class="hidden-xs hidden-sm hidden-md"><a href="" ng-click="setOrderMember('plan')">{{ 'subscription' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='plan', 'fa fa-sort-alpha-desc': member.order=='-plan', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:15%">
+        <a href="" ng-click="setOrderMember('last_name')">{{ 'surname' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='last_name', 'fa fa-sort-alpha-desc': member.order=='-last_name', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
+      <th style="width:15%">
+        <a href="" ng-click="setOrderMember('first_name')">{{ 'first_name' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='first_name', 'fa fa-sort-alpha-desc': member.order=='-first_name', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
+      <th style="width:15%" class="hidden-xs">
+        <a href="" ng-click="setOrderMember('email')">{{ 'email' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='email', 'fa fa-sort-alpha-desc': member.order=='-email', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
+      <th style="width:10%" class="hidden-xs hidden-sm hidden-md">
+        <a href="" ng-click="setOrderMember('phone')">{{ 'phone' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': member.order=='phone', 'fa fa-sort-numeric-desc': member.order=='-phone', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
+      <th style="width:20%" class="hidden-xs hidden-sm">
+        <a href="" ng-click="setOrderMember('group')">{{ 'user_type' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='group', 'fa fa-sort-alpha-desc': member.order=='-group', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
+      <th style="width:15%" class="hidden-xs hidden-sm hidden-md">
+        <a href="" ng-click="setOrderMember('plan')">{{ 'subscription' | translate }}
+          <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='plan', 'fa fa-sort-alpha-desc': member.order=='-plan', 'fa fa-arrows-v': member.order }"></i>
+        </a>
+      </th>
+
       <th style="width:10%"></th>
     </tr>
     </thead>
