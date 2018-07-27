@@ -84,7 +84,7 @@ class API::MembersController < API::ApiController
   def destroy
     authorize User
     @member.soft_destroy
-    sign_out(@member)
+    sign_out(@member) unless current_user.is_admin?
     head :no_content
   end
 
