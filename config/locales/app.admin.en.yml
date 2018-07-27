@@ -409,7 +409,7 @@ en:
         groups: "Groups"
         authentication: "Authentication"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Do you really want to delete this administrator? This cannot be undone."
-        do_you_really_want_to_delete_this_member_this_cannot_be_undone: "Do you really want to delete this member? This cannot be undone."
+        do_you_really_want_to_delete_this_member_this_cannot_be_undone: "Do you really want to delete this member? This cannot be undone. All of the user projects and training records will be also deleted."
         this_may_take_a_while_please_wait: "Warning: this may take a while, please be patient."
         administrator_successfully_deleted: "Administrator successfully deleted."
         member_successfully_deleted: "Member successfully deleted."

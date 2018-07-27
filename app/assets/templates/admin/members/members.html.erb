@@ -66,23 +66,23 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="m in members">
-        <td class="text-c">{{ m.profile.last_name }}</td>
-        <td class="text-c">{{ m.profile.first_name }}</td>
-        <td class="hidden-xs">{{ m.email }}</td>
-        <td class="hidden-xs hidden-sm hidden-md">{{ m.profile.phone }}</td>
-        <td class="text-u-c text-sm hidden-xs hidden-sm">{{ m.group.name }}</td>
-        <td class="hidden-xs hidden-sm hidden-md">{{ m.subscribed_plan | humanReadablePlanName }}</td>
+      <tr ng-repeat="_member in members">
+        <td class="text-c">{{ _member.profile.last_name }}</td>
+        <td class="text-c">{{ _member.profile.first_name }}</td>
+        <td class="hidden-xs">{{ _member.email }}</td>
+        <td class="hidden-xs hidden-sm hidden-md">{{ _member.profile.phone }}</td>
+        <td class="text-u-c text-sm hidden-xs hidden-sm">{{ _member.group.name }}</td>
+        <td class="hidden-xs hidden-sm hidden-md">{{ _member.subscribed_plan | humanReadablePlanName }}</td>
         <td>
           <div class="buttons">
-            <button class="btn btn-default" ui-sref="app.admin.members_edit({id: m.id})">
+            <button class="btn btn-default" ui-sref="app.admin.members_edit({id: _member.id})">
               <i class="fa fa-edit"></i> {{ 'edit' | translate }}
             </button>
-            <span class="label label-danger text-white" ng-show="m.need_completion" translate>{{ 'incomplete_profile' }}</span>
+            <span class="label label-danger text-white" ng-show="_member.need_completion" translate>{{ 'incomplete_profile' }}</span>
           </div>
         </td>
         <td>
-          <button class="btn btn-danger" ng-click="destroyMember(members, member)">
+          <button class="btn btn-danger" ng-click="destroyMember(members, _member)">
             <i class="fa fa-trash-o"></i>
           </button>
         </td>
