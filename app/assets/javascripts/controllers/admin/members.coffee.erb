@@ -169,6 +169,34 @@ Application.Controllers.controller "AdminMembersController", ["$scope","$sce", '
 
 
   ##
+  # Ask for confirmation then delete the specified member
+  # @param members {Array} full list of members
+  # @param member {Object} member to delete
+  ##
+  $scope.destroyMember = (members, member)->
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: $sce.trustAsHtml(
+            _t('do_you_really_want_to_remove_this_member') +
+            '<br/><br/>' +
+            _t('notice_member_projects_will_be_deleted') +
+            '<br/><br/>' +
+            _t('warning_if_multiple_period_suscription_is_active') +
+            '<br/><br/>' +
+            _t('this_may_take_a_while_please_wait')
+          )
+    , -> # cancel confirmed
+      Member.delete id: member.id, ->
+        members.splice(findMemberIdxById(members, member.id), 1)
+        growl.success(_t('member_successfully_deleted'))
+      , (error)->
+        growl.error(_t('unable_to_delete_the_member'))
+
+
+
+  ##
   # Ask for confirmation then delete the specified administrator
   # @param admins {Array} full list of administrators
   # @param admin {Object} administrator to delete
@@ -235,6 +263,19 @@ Application.Controllers.controller "AdminMembersController", ["$scope","$sce", '
   findAdminIdxById = (admins, id)->
     (admins.map (admin)->
       admin.id
+    ).indexOf(id)
+
+
+
+  ##
+  # Iterate through the provided array and return the index of the requested member
+  # @param members {Array} full list of members
+  # @param id {Number} user id of the member to retrieve in the list
+  # @returns {Number} index of the requested member, in the provided array
+  ##
+  findMemberIdxById = (members, id)->
+    (members.map (member)->
+      member.id
     ).indexOf(id)
 
 
