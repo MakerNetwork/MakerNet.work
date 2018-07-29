@@ -178,7 +178,15 @@ Application.Controllers.controller "AdminMembersController", ["$scope","$sce", '
       resolve:
         object: ->
           title: _t('confirmation_required')
-          msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_member_this_cannot_be_undone') + '<br/><br/>' +_t('this_may_take_a_while_please_wait'))
+          msg: $sce.trustAsHtml(
+            _t('do_you_really_want_to_remove_this_member') +
+            '<br/><br/>' +
+            _t('notice_member_projects_will_be_deleted') +
+            '<br/><br/>' +
+            _t('warning_if_multiple_period_suscription_is_active') +
+            '<br/><br/>' +
+            _t('this_may_take_a_while_please_wait')
+          )
     , -> # cancel confirmed
       Member.delete id: member.id, ->
         members.splice(findMemberIdxById(members, member.id), 1)
