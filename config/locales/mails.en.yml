@@ -5,7 +5,6 @@ en:
       sincerely: "Sincerely,"
       signature: "The MakerNet.work team."
       do_not_reply: "Please do not reply to this email."
-
   users_mailer:
     notify_user_account_created:
       subject: "MakerNet: You have a new account on %{FABLAB}"
@@ -20,7 +19,15 @@ en:
         thanks_to_: "To use the website, please"
         logon_or_login: "create a new account or log in by clicking here"
         token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
-
+    notify_user_forgot_password:
+              subject: "%{FABLAB} password reset instructions "
+              body:
+                hello: "Hello %{NAME},"
+                intro: " You recently requested to reset your password for your {FABLAB} website acount."  # messageFormat interpolation
+                not request: "if you did not request a password reset please ignore this email."
+                valid for: "this password reset is only valid for the next 3 hours"
+                signature: "The MakerNet.work team."
+                do_not_reply: "Please do not reply to this email."
   notifications_mailer:
     notify_user_user_group_changed:
       subject: "Your %{FABLAB} group has been changed"
@@ -286,3 +293,5 @@ en:
 
     shared:
       hello: "Hello %{user_name}"
+
+
