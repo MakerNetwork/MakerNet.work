@@ -6,7 +6,6 @@ class PasswordsController < Devise::PasswordsController
     UsersMailer.delay.notify_user_forgot_password(resource)
 
     if successfully_sent?(resource)
-
       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
     else
       head 404
@@ -15,11 +14,12 @@ class PasswordsController < Devise::PasswordsController
 
   def update
     @user = User.find_by_reset_password_token(resource_params[:reset_password_token])
+
     if @user != nil
-    @user.update_attributes(password: resource_params[:password],password_confirmation: resource_params[:password_confirmation])
-    respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+      @user.update_attributes(password: resource_params[:password], password_confirmation: resource_params[:password_confirmation])
+      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
     else
       head 404
-      end
     end
+  end
 end
