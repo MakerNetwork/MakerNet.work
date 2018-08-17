@@ -240,8 +240,10 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
     CSRF.setMetaTags()
 
     # init the birth date to JS object
-    $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
-
+    if $scope.user.profile.birthday?
+      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
+    else
+      $scope.user.profile.birthday = ""
     if $scope.activeProvider.providable_type != 'DatabaseProvider'
       $scope.preventPassword = true
     # bind fields protection with sso fields

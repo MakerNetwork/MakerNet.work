@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
 
   def need_completion?
     profile.gender.nil? or profile.first_name.blank? or profile.last_name.blank? or username.blank? or
-    email.blank? or encrypted_password.blank? or group_id.nil? or profile.birthday.blank? or profile.phone.blank?
+    email.blank? or encrypted_password.blank? or group_id.nil? or profile.phone.blank?
   end
 
   ## Retrieve the requested data in the User and user's Profile tables

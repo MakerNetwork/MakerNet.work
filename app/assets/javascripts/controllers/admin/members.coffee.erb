@@ -538,8 +538,10 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
     CSRF.setMetaTags()
 
     # init the birth date to JS object
-    $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
-
+    if $scope.user.profile.birthday?
+      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
+    else
+      $scope.user.profile.birthday = ""
     ## the user subscription
     if $scope.user.subscribed_plan? and $scope.user.subscription?
       $scope.subscription = $scope.user.subscription
