@@ -277,3 +277,32 @@ Application.Filters.filter 'filterDisabled', [ ->
     else
       list
 ]
+Application.Filters.filter 'tel', [->
+        (tel) ->
+          console.log tel
+          if !tel
+            return ''
+          value = tel.toString().trim().replace(/^\+/, '')
+          if value.match(/[^0-9]/)
+            return tel
+          country = undefined
+          city = undefined
+          number = undefined
+          switch value.length
+            when 1, 2, 3
+              city = value
+            else
+              city = value.slice(0, 3)
+              number = value.slice(3)
+          if number
+            if number.length > 3
+              number = number.slice(0, 3) + '-' + number.slice(3, 7)
+            else
+              number = number
+            ('(' + city + ') ' + number).trim()
+          else
+            if city.length > 0 
+              '(' + city   
+            else
+              ''     
+]

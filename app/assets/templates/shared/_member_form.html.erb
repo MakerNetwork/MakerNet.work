@@ -240,13 +240,18 @@
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
+                 minlength=14
                  name="user[profile_attributes][phone]"
+                 phone-input 
                  ng-model="user.profile.phone"
                  class="form-control"
                  id="user_phone"
-                 placeholder="{{ 'phone_number' | translate }}"
+                 placeholder="{{ 'phone_number (555) 555-5555' | translate }}"
                  ng-disabled="preventField['profile.phone'] && user.profile.phone && !userForm['user[profile_attributes][phone]'].$dirty"
                  required/>
+                  <input type="hidden"
+                 name="user[profile_attributes][phone]"
+                 value="{{user.profile.phone }}" />
         </div>
         <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
       </div>

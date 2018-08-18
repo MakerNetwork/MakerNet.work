@@ -132,7 +132,8 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
               angular.forEach v, (err) ->
                 $scope.alerts.push
                   msg: k+': '+err
-                  type: 'danger'
+                  type: 'danger'    
+             
       ]
     .result['finally'](null).then (user) ->
       # when the account was created succesfully, set the session to the newly created account
