@@ -27,28 +27,29 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [
-      {
-        profile_attributes: [
-          :phone,
-          :last_name,
-          :first_name,
-          :gender,
-          :birthday,
-          :interest,
-          :software_mastered,
-          organization_attributes: [
-            :name,
-            address_attributes: [:address]
-          ]
+    devise_parameter_sanitizer.for(:sign_up) << {
+      profile_attributes: [
+        :phone,
+        :last_name,
+        :first_name,
+        :gender,
+        :birthday,
+        :interest,
+        :software_mastered,
+        organization_attributes: [
+          :name,
+          address_attributes: [:address]
         ]
-      },
+      ]
+    }
+
+    devise_parameter_sanitizer.for(:sign_up).concat [
       :username,
       :is_allow_contact,
       :is_allow_newsletter,
       :cgu,
       :group_id
-    ])
+    ]
   end
 
   def default_url_options

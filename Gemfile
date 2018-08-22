@@ -6,8 +6,8 @@ gem 'sass-rails', '5.0.1' # Use SCSS for stylesheets
 gem 'compass-rails', '2.0.4' # CSS Authoring Framework
 gem 'uglifier', '~> 4.0.1' # Compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.1.0' # For .js.coffee assets and views
-gem 'therubyracer', '= 0.12.3', platforms: :ruby # Embed the V8 JavaScript interpreter
 gem 'jquery-rails' # Main JavaScript library
+gem 'jquery-ui-rails' # the jQuery UI assets (JavaScripts, stylesheets, and images)
 gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease
 gem 'jbuilder_cache_multi' # Retrieve fragments for a collection of objects from the cache
 gem 'responders', '~> 2.0' # Rails flash responders to dry up your application
@@ -34,7 +34,7 @@ gem 'sidekiq-cron' # Recurring jobs for Sidekiq
 gem 'sinatra', require: false # DSL for quickly creating web applications
 gem 'recurrence' # A simple library that handles recurring events
 
-gem 'devise' # Flexible authentication solution
+gem 'devise', '~> 3' # Flexible authentication solution
 gem 'devise-async' # Send Devise's emails in background
 gem 'omniauth' # Standardized Multi-Provider Authentication
 gem 'omniauth-oauth2' # Generic OAuth2 strategy for OmniAuth

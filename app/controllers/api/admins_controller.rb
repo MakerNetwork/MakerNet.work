@@ -7,11 +7,11 @@ class API::AdminsController < API::ApiController
   end
 
   def create
+
     authorize :admin
     generated_password = Devise.friendly_token.first(8)
     @admin = User.new(admin_params.merge(password: generated_password))
     @admin.send :set_slug
-
     # we associate the admin group to prevent linking any other 'normal' group (which won't be deletable afterwards)
     @admin.group = Group.find_by(slug: 'admins')
 
@@ -21,10 +21,11 @@ class API::AdminsController < API::ApiController
     end
 
     if @admin.save(validate: false)
-      @admin.send_confirmation_instructions
       @admin.add_role(:admin)
       @admin.remove_role(:member)
       UsersMailer.delay.notify_user_account_created(@admin, generated_password)
+      @admin.send_confirmation_instructions
+
       render :create, status: :created
     else
       render json: @admin.errors.full_messages, status: :unprocessable_entity
