@@ -59,7 +59,7 @@ class Reservation < ActiveRecord::Base
 
       # === Machine reservation ===
       when Machine
-        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        base_amount = compute_base_amount
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
@@ -88,7 +88,7 @@ class Reservation < ActiveRecord::Base
 
       # === Training reservation ===
       when Training
-        base_amount = reservable.amount_by_group(user.group_id).amount
+        base_amount = compute_base_amount
 
         # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
@@ -112,17 +112,15 @@ class Reservation < ActiveRecord::Base
 
       # === Event reservation ===
       when Event
-        amount = reservable.amount * nb_reserve_places
-        tickets.each do |ticket|
-          amount += ticket.booked * ticket.event_price_category.amount
-        end
+        base_amount = compute_base_amount
+
         slots.each do |slot|
           description = "#{reservable.name} "
           (slot.start_at.to_date..slot.end_at.to_date).each do |d|
             description += "\n" if slot.start_at.to_date != slot.end_at.to_date
             description += "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute} - #{I18n.l slot.end_at, format: :hour_minute}"
           end
-          ii_amount = amount
+          ii_amount = base_amount
           ii_amount = 0 if (slot.offered and on_site)
           unless on_site
             ii = Stripe::InvoiceItem.create(
@@ -133,12 +131,13 @@ class Reservation < ActiveRecord::Base
             )
             invoice_items << ii
           end
+
           self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
         end
 
       # === Space reservation ===
       when Space
-        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        base_amount = compute_base_amount
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
@@ -212,6 +211,19 @@ class Reservation < ActiveRecord::Base
     invoice_items
   end
 
+  def no_payment_required?
+    compute_base_amount.eql? 0
+  end
+
+  def save_with_no_payment
+    if valid?
+      save!
+      true
+    else
+      false
+    end
+  end
+
   def save_with_payment(coupon_code = nil)
     begin
       clean_pending_strip_invoice_items
@@ -222,14 +234,17 @@ class Reservation < ActiveRecord::Base
       errors[:payment] << e.message
       return false
     end
+
     if valid?
       # TODO: refactoring
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
+
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
+
         if subscription.save_with_payment(false)
-          self.stp_invoice_id = invoice_items.first.refresh.invoice
+          self.stp_invoice_id = invoice_items.first.refreshsinvoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
           set_total_and_coupon(coupon_code)
@@ -242,9 +257,11 @@ class Reservation < ActiveRecord::Base
           # error handling
           invoice_items.each(&:delete)
           errors[:card] << subscription.errors[:card].join
+
           if subscription.errors[:payment]
             errors[:payment] << subscription.errors[:payment].join
           end
+
           return false
         end
 
@@ -491,6 +508,22 @@ class Reservation < ActiveRecord::Base
       else
         raise DebitWalletError
       end
+    end
+  end
+
+  def compute_base_amount
+    case reservable
+    when Machine
+      reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+    when Training
+      reservable.amount_by_group(user.group_id).amount
+    when Event
+      amount = reservable.amount * nb_reserve_places
+      tickets.reduce(amount) do |ticket, amount|
+        amount += ticket.booked * ticket.event_price_category.amount
+      end
+    when Space
+      reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
     end
   end
 
