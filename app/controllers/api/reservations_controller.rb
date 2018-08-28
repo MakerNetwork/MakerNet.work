@@ -39,8 +39,6 @@ class API::ReservationsController < API::ApiController
         end
       end
 
-      byebug
-
       if is_reserve
         SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
 
