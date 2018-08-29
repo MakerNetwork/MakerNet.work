@@ -59,7 +59,7 @@ class Reservation < ActiveRecord::Base
 
       # === Machine reservation ===
       when Machine
-        base_amount = compute_base_amount
+        base_amount = compute_base_amount(plan)
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
@@ -88,7 +88,7 @@ class Reservation < ActiveRecord::Base
 
       # === Training reservation ===
       when Training
-        base_amount = compute_base_amount
+        base_amount = compute_base_amount(plan)
 
         # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
@@ -112,7 +112,7 @@ class Reservation < ActiveRecord::Base
 
       # === Event reservation ===
       when Event
-        base_amount = compute_base_amount
+        base_amount = compute_base_amount(plan)
 
         slots.each do |slot|
           description = "#{reservable.name} "
@@ -137,7 +137,7 @@ class Reservation < ActiveRecord::Base
 
       # === Space reservation ===
       when Space
-        base_amount = compute_base_amount
+        base_amount = compute_base_amount(plan)
         users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
@@ -212,7 +212,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def no_payment_required?
-    compute_base_amount.eql? 0
+    compute_base_amount(nil).eql? 0
   end
 
   def save_with_no_payment
@@ -511,7 +511,7 @@ class Reservation < ActiveRecord::Base
     end
   end
 
-  def compute_base_amount
+  def compute_base_amount(plan)
     case reservable
     when Machine
       reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
@@ -530,6 +530,7 @@ class Reservation < ActiveRecord::Base
   # this function only use for compute total of reservation before save
   def compute_amount_total_to_pay(coupon_code = nil)
     total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+
     unless coupon_code.nil?
       cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'

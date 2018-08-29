@@ -24,7 +24,7 @@ class API::ReservationsController < API::ApiController
       if current_user.is_admin?
         @reservation = Reservation.new(reservation_params)
 
-        is_reserve = if @revervation.no_payment_required?
+        is_reserve = if @reservation.no_payment_required?
           @reservation.save_with_no_payment
         else
           @reservation.save_with_local_payment(coupon_params[:coupon_code])
