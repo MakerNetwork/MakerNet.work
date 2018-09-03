@@ -49,7 +49,7 @@
       </div>
       <div class="widget-content no-bg auto wrapper" ng-class="{'reservations-locked': availability.lock}">
         <ul class="list-unstyled" ng-if="reservations.length > 0">
-          <li ng-repeat="r in reservations" class="m-b-xs" ng-class="{'reservation-canceled':r.canceled_at}">
+          <li ng-value="{{ 'admin_calendar.cancelled' | translate }}" ng-repeat="r in reservations" class="m-b-xs" ng-class="{'reservation-canceled':r.canceled_at}">
             {{r.user.name}}
               - <span class="label reservation-time">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
               - <span class="label label-success text-white">{{r.reservable.name}}</span>
