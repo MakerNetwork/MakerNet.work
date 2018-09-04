@@ -37,6 +37,13 @@
   z-index: 1100;
 }
 
+.alert{
+   top:0;
+  z-index: 1100;
+  position: sticky;
+}
+
+
 // fullcalendar
 
 .fc-view-container .fc-body tr {
