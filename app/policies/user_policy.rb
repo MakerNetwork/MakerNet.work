@@ -18,7 +18,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.id == record.id
+    user.is_admin? or (user.id == record.id)
   end
 
   def merge?

@@ -127,6 +127,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
             # restore organization param
             $scope.user.organization = orga
             # display errors
+            # TODO: HERE MAY LAY THE CAUSE OF WEIRD ERROR DISPLAY
             angular.forEach error.data.errors, (v, k) ->
               angular.forEach v, (err) ->
                 $scope.alerts.push

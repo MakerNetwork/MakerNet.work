@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
 
   def need_completion?
     profile.gender.nil? or profile.first_name.blank? or profile.last_name.blank? or username.blank? or
-    email.blank? or encrypted_password.blank? or group_id.nil? or profile.birthday.blank? or profile.phone.blank?
+    email.blank? or encrypted_password.blank? or group_id.nil? or profile.phone.blank?
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -360,7 +360,12 @@ class User < ActiveRecord::Base
   end
 
   def cached_has_role?(role)
-    roles = Rails.cache.fetch(roles_for: { object_id: self.object_id }, expires_in: 1.day, race_condition_ttl: 2.seconds) { self.roles.map(&:name) }
+    roles = Rails.cache.fetch(
+      roles_for: { object_id: self.object_id },
+      expires_in: 1.day,
+      race_condition_ttl: 2.seconds
+    ) { self.roles.map(&:name) }
+
     roles.include?(role.to_s)
   end
 
@@ -395,7 +400,10 @@ class User < ActiveRecord::Base
 
       User.admins.each do |admin|
         notification = Notification.new(meta_data: meta_data)
-        notification.send_notification(type: :notify_admin_user_group_changed, attached_object: self).to(admin).deliver_later
+        notification.send_notification(
+          type: :notify_admin_user_group_changed,
+          attached_object: self
+        ).to(admin).deliver_later
       end
 
       NotificationCenter.call type: :notify_user_user_group_changed,

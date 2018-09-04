@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   ## You can have the root of your site routed with "root"
   root 'application#index'
 
+  get 'innovation_map', controller: "innovation_map", action: 'index'
+
   namespace :api, as: nil, defaults: { format: :json } do
     resources :projects, only: [:index, :show, :create, :update, :destroy] do
       collection do

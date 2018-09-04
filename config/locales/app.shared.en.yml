@@ -61,7 +61,7 @@ en:
         first_name: "First Name"
         address: "Address"
         interests: "Interests"
-        CAD_softwares_mastered: "Software Mastered"
+        CAD_softwares_mastered: "Software Proficiencies"
         name: "Name"
         step_N: "Step {{INDEX}}"  # angular interpolation
         themes: "Themes"
@@ -143,12 +143,21 @@ en:
         creative_commons_licences: "Creative Commons licences"
 
       machine:
-        # machine edition form
-        technical_specifications_are_required: "Technical specifications are required."
-        attached_files_(pdf): "Attached files (pdf)"
-        attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        validate_your_machine: "Validate Machine"
+        # Edit machine form
+        machine_form:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Image"
+          add_an_illustration: "Add machine image"
+          description: "Description"
+          description_is_required: "Description is required."
+          technical_specifications: "Tech Specs"
+          technical_specifications_are_required: "Tech specs are required."
+          attached_files_(pdf): "Attach File (pdf)"
+          attach_a_file: "Attach File"
+          add_an_attachment: "Add an attachment"
+          disable_machine: "Disable Machine"
+          validate_your_machine: "Validate Machine"
 
       plan_subscribe:
         # frame to select a plan to subscribe
@@ -339,7 +348,7 @@ en:
         amount: 'Amount'
         credit: 'Credit'
         debit: 'Debit'
-        credit_title: 'Credit wallet'
+        credit_title: 'Wallet'
         credit_label: 'Set the amount to be credited'
         confirm_credit_label: 'Confirm the amount to be credited'
         generate_a_refund_invoice: "Generate a refund invoice"
@@ -363,6 +372,7 @@ en:
         debit_reservation_machine: "Debit by machine reservation"
         debit_reservation_event: "Debit by event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+        info_is_invoice: "Is this an invoice?"
 
       coupon:
         # promotional coupon (creation/edition form)
