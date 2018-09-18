@@ -59,5 +59,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "LANGUAGE" => "en_US.UTF-8",
       }
   end
-
 end
