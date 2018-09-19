@@ -41,9 +41,6 @@ install_ruby() {
   gem update --no-ri --no-rdoc
   rvm use ruby-2.4.4 --default
   rvm cleanup all
-
-  # Fetch example .envrc
-  curl -sSL https://gist.githubusercontent.com/MakerNetwork/bae611f9f249735ab521f3b0aeea576a/raw/eba0ff7bf005d5164a98937e9b847c92e839e0c1/.envrc > .envrc
 }
 
 ###
@@ -99,9 +96,9 @@ install_postgres() {
   sudo apt-get update
   sudo apt-get install -y postgresql postgresql-contrib
 
-  # Set up vagrant user
-  sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
-  sudo -u postgres bash -c "psql -c \"ALTER USER vagrant WITH SUPERUSER;\""
+  # Set up ubuntu user
+  sudo -u postgres bash -c "psql -c \"CREATE USER ubuntu WITH PASSWORD 'ubuntu';\""
+  sudo -u postgres bash -c "psql -c \"ALTER USER ubuntu WITH SUPERUSER;\""
 
   # Make available useful extensions to the schemas
   sudo -u postgres bash -c "psql -c \"CREATE EXTENSION unaccent SCHEMA pg_catalog;\""
@@ -155,6 +152,15 @@ install_ngrok() {
 }
 
 ###
+# Fetch basic environment values
+fetch_env_files() {
+  echo 'Fetching basic environment values'
+  curl -sSL https://gist.githubusercontent.com/MakerNetwork/bae611f9f249735ab521f3b0aeea576a/raw/eba0ff7bf005d5164a98937e9b847c92e839e0c1/.envrc > ~/.envrc
+  sudo mv ~/.envrc /vagrant/.envrc
+  ~/bin/direnv allow /vagrant/.envrc
+}
+
+###
 # Remove unused software
 clean_up() {
   echo "Removing unused software"
@@ -172,8 +178,8 @@ setup() {
   install_elasticsearch
   install_imagemagick
   install_ngrok
+  fetch_env_files
   clean_up
 }
 
 setup "$@"
-sudo reboot
