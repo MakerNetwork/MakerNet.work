@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Provider-specific configuration
   config.vm.provider 'virtualbox' do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '4096']
+    vb.customize ['modifyvm', :id, '--memory', '2048']
   end
 
   # If you are using Windows o Linux with an encrypted volume
@@ -59,5 +59,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "LANGUAGE" => "en_US.UTF-8",
       }
   end
-
 end

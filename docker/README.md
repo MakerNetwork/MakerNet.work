@@ -389,7 +389,7 @@ You can check that all containers are running with `docker ps`.
 
 ### Good to know
 
-#### Is it possible to update several versions at the same time ?
+#### Is it possible to update several versions at the same time?
 
 Yes, indeed. It's the default behaviour as `docker-compose pull` command will
 fetch the latest versions of the docker images.
