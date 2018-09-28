@@ -257,7 +257,7 @@ en:
         free_entry: "Free entry"
         cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
-        make_a_gift_of_this_reservation: "Make a gift of this reservation"
+        make_a_gift_of_this_reservation: "Offer free tickets"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
         book: "Book"

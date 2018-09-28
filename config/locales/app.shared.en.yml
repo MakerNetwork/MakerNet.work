@@ -436,7 +436,7 @@ en:
           you_ve_just_selected_the_slot: "You've just selected the slot:"
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
-          offer_this_slot: "Offer this slot"
+          offer_this_slot: "Offer free slot"
           confirm_this_slot: "Confirm this slot"
           remove_this_slot: "Remove this slot"
           to_benefit_from_attractive_prices: "To benefit from attractive prices"
