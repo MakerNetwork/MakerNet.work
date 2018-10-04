@@ -50,3 +50,5 @@
 # Plugins are versioned is their own repository
 /plugins/*
 
+db/schema.rb
+.gitignore

@@ -155,14 +155,17 @@
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
-              <input ng-model="user.profile_attributes.phone"
+              <input  class="form-control"
+                      ng-pattern="phoneNumbr"
+
+                      ng-model="user.profile_attributes.phone"
                      type="text"
                      name="phone"
-                     class="form-control"
-                     placeholder="{{ 'phone_number' | translate }}"
+                     placeholder="{{ '+5555555555 ' | translate }}"
                      required>
             </div>
             <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'phone_number_is_required' }}</span>
+
           </div>
         </div>
 

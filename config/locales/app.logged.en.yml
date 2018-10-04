@@ -62,6 +62,7 @@ en:
           your_next_trainings: "Your next workshops"
           your_previous_trainings: "Your previous workshops"
           your_approved_trainings: "Your approved workshops"
+          cancelled: "Cancelled"
         events:
           # dashboard: my events
           your_next_events: "Your next events"

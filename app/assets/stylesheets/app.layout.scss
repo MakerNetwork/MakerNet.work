@@ -382,7 +382,7 @@ body.container{
   }
 
   &:before {
-    content: "Canceled";
+    content: attr(ng-value);
     display: inline-block;
     background-color: #c44242;
     border-radius: 0.25em;

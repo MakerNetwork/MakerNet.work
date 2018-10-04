@@ -86,6 +86,8 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           opened: false
           options:
             startingDay: Fablab.weekStartingDay
+        #validate number format and length
+        $scope.phoneNumbr = /^\+?\d{7,12}$/
 
         # callback to open the date picker (account creation modal)
         $scope.openDatePicker = ($event) ->
@@ -132,7 +134,8 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
               angular.forEach v, (err) ->
                 $scope.alerts.push
                   msg: k+': '+err
-                  type: 'danger'
+                  type: 'danger'    
+             
       ]
     .result['finally'](null).then (user) ->
       # when the account was created succesfully, set the session to the newly created account
