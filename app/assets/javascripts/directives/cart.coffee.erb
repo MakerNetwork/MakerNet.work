@@ -120,7 +120,8 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
           Wallet.getWalletByUser {user_id: $scope.user.id}, (wallet) ->
             amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
-            if amountToPay is 0
+
+            if $scope.amountTotal is 0
               noPaymentRequired(reservation)
             else
               if $scope.isAdmin()
