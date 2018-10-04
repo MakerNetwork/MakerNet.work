@@ -545,7 +545,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       payOnSite = (reservation) ->
         $uibModal.open
           templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>'
-          size: 'sm'
+          size: 'md'
           resolve:
             reservation: ->
               reservation

@@ -182,6 +182,7 @@ en:
         # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Summary of the slots to be booked:"
+        you_are_allowing_user_to_pay_on_site: "Note: Upon confirmation, you are allowing the selected user to pay on site for this booking."
 
       event:
         # event edition form
@@ -447,10 +448,10 @@ en:
           cost_of_the_subscription: "Subscription Cost"
           confirm: "Confirm"
           confirm_and_pay: "Confirm Payment"
-          you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
-          you_have_settled_a_: "You have settled a"
+          you_have_settled_the_following_TYPE: "You have selected the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_a_: "You have selected a"
           total_: "TOTAL :"
-          thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
+          thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
           your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon from your"
           dashboard: "Dashboard"
           i_want_to_change_the_following_reservation: "I want to change the following reservation:"
