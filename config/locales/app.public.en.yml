@@ -30,10 +30,10 @@ en:
 
         # left menu (public)
         home: "Home"
-        reserve_a_machine: "Reserve a Machine"
-        trainings_registrations: "Workshops"
-        events_registrations: "Events"
-        reserve_a_space: "Reserve a Space"
+        reserve_a_machine: "Book Machines"
+        trainings_registrations: "Book Workshops"
+        events_registrations: "Book Events"
+        reserve_a_space: "Book Spaces"
         projects_gallery: "Projects Gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"

@@ -1,6 +1,7 @@
 <div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved">
+
   <div class="panel-heading b-b small">
-    <h3 translate>{{ 'cart.summary' }}</h3>
+    <h3 translate>{{ 'cart.summary'}}</h3>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
@@ -15,7 +16,8 @@
     <div class="panel panel-default bg-light" ng-repeat="slot in events.reserved">
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
-        <div class="text-base">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
+        <div ng-hide="slot.price === 0" class="text-base">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
+
         <div ng-show="isAdmin()" class="m-t">
           <label for="offerSlot" class="control-label m-r" translate>{{ 'cart.offer_this_slot' }}</label>
           <input bs-switch
@@ -28,7 +30,9 @@
                  switch-animate="true"
                  switch-readonly="{{slot.isValid}}"/>
         </div>
+
       </div>
+
       <div>
         <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'cart.confirm_this_slot' }}</button>
       </div>
@@ -36,7 +40,7 @@
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'cart.remove_this_slot' }}</a></div>
     </div>
 
-    <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <coupon ng-if="amountTotal > 0" show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
     <div ng-hide="fablabWithoutPlans">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
@@ -59,7 +63,8 @@
   </div>
 
   <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
-    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+    <button ng-if="amountTotal === 0" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'cart.confirm' | translate }}</button>
+    <button ng-if="amountTotal > 0" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
@@ -86,7 +91,6 @@
 
   </div>
 </div>
-
 
 <div class="widget panel b-a m m-t-lg" ng-if="events.modifiable || events.moved">
   <div class="panel-heading b-b small">
