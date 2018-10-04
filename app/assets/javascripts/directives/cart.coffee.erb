@@ -51,6 +51,8 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ## Global config: delay in hours before a booking while the cancellation is forbidden
       $scope.cancelBookingDelay = parseInt($scope.settings.booking_cancel_delay)
 
+      ## Global config: if true, the whole 'Plans & Subscriptions' feature will be disabled in the application
+      $scope.fablabWithoutPlans = $rootScope.fablabWithoutPlans;
 
 
       ##
@@ -118,11 +120,13 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
           Wallet.getWalletByUser {user_id: $scope.user.id}, (wallet) ->
             amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
-            if not $scope.isAdmin() and amountToPay > 0
-              payByStripe(reservation)
+            if amountToPay is 0
+              noPaymentRequired(reservation)
             else
-              if $scope.isAdmin() or amountToPay is 0
+              if $scope.isAdmin()
                 payOnSite(reservation)
+              else
+                payByStripe(reservation)
         else
           # otherwise we alert, this error musn't occur when the current user is not admin
           growl.error(_t('cart.please_select_a_member_first'))
@@ -412,6 +416,58 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
         reservation
 
+
+      ##
+      # Open a modal window that allows the user to confirm reservations with no cost
+      ##
+      noPaymentRequired = (reservation) ->
+        $uibModal.open
+          templateUrl: '<%= asset_path "shared/free_reservation_modal.html" %>'
+          size: 'md'
+          resolve:
+            reservation: ->
+              reservation
+            price: ->
+              Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+            wallet: ->
+              Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+            coupon: ->
+              $scope.coupon.applied
+          controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+            ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) ->
+
+              # Global price (total of all items)
+              $scope.price = price.price
+
+              # Price to pay (wallet deducted)
+              $scope.amount = price.price
+
+              # Reservation
+              $scope.reservation = reservation
+
+              # Used in wallet info template to interpolate some translations
+              $scope.numberFilter = $filter('number')
+
+              # Button label
+              $scope.validButtonName = _t('confirm')
+
+              ##
+              # Callback to process the local payment, triggered on button click
+              ##
+              $scope.ok = ->
+                $scope.attempting = true
+                Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
+                  $uibModalInstance.close(reservation)
+                  $scope.attempting = true
+                , (response)->
+                  $scope.alerts = []
+                  $scope.alerts.push({msg: _t('cart.a_problem_occured_during_the_booking_process_please_try_again_later'), type: 'danger' })
+                  $scope.attempting = false
+              $scope.cancel = ->
+                $uibModalInstance.dismiss('cancel')
+          ]
+        .result['finally'](null).then (reservation)->
+          afterPayment(reservation)
 
 
       ##

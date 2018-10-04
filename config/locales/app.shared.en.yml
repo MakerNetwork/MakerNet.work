@@ -181,7 +181,7 @@ en:
       valid_reservation_modal:
         # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
-        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
+        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Summary of the slots to be booked:"
 
       event:
         # event edition form
@@ -437,7 +437,7 @@ en:
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
           offer_this_slot: "Offer free slot"
-          confirm_this_slot: "Confirm this slot"
+          confirm_this_slot: "Select this slot"
           remove_this_slot: "Remove this slot"
           to_benefit_from_attractive_prices: "To benefit from attractive prices"
           view_our_subscriptions: "View our subscriptions"
@@ -445,6 +445,7 @@ en:
           you_ve_just_selected_a_: "You've just selected a"
           _subscription: "subscription"
           cost_of_the_subscription: "Subscription Cost"
+          confirm: "Confirm"
           confirm_and_pay: "Confirm Payment"
           you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "You have settled a"
@@ -469,4 +470,5 @@ en:
           cancellation_failed: "Cancellation failed."
           confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+          a_problem_occured_during_the_booking_process_please_try_again_later: "A problem occurred during the booking process. Please try again later."
           none: "None"
