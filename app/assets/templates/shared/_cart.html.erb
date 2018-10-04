@@ -40,7 +40,7 @@
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'cart.remove_this_slot' }}</a></div>
     </div>
 
-    <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <coupon ng-if="amountTotal > 0" show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
     <div ng-hide="fablabWithoutPlans">
       <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
