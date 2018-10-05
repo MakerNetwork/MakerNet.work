@@ -11,16 +11,22 @@
           <div class="col-sm-12">
             <label class="checkbox-inline">
               <input type="radio"
-                     name="gender"
+                     name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="true"
+                     value="man"
                      required/> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
-                     name="gender"
+                     name="gender_woman"
                      ng-model="user.profile_attributes.gender"
-                     value="false"/> {{ 'woman' | translate }}
+                     value="woman"/> {{ 'woman' | translate }}
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio"
+                     name="gender_non"
+                     ng-model="user.profile_attributes.gender"
+                     value="non-binary"/> {{ 'non_binary' | translate }}
             </label>
             <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
