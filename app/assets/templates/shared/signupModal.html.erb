@@ -1,3 +1,4 @@
+ <div ng-if="!isAuthenticated()">
   <div class="modal-header">
     <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
     <h1 translate>{{ 'create_your_account' }}</h1>
@@ -211,3 +212,4 @@
   <div class="modal-footer no-padder">
     <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="signupForm.$invalid" translate>{{ 'confirm' }}</button>
   </div>
+</div>

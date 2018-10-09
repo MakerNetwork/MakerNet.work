@@ -68,6 +68,16 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.about').$promise
           ]
+      .state 'app.public.signup',
+        url: '/signup'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "shared/signupModal.html" %>'
+            controller: 'SignUpController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.public.signup', 'app.shared.user').$promise
+          ]
       .state 'app.public.home',
         url: '/?reset_password_token'
         views:
