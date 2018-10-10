@@ -6,17 +6,33 @@
 <div class="row wrapper">
 	<div class="col-lg-8">
 		<h4 class="text-sm m-t-sm" translate>{{ 'latest_documented_projects' }}</h4>
+    <div class="row">
+      <div class="col-lg-4" ng-repeat="project in lastProjects | limitTo:3">
+        <div class="card card-project" >
 
-		<uib-carousel interval="5000" disable-animation="true">
-			<uib-slide class="h480 cover r" ng-repeat="p in lastProjects" active="p.active" style="background-image:url({{p.project_image}});">
-			  <!-- <img ng-src="{{p.project_image}}" style="margin:auto;"> -->
-			  <div class="carousel-caption">
-			    <h1 class="title"><a ui-sref="app.public.projects_show({id:p.slug})">{{ p.name }}</a></h1>
-			    <!-- <p class="description hidden-xs">{{p.description | humanize : 120}}</p> -->
-			  </div>
-			</uib-slide>
-		</uib-carousel>
+          <div class="card-header">
+            <a ui-sref="app.public.projects_show({id:project.slug})">
+              <div class="card-header-bg" style="background-image: url({{project.project_image}});">
+                <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!project.project_image">
+              </div>
+            </a>
+          </div>
+
+          <div class="card-block">
+            <a ui-sref="app.public.projects_show({id:project.slug})">
+              <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
+              <h1 class="card-title">{{project.name}}</h1>
+            </a>
+          </div>
+
+          <div class="text-center">
+            <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
+          </div>
+
+        </div>
+      </div>
     </div>
+  </div>
 
 
 	<div class="col-lg-4 m-t-lg">
