@@ -72,7 +72,7 @@ angular.module('application.router', ['ui.router']).
         url: '/signup'
         views:
           'main@':
-            templateUrl: '<%= asset_path "shared/signupModal.html" %>'
+            templateUrl: '<%= asset_path "shared/signup_form.html" %>'
             controller: 'SignUpController'
         resolve:
           translations: [ 'Translations', (Translations) ->
