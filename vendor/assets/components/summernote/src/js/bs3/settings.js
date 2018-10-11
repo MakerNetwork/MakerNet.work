@@ -60,7 +60,7 @@ define([
       },
 
       buttons: {},
-      
+
       lang: 'en-US',
 
       // toolbar
@@ -256,7 +256,7 @@ define([
         'superscript': 'fa fa-superscript',
         'table': 'fa fa-table',
         'textHeight': 'fa fa-text-height',
-        'trash': 'fa fa-trash',
+        'trash': 'fas fa-trash',
         'underline': 'fa fa-underline',
         'undo': 'fa fa-undo',
         'unorderedlist': 'fa fa-list-ul',

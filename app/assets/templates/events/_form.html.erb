@@ -31,7 +31,7 @@
             <div>
               <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'choose_a_picture' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'change' }}</span>
                 <input type="file" name="event[event_image_attributes][attachment]"></span>
-              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-trash-o"></i></a>
+              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fas fa-trash"></i></a>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
               </div>
               <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
                 <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="event[event_files_attributes][][attachment]"></span>
-              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fas fa-trash"></i></a>
             </div>
 
           </div>
@@ -78,9 +78,9 @@
 
     </div>   <!-- ./panel-body  -->
     <div class="panel-footer no-padder">
-      <input type="submit" 
-		     ng-value="submitName" 
-			 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" 
+      <input type="submit"
+		     ng-value="submitName"
+			 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
 			 ng-disabled="eventForm.$invalid || event.category_id === null"/>
     </div>
     </section>
