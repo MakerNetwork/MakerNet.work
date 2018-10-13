@@ -14,9 +14,6 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = ENV['DEFAULT_MAIL_FROM']
 
-  # Configure the class responsible to send e-mails.
-  config.mailer = "Devise::Async::Proxy"
-
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be

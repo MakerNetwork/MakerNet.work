@@ -534,7 +534,7 @@ DEPENDENCIES
   coveralls
   database_cleaner
   devise (~> 3)
-  devise-async
+  devise-async (~> 0.10.2)
   elasticsearch-model (~> 5)
   elasticsearch-persistence (~> 5)
   elasticsearch-rails (~> 5)
@@ -593,4 +593,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.5
+   1.16.6

@@ -35,7 +35,7 @@ gem 'sinatra', require: false # DSL for quickly creating web applications
 gem 'recurrence' # A simple library that handles recurring events
 
 gem 'devise', '~> 3' # Flexible authentication solution
-gem 'devise-async' # Send Devise's emails in background
+gem 'devise-async', '~> 0.10.2' # Send Devise's emails in background
 gem 'omniauth' # Standardized Multi-Provider Authentication
 gem 'omniauth-oauth2' # Generic OAuth2 strategy for OmniAuth
 gem 'rolify' # Role management with resource scoping
