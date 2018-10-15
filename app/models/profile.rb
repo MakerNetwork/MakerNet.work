@@ -34,12 +34,6 @@ class Profile < ActiveRecord::Base
     end
   end
 
-=begin
-  def str_gender
-    gender ? 'male' : 'female'
-  end
-=end
-
   def self.mapping
     # we protect some fields as they are designed to be managed by the system and must not be updated externally
     blacklist = %w(id user_id created_at updated_at)

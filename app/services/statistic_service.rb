@@ -362,7 +362,7 @@ class StatisticService
   def user_info(user)
     {
       user_id: user.id,
-      gender: user.profile.str_gender,
+      gender: user.profile.gender,
       age: user.profile.age,
       group: user.group.slug,
       email: user.email
