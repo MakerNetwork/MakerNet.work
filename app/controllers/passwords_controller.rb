@@ -1,11 +1,10 @@
 class PasswordsController < Devise::PasswordsController
   # POST /resource/password
   def create
-    self.resource = resource_class.send_reset_password_instructions(resource_params)
-    yield resource if block_given?
-    UsersMailer.delay.notify_user_forgot_password(resource)
+    @user = User.find_by_email resource_params[:email]
 
-    if successfully_sent?(resource)
+    if @user != nil
+      UsersMailer.delay.notify_user_forgot_password(resource)
       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
     else
       head 404

@@ -5,8 +5,8 @@ class UsersMailer < BaseMailer
 
 
   def notify_user_account_created(user, generated_password)
-    @token=user.reset_password_token
-    @user = user
+    @user  = user
+    @token = user.reset_password_token
     @generated_password = generated_password
 
     mail(
@@ -16,8 +16,8 @@ class UsersMailer < BaseMailer
   end
 
   def notify_user_forgot_password(user)
-    @user=user
-    @token=user.reset_password_token
+    @user  = user
+    @token = user.reset_password_token
 
     mail(
         to: @user.email,
