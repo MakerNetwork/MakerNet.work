@@ -71,8 +71,6 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
 
   $scope.eventSources = [$scope.trainingEvents, $scope.workshopEvents]
 
-  console.log($scope.eventSources)
-
   ### PRIVATE SCOPE ###
 
   calendarEventClickCb = (event, jsEvent, view) ->
