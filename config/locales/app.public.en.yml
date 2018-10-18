@@ -31,7 +31,7 @@ en:
         # left menu (public)
         home: "Home"
         reserve_a_machine: "Book Machines"
-        trainings_registrations: "Book Workshops"
+        trainings_registrations: "Trainings and Classes"
         events_registrations: "Book Events"
         reserve_a_space: "Book Spaces"
         projects_gallery: "Projects Gallery"
@@ -129,7 +129,7 @@ en:
         discover_members: "Discover members"
 
         # next events summary on the home page
-        fablab_s_next_events: "Future events"
+        fablab_s_next_events: "Upcoming workshops"
         every_events: "All events"
         from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
         on_the_date: "On the {{DATE}}"  # angular interpolation

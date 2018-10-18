@@ -1,6 +1,6 @@
 'use strict'
 
-Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise', ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise)->
+Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise', 'uiCalendarConfig', 'CalendarConfig', ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise, uiCalendarConfig, CalendarConfig)->
 
   ### PUBLIC SCOPE ###
 
@@ -30,9 +30,62 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
   $scope.isOneDayEvent = (event) ->
     moment(event.start_date).isSame(event.end_date, 'day')
 
+  $scope.calendarConfig = CalendarConfig
+    defaultView: 'week',
+    views: 
+        week: 
+            type: 'basic',
+            duration:
+              weeks: 2
+    header: 
+      left: '',
+      center: 'title',
+      right: ''
+    eventRender: (event, element, view) ->
+      eventRenderCb(event, element)
 
+  $scope.trainingEvents =
+    events: [],
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    color: "black"
+
+  $scope.workshopEvents =
+    events: [],
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    color: "black"
+
+  $scope.adjustEventFields = (event) ->
+    event.start = event.start_date
+    event.end = event.end_date
+    event.url = null
+    if event.category.name == "Training"
+      event.colorClass = "success"
+      $scope.trainingEvents.events.push(event)
+    else
+      event.colorClass = "info"
+      $scope.workshopEvents.events.push(event) 
+   
+  $scope.adjustEventFields(event) for event in $scope.upcomingEvents
+
+  $scope.eventSources = [$scope.trainingEvents, $scope.workshopEvents]
+
+  console.log($scope.eventSources)
 
   ### PRIVATE SCOPE ###
+
+  calendarEventClickCb = (event, jsEvent, view) ->
+    ## $state.go('app.public.events_show', {id: event.event_id})
+    $scope.event = event
+    modalInstance = $uibModal.open
+      templateUrl: 'eventModal.html'
+    return false
+
+  ## custom event display
+  eventRenderCb = (event, element) ->
+    element.find('.fc-content').html($('#event-card-'+event.id).clone())    
+    return
 
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
@@ -46,8 +99,6 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
     # changePassword modal from the parent controller
     if $stateParams.reset_password_token
       $scope.$parent.editPassword($stateParams.reset_password_token)
-
-
 
   ## !!! MUST BE CALLED AT THE END of the controller
   initialize()
