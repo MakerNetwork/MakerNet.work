@@ -37,13 +37,13 @@ This is a Ruby on Rails / AngularJS web application that runs on the following s
 ## Setup a production environment
 
 To run MakerNet as a production application, conteinarization with Docker is used. Refer to the
-Docker [production install instructions](doc/docker_production.md).
+Docker [production install instructions](doc/production.md).
 
 ## Setup a development environment
 
 In you intend to run MakerNet on your local machine to contribute to the project development, you
 can set it up with the virtual environment
-[instructions](doc/virtual_dev_env.md).
+[instructions](doc/development.md).
 
 ## Additional Information
 
