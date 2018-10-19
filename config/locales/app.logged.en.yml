@@ -62,6 +62,7 @@ en:
           your_next_trainings: "Your next workshops"
           your_previous_trainings: "Your previous workshops"
           your_approved_trainings: "Your approved workshops"
+          cancelled: "Cancelled"
         events:
           # dashboard: my events
           your_next_events: "Your next events"
@@ -97,7 +98,7 @@ en:
 
       machines_reserve:
         # book a machine
-        machine_planning: "Machine planning"
+        machine_planning: "Machine Calendar"
         i_ve_reserved: "I've reserved"
         not_available: "Not available"
         i_reserve: "I reserve"
@@ -106,7 +107,7 @@ en:
 
       trainings_reserve:
         # book a training
-        trainings_planning: "Woekshops planning"
+        trainings_planning: "Workshop Calendar"
         planning_of: "Planning of"   # followed by the training name (eg. "Planning of 3d printer training")
         all_trainings: "All workshops"
         cancel_my_selection: "Cancel my selection"
@@ -115,7 +116,7 @@ en:
       space_reserve:
         # book a space
         space_reserve:
-          planning_of_space_NAME: "Planning of the {{NAME}} space"  # angular interpolation
+          planning_of_space_NAME: "Calendar for {{NAME}} space"  # angular interpolation
           i_ve_reserved: "I've reserved"
           i_shift: "I shift"
           i_change: "I change"

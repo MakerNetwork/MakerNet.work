@@ -24,14 +24,16 @@ en:
         # left menu
         notifications: "Notifications"
         admin: "Admin"
+        admin_menu: "Admin Menu"
+        member_menu: "Member Menu"
         reduce_panel: "Reduce Panel"
 
         # left menu (public)
         home: "Home"
-        reserve_a_machine: "Reserve a Machine"
-        trainings_registrations: "Workshops"
-        events_registrations: "Events"
-        reserve_a_space: "Reserve a Space"
+        reserve_a_machine: "Book Machines"
+        trainings_registrations: "Book Workshops"
+        events_registrations: "Book Events"
+        reserve_a_space: "Book Spaces"
         projects_gallery: "Projects Gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
@@ -56,6 +58,7 @@ en:
         create_your_account: "Create your account"
         man: "Man"
         woman: "Woman"
+        non_binary: "Non-binary"
         gender_is_required: "Gender is required."
         your_first_name: "Your first name"
         first_name_is_required: "First name is required."
@@ -98,11 +101,11 @@ en:
         not_registered_to_the_fablab: "Not registered to the makerspace?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
-        caps_lock_is_on: "Caps Lock key is on."
+        caps_lock_is_on: "Caps-Lock key is on."
 
         # forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive e-mail in a moment with instructions to reset your password."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive e-mail with instructions to reset your password."
 
         # Fab-manager's version
         version: "Version:"
@@ -255,7 +258,7 @@ en:
         free_entry: "Free entry"
         cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
-        make_a_gift_of_this_reservation: "Make a gift of this reservation"
+        make_a_gift_of_this_reservation: "Offer free tickets"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
         book: "Book"

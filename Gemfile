@@ -22,7 +22,7 @@ gem 'kaminari' # Customizable and sophisticated paginator for Ruby webapps
 gem 'figaro' # Simple Rails app configuration using ENV and a single YAML file
 gem 'mini_magick' # Image processing ruby wrapper for ImageMagick
 gem 'carrierwave' # File uploads for Ruby web frameworks
-gem 'fog-aws' # Support for AWS file storage
+gem 'fog-aws', '~> 2' # Support for AWS file storage
 gem 'notify_with' # Very simple notification system
 gem 'rails-observers' # Respond to life cycle callbacks to implement trigger-like behavior
 gem 'actionpack-page_caching' # action output is stored as a HTML file
@@ -46,9 +46,9 @@ gem 'pg', '~> 0.21.0' # Interface to the PostgreSQL RDBMS
 gem 'seed_dump' # Task to dump your data to db/seeds.rb
 gem 'friendly_id', '~> 5.1.0' # create pretty URL’s and human-friendly strings
 gem 'redis-namespace'
-gem 'elasticsearch-rails'
-gem 'elasticsearch-model'
-gem 'elasticsearch-persistence'
+gem 'elasticsearch-rails', '~> 5'
+gem 'elasticsearch-model', '~> 5'
+gem 'elasticsearch-persistence', '~> 5'
 gem 'aasm' # State machines for Ruby classes
 
 gem 'prawn' # Fast, Nimble PDF Writer
@@ -56,7 +56,6 @@ gem 'prawn-table' # Provides support for tables in Prawn
 # XLS files generation
 gem 'axlsx', git: 'https://github.com/randym/axlsx', branch: 'release-3.0.0'
 gem 'axlsx_rails'
-
 
 gem 'oj', '~> 3.3.9' # Optimized JSON
 gem 'api-pagination' # Link header pagination for Rails and Grape APIs
@@ -78,8 +77,7 @@ group :development, :test do
 end
 
 group :development do
-  # Preview mail in the browser
-  gem 'mailcatcher'
+  gem 'mailcatcher' # Preview mail in the browser
   gem 'awesome_print'
   gem 'capistrano'
   gem 'rvm-capistrano', require: false
@@ -105,4 +103,3 @@ group :production do
 end
 
 gem 'sdoc', '~> 0.4.0', group: :doc
-

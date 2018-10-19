@@ -62,6 +62,7 @@ fr:
           your_next_trainings: "Vos prochaines formations"
           your_previous_trainings: "Vos formations passées"
           your_approved_trainings: "Vos formations validées"
+          cancelled: "Annulé"
         events:
           # tableau de bord : mes évènements
           your_next_events: "Vos prochains évènements"

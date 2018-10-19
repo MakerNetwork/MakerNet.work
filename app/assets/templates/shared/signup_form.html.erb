@@ -1,3 +1,4 @@
+ <div ng-if="!isAuthenticated()">
   <div class="modal-header">
     <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
     <h1 translate>{{ 'create_your_account' }}</h1>
@@ -11,16 +12,22 @@
           <div class="col-sm-12">
             <label class="checkbox-inline">
               <input type="radio"
-                     name="gender"
+                     name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="true"
+                     value="man"
                      required/> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
-                     name="gender"
+                     name="gender_woman"
                      ng-model="user.profile_attributes.gender"
-                     value="false"/> {{ 'woman' | translate }}
+                     value="woman"/> {{ 'woman' | translate }}
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio"
+                     name="gender_non"
+                     ng-model="user.profile_attributes.gender"
+                     value="non-binary"/> {{ 'non_binary' | translate }}
             </label>
             <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
@@ -149,14 +156,17 @@
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
-              <input ng-model="user.profile_attributes.phone"
+              <input  class="form-control"
+                      ng-pattern="phoneNumbr"
+
+                      ng-model="user.profile_attributes.phone"
                      type="text"
                      name="phone"
-                     class="form-control"
-                     placeholder="{{ 'phone_number' | translate }}"
+                     placeholder="{{ '+5555555555 ' | translate }}"
                      required>
             </div>
             <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'phone_number_is_required' }}</span>
+
           </div>
         </div>
 
@@ -202,3 +212,4 @@
   <div class="modal-footer no-padder">
     <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="signupForm.$invalid" translate>{{ 'confirm' }}</button>
   </div>
+</div>
