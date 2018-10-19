@@ -14,7 +14,7 @@ class API::UsersController < API::ApiController
       generated_password = Devise.friendly_token.first(8)
       @user = User.new(email: partner_params[:email], username: "#{partner_params[:first_name]}#{partner_params[:last_name]}",
                        password: generated_password, password_confirmation: generated_password, group_id: Group.first.id)
-      @user.build_profile(first_name: partner_params[:first_name], last_name: partner_params[:last_name], gender: true, birthday: Time.now, phone: '0000000000')
+      @user.build_profile(first_name: partner_params[:first_name], last_name: partner_params[:last_name], gender: true, phone: '0000000000')
 
       if @user.save
         @user.remove_role :member

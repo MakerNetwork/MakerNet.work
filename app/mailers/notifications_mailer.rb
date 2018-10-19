@@ -30,11 +30,21 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
 
   def notify_user_when_invoice_ready
     attachments[@attached_object.filename] = File.read(@attached_object.file)
-    mail(to: @recipient.email, subject: t('notifications_mailer.notify_member_invoice_ready.subject'), template_name: 'notify_member_invoice_ready')
+    @fablab_name = Setting.find_by(name: 'fablab_name').value
+    mail(
+      to: @recipient.email,
+      subject: t('notifications_mailer.notify_member_invoice_ready.subject', {FABLAB: @fablab_name}),
+      template_name: 'notify_member_invoice_ready'
+    )
   end
 
   def notify_user_when_avoir_ready
     attachments[@attached_object.filename] = File.read(@attached_object.file)
-    mail(to: @recipient.email, subject: t('notifications_mailer.notify_member_avoir_ready.subject'), template_name: 'notify_member_avoir_ready')
+    @fablab_name = Setting.find_by(name: 'fablab_name').value
+    mail(
+      to: @recipient.email,
+      subject: t('notifications_mailer.notify_member_avoir_ready.subject', {FABLAB: @fablab_name}),
+      template_name: 'notify_member_avoir_ready'
+    )
   end
 end

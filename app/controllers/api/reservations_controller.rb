@@ -23,11 +23,22 @@ class API::ReservationsController < API::ApiController
     begin
       if current_user.is_admin?
         @reservation = Reservation.new(reservation_params)
-        is_reserve = @reservation.save_with_local_payment(coupon_params[:coupon_code])
+
+        is_reserve = if @reservation.no_payment_required?
+          @reservation.save_with_no_payment
+        else
+          @reservation.save_with_local_payment(coupon_params[:coupon_code])
+        end
       else
         @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
-        is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
+
+        is_reserve = if @reservation.no_payment_required?
+          @reservation.save_with_no_payment
+        else
+          is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
+        end
       end
+
       if is_reserve
         SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
 
@@ -55,10 +66,26 @@ class API::ReservationsController < API::ApiController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:user_id, :message, :reservable_id, :reservable_type, :card_token, :plan_id,
-                                        :nb_reserve_places,
-                                        tickets_attributes: [:event_price_category_id, :booked],
-                                        slots_attributes: [:id, :start_at, :end_at, :availability_id, :offered])
+    params.require(:reservation).permit(
+      :user_id,
+      :message,
+      :reservable_id,
+      :reservable_type,
+      :card_token,
+      :plan_id,
+      :nb_reserve_places,
+      tickets_attributes: [
+        :event_price_category_id,
+        :booked
+      ],
+      slots_attributes: [
+        :id,
+        :start_at,
+        :end_at,
+        :availability_id,
+        :offered
+      ]
+    )
   end
 
   def coupon_params

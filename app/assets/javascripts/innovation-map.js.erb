@@ -1,0 +1,113 @@
+
+var map = L.map('map', {
+	minZoom: 2,
+	worldCopyJump: true
+}).setView([20,0], 2);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/albiebrown/civehqtub00022ikc7sgmp1n2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWxiaWVicm93biIsImEiOiJjaXZlaDh1a2MwMWl6MnlwZDJldzFvYjNxIn0.d04rCBRG42H2JkkiID2qpA', {
+    attribution: 'Innovation Spaces data by the <a href="http://atlasofinnovation.com">Ananse Group</a>, Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+}).addTo(map);
+
+map.refresh = function(timeout){
+	window.setTimeout(function(){
+		map.invalidateSize();
+	},timeout);
+};
+
+const markerClusters = L.markerClusterGroup({
+		spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    maxClusterRadius: 40
+});
+
+const allTypes = {
+	"hub": "Hub",
+	"workshop": "Workshop",
+	"event": "Event",
+	"art gallery": "Art Gallery",
+	"gallery": "Art Gallery",
+	"factory": "Factory",
+	"retail": "Retail",
+	"virtual": "Virtual",
+	"ecovillage": "Ecovillage",
+	"cluster": "Cluster",
+	"library": "Library",
+	"lab": "Lab",
+	"": "Hub"
+};
+
+const markerImage = '<%= asset_path("marker.png") %>';
+const markerImageSmall = '<%= asset_path("marker_small.png") %>';
+const spacePageImage = '<%= asset_path("space_page.png") %>';
+
+const myIcon = L.icon({
+    iconUrl: markerImage,
+    iconSize: [23, 30],
+    iconAnchor: [11, 29],
+    popupAnchor: [0, -30]
+});
+
+const endpoint = 'https://www.atlasofinnovation.com/api/space/filter/?not_closed=True&fields=latitude,longitude,name,city,country,website,short_description,id';
+
+var allMarkers = [];
+var noLocation = [];
+
+$.get(endpoint,{cache: true}, function(spaces) {
+	buildMarkers(spaces);
+});
+
+function buildMarkers(allSpaces) {
+	$(".loader-text").text("Building Map . . .");
+	for (i=0; i<allSpaces.length; ++i) {
+		var space = allSpaces[i];
+		if (space.latitude && space.longitude) {
+			try {
+				var marker = L.marker([space.latitude, space.longitude], {icon: myIcon});
+
+				marker.placeData = space;
+				var popup = createPopup(space);
+				marker.bindPopup(popup, {minWidth: "250"});
+				markerClusters.addLayer(marker);
+				allMarkers.push(marker);
+			} catch (e) {
+				// console.log("TypeError: " + space.name);
+				// console.log(e.message);
+			}
+		} else {
+			noLocation.push(space);
+		}
+	}
+
+	map.addLayer(markerClusters, {"chunkedLoading": true});
+	$("#loading").fadeOut();
+	map.refresh(0);
+}
+
+function createPopup(space) {
+
+	var popupText = "<div class='popup-header'>";
+	popupText += "<h3>"+space.name+"</h3>";
+	popupText += "</div>";
+	popupText += "<p><img src='" + markerImageSmall + "'" + " height='14' class='popup-location-text'><span style='margin-bottom:3px;position:fixed;'>";
+
+	if (space.city) {
+		popupText += space.city+", "+space.country;
+ 	} else {
+		popupText += space.country;
+ 	}
+
+	popupText += "</span></p>"
+
+ 	if (space.website) {
+		popupText += "<a class='popup-website-link' target='_blank' href='http://" + space.website + "'>" + space.website + "</a>";
+	}
+	if (space.short_description) {
+		popupText += "<p>"+space.short_description+"</p>";
+	}
+
+	popupText += "<a href='http://atlasofinnovation.com/space/" + space.id + "' target='_blank'><img src='" + spacePageImage + "' class='space-page-button'></a>";
+
+	return popupText;
+}

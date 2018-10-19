@@ -89,7 +89,7 @@ end
 
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count === 0
-    admin = User.new(username: 'admin', email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
+    admin = User.new(username: 'admin', email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789'})
     admin.add_role 'admin'
     admin.save!
 end
@@ -182,48 +182,35 @@ end
 
 unless Setting.find_by(name: 'about_body').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_body')
-  setting.value = "We are a community of inventive, creative, artistic, innovative, fun and welcoming people who love to make things and have a great time doing it. Make Nashville is a member-led organization that was founded in 2012 to be the focal point of the maker movement in the region and became a registered federal 501(c)(3) nonprofit in 2015. Our purpose is to provide the community, training, tools, and opportunity for everyone to experience the transformative experience of making. We want to help more people make, and to help makers make more.
-
-  We’ve been putting on the Nashville Mini Maker Faire for the last four years, sharing STEAM education and our passion for making with as many as 6,000 people. This year’s Faire will be held at Vanderbilt University on September 30th and October 1st and will feature Bot Battles, Competitive PowerWheels Exhibitions, and Drone Competitions along with dozens of maker exhibits, workshops, demonstrations, and performances, both inside and out!
-
-  Around a year and a half ago, after years of planning, fundraising, and the efforts of dozens of volunteers we opened Nashville’s first all-ages non-profit makerspace! This over 9,500 square foot facility shared with two nonprofit partners enables us to host workshops, builds, events, and provide members with the space and equipment to create some truly amazing things. In the last year, we have seen inspiring art installations, amazing concerts, innovative inventions, incredible feats of science and technology, market-changing entrepreneurial prototypes, skill-strengthening projects, crazy and fun maker builds, and awesome feats of education in the space. We hope you will join us! Become a member today!"
+  setting.value = "The Maker Network is about helping Makers and Makerspaces thrive and evolve into an interconnected ecosystem of skills, tools, resources, and ideas. We want to see the maker movement flourish all over the world, and believe that the tools to do so look something like this."
   setting.save
 end
 
 unless Setting.find_by(name: 'about_title').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_title')
-  setting.value = 'Imaginer, Fabriquer, <br>Partager au Fab Lab <br> de La Casemate'
+  setting.value = 'Make. Learn. Share. Play. Participate. Grow.'
   setting.save
 end
 
 unless Setting.find_by(name: 'about_contacts').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_contacts')
   setting.value = 'Information:
-  info@makenashville.org
+  info@makernet.work
 
-  Member Experience:
-  Joel Lindsey
-  joel@makenashville.org
+  Lead Product Designer:
+  Nathan Parker
 
-  Workshops Lead:
-  Jenn Deafenbaugh
-  jenn@makenashville.org
+  Lead Software Developer:
+  Kyle Sorus
 
-  Facilities Director:
-  Jonathan Taufer
-  jonathan@makenashville.org
-
-  Makerspace President:
-  Matt Kenigson
-  matt@makenashville.org
-
-  Visit the Make Nashville Website'
+  Project Manager:
+  Matt Kenigson'
   setting.save
 end
 
 unless Setting.find_by(name: 'twitter_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'twitter_name')
-  setting.value = 'makenashville'
+  setting.value = 'twitter'
   setting.save
 end
 
@@ -270,7 +257,7 @@ end
 
 unless Setting.find_by(name: 'invoice_code-value').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_code-value')
-  setting.value = 'INMEDFABLAB'
+  setting.value = 'INMEDSPACE'
   setting.save
 end
 
@@ -294,15 +281,14 @@ end
 
 unless Setting.find_by(name: 'invoice_text').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_text')
-  setting.value = "Notre association n'est pas assujettie à la TVA"
+  setting.value = "TAX NOTICE"
   setting.save
 end
 
 unless Setting.find_by(name: 'invoice_legals').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_legals')
-  setting.value = 'Make Nashville<br/>'+
-                  '947 Woodland Street, Nashville, TN 37206<br/>'+
-                  'Tél. 615.450.6253<br/>'
+  setting.value = 'My Maker Space<br/>'+
+                  'Nashville, TN<br/>'
   setting.save
 end
 
@@ -365,7 +351,7 @@ end
 
 unless Setting.find_by(name: 'fablab_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'fablab_name')
-  setting.value = 'Make Nashville'
+  setting.value = 'The Maker Network'
   setting.save
 end
 

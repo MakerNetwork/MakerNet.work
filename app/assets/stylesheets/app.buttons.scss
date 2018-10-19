@@ -1,11 +1,14 @@
 
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
-
-	background-color: #f2f2f2;
-
+button {
+  color: white;
 }
 
-.btn{
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+  color: black;
+  background-color: #f2f2f2;
+}
+
+.btn {
 	> i{
 		&.pull-left,
 		&.pull-right{
@@ -14,14 +17,18 @@
 	}
 }
 
-.btn-warning-full {
-	outline: 0;
-	text-transform: uppercase;
-	//border: 3px solid $yellow;
-	//background-color: $yellow;
+.btn-warning, .btn-warning-full {
+  outline: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+
 	&:hover {
 		background-color: white;
 	}
+}
+
+.btn-warning {
+  color: white;
 }
 
 .btn-facebook {
@@ -75,6 +82,17 @@
   -webkit-animation:spin 4s linear infinite;
   -moz-animation:spin 4s linear infinite;
   animation:spin 4s linear infinite;
+}
+
+.fc-state-default {
+  color: black;
+  background-color: white;
+}
+
+.fc-state-active  {
+  color: white !important;
+  background-color: $gray !important;
+  font-weight: bold;
 }
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
