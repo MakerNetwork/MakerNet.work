@@ -934,7 +934,7 @@ var ButtonsData;
             aria: 'image',
             tagNames: ['img'],
             contentDefault: '<b>image</b>',
-            contentFA: '<i class="fa fa-picture-o"></i>'
+            contentFA: '<i class="fas fa-image"></i>'
         },
         'quote': {
             name: 'quote',

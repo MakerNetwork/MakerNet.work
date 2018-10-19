@@ -6918,7 +6918,7 @@
         'minus': 'fa fa-minus',
         'orderedlist': 'fa fa-list-ol',
         'pencil': 'fa fa-pencil',
-        'picture': 'fa fa-picture-o',
+        'picture': 'fas fa-image',
         'question': 'fa fa-question',
         'redo': 'fa fa-repeat',
         'square': 'fa fa-square',
@@ -6931,7 +6931,7 @@
         'underline': 'fa fa-underline',
         'undo': 'fa fa-undo',
         'unorderedlist': 'fa fa-list-ul',
-        'video': 'fa fa-youtube-play'
+        'video': 'fab fa-youtube'
       }
     }
   });
