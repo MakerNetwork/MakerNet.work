@@ -64,14 +64,29 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
   Fablab.adminNavLinks = Fablab.adminNavLinks || []
   adminNavLinks = [
     {
+      state: 'app.admin.calendar'
+      linkText: 'manage_the_calendar'
+      linkIcon: 'calendar'
+    }
+    {
+      state: 'app.public.machines_list'
+      linkText: 'manage_the_machines'
+      linkIcon: 'cogs'
+    }
+    {
       state: 'app.admin.trainings'
       linkText: 'trainings_monitoring'
       linkIcon: 'graduation-cap'
     }
     {
-      state: 'app.admin.calendar'
-      linkText: 'manage_the_calendar'
-      linkIcon: 'calendar'
+      state: 'app.admin.events'
+      linkText: 'manage_the_events'
+      linkIcon: 'tags'
+    }
+    {
+      state: 'app.admin.project_elements'
+      linkText: 'manage_the_projects_elements'
+      linkIcon: 'tasks'
     }
     {
       state: 'app.admin.members'
@@ -81,37 +96,22 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
     {
       state: 'app.admin.invoices'
       linkText: 'manage_the_invoices'
-      linkIcon: 'file-pdf-o'
+      linkIcon: 'file-invoice'
     }
     {
       state: 'app.admin.pricing'
       linkText: 'subscriptions_and_prices'
-      linkIcon: 'money'
-    }
-    {
-      state: 'app.admin.events'
-      linkText: 'manage_the_events'
-      linkIcon: 'tags'
-    }
-    {
-      state: 'app.public.machines_list'
-      linkText: 'manage_the_machines'
-      linkIcon: 'cogs'
-    }
-    {
-      state: 'app.admin.project_elements'
-      linkText: 'manage_the_projects_elements'
-      linkIcon: 'tasks'
+      linkIcon: 'money-bill-alt'
     }
     {
       state: 'app.admin.statistics'
       linkText: 'statistics'
-      linkIcon: 'bar-chart-o'
+      linkIcon: 'chart-area'
     }
     {
       state: 'app.admin.settings'
       linkText: 'customization'
-      linkIcon: 'gear'
+      linkIcon: 'sliders-h'
     }
     {
       state: 'app.admin.open_api_clients'
