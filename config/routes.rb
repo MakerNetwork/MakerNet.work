@@ -98,7 +98,7 @@ Rails.application.routes.draw do
     end
 
     resources :events do
-      get 'upcoming/:limit', action: 'upcoming', on: :collection
+      get 'upcoming', action: 'upcoming', on: :collection
     end
 
     resources :invoices, only: [:index, :show, :create] do
