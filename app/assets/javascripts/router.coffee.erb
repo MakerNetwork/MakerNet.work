@@ -82,7 +82,7 @@ angular.module('application.router', ['ui.router']).
             Project.lastPublished().$promise
           ]
           upcomingEventsPromise: ['Event', (Event)->
-            Event.upcoming(limit: 3).$promise
+            Event.upcoming().$promise
           ]
           homeBlogpostPromise: ['Setting', (Setting)->
             Setting.get(name: 'home_blogpost').$promise
