@@ -12,7 +12,7 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates :gender, presence: true, length: { maximum: 10}
+  validates :gender, presence: false, length: { maximum: 10}
   validates :birthday, presence: false
   validates :phone, presence: true
 

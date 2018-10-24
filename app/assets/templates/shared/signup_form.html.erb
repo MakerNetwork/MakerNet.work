@@ -14,8 +14,7 @@
               <input type="radio"
                      name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="man"
-                     required/> {{ 'man' | translate }}
+                     value="man"/> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
@@ -29,7 +28,6 @@
                      ng-model="user.profile_attributes.gender"
                      value="non-binary"/> {{ 'non_binary' | translate }}
             </label>
-            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
         </div>
 
