@@ -1,6 +1,6 @@
 'use strict'
 
-Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise', 'uiCalendarConfig', 'CalendarConfig', ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise, uiCalendarConfig, CalendarConfig)->
+Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'upcomingTrainingsPromise','homeBlogpostPromise', 'twitterNamePromise', 'uiCalendarConfig', 'CalendarConfig', ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, upcomingTrainingsPromise, homeBlogpostPromise, twitterNamePromise, uiCalendarConfig, CalendarConfig)->
 
   ### PUBLIC SCOPE ###
 
@@ -15,6 +15,9 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
 
   ## The closest upcoming events
   $scope.upcomingEvents = upcomingEventsPromise
+
+  ## The closest upcoming trainings
+  $scope.upcomingTrainings = upcomingTrainingsPromise
 
   ## The admin blogpost
   $scope.homeBlogpost = homeBlogpostPromise.setting.value
@@ -32,12 +35,12 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
 
   $scope.calendarConfig = CalendarConfig
     defaultView: 'week',
-    views: 
-        week: 
+    views:
+        week:
             type: 'basic',
             duration:
               weeks: 2
-    header: 
+    header:
       left: '',
       center: 'title',
       right: ''
@@ -65,8 +68,8 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
       $scope.trainingEvents.events.push(event)
     else
       event.colorClass = "info"
-      $scope.workshopEvents.events.push(event) 
-   
+      $scope.workshopEvents.events.push(event)
+
   $scope.adjustEventFields(event) for event in $scope.upcomingEvents
 
   $scope.eventSources = [$scope.trainingEvents, $scope.workshopEvents]
@@ -82,7 +85,7 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
 
   ## custom event display
   eventRenderCb = (event, element) ->
-    element.find('.fc-content').html($('#event-card-'+event.id).clone())    
+    element.find('.fc-content').html($('#event-card-'+event.id).clone())
     return
 
   ##
