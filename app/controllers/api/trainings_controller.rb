@@ -1,7 +1,7 @@
 class API::TrainingsController < API::ApiController
   include ApplicationHelper
 
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :upcoming]
   before_action :set_training, only: [:update, :destroy]
 
   def index
@@ -14,6 +14,18 @@ class API::TrainingsController < API::ApiController
     if attribute_requested?(@requested_attributes, 'availabilities')
       @trainings = @trainings.includes(:availabilities => [:slots => [:reservation => [:user => [:profile, :trainings]]]]).order('availabilities.start_at DESC')
     end
+  end
+
+  # GET api/trainings/upcoming/:limit
+  def upcoming
+    limit = params[:limit]
+    @trainings = Training.includes(:availabilities, :training_image)
+      .where('trainings.nb_total_places != -1 OR trainings.nb_total_places IS NULL')
+      .where('availabilities.start_at >= ?', Time.now)
+      .order('availabilities.start_at ASC').references(:availabilities)
+      .limit(limit)
+
+      render json: @trainings
   end
 
   def show

@@ -78,6 +78,10 @@ Rails.application.routes.draw do
     post 'coupons/validate' => 'coupons#validate'
     post 'coupons/send' => 'coupons#send_to'
 
+    resources :trainings do
+      get 'upcoming/:limit', action: 'upcoming', on: :collection
+    end
+
     resources :trainings_pricings, only: [:index, :update]
 
     resources :availabilities do
@@ -110,6 +114,7 @@ Rails.application.routes.draw do
     resources :trainings do
       get :availabilities, on: :member
     end
+
     resources :credits
     resources :categories
     resources :event_themes

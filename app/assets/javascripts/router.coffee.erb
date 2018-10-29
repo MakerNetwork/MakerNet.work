@@ -81,6 +81,9 @@ angular.module('application.router', ['ui.router']).
           lastProjectsPromise: ['Project', (Project)->
             Project.lastPublished().$promise
           ]
+          upcomingTrainingsPromise: ['Training', (Training)->
+            Training.upcoming(limit: 3).$promise
+          ]
           upcomingEventsPromise: ['Event', (Event)->
             Event.upcoming().$promise
           ]
