@@ -3,7 +3,6 @@ class UsersMailer < BaseMailer
     Setting.find_by(name: 'fablab_name').value
   end
 
-
   def notify_user_account_created(user, generated_password)
     @user  = user
     @token = user.reset_password_token
@@ -15,9 +14,9 @@ class UsersMailer < BaseMailer
     )
   end
 
-  def notify_user_forgot_password(user)
+  def notify_user_forgot_password(user, token)
     @user  = user
-    @token = user.reset_password_token
+    @token = token
 
     mail(
         to: @user.email,
