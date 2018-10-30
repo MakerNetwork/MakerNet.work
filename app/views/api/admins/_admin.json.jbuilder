@@ -4,6 +4,7 @@ json.profile_attributes do
   json.first_name admin.profile.first_name
   json.last_name admin.profile.last_name
   json.gender admin.profile.gender
+  json.member_id admin.profile.member_id
   json.birthday admin.profile.birthday if admin.profile.birthday
   json.phone admin.profile.phone
   json.user_avatar do
