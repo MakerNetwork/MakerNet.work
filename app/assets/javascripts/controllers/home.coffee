@@ -64,11 +64,12 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
     training.category.name = "Workshop"
     training.title = event.name
     training.type = "training"
+    training.slug = event.slug
+    training.id = event.id
     for availability in event.availabilities
       training.start = availability.start_at
       training.end = availability.end_at
-      training.all_day = $scope.isOneDayEvent(training)
-      training.id = availability.id
+      training.all_day = availability.all_day
       training.containerId = "training-" + event.id + "-" + availability.id
       training.nb_total_places = availability.nb_total_places
       training.nb_free_spaces = availability.nb_free_spaces

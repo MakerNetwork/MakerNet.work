@@ -99,10 +99,12 @@
     <div ng-repeat="event in (calendarEvents)">
       <div class="panel panel-{{event.colorClass}}" id="event-card-{{event.containerId}}">
         <div class="panel-heading">
-          <a ng-if="event.type!='training'" href="" ui-sref="app.public.events_show({id: event.id})">
+          <a ng-if="event.type!='training'" href="" ui-sref="app.public.events_show({id: event.id})" data-toggle="tooltip" data-placement="top" title="{{ event.title }} ({{ event.category.name }})">
             <h4 >{{event.title}} <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span></h4>
           </a>
-            <h4 ng-if="event.type=='training'">{{event.title}} <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span></h4>
+          <a ng-if="event.type=='training'" href="" ui-sref="app.public.training_show({id: event.id})" data-toggle="tooltip" data-placement="top" title="{{ event.title }} ({{ event.category.name }})">
+            <h4>{{event.title}} <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span></h4>
+          </a>
         </div>
         <div class="panel-body" style="color:black">
           <p class="event-description" ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>
@@ -114,9 +116,9 @@
           <p>
             <i class="fa fa-clock-o red"></i>
             <span ng-if="event.all_day == 'true'" translate>{{ 'all_day' }}</span>
-            <span ng-if="event.all_day == 'false'">{{ 'from_time_to_time' | translate:{START:(event.start | amDateFormat:'LT'), END:(event.end | amDateFormat:'LT')} }}</span>
+            <span ng-if="event.all_day != 'true'">{{ 'from_time_to_time' | translate:{START:(event.start | amDateFormat:'LT'), END:(event.end | amDateFormat:'LT')} }}</span>
           </p>
-          <p ng-if="event.nb_total_places > 0">
+          <p ng-if="event.nb_total_places > 0 && event.nb_free_places > -1">
             <i class="fa fa-user red"></i>
             <span ng-if="event.nb_free_places > 0">{{ 'still_available' | translate }} {{event.nb_free_places}}</span>
             <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
