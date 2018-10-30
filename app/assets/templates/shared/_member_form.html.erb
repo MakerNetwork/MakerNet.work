@@ -43,12 +43,7 @@
                    name="user[profile_attributes][gender]"
                    ng-model="user.profile.gender"
                    value="man"
-<<<<<<< HEAD
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
-                   required/>
-=======
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
->>>>>>> gender field optional
               <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
           </label>
           <label class="btn-mini-default">
@@ -67,7 +62,7 @@
                  value="non-binary"
                  ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
                  />
-          <i class="fa fa-genderless m-l-sm"></i> {{ 'non_binary' | translate }}
+          <i class="fas fa-genderless m-l-sm"></i> {{ 'non_binary' | translate }}
         </label>
 
         <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>

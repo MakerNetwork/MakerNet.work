@@ -14,19 +14,23 @@
               <input type="radio"
                      name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="man"/> {{ 'man' | translate }}
+                     value="man"/>
+                     <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_woman"
                      ng-model="user.profile_attributes.gender"
-                     value="woman"/> {{ 'woman' | translate }}
+                     value="woman"/>
+                     <i class="fa fa-female m-l-sm"></i>  {{ 'woman' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_non"
                      ng-model="user.profile_attributes.gender"
-                     value="non-binary"/> {{ 'non_binary' | translate }}
+                     value="non-binary"/>
+                     <i class="fas fa-genderless m-l-sm"></i>
+                     {{ 'non_binary' | translate }}
             </label>
           </div>
         </div>
