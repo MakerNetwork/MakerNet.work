@@ -25,7 +25,7 @@ class API::TrainingsController < API::ApiController
       .order('availabilities.start_at ASC').references(:availabilities)
       .limit(limit)
 
-      render json: @trainings
+    render json: @trainings, include: [:availabilities, :training_image]
   end
 
   def show
