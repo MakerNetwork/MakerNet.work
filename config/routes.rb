@@ -79,7 +79,7 @@ Rails.application.routes.draw do
     post 'coupons/send' => 'coupons#send_to'
 
     resources :trainings do
-      get 'upcoming/:limit', action: 'upcoming', on: :collection
+      get 'upcoming', action: 'upcoming', on: :collection
     end
 
     resources :trainings_pricings, only: [:index, :update]
