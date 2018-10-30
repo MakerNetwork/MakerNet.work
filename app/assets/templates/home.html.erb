@@ -96,32 +96,33 @@
 	</div>
 
   <section class="col-lg-12 wrapper hidden">
-    <div ng-repeat="event in (upcomingEvents)">
-      <div class="panel panel-{{event.colorClass}}" id="event-card-{{event.id}}">
+    <div ng-repeat="event in (calendarEvents)">
+      <div class="panel panel-{{event.colorClass}}" id="event-card-{{event.containerId}}">
         <div class="panel-heading">
-          <a href="" ui-sref="app.public.events_show({id: event.id})">
+          <a ng-if="event.type!='training'" href="" ui-sref="app.public.events_show({id: event.id})">
             <h4 >{{event.title}} <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span></h4>
           </a>
+            <h4 ng-if="event.type=='training'">{{event.title}} <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span></h4>
         </div>
         <div class="panel-body" style="color:black">
           <p class="event-description" ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>
-          <p>
+          <!--p>
             <i class="fa fa-calendar red"></i>
-            <span ng-hide="isOneDayEvent(event)">{{ 'from_date_to_date' | translate:{START:(event.start_date | amDateFormat:'L'), END:(event.end_date | amDateFormat:'L')} }}</span>
-            <span ng-show="isOneDayEvent(event)">{{ 'on_the_date' | translate:{DATE:(event.start_date | amDateFormat:'L')} }}</span>
-          </p>
+            <span ng-hide="isOneDayEvent(event)">{{ 'from_date_to_date' | translate:{START:(event.start | amDateFormat:'L'), END:(event.end | amDateFormat:'L')} }}</span>
+            <span ng-show="isOneDayEvent(event)">{{ 'on_the_date' | translate:{DATE:(event.start | amDateFormat:'L')} }}</span>
+          </p-->
           <p>
             <i class="fa fa-clock-o red"></i>
             <span ng-if="event.all_day == 'true'" translate>{{ 'all_day' }}</span>
-            <span ng-if="event.all_day == 'false'">{{ 'from_time_to_time' | translate:{START:(event.start_date | amDateFormat:'LT'), END:(event.end_date | amDateFormat:'LT')} }}</span>
+            <span ng-if="event.all_day == 'false'">{{ 'from_time_to_time' | translate:{START:(event.start | amDateFormat:'LT'), END:(event.end | amDateFormat:'LT')} }}</span>
           </p>
-          <p>
+          <p ng-if="event.nb_total_places > 0">
             <i class="fa fa-user red"></i>
             <span ng-if="event.nb_free_places > 0">{{ 'still_available' | translate }} {{event.nb_free_places}}</span>
             <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
             <span ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'event_full' }}</span>
           </p>
-          <p>
+          <p ng-if="event.amount > -1">
             <i class="fa fa-bookmark red"></i>
             <span ng-if="event.amount == 0" translate>{{ 'free_admission' }}</span>
             <span ng-if="event.amount > 0">{{ 'full_price' | translate }} {{event.amount | currency}}</span>

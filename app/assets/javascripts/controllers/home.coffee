@@ -31,7 +31,7 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
   # @returns {boolean} false if the event runs on more that 1 day
   ##
   $scope.isOneDayEvent = (event) ->
-    moment(event.start_date).isSame(event.end_date, 'day')
+    moment(event.start).isSame(event.end, 'day')
 
   $scope.calendarConfig = CalendarConfig
     defaultView: 'week',
@@ -47,32 +47,48 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
 
-  $scope.trainingEvents =
-    events: [],
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    color: "black"
-
-  $scope.workshopEvents =
-    events: [],
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    color: "black"
-
   $scope.adjustEventFields = (event) ->
     event.start = event.start_date
     event.end = event.end_date
     event.url = null
-    if event.category.name == "Training"
-      event.colorClass = "success"
-      $scope.trainingEvents.events.push(event)
-    else
-      event.colorClass = "info"
-      $scope.workshopEvents.events.push(event)
+    event.colorClass = "info"
+    event.containerId = "event-" + event.id
+    event.type = "event"
+
+  $scope.trainingEvents = []
+
+  $scope.adjustTrainingFields = (event) ->
+    training = {}
+    training.colorClass = "success"
+    training.category = {}
+    training.category.name = "Workshop"
+    training.title = event.name
+    training.type = "training"
+    for availability in event.availabilities
+      training.start = availability.start_at
+      training.end = availability.end_at
+      training.all_day = $scope.isOneDayEvent(training)
+      training.id = availability.id
+      training.containerId = "training-" + event.id + "-" + availability.id
+      training.nb_total_places = availability.nb_total_places
+      training.nb_free_spaces = availability.nb_free_spaces
+      training.amount = availability.amount
+      $scope.trainingEvents.push(Object.assign({}, training))
 
   $scope.adjustEventFields(event) for event in $scope.upcomingEvents
+  $scope.adjustTrainingFields(event) for event in $scope.upcomingTrainings
 
-  $scope.eventSources = [$scope.trainingEvents, $scope.workshopEvents]
+  $scope.calendarEvents = $scope.upcomingEvents.concat($scope.trainingEvents)
+
+  console.log($scope.calendarEvents)
+
+  $scope.source =
+    events: $scope.calendarEvents,
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    color: "black"
+
+  $scope.eventSources = [$scope.source]
 
   ### PRIVATE SCOPE ###
 
@@ -85,7 +101,7 @@ Application.Controllers.controller "HomeController", ['$scope', '$stateParams', 
 
   ## custom event display
   eventRenderCb = (event, element) ->
-    element.find('.fc-content').html($('#event-card-'+event.id).clone())
+    element.find('.fc-content').html($('#event-card-'+event.containerId).clone())
     return
 
   ##
