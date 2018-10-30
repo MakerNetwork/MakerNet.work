@@ -67,12 +67,12 @@
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
                 <a href="#" ui-sref="app.logged.dashboard.events">
-                    <i class="fa fa-calendar-o"></i> <span translate>{{ 'my_events' }}</span>
+                    <i class="fa fa-calendar"></i> <span translate>{{ 'my_events' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg"  ng-if-end>
                 <a href="#" ui-sref="app.logged.dashboard.invoices">
-                    <i class="fa fa-file-pdf-o"></i> <span translate>{{ 'my_invoices' }}</span>
+                    <i class="fas fa-file-invoice"></i> <span translate>{{ 'my_invoices' }}</span>
                 </a>
             </li>
             <!-- Common menu entries -->
@@ -90,8 +90,8 @@
 
     <footer class="footer hidden-xs no-padder text-center-nav-xs">
       <a data-link="#nav" data-toggle="class:nav-xs" class="btn btn-theme btn-block no-b btn-icon icon-muted btn-inactive no-radius wrapper" ng-click="toggleNavSize($event)">
-        <i class="fa fa-long-arrow-left text"></i> <span class="text text-sm" translate>{{ 'reduce_panel' }}</span>
-        <i class="fa fa-long-arrow-right text-active"></i>
+        <i class="fas fa-long-arrow-alt-left text"></i> <span class="text text-sm" translate>{{ 'reduce_panel' }}</span>
+        <i class="fas fa-long-arrow-alt-right text-active"></i>
       </a>
     </footer>
   </section>

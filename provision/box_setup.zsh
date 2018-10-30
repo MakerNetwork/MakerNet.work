@@ -21,6 +21,29 @@ set_user_config() {
 }
 
 ###
+# Tune-up the system settings
+system_tuning()
+{
+  echo "Tunning up the system"
+
+  sudo echo -e "\n## Redis tune-up" >> /etc/sysctl.conf
+  sudo echo '# Allow background save on low memory conditions' >> /etc/sysctl.conf
+  sudo echo -e "vm.overcommit_memory = 1\n" >> /etc/sysctl.conf
+
+  sudo touch /etc/rc.local
+  sudo echo '## Redis tune-up' >> /etc/rc.local
+  sudo echo '# Reduce latency and memory usage' >> /etc/rc.local
+  sudo echo 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' >> /etc/rc.local
+  sudo echo -e "\n\n"
+  sudo echo -e "exit 0\n" >> /etc/rc.local
+  sudo chmod +x /etc/rc.local
+
+  sudo echo -e "\n## ElasticSearch tune-up" >> /etc/sysctl.conf
+  sudo echo '# Increase max virtual memory areas' >> /etc/sysctl.conf
+  sudo echo -e "vm.max_map_count = 262144\n" >> /etc/sysctl.conf
+}
+
+###
 # Install Ruby Version Manager
 install_rvm() {
   echo 'Installing RVM'
@@ -121,12 +144,11 @@ install_elasticsearch() {
   echo "Installing Oracle Java 8 and ElasticSearch"
   sudo apt-get install -y openjdk-8-jre apt-transport-https
   wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-  echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+  echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
   sudo apt-get update && sudo apt-get install -y elasticsearch
 
   # This configuration limits ElasticSearch memory use inside the virtual machine
   sudo bash -c "echo 'node.master: true' >> /etc/elasticsearch/elasticsearch.yml"
-  sudo bash -c "echo 'node.data: false' >> /etc/elasticsearch/elasticsearch.yml"
   sudo sed -i 's/#bootstrap.memory_lock: true/bootstrap.memory_lock: true/g' /etc/elasticsearch/elasticsearch.yml
   sudo sed -i 's/#ES_JAVA_OPTS=/ES_JAVA_OPTS="-Xms256m -Xmx256m"/g' /etc/default/elasticsearch
 
@@ -169,6 +191,7 @@ clean_up() {
 
 setup() {
   set_user_config
+  system_tunning
   install_nvm
   install_nodejs
   install_rvm

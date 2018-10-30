@@ -212,9 +212,9 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   # @param sex {string} 'male' | 'female'
   ##
   $scope.formatSex = (sex) ->
-    if sex == 'male'
+    if sex == 'man'
       return _t('man')
-    if sex == 'female'
+    if sex == 'woman'
       return _t('woman')
     if sex == 'non-binary'
       return _t('non-binary')

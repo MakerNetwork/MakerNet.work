@@ -2,7 +2,7 @@
   <div class="row no-gutter">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
@@ -38,10 +38,10 @@
          uib-popover="{{ 'admin_calendar.availabilities_notice' | translate}}"
          popover-trigger="mouseenter"
          popover-placement="bottom">
-        <i class="fa fa-file-excel-o"></i> {{ 'admin_calendar.availabilities' | translate }}
+        <i class="fas fa-file-excel"></i> {{ 'admin_calendar.availabilities' | translate }}
       </a>
       <iframe name="export-frame" height="0" width="0" class="none"></iframe>
-      <a class="btn btn-default" ng-click="addSlot()"><i class="fa fa-plus"></i> {{ 'admin_calendar.add_slot' | translate }}</a>
+      <a class="btn btn-warning" ng-click="addSlot()"><i class="fa fa-plus"></i> {{ 'admin_calendar.add_slot' | translate }}</a>
     </div>
 
     <div class="widget panel b-a m m-t-lg" ng-if="availability">
@@ -93,7 +93,7 @@
         </button>
         <button class="btn btn-default m-t" ng-click="removeSlot()">
           <span>
-            <i class="fa fa-trash" />
+            <i class="fas fa-trash" />
             <span class="m-l-xs" translate>{{ 'admin_calendar.delete_slot' }}</span>
           </span>
         </button>

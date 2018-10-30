@@ -60,7 +60,7 @@ define([
       },
 
       buttons: {},
-      
+
       lang: 'en-US',
 
       // toolbar
@@ -247,7 +247,7 @@ define([
         'minus': 'fa fa-minus',
         'orderedlist': 'fa fa-list-ol',
         'pencil': 'fa fa-pencil',
-        'picture': 'fa fa-picture-o',
+        'picture': 'fas fa-image',
         'question': 'fa fa-question',
         'redo': 'fa fa-repeat',
         'square': 'fa fa-square',
@@ -256,11 +256,11 @@ define([
         'superscript': 'fa fa-superscript',
         'table': 'fa fa-table',
         'textHeight': 'fa fa-text-height',
-        'trash': 'fa fa-trash',
+        'trash': 'fas fa-trash',
         'underline': 'fa fa-underline',
         'undo': 'fa fa-undo',
         'unorderedlist': 'fa fa-list-ul',
-        'video': 'fa fa-youtube-play'
+        'video': 'fab fa-youtube'
       }
     }
   });

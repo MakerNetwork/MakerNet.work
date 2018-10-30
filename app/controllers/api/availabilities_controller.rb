@@ -1,5 +1,6 @@
 class API::AvailabilitiesController < API::ApiController
   include FablabConfiguration
+  include AvailabilitiesConcern
 
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: [:show, :update, :destroy, :reservations, :lock]
@@ -154,6 +155,7 @@ class API::AvailabilitiesController < API::ApiController
                             .where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
                             .where(lock: false)
     end
+
     @availabilities.each do |a|
       ((a.end_at - a.start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
@@ -332,7 +334,8 @@ class API::AvailabilitiesController < API::ApiController
     end
 
     def verify_machine_is_reserved(slot, reservations, user, user_role)
-      show_name = (user_role == 'admin' or Setting.find_by(name: 'display_name_enable').value == 'true')
+      show_name = display_reservation_user_name?(user_role)
+
       reservations.each do |r|
         r.slots.each do |s|
           if slot.machine.id == r.reservable_id
@@ -351,6 +354,7 @@ class API::AvailabilitiesController < API::ApiController
           end
         end
       end
+
       slot
     end
 

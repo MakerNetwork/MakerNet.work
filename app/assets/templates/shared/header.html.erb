@@ -49,7 +49,7 @@
     <% active_provider = AuthProvider.active %>
     <% if active_provider.providable_type == DatabaseProvider.name %>
       <li ng-if="!isAuthenticated()">
-        <a href="#" class="font-sbold text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a>
+        <a href class="font-sbold text-md" ui-sref="app.public.signup"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a>
       </li>
       <li ng-if="!isAuthenticated()">
         <a href="#" class="font-sbold text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
