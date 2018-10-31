@@ -262,7 +262,18 @@
         </div>
         <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
       </div>
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][member_id]'].$dirty && userForm['user[profile_attributes][member_id]'].$invalid}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-id-card "></i></span>
+              <input type="text"
+                     name="user[profile_attributes][member_id]"
+                     ng-model="user.profile.member_id"
+                     class="form-control" 
+                     id="user_email"                    
+                     placeholder="{{ 'your_member_id' | translate }}">
 
+            </div>
+      </div>
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
