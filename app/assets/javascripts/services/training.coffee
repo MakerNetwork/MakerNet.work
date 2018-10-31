@@ -8,4 +8,9 @@ Application.Services.factory 'Training', ["$resource", ($resource)->
     availabilities:
       method: 'GET'
       url: "/api/trainings/:id/availabilities"
+    upcoming:
+      method: 'GET'
+      url: '/api/trainings/upcoming/:limit'
+      params: {limit: "@limit"}
+      isArray: true
 ]
