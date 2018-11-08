@@ -35,19 +35,27 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
 
-          <div class="col-sm-6" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
+          <div class="col-sm-12">
+             <div class="input-group">
+               <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
             <input type="text"
                    name="first_name"
                    ng-model="user.profile_attributes.first_name"
                    class="form-control"
                    placeholder="{{ 'your_first_name' | translate }}"
-                   required>
-            <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
+                   required>  
+                   <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>       
           </div>
-          <div class="m-b visible-xs"></div>
-          <div class="col-sm-6" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
+          </div>
+         </div>
+          <div class="form-group" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
+          <div class="col-sm-12">
+             <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
             <input type="text"
                    name="last_name"
                    ng-model="user.profile_attributes.last_name"
@@ -56,12 +64,14 @@
                    required>
             <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
           </div>
+          </div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': signupForm.username.$dirty && signupForm.username.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            </span>
               <input type="text"
                      name="username"
                      ng-model="user.username"
@@ -75,7 +85,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <span class="input-group-addon"><i class="fa fa-envelope"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
               <input type="email"
                      name="email"
                      ng-model="user.email"
@@ -125,7 +135,10 @@
 
         <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
           <div class="col-sm-12">
-            <div>
+              
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
               <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
                 <option value="" translate>{{ 'your_user_s_profile' }}</option>
               </select>
@@ -137,7 +150,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.birthday.$dirty && signupForm.birthday.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-birthday-cake"></i> </span>
+              <span class="input-group-addon"><i class="fa fa-birthday-cake"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span> </span>
               <input type="text"
                      class="form-control"
                      name="birthday"
@@ -156,7 +169,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.phone.$dirty && signupForm.phone.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+              <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span> </span>
               <input  class="form-control"
                       ng-pattern="phoneNumbr"
 
