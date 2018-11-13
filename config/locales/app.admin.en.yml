@@ -63,6 +63,7 @@ en:
           do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
           cancelled: "Cancelled"
           add_slot: "Add slot"
+          edit_slot: "Edit this slot"
 
       project_elements:
         # management of the projects' components
