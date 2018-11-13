@@ -44,7 +44,10 @@
   </div>
 
   <div ng-show="availability.available_type == 'training'">
-    <select ng-model="selectedTraining" class="form-control m-t-sm" ng-options="t.name for t in trainings" ng-change="setNbTotalPlaces()">
+    <!--select ng-model="selectedTraining" class="form-control m-t-sm" ng-options="t.name for t in trainings" ng-change="setNbTotalPlaces()">
+    </select-->
+    <select ng-model="selectedTraining" class="form-control m-t-sm" ng-change="setNbTotalPlaces()">
+      <option ng-repeat="t in trainings" ng-value="t" ng-selected="t.id == selectedTraining.id">{{t.name}}</option>
     </select>
     <div class="row m-t">
       <div class="form-group">
