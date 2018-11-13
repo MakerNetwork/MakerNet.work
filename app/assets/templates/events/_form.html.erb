@@ -8,7 +8,6 @@
       <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
       <input name="_method" type="hidden" ng-value="method">
-
       <div class="form-group" ng-class="{'has-error': eventForm['event[title]'].$dirty && eventForm['event[title]'].$invalid}">
         <label for="event_title" class="col-sm-3 control-label">{{ 'title' | translate }} *</label>
         <div class="col-sm-9">
@@ -16,8 +15,6 @@
           <span class="help-block" ng-show="eventForm['event[title]'].$dirty && eventForm['event[title]'].$error.required" translate>{{ 'title_is_required' }}</span>
         </div>
       </div>
-
-
       <div class="form-group">
         <label for="event_image" class="col-sm-3 control-label" translate>{{ 'matching_visual' }}</label>
         <div class="col-sm-9">
@@ -36,7 +33,6 @@
           </div>
         </div>
       </div>
-
       <div class="form-group" ng-class="{'has-error': eventForm['event[description]'].$dirty && eventForm['event[description]'].$invalid}">
         <label for="description" class="col-sm-3 control-label">{{ 'description' | translate }} *</label>
         <div class="col-sm-9">
@@ -53,7 +49,6 @@
           <span class="help-block" ng-show="eventForm['event[description]'].$dirty && eventForm['event[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
         </div>
       </div>
-
       <div class="form-group">
         <label class="col-sm-3 control-label" translate>{{ 'attachments' }}</label>
         <div class="col-sm-9">
@@ -77,19 +72,13 @@
 
 
     </div>   <!-- ./panel-body  -->
-    <div class="panel-footer no-padder">
-      <input type="submit"
-		     ng-value="submitName"
-			 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
-			 ng-disabled="eventForm.$invalid || event.category_id === null"/>
-    </div>
-    </section>
 
+    </section>
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-4">
 
-
+<section>
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
         <h3 translate>{{ 'event_type' }} *</h3>
@@ -210,7 +199,7 @@
         </div>
 
         <div ng-if="method == 'post'" class="m-b">
-          <label translate>{{ 'recurrence' }}</label>
+          <label translate>{{ 'recurrence' }}*</label>
           <select ng-model="event.recurrence" class="form-control" name="event[recurrence]">
             <option value="{{t.value}}" ng-repeat="t in recurrenceTypes">{{t.label}}</option>
           </select>
@@ -240,7 +229,7 @@
       </div>
       <div class="widget-content no-bg wrapper">
         <div class="form-group">
-          <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'standard_rate' }}</label>
+          <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'standard_rate' }}*</label>
           <div class="col-sm-5">
             <div class="input-group">
               <input ng-model="event.amount" type="number" name="event[amount]" class="form-control" id="event_amount" required>
@@ -288,5 +277,13 @@
         </div>
       </div>
     </div>
-  </div>
+    </section>
+     <div class="panel-footer no-padder">
+      <input type="submit"
+         ng-value="submitName"
+       class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+       ng-disabled="eventForm.$invalid || event.category_id === null"/>
+    </div>
+  </div>    
 </div>
+    
