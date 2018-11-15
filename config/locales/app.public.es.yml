@@ -61,6 +61,7 @@ es:
         surname_is_required: "El apellido es obligatorio."
         your_pseudonym: "Su seudónimo"
         pseudonym_is_required: "El seudónimo es obligatorio."
+        your_member_id: "Student / Member ID"
         your_email_address: "Su e-mail"
         email_is_required: "El e-mail es obligatorio."
         your_password: "Su contraseña"

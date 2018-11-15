@@ -23,12 +23,12 @@
             <!-- Disconnected user menu for small devices -->
             <li class="hidden-sm hidden-md hidden-lg" ng-if-start="!isAuthenticated()">
               <a href="#" class="auto" ng-click="signup($event)">
-                  <i class="fa fa-rocket"></i> <span translate>{{ 'sign_up' }}</span>
+                  <i class="fas fa-user-plus"></i> <span translate>{{ 'sign_up' }}</span>
               </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" ng-if-end>
               <a href="#" class="auto" ng-click="login($event)">
-                  <i class="fa fa-sign-in"></i> <span translate>{{ 'sign_in' }}</span>
+                  <i class="fas fa-sign-in-alt"></i> <span translate>{{ 'sign_in' }}</span>
               </a>
             </li>
             <!-- Connected user menu for small devices -->

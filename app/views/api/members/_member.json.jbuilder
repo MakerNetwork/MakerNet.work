@@ -11,6 +11,7 @@ json.profile do
   json.first_name member.profile.first_name
   json.last_name member.profile.last_name
   json.gender member.profile.gender.to_s
+  json.member_id member.profile.member_id.to_s
   json.birthday member.profile.birthday.to_date.iso8601 if member.profile.birthday
   json.interest member.profile.interest
   json.software_mastered member.profile.software_mastered
