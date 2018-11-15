@@ -446,7 +446,8 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     $scope.availability.start_at = $scope.availability.start
     $scope.availability.end_at = $scope.availability.end
     if ($scope.availability.id)
-      relationsObj = {}
+      relationsObj =
+        tag_ids = $scope.availability.tag_ids
       if $scope.availability.available_type == 'machines'
         relationsObj =
           machine_ids: $scope.availability.machine_ids
