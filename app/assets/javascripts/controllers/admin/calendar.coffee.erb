@@ -291,7 +291,6 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
     $scope.availability = event
-    console.log($scope.availability)
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
       $scope.removeSlot()
@@ -385,7 +384,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       mstep: 5
     end:
       hstep: 1
-      mstep: 5
+      mstep: 5  
 
   ## datepicker configuration
   $scope.datepickerConfig =
@@ -403,35 +402,32 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       $scope.selectedMachines.splice(index, 1)
     else
       $scope.selectedMachines.push(machine)
-    console.log($scope.selectedMachines)
 
   $scope.isChecked = (machine) ->
     if $scope.selectedMachines.indexOf(machine) > -1
       return true
 
-
-  ## slot details
-  $scope.availability =
-    start: start
-    end: end
-    available_type: 'machines' # default
-
-
   ## replace with availability from params if supplied
   if availability
     $scope.availability = availability
-    if availability.machine_ids.length > 0
+    if availability.available_type == 'machines'
       for mid in $scope.availability.machine_ids
         for machine in $scope.machines
           if machine.id == mid
             $scope.toggleSelection(machine)
-    if availability.training_ids.length > 0
+    else if availability.available_type == 'training'
       for training in $scope.trainings
         if training.id == availability.training_ids[0]
           $scope.selectedTraining = training
-      console.log($scope.selectedTraining)
-  
-  console.log($scope.selectedTraining)
+    else if availability.available_type == 'space'
+      for space in $scope.spaces
+        if space.id == availability.space_ids[0]
+          $scope.selectedSpace = space
+  else
+    $scope.availability =
+      start: start
+      end: end
+      available_type: 'machines' # default
 
   ##
   # Callback for the modal window validation: save the slot and closes the modal
@@ -445,21 +441,32 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
         return
     else if $scope.availability.available_type == 'training'
       $scope.availability.training_ids = [$scope.selectedTraining.id]
-      $scope.availability.title = $scope.selectedTraining.name
     else if $scope.availability.available_type == 'space'
       $scope.availability.space_ids = [$scope.selectedSpace.id]
     $scope.availability.start_at = $scope.availability.start
     $scope.availability.end_at = $scope.availability.end
-    console.log($scope.availability)
     if ($scope.availability.id)
-      Availability.update {id: $scope.availability.id}, $scope.availability
+      relationsObj = {}
+      if $scope.availability.available_type == 'machines'
+        relationsObj =
+          machine_ids: $scope.availability.machine_ids
+          training_ids: []
+          space_ids: []
+      else if $scope.availability.available_type == 'training'
+        relationsObj =
+          machine_ids: []
+          training_ids: $scope.availability.training_ids
+          space_ids: []
+      else if $scope.availability.available_type == 'space'
+        relationsObj =
+          machine_ids: []
+          training_ids: []
+          space_ids: $scope.availability.space_ids
+      Availability.update {id: $scope.availability.id}, {availability: relationsObj}
+      , ->
+        Availability.update {id: $scope.availability.id}, $scope.availability
         , (availability) ->
-          if $scope.availability.available_type == 'machines'
-            Availability.update {id: $scope.availability.id}, {availability: {machines_attributes: $scope.availability.machine_ids}}
-            , ->
-              $uibModalInstance.close(availability)
-          else
-            $uibModalInstance.close(availability)
+          $uibModalInstance.close(availability)
     else  
       Availability.save
         availability: $scope.availability
@@ -474,7 +481,6 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.next = ->
     $scope.setNbTotalPlaces() if $scope.step == 1
     if $scope.step == 2
-      console.log($scope.availability.start)
       if $scope.availability.start == null
         today = moment.tz(new Date(), Fablab.timezone)
         $scope.availability.start = today.startOf('hour').add(1, 'h').clone()
@@ -503,10 +509,11 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # For training avaiabilities, set the maximum number of people allowed to register on this slot
   ##
   $scope.setNbTotalPlaces = ->
-    if $scope.availability.available_type == 'training'
-      $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
-    else if $scope.availability.available_type == 'space'
-      $scope.availability.nb_total_places = $scope.selectedSpace.default_places
+    if !$scope.availability.nb_total_places
+      if $scope.availability.available_type == 'training'
+        $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
+      else if $scope.availability.available_type == 'space'
+        $scope.availability.nb_total_places = $scope.selectedSpace.default_places
 
 
   ### PRIVATE SCOPE ###
@@ -515,9 +522,9 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    if $scope.trainings.length > 0
+    if $scope.trainings.length > 0 && !$scope.selectedTraining
       $scope.selectedTraining = $scope.trainings[0]
-    if $scope.spaces.length > 0
+    if $scope.spaces.length > 0 && !$scope.selectedSpace
       $scope.selectedSpace = $scope.spaces[0]
 
     Tag.query().$promise.then (data) ->
