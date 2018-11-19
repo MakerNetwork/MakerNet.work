@@ -538,6 +538,30 @@ body.container{
             box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
 }
 
+.msg-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #31708f;
+}
+
+.msg-warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}
+
+.msg-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.msg-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+
 // profile edition -- add a social network buttons
 .social-icons {
   & > div {
