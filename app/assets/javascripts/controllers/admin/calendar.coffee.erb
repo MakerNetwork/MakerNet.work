@@ -191,9 +191,9 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           $scope.availability = null
         ,->
           growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
-  
+
   ##
-  # Add 'seleceted' class to slot element
+  # Add 'selected' class to slot element
   ##
   $scope.selectEvent = (jsEvent) ->
     $(".fc-event.selected").removeClass("selected")
@@ -284,7 +284,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     start = moment.tz(date.toISOString(), Fablab.timezone)
     end = moment.tz(date.toISOString(), Fablab.timezone).add(1, "h")
     $scope.triggerEventModal(null, start, end)
-  
+
   ##
   # Triggered when the admin clicks on a availability slot in the agenda.
   # @see http://fullcalendar.io/docs/mouse/eventClick/
@@ -384,7 +384,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       mstep: 5
     end:
       hstep: 1
-      mstep: 5  
+      mstep: 5
 
   ## datepicker configuration
   $scope.datepickerConfig =
@@ -468,7 +468,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
         Availability.update {id: $scope.availability.id}, $scope.availability
         , (availability) ->
           $uibModalInstance.close(availability)
-    else  
+    else
       Availability.save
         availability: $scope.availability
         , (availability) ->
