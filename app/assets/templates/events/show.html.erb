@@ -148,7 +148,7 @@
             <a class="pull-right m-t-xs text-u-l ng-scope" href="#" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'cancel' }}</a>
           </div>
 
-          <div ng-if="reserveSuccess" class="alert alert-success">{{ 'thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+          <div ng-if="reserveSuccess" class="msg msg-success">{{ 'thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
             {{ 'you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a>
           </div>
           <div class="well well-warning m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
