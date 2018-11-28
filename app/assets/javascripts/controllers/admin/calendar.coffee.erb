@@ -453,21 +453,27 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
           machine_ids: $scope.availability.machine_ids
           training_ids: []
           space_ids: []
-      else if $scope.availability.available_type == 'training'
-        relationsObj =
-          machine_ids: []
-          training_ids: $scope.availability.training_ids
-          space_ids: []
-      else if $scope.availability.available_type == 'space'
-        relationsObj =
-          machine_ids: []
-          training_ids: []
-          space_ids: $scope.availability.space_ids
-      Availability.update {id: $scope.availability.id}, {availability: relationsObj}
-      , ->
+        Availability.update {id: $scope.availability.id}, {availability: relationsObj}
+        , ->
+          Availability.update {id: $scope.availability.id}, $scope.availability
+          , (availability) ->
+            $uibModalInstance.close(availability)
+      else 
+        if $scope.availability.available_type == 'training'
+          relationsObj =
+            machine_ids: []
+            training_ids: $scope.availability.training_ids
+            space_ids: []
+        if $scope.availability.available_type == 'space'
+          relationsObj =
+            machine_ids: []
+            training_ids: []
+            space_ids: $scope.availability.space_ids
         Availability.update {id: $scope.availability.id}, $scope.availability
-        , (availability) ->
-          $uibModalInstance.close(availability)
+        , ->
+          Availability.update {id: $scope.availability.id}, {availability: relationsObj}
+          , (availability) ->
+            $uibModalInstance.close(availability)
     else
       Availability.save
         availability: $scope.availability
