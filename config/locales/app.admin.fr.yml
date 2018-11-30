@@ -47,6 +47,7 @@ fr:
           the_slot_START-END_has_been_successfully_deleted: "Le créneau {{START}} - {{END}} a bien été supprimé"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Le créneau {{START}} - {{END}} n'a pu être supprimé car il est déjà réservé par un membre"  # angular interpolation
           you_should_select_at_least_a_machine: "Vous devriez sélectionner au moins une machine pour ce créneau."
+          the_start_time_must_be_less_than_the_end_time: "L'heure de début doit être inférieure à l'heure de fin."
           export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
           actions: "Actions"
           block_reservations: "Bloquer les réservations"

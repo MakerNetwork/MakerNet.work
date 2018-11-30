@@ -448,9 +448,15 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       $scope.availability.title = $scope.selectedTraining.name
     else if $scope.availability.available_type == 'space'
       $scope.availability.space_ids = [$scope.selectedSpace.id]
-    $scope.availability.start_at = $scope.availability.start
-    $scope.availability.end_at = $scope.availability.end
-    console.log($scope.availability)
+
+    if $scope.availability.start < $scope.availability.end
+      $scope.availability.start_at = $scope.availability.start
+      $scope.availability.end_at = $scope.availability.end
+      console.log($scope.availability)
+    else
+      growl.error(_t('admin_calendar.the_start_time_must_be_less_than_the_end_time'))
+      return
+
     if ($scope.availability.id)
       Availability.update {id: $scope.availability.id}, $scope.availability
         , (availability) ->
