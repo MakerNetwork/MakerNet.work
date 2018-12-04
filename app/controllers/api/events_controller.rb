@@ -28,7 +28,7 @@ class API::EventsController < API::ApiController
     @events = @events.page(@page).per(12)
   end
 
-  # GET /events/upcoming/:limit
+  # GET api/events/upcoming
   def upcoming
     today = Time.now.to_date
     start_of_current_week = today.beginning_of_week
