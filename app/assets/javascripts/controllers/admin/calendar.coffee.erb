@@ -282,7 +282,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   ##
   calendarDayClickCb = (date, jsEvent, view) ->
     start = moment.tz(date.toISOString(), Fablab.timezone)
-    end = moment.tz(date.toISOString(), Fablab.timezone).add(1, "h")
+    end = moment.tz(date.toISOString(), Fablab.timezone).add(30, "m")
     $scope.triggerEventModal(null, start, end)
 
   ##
@@ -381,10 +381,10 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.timepickers =
     start:
       hstep: 1
-      mstep: 5
+      mstep: 30
     end:
       hstep: 1
-      mstep: 5
+      mstep: 30
 
   ## datepicker configuration
   $scope.datepickerConfig =
@@ -443,8 +443,14 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       $scope.availability.training_ids = [$scope.selectedTraining.id]
     else if $scope.availability.available_type == 'space'
       $scope.availability.space_ids = [$scope.selectedSpace.id]
-    $scope.availability.start_at = $scope.availability.start
-    $scope.availability.end_at = $scope.availability.end
+
+    if $scope.availability.start < $scope.availability.end
+      $scope.availability.start_at = $scope.availability.start
+      $scope.availability.end_at = $scope.availability.end
+    else
+      growl.error(_t('admin_calendar.the_start_time_must_be_less_than_the_end_time'))
+      return
+
     if ($scope.availability.id)
       relationsObj =
         tag_ids = $scope.availability.tag_ids
@@ -458,7 +464,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
           Availability.update {id: $scope.availability.id}, $scope.availability
           , (availability) ->
             $uibModalInstance.close(availability)
-      else 
+      else
         if $scope.availability.available_type == 'training'
           relationsObj =
             machine_ids: []
@@ -491,7 +497,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       if $scope.availability.start == null
         today = moment.tz(new Date(), Fablab.timezone)
         $scope.availability.start = today.startOf('hour').add(1, 'h').clone()
-        $scope.availability.end = today.add(1, 'h').clone()
+        $scope.availability.end = today.add(30, 'm').clone()
     $scope.step++
 
 
