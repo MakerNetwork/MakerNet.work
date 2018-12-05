@@ -122,14 +122,15 @@
         </div>
 
 
-
         <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
-          <div class="col-sm-12">
-            <div>
-              <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
-                <option value="" translate>{{ 'your_user_s_profile' }}</option>
-              </select>
-            </div>
+          <div class="colsm-12">
+            <!--label for="user_group_id" class="control-label">
+              <span translate>{{ 'your_user_s_profile' }}</span>
+              <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            </label-->
+            <label class="checkbox-inline" ng-repeat="g in groups">
+              <input type="radio" ng-model="user.group_id" ng-value="g.id"> {{ g.name }}
+            </label>
             <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
           </div>
         </div>

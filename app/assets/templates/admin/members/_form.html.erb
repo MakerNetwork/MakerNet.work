@@ -4,11 +4,12 @@
     <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
   </label>
   <div class="col-sm-9">
-    <select ng-model="user.group_id" ng-disabled="user.subscribed_plan" class="form-control" name="user[group_id]" id="user_group_id" ng-options="g.id as g.name for g in groups" required>
-    </select>
-    <input type="hidden" name="user[group_id]" ng-value="user.group_id" />
-    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'group_is_required' }}</span>
+    <label class="checkbox" ng-repeat="g in groups">
+      <input type="radio" ng-model="user.group_id" ng-value="g.id" ng-disabled="user.subscribed_plan"> {{ g.name }}
+    </label>
   </div>
+  <input type="hidden" name="user[group_id]" ng-value="user.group_id" />
+  <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'group_is_required' }}</span>
 </div>
 
 
