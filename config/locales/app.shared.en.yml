@@ -204,6 +204,8 @@ en:
         standard_rate: "Standard rate"
         add_a_rate: "Add rate"
         0_=_free: "0 = free"
+        rate_is_required: "Rate is required"
+        date_is_required: "Date is required"
         tickets_available: "Tickets available"
         event_theme: "Event theme"
         age_range: "Age range"
