@@ -392,6 +392,52 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     startingDay: 1
     showWeeks: false
 
+  ## default parameters for AngularUI-Bootstrap datepicker
+  $scope.datePicker =
+  format: Fablab.uibDateFormat
+  startOpened: false # default: datePicker is not shown
+  endOpened: false
+  recurrenceEndOpened: false
+  options:
+    startingDay: Fablab.weekStartingDay
+
+  ## Possible types of recurrences for an event
+  $scope.recurrenceTypes = [
+    {label: _t('none'), value: 'none'},
+    {label: _t('every_days'), value: 'day'},
+    {label: _t('every_week'), value: 'week'},
+    {label: _t('every_month'), value: 'month'},
+    {label: _t('every_year'), value: 'year'}
+  ]
+
+  ##
+  # Show/Hide the "start" datepicker (open the drop down/close it)
+  ##
+  $scope.toggleStartDatePicker = ($event) ->
+    $event.preventDefault()
+    $event.stopPropagation()
+    $scope.datePicker.startOpened = !$scope.datePicker.startOpened
+
+
+
+  ##
+  # Show/Hide the "end" datepicker (open the drop down/close it)
+  ##
+  $scope.toggleEndDatePicker = ($event) ->
+    $event.preventDefault()
+    $event.stopPropagation()
+    $scope.datePicker.endOpened = !$scope.datePicker.endOpened
+
+
+
+  ##
+  # Masks/displays the recurrence pane allowing the admin to set the current event as recursive
+  ##
+  $scope.toggleRecurrenceEnd = (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    $scope.datePicker.recurrenceEndOpened = !$scope.datePicker.recurrenceEndOpened
+
   ##
   # Adds or removes the provided machine from the current slot
   # @param machine {Object}

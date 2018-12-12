@@ -73,6 +73,80 @@
   <div id="timeAdjust" class="m-t-sm">
       <p class="text-center font-sbold" translate>{{ 'admin_calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
+        <div class="col-md-6">
+          <label translate>{{ 'start_date' }}</label>
+          <div class="input-group">
+            <input type="hidden" ng-value="availability.start">
+            <input type="text"
+                   class="form-control"
+                   ng-model="availability.start"
+                   uib-datepicker-popup="{{datePicker.format}}"
+                   datepicker-options="datePicker.options"
+                   is-open="datePicker.startOpened"
+                   ng-click="toggleStartDatePicker($event)"
+                   required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="toggleStartDatePicker($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+          </div>
+          <label translate>{{ 'start_time' }}</label>
+          <div>
+            <input type="hidden" ng-value="availability.start">
+            <uib-timepicker ng-model="availability.start" mousewheel="false" hour-step="timepickers.start.hstep" minute-step="timepickers.start.mstep" show-meridian="ismeridian"></uib-timepicker>
+          </div>
+        </div><!--col-md-6-->
+        <div class="col-md-6">
+          <label translate>{{ 'end_date' }}</label>
+          <div class="input-group">
+            <input type="hidden" ng-value="availability.end">
+            <input type="text"
+                   class="form-control"
+                   ng-model="availability.end"
+                   uib-datepicker-popup="{{datePicker.format}}"
+                   datepicker-options="datePicker.options"
+                   is-open="datePicker.endOpened"
+                   ng-click="toggleEndDatePicker($event)"
+                   required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="toggleEndDatePicker($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+          </div>
+          <label translate>{{ 'end_time' }}</label>
+            <div>
+              <input type="hidden" ng-value="availability.end">
+              <uib-timepicker ng-model="availability.end" mousewheel="false" hour-step="timepickers.end.hstep" minute-step="timepickers.end.mstep" show-meridian="ismeridian"></uib-timepicker>
+            </div>
+        </div><!--col-md-6-->
+      </div><!--row-->
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <label translate>{{ 'recurrence' }}</label>
+          <select ng-model="availability.recurrence" class="form-control">
+            <option value="{{t.value}}" ng-repeat="t in recurrenceTypes">{{t.label}}</option>
+          </select>
+        </div><!--col-md-6-->
+        <div class="col-md-6">
+          <div ng-if="availability.recurrence != 'none'">
+            {{ '_and_ends_on' | translate }}
+            <div class="input-group">
+              <input type="hidden" ng-value="availability.recurrence_end_at">
+              <input type="text"
+                     class="form-control"
+                     uib-datepicker-popup="{{datePicker.format}}"
+                     datepicker-options="datePicker.options"
+                     ng-model="availability.recurrence_end_at"
+                     is-open="datePicker.recurrenceEndOpened"
+                     ng-required="true"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="toggleRecurrenceEnd($event)"><i class="fa fa-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div><!--col-md-6-->
+      </div><!--row-->
+
+      <!--div class="row">
         <div class="col-md-6 datepicker-wrapper">
           <div uib-datepicker ng-model="availability.start" min-date="datepickerConfig.minDate" starting-day="datepickerConfig.startingDay" show-weeks="datepickerConfig.showWeeks"></div>
         </div>
@@ -88,7 +162,7 @@
           <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
               <uib-timepicker ng-model="availability.end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
           </fieldset>
-      </div>
+      </div-->
   </div>
   <div id="tagAssociate" class="m-t-lg">
       <p class="text-center font-sbold" translate>{{ 'admin_calendar.restrict_this_slot_with_labels_(optional)' }}</p>
