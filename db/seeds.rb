@@ -175,8 +175,9 @@ end
 
 if Category.count == 0
   Category.create!([
-    {name: 'Training'},
-    {name: 'Workshop'}
+    {name: 'Meetup'},
+    {name: 'Faire'},
+    {name: 'Open Day'},
   ])
 end
 
