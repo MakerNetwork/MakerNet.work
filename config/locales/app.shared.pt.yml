@@ -202,6 +202,7 @@ pt:
         prices_and_availabilities: "Preços e disponibilidades"
         standard_rate: "Taxa padrão"
         0_=_free: "0 = grátis"
+        0_=_non_bookable: "0 = evento não reservado"
         tickets_available: "Tickets disponíveis"
         event_theme: "Tema do evento"
         age_range: "Faixa etária"

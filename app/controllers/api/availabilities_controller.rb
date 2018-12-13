@@ -11,8 +11,10 @@ class API::AvailabilitiesController < API::ApiController
     authorize Availability
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces).where.not(available_type: 'event')
-                                  .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+
+    @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
+      .where.not(available_type: 'event')
+      .where('start_at >= ? AND end_at <= ?', start_date, end_date)
 
     if fablab_spaces_deactivated?
       @availabilities = @availabilities.where.not(available_type: 'space')

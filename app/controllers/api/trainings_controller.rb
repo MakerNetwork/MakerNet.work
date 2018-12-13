@@ -16,7 +16,7 @@ class API::TrainingsController < API::ApiController
     end
   end
 
-  # GET api/trainings/upcoming/:limit
+  # GET api/trainings/upcoming
   def upcoming
     today = Time.now.to_date
     start_of_current_week = today.beginning_of_week

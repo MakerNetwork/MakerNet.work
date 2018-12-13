@@ -47,6 +47,7 @@ pt:
           the_slot_START-END_has_been_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
+          the_start_time_must_be_less_than_the_end_time: "O horário de início deve ser menor que o horário de término."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
           actions: "Ações"
           block_reservations: "Impedir reservas"
