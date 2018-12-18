@@ -47,6 +47,7 @@ es:
           the_slot_START-END_has_been_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "No se puede eliminar la ranura {{START}} - {{END}} porque ya está reservada por un miembror"  # angular interpolation
           you_should_select_at_least_a_machine: "Debe seleccionar al menos una máquina en esta ranura."
+          the_start_time_must_be_less_than_the_end_time: "La hora de inicio debe ser antes que a la hora de termino."
           export_is_running_you_ll_be_notified_when_its_ready: "La exportación se está ejecutando. Se le notificará cuando esté listo."
           actions: "Acciones"
           block_reservations: "Reservas de bloques"
@@ -590,7 +591,7 @@ es:
           terms_of_service_(TOS): "Términos de servicio (TOS)"
           customize_the_graphics: "Personalizar los gráficos"
           for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height: "Para una representación óptima, la imagen del logotipo debe estar en el formato PNG con un fondo transparente y una relación de aspecto 3,5 más ancha que la altura."
-          concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "En cuanto al favicon, debe estar en formato ICO con un tamaño de 16x16 píxeles." 
+          concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "En cuanto al favicon, debe estar en formato ICO con un tamaño de 16x16 píxeles."
           remember_to_refresh_the_page_for_the_changes_to_take_effect: "Recuerde actualizar la página para que los cambios surtan efecto."
           logo_(white_background): "Logo (fondo blanco)"
           change_the_logo: "Cambiar el logotipo"
