@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
         :last_name,
         :first_name,
         :gender,
+        :member_id,
         :birthday,
         :interest,
         :software_mastered,

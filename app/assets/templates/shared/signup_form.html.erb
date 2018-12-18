@@ -14,22 +14,24 @@
               <input type="radio"
                      name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="man"
-                     required/> {{ 'man' | translate }}
+                     value="man"/>
+                     <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_woman"
                      ng-model="user.profile_attributes.gender"
-                     value="woman"/> {{ 'woman' | translate }}
+                     value="woman"/>
+                     <i class="fa fa-female m-l-sm"></i>  {{ 'woman' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_non"
                      ng-model="user.profile_attributes.gender"
-                     value="non-binary"/> {{ 'non_binary' | translate }}
+                     value="non-binary"/>
+                     <i class="fas fa-genderless m-l-sm"></i>
+                     {{ 'non_binary' | translate }}
             </label>
-            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
         </div>
 
@@ -70,7 +72,6 @@
             <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required" translate>{{ 'pseudonym_is_required' }}</span>
           </div>
         </div>
-
         <div class="form-group" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
@@ -169,7 +170,18 @@
 
           </div>
         </div>
-
+        <div class="form-group" ng-class="{'has-error': signupForm.member_id.$dirty && signupForm.member_id.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+              <input type="text"
+                     name="member_id"
+                     ng-model="user.profile_attributes.member_id"
+                     class="form-control"
+                     placeholder="{{ 'your_member_id' | translate }}">
+            </div>
+          </div>
+        </div>
         <div class="form-group" ng-class="{'has-error': signupForm.is_allow_contact.$dirty && signupForm.is_allow_contact.$invalid}">
           <div class="col-sm-12 checkbox-group">
             <input type="checkbox"

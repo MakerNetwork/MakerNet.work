@@ -12,10 +12,10 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates :gender, presence: true, length: { maximum: 10}
+  validates :gender, presence: false, length: { maximum: 10}
   validates :birthday, presence: false
   validates :phone, presence: true
-
+  validates :member_id, presence: false, length: { maximum: 20}
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
     (first_name || '').humanize.titleize + ' ' + (last_name || '').humanize.titleize
