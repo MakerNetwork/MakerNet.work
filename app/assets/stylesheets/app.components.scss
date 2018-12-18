@@ -73,7 +73,6 @@
   background-color: #fff;
   border: 1px solid #e5e5e5;
   border-radius: .25rem;
-  height: 325px;
   overflow: hidden;
   margin-bottom: 3rem;
   cursor: pointer;
@@ -560,8 +559,8 @@ padding: 10px;
     font-size: 1.2em;
     line-height: 0;
   }
+
   .afterAmount {
-    margin-left: -35px;
     font-weight: bold;
     color: $green;
     font-size: 1.2em;
@@ -599,11 +598,33 @@ padding: 10px;
   }
 }
 
-.reservable-card {
-  @media only screen and (min-width: 768px) {
-    height: 24em;
+
+.gallery-item {
+  .panel-default {
+    width: 100%;
+
+    .panel-body {
+      padding: 0;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
+
+
+#login-panel {
+  #recovery-link {
+    margin-top: 15px;
+  }
+}
+
 
 .disabled-reservable {
   opacity: 0.5 !important;

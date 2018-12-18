@@ -68,6 +68,16 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.about').$promise
           ]
+      .state 'app.public.signup',
+        url: '/signup'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "shared/signup_form.html" %>'
+            controller: 'SignUpController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.public.signup', 'app.shared.user').$promise
+          ]
       .state 'app.public.home',
         url: '/?reset_password_token'
         views:
@@ -647,6 +657,18 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.public.calendar']).$promise
           ]
 
+      # innovation map
+      .state 'app.public.innovation_map',
+        url: '/innovation_map'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "innovation_map/index.html" %>'
+            controller: 'InnovationMapController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.innovation_map']).$promise
+          ]
+
       # --- namespace /admin/... ---
       # calendar
       .state 'app.admin.calendar',
@@ -1158,7 +1180,8 @@ angular.module('application.router', ['ui.router']).
               'reminder_enable',
               'reminder_delay',
               'visibility_yearly',
-              'visibility_others'
+              'visibility_others',
+              'display_name_enable'
             ]").$promise
           ]
           cguFile: ['CustomAsset', (CustomAsset) ->

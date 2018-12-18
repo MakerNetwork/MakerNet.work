@@ -48,6 +48,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       calendarSelectCb(start, end, jsEvent, view)
     eventClick: (event, jsEvent, view)->
       calendarEventClickCb(event, jsEvent, view)
+    dayClick: (date, jsEvent, view)->
+      calendarDayClickCb(date, jsEvent, view)
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
     loading: (isLoading, view ) ->
@@ -186,9 +188,47 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
 
 
+  ##
+  # Adds a slot
+  ##
+  $scope.addSlot = ->
+    today = moment.tz(new Date(), Fablab.timezone)
+    start = today.startOf('hour').add(1, 'h').clone()
+    end = today.add(1, 'h').clone()
+    modalInstance = $uibModal.open
+      templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>'
+      controller: 'CreateEventModalController'
+      resolve:
+        start: -> start
+        end: -> end
+        machinesPromise: ['Machine', (Machine)->
+          Machine.query().$promise
+        ]
+        trainingsPromise: ['Training', (Training)->
+          Training.query().$promise
+        ]
+        spacesPromise: ['Space', (Space)->
+          Space.query().$promise
+        ]
+    # when the modal is closed, we send the slot to the server for saving
+    modalInstance.result.then (availability) ->
+      uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
+        id: availability.id
+        title: availability.title,
+        start: availability.start_at
+        end: availability.end_at
+        textColor: 'black'
+        backgroundColor: availability.backgroundColor
+        borderColor: availability.borderColor
+        tag_ids: availability.tag_ids
+        tags: availability.tags
+        machine_ids: availability.machine_ids
+      , true
+    , ->
+      uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
 
 
-    ### PRIVATE SCOPE ###
+  ### PRIVATE SCOPE ###
 
   ##
   # Return an enumerable meaninful string for the gender of the provider user
@@ -245,8 +285,44 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
     uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
 
-
-
+  # Triggered when the admin clicks the agenda to create a new reservable slot.
+  # @see http://fullcalendar.io/docs/dayClick
+  ##
+  calendarDayClickCb = (date, jsEvent, view) ->
+    start = moment.tz(date.toISOString(), Fablab.timezone)
+    end = moment.tz(date.toISOString(), Fablab.timezone).add(1, "h")
+    modalInstance = $uibModal.open
+      templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>'
+      controller: 'CreateEventModalController'
+      resolve:
+        start: -> start
+        end: -> end
+        machinesPromise: ['Machine', (Machine)->
+          Machine.query().$promise
+        ]
+        trainingsPromise: ['Training', (Training)->
+          Training.query().$promise
+        ]
+        spacesPromise: ['Space', (Space)->
+          Space.query().$promise
+        ]
+    # when the modal is closed, we send the slot to the server for saving
+    modalInstance.result.then (availability) ->
+      uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
+        id: availability.id
+        title: availability.title,
+        start: availability.start_at
+        end: availability.end_at
+        textColor: 'black'
+        backgroundColor: availability.backgroundColor
+        borderColor: availability.borderColor
+        tag_ids: availability.tag_ids
+        tags: availability.tags
+        machine_ids: availability.machine_ids
+      , true
+    , ->
+      uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
+  
   ##
   # Triggered when the admin clicks on a availability slot in the agenda.
   # @see http://fullcalendar.io/docs/mouse/eventClick/
@@ -340,6 +416,12 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     end:
       hstep: 1
       mstep: 5
+
+  ## datepicker configuration
+  $scope.datepickerConfig =
+    minDate: new Date()
+    startingDay: 1
+    showWeeks: false
 
   ## slot details
   $scope.availability =

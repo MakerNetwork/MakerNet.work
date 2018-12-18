@@ -24,17 +24,20 @@ en:
         # left menu
         notifications: "Notifications"
         admin: "Admin"
+        admin_menu: "Admin Menu"
+        member_menu: "Member Menu"
         reduce_panel: "Reduce Panel"
 
         # left menu (public)
         home: "Home"
-        reserve_a_machine: "Reserve a Machine"
-        trainings_registrations: "Workshops"
-        events_registrations: "Events"
-        reserve_a_space: "Reserve a Space"
+        reserve_a_machine: "Book Machines"
+        trainings_registrations: "Book Workshops"
+        events_registrations: "Book Events"
+        reserve_a_space: "Book Spaces"
         projects_gallery: "Projects Gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
+        innovation_map: "Atlas of Innovation"
 
         # left menu (admin)
         trainings_monitoring: "Manage Workshops"
@@ -55,6 +58,7 @@ en:
         create_your_account: "Create your account"
         man: "Man"
         woman: "Woman"
+        non_binary: "Non-binary"
         gender_is_required: "Gender is required."
         your_first_name: "Your first name"
         first_name_is_required: "First name is required."
@@ -82,7 +86,7 @@ en:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize the makerspace users, registered on the site, to contact me"
-        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the makerspace"
+        i_accept_to_receive_information_from_the_fablab: "I agree to receive information from the makerspace"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the makerspace policy"
 
@@ -91,17 +95,17 @@ en:
         your_new_password: "Your new password"
         your_password_was_successfully_changed: "Your password was successfully changed."
 
-        # connection modal
-        connection: "Connection"
-        password_forgotten: "Forgotten password?"
+        # Login modal
+        connection: "Log-In"
+        password_forgotten: "Forgot your password?"
         not_registered_to_the_fablab: "Not registered to the makerspace?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
-        caps_lock_is_on: "Caps Lock key is on."
+        caps_lock_is_on: "Caps-Lock key is on."
 
         # forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."
-        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive in a moment, an e-mail with instructions to reset your password."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive e-mail with instructions to reset your password."
 
         # Fab-manager's version
         version: "Version:"
@@ -180,7 +184,7 @@ en:
         machines_list:
           the_fablab_s_machines: "Machines"
           add_a_machine: "Add a Machine"
-          book: "Book"
+          book: "Schedule"
           _or_the_: " or the "
           status_enabled: "Enabled"
           status_disabled: "Disabled"
@@ -254,7 +258,7 @@ en:
         free_entry: "Free entry"
         cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
-        make_a_gift_of_this_reservation: "Make a gift of this reservation"
+        make_a_gift_of_this_reservation: "Offer free tickets"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
         book: "Book"
@@ -297,3 +301,7 @@ en:
           characteristics: "Characteristics"
           files_to_download: "Files to download"
           projects_using_the_space: "Projects using the space"
+
+      innovation_map:
+        # show data from places displayed in the map
+        innovation_map: 'Atlas of Innovation'

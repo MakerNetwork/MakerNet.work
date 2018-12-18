@@ -1,0 +1,8 @@
+[Unit]
+Description=letsencrypt cert update oneshot
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/apps/makernet/log:/var/log/letsencrypt" -v "/apps/makernet/letsencrypt/etc:/etc/letsencrypt" -v "/apps/makernet/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
+ExecStartPost=-/usr/bin/docker restart makernet_nginx_1

@@ -1,33 +1,43 @@
 # Ignore bundler config.
 .bundle
-vendor/cache
-
-config/database.yml
-config/application.yml
 
 # Ignore the default SQLite database.
 db/*.sqlite3
 db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-log
-tmp
+log/*
+*.log
+tmp/*
+vendor/cache/*
 
-public/uploads
-public/assets
+# User uploaded/generated files
+invoices/*
+public/uploads/*
+public/assets/*
 
-*.DS_Store
-.idea
+# Documentation
+*.md
+doc/*
 
-# PDF invoices
-invoices
+# GitHub related files
+.git/*
+.gtm/*
+.gitignore
 
-.DS_Store
+# Docker related files
+docker/*
+Dockerfile
+docker-compose.yml
+!docker/supervisor.conf
 
-.vagrant
+# Vagrant related files
+.vagrant/*
 Vagrantfile
 
-.git*
-
-Dockerfile
-docker-compose*
+# Other files
+*.DS_Store
+.idea
+.byebug_history
+codealike.json
+.envrc

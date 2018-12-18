@@ -41,10 +41,11 @@
 .vagrant
 .docker
 .envrc
+.byebug_history
+.buildconfig
 
 # Do not versionate coveralls token
 .coveralls.yml
 
 # Plugins are versioned is their own repository
 /plugins/*
-

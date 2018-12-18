@@ -242,7 +242,7 @@ class StatisticService
           date: options[:start_date].to_date,
           reservation_id: r.id,
           event_id: r.reservable.id,
-          event_type: r.reservable.category.name,
+          event_type: r.reservable.category.slug,
           event_name: r.reservable.name,
           event_date: slot.start_at.to_date,
           event_theme: (r.reservable.event_themes.first ? r.reservable.event_themes.first.name : ''),
@@ -362,7 +362,7 @@ class StatisticService
   def user_info(user)
     {
       user_id: user.id,
-      gender: user.profile.str_gender,
+      gender: user.profile.gender,
       age: user.profile.age,
       group: user.group.slug,
       email: user.email

@@ -77,7 +77,7 @@
   <![endif]-->
 </head>
 
-<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_builder.target! : 'null' %>)" ng-cloak>
+<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_json : 'null' %>)" ng-cloak>
   <div growl></div>
 
   <%= flash_messages %>
@@ -106,10 +106,12 @@
   </section> <!-- /.vbox -->
 
   <div class="app-generator">
-    <span class="app-version" ng-if="currentUser && currentUser.role == 'admin'" uib-tooltip="{{'version' | translate}} {{version.version}}">
-      <i class="fa fa-question-circle" aria-label="Version ?"></i>
+    <span class="app-version">
+      <span class="text-sm"><i class="fa fa-question-circle"></i> Powered by <a href="http://www.makernet.work/" target="_blank">The Maker Network</a></span>
     </span>
-    <span class="text-sm">Powered by <a href="http://www.makernet.work/" target="_blank">Maker Network</a></span>
+    <span class="app-version">
+      <span class="text-sm"><i class="fa fa-bug"></i> <a href="https://goo.gl/forms/jG70kWl7R3ng1lab2" target="_blank">Report an issue</a></span>
+    </span>
   </div>
 
 <%= javascript_include_tag 'application' %>

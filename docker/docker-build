@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker build --no-cache --compress --force-rm --tag 'makernet:manual-build' /vagrant/

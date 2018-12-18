@@ -68,6 +68,11 @@
   <div id="timeAdjust" class="m-t-sm">
       <p class="text-center font-sbold" translate>{{ 'admin_calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
+        <div class="col-md-7 col-md-offset-3 datepicker-wrapper">
+          <div uib-datepicker ng-model="start" min-date="datepickerConfig.minDate" starting-day="datepickerConfig.startingDay" show-weeks="datepickerConfig.showWeeks"></div>
+        </div>
+      </div>
+      <div class="row">
           <div class="col-md-3 col-md-offset-2">
               <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
           </div>

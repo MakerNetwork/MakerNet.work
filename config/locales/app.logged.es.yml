@@ -62,6 +62,7 @@ es:
           your_next_trainings: "Sus próximos cursos"
           your_previous_trainings: "Sus cursos anteriores"
           your_approved_trainings: "Sus cursos aprobados"
+          cancelled: "Cancelado"
         events:
           # dashboard: my events
           your_next_events: "Sus próximos eventos"

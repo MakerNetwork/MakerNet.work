@@ -26,7 +26,6 @@ h5 {
    display: inline-block;
    position: relative;
    line-height: rem-calc(18);
-   //color: $red;
    font-size: rem-calc(16);
    &:after {
       position: absolute;
@@ -35,7 +34,6 @@ h5 {
       content: '';
       width: 35%;
       height: 1px;
-      //background-color: $red;
    }
 }
 

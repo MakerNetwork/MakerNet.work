@@ -61,7 +61,7 @@ en:
         first_name: "First Name"
         address: "Address"
         interests: "Interests"
-        CAD_softwares_mastered: "Software Mastered"
+        CAD_softwares_mastered: "Software Proficiencies"
         name: "Name"
         step_N: "Step {{INDEX}}"  # angular interpolation
         themes: "Themes"
@@ -143,12 +143,21 @@ en:
         creative_commons_licences: "Creative Commons licences"
 
       machine:
-        # machine edition form
-        technical_specifications_are_required: "Technical specifications are required."
-        attached_files_(pdf): "Attached files (pdf)"
-        attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        validate_your_machine: "Validate Machine"
+        # Edit machine form
+        machine_form:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Image"
+          add_an_illustration: "Add machine image"
+          description: "Description"
+          description_is_required: "Description is required."
+          technical_specifications: "Tech Specs"
+          technical_specifications_are_required: "Tech specs are required."
+          attached_files_(pdf): "Attach File (pdf)"
+          attach_a_file: "Attach File"
+          add_an_attachment: "Add an attachment"
+          disable_machine: "Disable Machine"
+          validate_your_machine: "Validate Machine"
 
       plan_subscribe:
         # frame to select a plan to subscribe
@@ -172,7 +181,8 @@ en:
       valid_reservation_modal:
         # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
-        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
+        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Summary of the slots to be booked:"
+        you_are_allowing_user_to_pay_on_site: "Note: Upon confirmation, you are allowing the selected user to pay on site for this booking."
 
       event:
         # event edition form
@@ -339,7 +349,7 @@ en:
         amount: 'Amount'
         credit: 'Credit'
         debit: 'Debit'
-        credit_title: 'Credit wallet'
+        credit_title: 'Wallet'
         credit_label: 'Set the amount to be credited'
         confirm_credit_label: 'Confirm the amount to be credited'
         generate_a_refund_invoice: "Generate a refund invoice"
@@ -363,6 +373,7 @@ en:
         debit_reservation_machine: "Debit by machine reservation"
         debit_reservation_event: "Debit by event reservation"
         warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+        info_is_invoice: "Is this an invoice?"
 
       coupon:
         # promotional coupon (creation/edition form)
@@ -426,8 +437,8 @@ en:
           you_ve_just_selected_the_slot: "You've just selected the slot:"
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
-          offer_this_slot: "Offer this slot"
-          confirm_this_slot: "Confirm this slot"
+          offer_this_slot: "Offer free slot"
+          confirm_this_slot: "Select this slot"
           remove_this_slot: "Remove this slot"
           to_benefit_from_attractive_prices: "To benefit from attractive prices"
           view_our_subscriptions: "View our subscriptions"
@@ -435,11 +446,12 @@ en:
           you_ve_just_selected_a_: "You've just selected a"
           _subscription: "subscription"
           cost_of_the_subscription: "Subscription Cost"
+          confirm: "Confirm"
           confirm_and_pay: "Confirm Payment"
-          you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
-          you_have_settled_a_: "You have settled a"
+          you_have_settled_the_following_TYPE: "You have selected the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_a_: "You have selected a"
           total_: "TOTAL :"
-          thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
+          thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered!"
           your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon from your"
           dashboard: "Dashboard"
           i_want_to_change_the_following_reservation: "I want to change the following reservation:"
@@ -459,4 +471,5 @@ en:
           cancellation_failed: "Cancellation failed."
           confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+          a_problem_occured_during_the_booking_process_please_try_again_later: "A problem occurred during the booking process. Please try again later."
           none: "None"

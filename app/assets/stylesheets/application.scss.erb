@@ -7,35 +7,36 @@
  *= require angular-xeditable/dist/css/xeditable
  *= require angular-loading-bar/src/loading-bar
  *= require nvd3/build/nv.d3
- *= require font-awesome
  *= require medium-editor/dist/css/medium-editor
  *= require medium-editor/dist/css/themes/default
  *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min
  *= require summernote/dist/summernote
  *= require jquery-minicolors/jquery.minicolors.css
  *= require angular-aside/dist/css/angular-aside
+ *= require leaflet
+ *= require markercluster.default
  */
 
-@import "bootstrap";
-@import "app.functions";
-@import "bootstrap-compass";
 @import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-compass";
 @import "compass";
-@import "bootstrap_and_overrides";
-
-@import "app.utilities";
-@import "app.colors";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap-overrides";
 
 @import "app.base";
+@import "app.functions";
+@import "app.utilities";
+@import "app.colors";
 @import "app.layout";
 @import "app.nav";
-
 @import "app.buttons";
 @import "app.components";
 @import "app.plugins";
-@import "modules/invoice";
-
 @import "app.responsive";
+
+@import "modules/invoice";
 
 <% PluginRegistry.stylesheets.each do |stylesheet| %>
   <% basename = File.basename(stylesheet,'.scss') %>
