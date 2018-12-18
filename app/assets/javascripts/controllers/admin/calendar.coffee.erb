@@ -192,14 +192,18 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
         ,->
           growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
 
+  ##
+  # Add 'selected' class to slot element
+  ##
+  $scope.selectEvent = (jsEvent) ->
+    $(".fc-event.selected").removeClass("selected")
+    if (jsEvent)
+      $(jsEvent.target).closest(".fc-event").addClass("selected")
 
   ##
-  # Adds a slot
+  # Trigger event details modal
   ##
-  $scope.addSlot = ->
-    today = moment.tz(new Date(), Fablab.timezone)
-    start = today.startOf('hour').add(1, 'h').clone()
-    end = today.add(1, 'h').clone()
+  $scope.triggerEventModal = (availability, start, end)->
     modalInstance = $uibModal.open
       templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>'
       controller: 'CreateEventModalController'
@@ -215,23 +219,38 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
         spacesPromise: ['Space', (Space)->
           Space.query().$promise
         ]
+        availability: -> availability
     # when the modal is closed, we send the slot to the server for saving
     modalInstance.result.then (availability) ->
-      uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
-        id: availability.id
-        title: availability.title,
-        start: availability.start_at
-        end: availability.end_at
-        textColor: 'black'
-        backgroundColor: availability.backgroundColor
-        borderColor: availability.borderColor
-        tag_ids: availability.tag_ids
-        tags: availability.tags
-        machine_ids: availability.machine_ids
-      , true
-    , ->
-      uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
+        $scope.availability = null
+        uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
+    #   uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
+    #     id: availability.id
+    #     title: availability.title,
+    #     start: availability.start_at
+    #     end: availability.end_at
+    #     textColor: 'black'
+    #     backgroundColor: availability.backgroundColor
+    #     borderColor: availability.borderColor
+    #     tag_ids: availability.tag_ids
+    #     tags: availability.tags
+    #     machine_ids: availability.machine_ids
+    #   , true
+    # , ->
+    #   uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
+    #   $scope.selectEvent(null)
 
+  ##
+  # Add a slot
+  ##
+  $scope.addSlot = ->
+    $scope.triggerEventModal(null, null, null)
+
+  ##
+  # Edit current slot
+  ##
+  $scope.editSlot = ->
+    $scope.triggerEventModal($scope.availability, null, null)
 
   ### PRIVATE SCOPE ###
 
@@ -255,39 +274,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     if Number.isInteger(parseInt((end.valueOf() - start.valueOf()) / (SLOT_MULTIPLE * 1000), 10)/SLOT_MULTIPLE)
       today = new Date()
       if (parseInt((start.valueOf() - today) / (60 * 1000), 10) >= 0)
-        # then we open a modal window to let the admin specify the slot type
-        modalInstance = $uibModal.open
-          templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>'
-          controller: 'CreateEventModalController'
-          resolve:
-            start: -> start
-            end: -> end
-            machinesPromise: ['Machine', (Machine)->
-              Machine.query().$promise
-            ]
-            trainingsPromise: ['Training', (Training)->
-              Training.query().$promise
-            ]
-            spacesPromise: ['Space', (Space)->
-              Space.query().$promise
-            ]
-        # when the modal is closed, we send the slot to the server for saving
-        modalInstance.result.then (availability) ->
-          uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
-            id: availability.id
-            title: availability.title,
-            start: availability.start_at
-            end: availability.end_at
-            textColor: 'black'
-            backgroundColor: availability.backgroundColor
-            borderColor: availability.borderColor
-            tag_ids: availability.tag_ids
-            tags: availability.tags
-            machine_ids: availability.machine_ids
-          , true
-        , ->
-          uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
-
+        $scope.triggerEventModal(null, start, end)
     uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
 
   # Triggered when the admin clicks the agenda to create a new reservable slot.
@@ -296,54 +283,22 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   calendarDayClickCb = (date, jsEvent, view) ->
     start = moment.tz(date.toISOString(), Fablab.timezone)
     end = moment.tz(date.toISOString(), Fablab.timezone).add(1, "h")
-    modalInstance = $uibModal.open
-      templateUrl: '<%= asset_path "admin/calendar/eventModal.html" %>'
-      controller: 'CreateEventModalController'
-      resolve:
-        start: -> start
-        end: -> end
-        machinesPromise: ['Machine', (Machine)->
-          Machine.query().$promise
-        ]
-        trainingsPromise: ['Training', (Training)->
-          Training.query().$promise
-        ]
-        spacesPromise: ['Space', (Space)->
-          Space.query().$promise
-        ]
-    # when the modal is closed, we send the slot to the server for saving
-    modalInstance.result.then (availability) ->
-      uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
-        id: availability.id
-        title: availability.title,
-        start: availability.start_at
-        end: availability.end_at
-        textColor: 'black'
-        backgroundColor: availability.backgroundColor
-        borderColor: availability.borderColor
-        tag_ids: availability.tag_ids
-        tags: availability.tags
-        machine_ids: availability.machine_ids
-      , true
-    , ->
-      uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
-  
+    $scope.triggerEventModal(null, start, end)
+
   ##
   # Triggered when the admin clicks on a availability slot in the agenda.
   # @see http://fullcalendar.io/docs/mouse/eventClick/
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
-
     $scope.availability = event
-
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
       $scope.removeSlot()
     # if the user has only clicked on the event, display its reservations
     else
+      $scope.selectEvent(jsEvent)
       Availability.reservations {id: event.id}, (reservations) ->
         $scope.reservations = reservations
-
 
 
 
@@ -389,8 +344,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 ##
 # Controller used in the slot creation modal window
 ##
-Application.Controllers.controller 'CreateEventModalController', ["$scope", "$uibModalInstance", "moment", "start", "end", "machinesPromise", "Availability", "trainingsPromise", "spacesPromise", 'Tag', 'growl', '_t'
-, ($scope, $uibModalInstance, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, Tag, growl, _t) ->
+Application.Controllers.controller 'CreateEventModalController', ["$scope", "$uibModalInstance", "moment", "start", "end", "availability", "machinesPromise", "Availability", "trainingsPromise", "spacesPromise", 'Tag', 'growl', '_t'
+, ($scope, $uibModalInstance, moment, start, end, availability, machinesPromise, Availability, trainingsPromise, spacesPromise, Tag, growl, _t) ->
 
   ## $uibModal parameter
   $scope.start = start
@@ -420,7 +375,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.step = 1
 
   ## the user is not able to edit the ending time of the availability, unless he set the type to 'training'
-  $scope.endDateReadOnly = true
+  ## $scope.endDateReadOnly = true
 
   ## timepickers configuration
   $scope.timepickers =
@@ -437,14 +392,6 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     startingDay: 1
     showWeeks: false
 
-  ## slot details
-  $scope.availability =
-    start_at: start
-    end_at: end
-    available_type: 'machines' # default
-
-
-
   ##
   # Adds or removes the provided machine from the current slot
   # @param machine {Object}
@@ -456,7 +403,31 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     else
       $scope.selectedMachines.push(machine)
 
+  $scope.isChecked = (machine) ->
+    if $scope.selectedMachines.indexOf(machine) > -1
+      return true
 
+  ## replace with availability from params if supplied
+  if availability
+    $scope.availability = availability
+    if availability.available_type == 'machines'
+      for mid in $scope.availability.machine_ids
+        for machine in $scope.machines
+          if machine.id == mid
+            $scope.toggleSelection(machine)
+    else if availability.available_type == 'training'
+      for training in $scope.trainings
+        if training.id == availability.training_ids[0]
+          $scope.selectedTraining = training
+    else if availability.available_type == 'space'
+      for space in $scope.spaces
+        if space.id == availability.space_ids[0]
+          $scope.selectedSpace = space
+  else
+    $scope.availability =
+      start: start
+      end: end
+      available_type: 'machines' # default
 
   ##
   # Callback for the modal window validation: save the slot and closes the modal
@@ -472,10 +443,42 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       $scope.availability.training_ids = [$scope.selectedTraining.id]
     else if $scope.availability.available_type == 'space'
       $scope.availability.space_ids = [$scope.selectedSpace.id]
-    Availability.save
-      availability: $scope.availability
-    , (availability) ->
-      $uibModalInstance.close(availability)
+    $scope.availability.start_at = $scope.availability.start
+    $scope.availability.end_at = $scope.availability.end
+    if ($scope.availability.id)
+      relationsObj =
+        tag_ids = $scope.availability.tag_ids
+      if $scope.availability.available_type == 'machines'
+        relationsObj =
+          machine_ids: $scope.availability.machine_ids
+          training_ids: []
+          space_ids: []
+        Availability.update {id: $scope.availability.id}, {availability: relationsObj}
+        , ->
+          Availability.update {id: $scope.availability.id}, $scope.availability
+          , (availability) ->
+            $uibModalInstance.close(availability)
+      else 
+        if $scope.availability.available_type == 'training'
+          relationsObj =
+            machine_ids: []
+            training_ids: $scope.availability.training_ids
+            space_ids: []
+        if $scope.availability.available_type == 'space'
+          relationsObj =
+            machine_ids: []
+            training_ids: []
+            space_ids: $scope.availability.space_ids
+        Availability.update {id: $scope.availability.id}, $scope.availability
+        , ->
+          Availability.update {id: $scope.availability.id}, {availability: relationsObj}
+          , (availability) ->
+            $uibModalInstance.close(availability)
+    else
+      Availability.save
+        availability: $scope.availability
+        , (availability) ->
+          $uibModalInstance.close(availability)
 
 
 
@@ -484,6 +487,11 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   ##
   $scope.next = ->
     $scope.setNbTotalPlaces() if $scope.step == 1
+    if $scope.step == 2
+      if $scope.availability.start == null
+        today = moment.tz(new Date(), Fablab.timezone)
+        $scope.availability.start = today.startOf('hour').add(1, 'h').clone()
+        $scope.availability.end = today.add(1, 'h').clone()
     $scope.step++
 
 
@@ -508,10 +516,11 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # For training avaiabilities, set the maximum number of people allowed to register on this slot
   ##
   $scope.setNbTotalPlaces = ->
-    if $scope.availability.available_type == 'training'
-      $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
-    else if $scope.availability.available_type == 'space'
-      $scope.availability.nb_total_places = $scope.selectedSpace.default_places
+    if !$scope.availability.nb_total_places
+      if $scope.availability.available_type == 'training'
+        $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
+      else if $scope.availability.available_type == 'space'
+        $scope.availability.nb_total_places = $scope.selectedSpace.default_places
 
 
   ### PRIVATE SCOPE ###
@@ -520,9 +529,9 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    if $scope.trainings.length > 0
+    if $scope.trainings.length > 0 && !$scope.selectedTraining
       $scope.selectedTraining = $scope.trainings[0]
-    if $scope.spaces.length > 0
+    if $scope.spaces.length > 0 && !$scope.selectedSpace
       $scope.selectedSpace = $scope.spaces[0]
 
     Tag.query().$promise.then (data) ->
@@ -533,7 +542,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     ## can configure any duration as it does not matters.
     $scope.$watch 'availability.available_type', (newValue, oldValue, scope) ->
       if newValue == 'machines' or newValue == 'space'
-        $scope.endDateReadOnly = true
+        ##$scope.endDateReadOnly = true
         diff = moment($scope.end).diff($scope.start, 'hours') # the result is rounded down by moment.js
         $scope.end = moment($scope.start).add(diff, 'hours').toDate()
         $scope.availability.end_at = $scope.end
