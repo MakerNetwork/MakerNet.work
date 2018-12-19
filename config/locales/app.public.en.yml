@@ -123,6 +123,7 @@ en:
       home:
         # home page
         latest_documented_projects: "The latest documented projects"
+        no_documented_projects: "No recent documented projects available"
         follow_us: "Follow Us"
         latest_tweets: "The latest tweets"
         latest_registered_members: "Latest registered members"

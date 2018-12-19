@@ -7,6 +7,9 @@
 	<div class="col-lg-8">
 		<h4 class="text-sm m-t-sm text-center" translate>{{ 'latest_documented_projects' }}</h4>
     <div class="row">
+      <div class="col-lg-12" ng-show="!lastProjects.length > 0">
+        <p class="text-center" translate>{{ 'no_documented_projects' }}</p>
+      </div>
       <div class="col-lg-4" ng-repeat="project in lastProjects | limitTo:3">
         <div class="card card-project" >
 

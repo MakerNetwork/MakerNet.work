@@ -118,6 +118,7 @@ fr:
       home:
         # page d'accueil
         latest_documented_projects: "Les derniers projets documentés"
+        no_documented_projects: "Aucun projet récent documenté disponible"
         follow_us: "Suivez-nous"
         latest_tweets: "Les derniers tweets"
         latest_registered_members: "Derniers membres inscrits"
