@@ -147,7 +147,7 @@
           </div>
         </div>
         <input type="hidden" name="event[availability_id]" ng-value="event.availability_id" ng-if="event.availability_id">
-  
+
         <div class="m-b"  ng-class="{'has-error': !event.start_date}">
           <label translate>{{ 'start_date' }}</label>
           <div class="input-group">
@@ -162,11 +162,11 @@
                    ng-required="true"/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="toggleStartDatePicker($event)"><i class="fa fa-calendar"></i></button>
-            </span>                     
-          </div> 
-          <span class="help-block" ng-show="!event.start_date" translate>{{ 'date_is_required' }}</span>         
+            </span>
+          </div>
+          <span class="help-block" ng-show="!event.start_date" translate>{{ 'date_is_required' }}</span>
         </div>
-     
+
 
         <div class="m-b" ng-class="{'has-error': !event.end_date}">
           <label translate>{{ 'end_date' }}</label>
@@ -185,7 +185,7 @@
             </span>
           </div>
         <span class="help-block" ng-show="!event.end_date" translate>{{ 'date_is_required' }}</span>
-        </div>         
+        </div>
         <div class="m-b row" ng-if="event.all_day =='false'">
           <div class="col-xs-6">
               <label translate>{{ 'start_time' }}</label>
@@ -216,7 +216,7 @@
                      class="form-control"
                      ng-model="event.recurrence_end_at"
                      uib-datepicker-popup="{{datePicker.format}}"
-                     datepicker-options="datePicker.options"                     
+                     datepicker-options="datePicker.options"
                      is-open="datePicker.recurrenceEndOpened"
                      ng-click="toggleRecurrenceEnd($event)"
                      ng-required="true"/>
@@ -234,46 +234,6 @@
         <h3 translate>{{ 'prices_and_availabilities' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
-        <div class="form-group"  ng-class="{'has-error': eventForm['event[amount]'].$dirty && eventForm['event[amount]'].$invalid}">
-          <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'standard_rate' }}*</label>
-          <div class="col-sm-5">
-            <div class="input-group">
-              <input ng-model="event.amount" type="number" name="event[amount]" class="form-control" id="event_amount" required/>
-              <div class="input-group-addon">{{currencySymbol}}</div>
-
-            </div>
-             <span class="help-block" translate>{{ '0_=_free' }}</span>
-             <span class="help-block" ng-show="eventForm['event[amount]'].$dirty && eventForm['event[amount]'].$error.required" translate>{{ 'rate_is_required' }}</span>
-          </div>
-        </div>
-        <div class="form-group" ng-repeat="price in event.prices" ng-show="!price._destroy">
-          <div class="col-sm-5">
-            <input type="hidden" name="event[event_price_categories_attributes][][id]" ng-value="price.id">
-            <select class="form-control"
-                    ng-model="price.category"
-                    name="event[event_price_categories_attributes][][price_category_id]"
-                    ng-options="cat as cat.name for cat in priceCategories track by cat.id">
-            </select>
-          </div>
-          <div class="col-sm-5">
-            <div class="input-group">
-              <input ng-model="price.amount"
-                     type="number"
-                     name="event[event_price_categories_attributes][][amount]"
-                     class="form-control">
-              <div class="input-group-addon">{{currencySymbol}}</div>
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <input type="hidden" name="event[event_price_categories_attributes][][_destroy]" ng-value="price._destroy">
-            <a class="btn" ng-click="removePrice(price, $event)" href="#"><i class="fa fa-times text-danger"></i></a>
-          </div>
-        </div>
-        <div class="link-icon m-b" ng-hide="event.prices.length == priceCategories.length">
-          <div class="col-sm-offset-5">
-            <i class="fa fa-plus"></i> <span ng-click="addPrice()" translate>{{ 'add_a_rate' }}</span>
-          </div>
-        </div>
         <div class="form-group" ng-class="{'has-error': eventForm['event[nb_total_places]'].$dirty && eventForm['event[nb_total_places]'].$invalid}">
           <label for="event_nb_total_places" class="col-sm-5 control-label" translate>{{ 'tickets_available' }}*</label>
           <div class="col-sm-6">
@@ -284,6 +244,50 @@
             <span class="help-block" translate>{{ '0_=_non_bookable' }}</span>
           </div>
         </div>
+
+        <div ng-show="event.nb_total_places > 0">
+
+          <div class="form-group">
+            <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'standard_rate' }}</label>
+            <div class="col-sm-5">
+              <div class="input-group">
+                <input ng-model="event.amount" type="number" name="event[amount]" class="form-control" id="event_amount" required>
+                <div class="input-group-addon">{{currencySymbol}}</div>
+              </div>
+              <span class="help-block" translate>{{ '0_=_free' }}</span>
+            </div>
+          </div>
+          <div class="form-group" ng-repeat="price in event.prices" ng-show="!price._destroy">
+            <div class="col-sm-5">
+              <input type="hidden" name="event[event_price_categories_attributes][][id]" ng-value="price.id">
+              <select class="form-control"
+                      ng-model="price.category"
+                      name="event[event_price_categories_attributes][][price_category_id]"
+                      ng-options="cat as cat.name for cat in priceCategories track by cat.id">
+              </select>
+            </div>
+            <div class="col-sm-5">
+              <div class="input-group">
+                <input ng-model="price.amount"
+                      type="number"
+                      name="event[event_price_categories_attributes][][amount]"
+                      class="form-control">
+                <div class="input-group-addon">{{currencySymbol}}</div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <input type="hidden" name="event[event_price_categories_attributes][][_destroy]" ng-value="price._destroy">
+              <a class="btn" ng-click="removePrice(price, $event)" href="#"><i class="fa fa-times text-danger"></i></a>
+            </div>
+          </div>
+          <div class="link-icon m-b" ng-hide="event.prices.length == priceCategories.length">
+            <div class="col-sm-offset-5">
+              <i class="fa fa-plus"></i> <span ng-click="addPrice()" translate>{{ 'add_a_rate' }}</span>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
     </section>
@@ -293,6 +297,5 @@
        class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
        ng-disabled="eventForm.$invalid || event.category_id === null"/>
     </div>
-  </div>    
+  </div>
 </div>
-    
