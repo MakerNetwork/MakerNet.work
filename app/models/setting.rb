@@ -1,4 +1,8 @@
 class Setting < ActiveRecord::Base
+    
+    attr_accessor :FACILITY_TYPE
+
+    
   FACILITY_TYPE = %w(
     fab_lab
     makerspace
@@ -37,6 +41,7 @@ class Setting < ActiveRecord::Base
         main_color
         secondary_color
         fablab_name
+        fablab_type
         name_genre
         reminder_enable
         reminder_delay

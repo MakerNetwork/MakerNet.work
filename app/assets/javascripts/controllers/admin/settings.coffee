@@ -52,6 +52,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.mainColorSetting = { name: 'main_color', value: settingsPromise.main_color }
     $scope.secondColorSetting = { name: 'secondary_color', value: settingsPromise.secondary_color }
     $scope.fablabName = { name: 'fablab_name', value: settingsPromise.fablab_name }
+    $scope.fablabType = { name: 'fablab_type', value: settingsPromise.fablab_type }
     $scope.nameGenre = { name: 'name_genre', value: settingsPromise.name_genre }
     $scope.cguFile = cguFile.custom_asset
     $scope.cgvFile = cgvFile.custom_asset
@@ -59,6 +60,15 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.customLogoBlack = logoBlackFile.custom_asset
     $scope.customFavicon = faviconFile.custom_asset
     $scope.profileImage = profileImageFile.custom_asset
+
+     ## Possible refunding methods
+    $scope.fablabTypes = [
+        {name: _t('settings.fab_lab'), value: 'fab_lab'}
+        {name: _t('settings.makerspace'), value: 'makerspace'}
+        {name: _t('settings.hackerspace'), value: 'hackerspace'}
+        {name: _t('settings.media_lab'), value: 'media_lab'}
+        {name: _t('settings.biohacking_space'), value: 'biohacking_space'}
+      ]
 
     $scope.enableMove =
       name: 'booking_move_enable'
@@ -126,7 +136,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
       if setting.value isnt null
         value = setting.value.toString()
       else
-        value = setting.value
+        value = setting.value 
 
       Setting.update { name: setting.name }, { value: value }, (data)->
         growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING:_t('settings.' + setting.name) }))
