@@ -75,6 +75,8 @@ fr:
       trainings:
         # suivre et surveiller les formations
         training: "Formation"
+        trainings_list: "Liste des ateliers"
+        validate_trainings: "Valider les ateliers"
         add_a_new_training: "Ajouter une nouvelle formation"
         associated_machines: "Machines associées"
         number_of_tickets: "Nombre de places"
@@ -107,9 +109,10 @@ fr:
 
       events:
         # gestion et suivi des évènements
-        events_monitoring: "Suivi des évènements"
+        events_monitoring: "Liste des événements"
         manage_filters: "Gérer les filtres"
-        fablab_events: "Les évènements du Fab Lab"
+        event_categories: "Catégories d'événements"
+        fablab_events: "Gestion d'événements"
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
         events_to_come: "Les évènements à venir"
@@ -133,7 +136,7 @@ fr:
         at_least_one_category_is_required: "Au moins une catégorie est requise."
         unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
         unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
-        manage_prices_categories: "Gérer les catégories tarifaires"
+        manage_prices_categories: "Catégories de prix"
         prices_categories: "Catégories tarifaires"
         add_a_price_category: "Ajouter une catégorie tarifaire"
         usages_count: "Nombre d'utilisations"

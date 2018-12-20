@@ -77,6 +77,8 @@ en:
       trainings:
         # track and monitor the trainings
         training: "Workshops"
+        trainings_list: "Workshops List"
+        validate_trainings: "Validate Workshops"
         add_a_new_training: "Add new workshop"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
@@ -109,9 +111,10 @@ en:
 
       events:
         # events tracking and management
-        events_monitoring: "Events Management"
+        events_monitoring: "Events List"
         manage_filters: "Manage filters"
-        fablab_events: "Events"
+        event_categories: "Event Categories"
+        fablab_events: "Events Management"
         all_events: "All events"
         passed_events: "Past Events"
         events_to_come: "Future Events"
@@ -135,7 +138,7 @@ en:
         at_least_one_category_is_required: "At least one category is required."
         unable_to_delete_the_last_one: "Unable to delete the last one."
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
-        manage_prices_categories: "Manage price categories"
+        manage_prices_categories: "Price categories"
         prices_categories: "Price categories"
         add_a_price_category: "Add a price category"
         usages_count: "Usages count"
