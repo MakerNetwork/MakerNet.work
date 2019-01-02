@@ -20,7 +20,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngCooki
                'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
                'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
                'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
-               'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock']).
+               'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'ncy-angular-breadcrumb']).
 config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfigProvider", "AnalyticsProvider", "uibDatepickerPopupConfig", "$provide", "$translateProvider",
     function($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
 
@@ -88,10 +88,18 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       $rootScope.backPrevLocation = function(event){
         event.preventDefault();
         event.stopPropagation();
+        
         if($state.prevState.name == ""){
           $state.prevState = "app.public.home";
         }
         $state.go($state.prevState, $state.prevParams);
+        
+        /*
+        window.history.back();
+        */
+        /*
+        $state.go('^');
+        */
       };
 
       // Configuration of the summernote editor (used in project edition)
