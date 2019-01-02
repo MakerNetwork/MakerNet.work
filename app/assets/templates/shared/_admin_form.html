@@ -1,35 +1,39 @@
 <div class="row m-t">
-  <div class="col-sm-offset-3 col-sm-6">
-    <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][gender]'].$dirty && adminForm['admin[profile_attributes][gender]'].$invalid}">
-        <label class="checkbox-inline btn btn-default">
-          <input type="radio"
-                 name="admin[profile_attributes][gender]"
-                 ng-model="admin.profile_attributes.gender"
-                 ng-value="true"
-                 required/>
-            <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
-        </label>
-        <label class="checkbox-inline btn btn-default">
-          <input type="radio"
-                 name="admin[profile_attributes][gender]"
-                 ng-model="admin.profile_attributes.gender"
-                 ng-value="false"/>
-            <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
-        </label>
-        <label class="checkbox-inline btn btn-default">
-            <input type="radio"
-                   name="admin[profile_attributes][gender]"
-                   ng-model="admin.profile_attributes.gender"
-                   ng-value="non-binary"/>
-            <i class="fa m-l-sm"></i> {{ 'non_binary' | translate }}
-        </label>
-    </div>
+  <div class="col-sm-offset-2 col-sm-8">
+   <div class="form-group" ng-class="{'has-error': adminForm.gender.$dirty && adminForm.gender.$invalid}">
+          <div class="col-sm-12">
+            <label class="checkbox-inline">
+              <input type="radio"
+                     name="gender_man"
+                     ng-model="admin.profile_attributes.gender"
+                     value="man"/>
+                     <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio"
+                     name="gender_woman"
+                     ng-model="admin.profile_attributes.gender"
+                     value="woman"/>
+                     <i class="fa fa-female m-l-sm"></i>  {{ 'woman' | translate }}
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio"
+                     name="gender_non"
+                     ng-model="admin.profile_attributes.gender"
+                     value="non-binary"/>
+                     <i class="fas fa-genderless m-l-sm"></i>
+                     {{ 'non_binary' | translate }}
+            </label>
+          </div>
+        </div>
+
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$invalid}">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
         <input ng-model="admin.username"
-               type="text" name="admin[username]"
+               type="text" 
+               name="admin[username]"
                class="form-control"
                id="user_username"
                placeholder="{{ 'pseudonym' | translate }}"
