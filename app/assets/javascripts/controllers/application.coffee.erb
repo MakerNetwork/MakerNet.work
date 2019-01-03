@@ -49,6 +49,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
 
 
+
   ##
   # Logout callback
   # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
@@ -172,7 +173,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           console.error('[ApplicationController::initialize] user is not allowed')
         else
           # user is not logged in
-          openLoginModal(toState, toParams)
+          openLoginModal()
 
     # we stop polling notifications when the page is not in foreground
     onPageVisible (state) ->
@@ -233,7 +234,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   ##
   # Open the modal window allowing the user to log in.
   ##
-  openLoginModal = (toState, toParams, callback) ->
+  openLoginModal = (callback) ->
   <% active_provider = AuthProvider.active %>
   <% if active_provider.providable_type != DatabaseProvider.name %>
     $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>'
@@ -272,10 +273,8 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     # what to do when the modal is closed
     .result['finally'](null).then (user) ->
       # authentification succeeded, set the session, gather the notifications and redirect
-      $scope.setCurrentUser(user)
-
-      if toState isnt null and toParams isnt null
-        $state.go(toState, toParams)
+      $scope.setCurrentUser(user)      
+      $state.go('app.public.home')
 
     , (reason) ->
       # authentification did not ended successfully
