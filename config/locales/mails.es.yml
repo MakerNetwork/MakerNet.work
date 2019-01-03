@@ -16,7 +16,7 @@ es:
         account_name: "Nombre de usuario:"
         password: "Contraseña:"
         temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
-        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (cursos, planes de suscripción)."
+        keep_advantages: "Esta cuenta le permite acceder a todos los beneficios de un usuario de MakerNet, incluida la membresía de makerspace, capacitaciones, eventos, reservaciones, proyectos y más. Mantenga su contraseña segura y no comparta esta cuenta con nadie más. Disfrute de la plataforma!"
         thanks_to_: "Para usar el sitio web, por favor"
         logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí"
         token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"

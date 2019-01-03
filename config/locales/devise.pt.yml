@@ -18,8 +18,8 @@ pt:
       unconfirmed: "Você precisa confirmar sua conta, antes de continuar."
     mailer:
       confirmation_instructions:
-      action:
-        instruction:
+        action: "Confirme seu email!"
+        instruction: "Você pode finalizar seu cadastro confirmando seu endereço de e-mail, clicando no seguinte link:"
         subject: "Instruções de confirmação"
       reset_password_instructions:
       action:
