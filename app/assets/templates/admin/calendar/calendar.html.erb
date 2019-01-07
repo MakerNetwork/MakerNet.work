@@ -44,9 +44,9 @@
       <a class="btn btn-warning" ng-click="addSlot()"><i class="fa fa-plus"></i> {{ 'admin_calendar.add_slot' | translate }}</a>
     </div>
 
-
     <div class="widget panel b-a m m-t-lg" ng-if="availability">
       <div class="panel-heading b-b small">
+        <!--Changes for the date are needed in the line below -->
         <h3>{{ 'admin_calendar.DATE_slot' | translate:{DATE:(availability.start | amDateFormat: 'LL')} }} {{availability.start | amDateFormat:'LT'}} - {{availability.end | amDateFormat:'LT'}}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
