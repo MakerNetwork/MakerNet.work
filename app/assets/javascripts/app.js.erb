@@ -86,12 +86,13 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page
       $rootScope.backPrevLocation = function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        if($state.prevState.name == ""){
-          $state.prevState = "app.public.home";
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-        $state.go($state.prevState, $state.prevParams);
+        
+        /*Changed to use browser's back button functionality instead*/
+        window.history.back();
       };
 
       // Configuration of the summernote editor (used in project edition)
