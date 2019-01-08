@@ -1,9 +1,5 @@
 class Setting < ActiveRecord::Base
-    
-    attr_accessor :FACILITY_TYPE
-
-    
-  FACILITY_TYPE = %w(
+  FACILITY_TYPES = %w(
     fab_lab
     makerspace
     hackerspace
