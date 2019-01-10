@@ -28,7 +28,9 @@ class Availability < ActiveRecord::Base
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
   scope :spaces, -> { includes(:spaces).where(available_type: 'space') }
 
-  attr_accessor :is_reserved, :slot_id, :can_modify
+  attr_accessor :is_reserved, :slot_id, :can_modify, :recurrence, :recurrence_end_at
+
+  after_create :availability_recurrence
 
   validates :start_at, :end_at, presence: true
   validate :length_must_be_30m_minimum, unless: proc { end_at.blank? or start_at.blank? }
@@ -150,6 +152,44 @@ class Availability < ActiveRecord::Base
   def should_be_associated
     if available_type == 'machines' and machine_ids.count == 0
       errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
+    end
+  end
+
+  def availability_recurrence
+    if recurrence.present? and recurrence != 'none'
+      case recurrence
+      when 'day'
+        on = nil
+      when 'week'
+        on = availability.start_at.wday
+      when 'month'
+        on = availability.start_at.day
+      when 'year'
+        on = [availability.start_at.month, availability.start_at.day]
+      else
+      end
+      r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at+1.day, until: recurrence_end_at)
+      r.events.each do |date|
+        days_diff = availability.end_at.day - availability.start_at.day
+        start_at = DateTime.new(date.year, date.month, date.day, availability.start_at.hour, availability.start_at.min, availability.start_at.sec, availability.start_at.zone)
+        start_at = dst_correction(availability.start_at,start_at)
+        end_date = date + days_diff.days
+        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, availability.end_at.hour, availability.end_at.min, availability.end_at.sec, availability.end_at.zone)
+        end_at = dst_correction(availability.start_at,end_at)
+       
+        availability = Availability.new({
+          recurrence: 'none',
+          title: title,
+          description: description,
+          start_at: start_at,
+          end_at: end_at,
+          available_type: available_type,
+          nb_total_places: nb_total_places,
+          recurrence_id: id
+        })
+        availability.save
+      end
+      update_columns(recurrence_id: id)
     end
   end
 
