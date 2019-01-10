@@ -12,6 +12,8 @@ class Setting < ActiveRecord::Base
         about_title
         about_body
         about_contacts
+        facility_types
+        facility_type
         twitter_name
         home_blogpost
         machine_explications_alert
@@ -56,5 +58,4 @@ class Setting < ActiveRecord::Base
       Stylesheet.first.rebuild!
     end
   end
-
 end
