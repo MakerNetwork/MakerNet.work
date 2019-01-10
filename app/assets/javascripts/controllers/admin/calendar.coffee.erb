@@ -29,6 +29,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
   ## currently selected availability
   $scope.availability = null
+  $scope.selected = null
 
   ## bind the availabilities slots with full-Calendar events
   $scope.eventSources = []
@@ -60,6 +61,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       updateEventTimes(event, delta, revertFunc, jsEvent, ui, view)
     eventResize: (event, delta, revertFunc, jsEvent, ui, view) ->
       updateEventTimes(event, delta, revertFunc, jsEvent, ui, view)
+    eventAfterAllRender: (view) ->
+      eventAfterAllRenderCb(view)
 
 
 
@@ -199,7 +202,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   $scope.selectEvent = (jsEvent) ->
     $(".fc-event.selected").removeClass("selected")
     if (jsEvent)
-      $(jsEvent.target).closest(".fc-event").addClass("selected")
+      $(jsEvent).closest(".fc-event").addClass("selected")
 
   ##
   # Trigger event details modal
@@ -277,12 +280,13 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
     $scope.availability = event
+    $scope.selected = event.id
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
       $scope.removeSlot()
     # if the user has only clicked on the event, display its reservations
     else
-      $scope.selectEvent(jsEvent)
+      $scope.selectEvent(jsEvent.target)
       Availability.reservations {id: event.id}, (reservations) ->
         $scope.reservations = reservations
 
@@ -294,7 +298,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   # @see http://fullcalendar.io/docs/event_rendering/eventRender/
   ##
   eventRenderCb = (event, element) ->
-    element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>')
+    element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>').attr('id', 'fc-' + event.id)
     if event.tags.length > 0
       html = ''
       for tag in event.tags
@@ -320,10 +324,23 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   # @see https://fullcalendar.io/docs/eventDrop
   ##
   updateEventTimes = (event, delta, revertFunc, jsEvent, ui, view) ->
+    if ($scope.availability)
+      $scope.availability = null
+      $scope.selected = event.id
     event.start_at = moment.tz(event.start.toISOString(), Fablab.timezone)
     event.end_at = moment.tz(event.end.toISOString(), Fablab.timezone)
     Availability.update {id: event.id}, event
-    uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
+    uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+
+
+  eventAfterAllRenderCb = (view) ->
+    if $scope.selected
+      events = uiCalendarConfig.calendars.calendar.fullCalendar( 'clientEvents' );
+      for event in events
+        if event.id == $scope.selected
+          $scope.availability = event
+          $scope.selectEvent( $('#fc-' + event.id) )
+          
 ]
 
 
