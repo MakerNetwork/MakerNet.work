@@ -65,6 +65,16 @@ en:
           cancelled: "Cancelled"
           add_slot: "Add slot"
           edit_slot: "Edit this slot"
+          start_date: "Start date"
+          end_date: "End date"
+          start_time: "Start time"
+          end_time: "End time"
+          recurrence: "Recurrence"
+          _and_ends_on: "and ends on"
+          every_days: "Everyday"
+          every_week: "Every week"
+          every_month: "Every month"
+          every_year: "Every year"
 
       project_elements:
         # management of the projects' components

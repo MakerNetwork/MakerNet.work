@@ -394,20 +394,20 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
 
   ## default parameters for AngularUI-Bootstrap datepicker
   $scope.datePicker =
-  format: Fablab.uibDateFormat
-  startOpened: false # default: datePicker is not shown
-  endOpened: false
-  recurrenceEndOpened: false
-  options:
-    startingDay: Fablab.weekStartingDay
+    format: Fablab.uibDateFormat
+    startOpened: false # default: datePicker is not shown
+    endOpened: false
+    recurrenceEndOpened: false
+    options:
+      startingDay: Fablab.weekStartingDay
 
   ## Possible types of recurrences for an event
   $scope.recurrenceTypes = [
     {label: _t('none'), value: 'none'},
-    {label: _t('every_days'), value: 'day'},
-    {label: _t('every_week'), value: 'week'},
-    {label: _t('every_month'), value: 'month'},
-    {label: _t('every_year'), value: 'year'}
+    {label: _t('admin_calendar.every_days'), value: 'day'},
+    {label: _t('admin_calendar.every_week'), value: 'week'},
+    {label: _t('admin_calendar.every_month'), value: 'month'},
+    {label: _t('admin_calendar.every_year'), value: 'year'}
   ]
 
   ##
@@ -474,7 +474,9 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       start: start
       end: end
       available_type: 'machines' # default
+      recurrence: 'none'
 
+  console.log($scope.availability)
   ##
   # Callback for the modal window validation: save the slot and closes the modal
   ##
