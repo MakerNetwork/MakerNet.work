@@ -12,8 +12,22 @@
                             <div class="input-group-addon"><i class="fa fa-font"></i></div>
                             <input type="text" id="fablabName" ng-model="fablabName.value" class="form-control" placeholder="{{ 'settings.fablab_name' | translate }}"/>
                         </div>
-                    </div>
+                    </div>                              
                     <button name="button" class="btn btn-warning" ng-click="save(fablabName)" translate>{{ 'save' }}</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row m-t-lg">
+            <div class="col-md-4">
+                <form role="form" novalidate>
+                    <label for="facilityType" class="control-label m-r" translate>{{ 'settings.facility_type' }}</label>
+                    <div class="form-group">
+                    <select class="form-control m-t-sm" id="facilityType" ng-model="facilityType.value" ng-options="type as ('settings.' + type | translate) for type in facilityTypes" placeholder="{{ 'settings.add_facility_type' | translate }}" ng-selected="facilityType.value">
+                        <option value="" translate>{{ 'settings.add_facility_type' }}</option>
+                    </select>                     
+                    </div>
+                      <button name="button" class="btn btn-warning" ng-click="save(facilityType)" translate>{{ 'save' }}</button>
                 </form>
             </div>
         </div>
