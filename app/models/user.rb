@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
    # uninvolve_from_projects
   end
 
+  def activate_member
+    update_attribute(:is_active, true)
+  end
+
   def uninvolve_from_projects
     my_projects.destroy_all
     project_users.destroy_all

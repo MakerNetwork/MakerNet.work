@@ -439,6 +439,10 @@ en:
         state: "State"
         unknown: "Unknown: "
         active: "Active"
+        member_is_active: "Do you really want to active this member?"
+        member_successfully_active: "Member successfully active"
+        unable_to_active_the_member: "Unable to active Member"
+        deactivate_members: "Deactivate Members"
         pending: "Pending"
         previous_provider: "Previous provider"
         do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Do you really want to delete the {{TYPE}} authentication provider: {{NAME}}?"  # angular interpolation

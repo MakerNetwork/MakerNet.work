@@ -1010,6 +1010,9 @@ angular.module('application.router', ['ui.router']).
           'main@':
             templateUrl: '<%= asset_path "admin/members/index.html.erb" %>'
             controller: 'AdminMembersController'
+          'deactivateMembers@app.admin.members':
+            templateUrl: '<%= asset_path "admin/members/deactivate_members.html.erb" %>'
+            controller: 'AdminMembersController'
           'groups@app.admin.members':
             templateUrl: '<%= asset_path "admin/groups/index.html.erb" %>'
             controller: 'GroupsController'
@@ -1021,7 +1024,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'AuthentificationController'
         resolve:
           membersPromise: ['Member', (Member)->
-            Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise
+            Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20, is_active: true} }).$promise
           ]
           adminsPromise: ['Admin', (Admin)->
             Admin.query().$promise
@@ -1034,6 +1037,9 @@ angular.module('application.router', ['ui.router']).
           ]
           authProvidersPromise: ['AuthProvider', (AuthProvider)->
             AuthProvider.query().$promise
+          ]
+          deactivateMembersPromise: ['Member', (Member)->
+            Member.list({ query: { is_active: 'f', search: '', order_by: 'id', page: 1, size: 20, is_active: false } }).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.members').$promise
