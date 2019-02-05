@@ -66,6 +66,7 @@ en:
         surname_is_required: "Surname is required."
         your_pseudonym: "Your nickname"
         pseudonym_is_required: "Nickname is required."
+        your_member_id: "Student / Member ID"
         your_email_address: "Your e-mail address"
         email_is_required: "E-mail address is required."
         your_password: "Your password"
