@@ -20,7 +20,7 @@ class API::AdminsController < API::ApiController
       @admin.generate_auth_migration_token
     end
 
-    if @admin.save(validate: false)
+    if @admin.save
       @admin.add_role(:admin)
       @admin.remove_role(:member)
       UsersMailer.delay.notify_user_account_created(@admin, generated_password)
