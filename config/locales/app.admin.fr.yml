@@ -414,6 +414,8 @@ fr:
         groups: "Groupes"
         authentication: "Authentification"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Êtes-vous sûr de vouloir supprimer cet administrateur ? Cette opération est irréversible."
+        do_you_really_want_to_pause_this_member: "Voulez-vous vraiment mettre en pause ce compte membre?"
+        warning_account_marked_as_inactive: "Il sera marqué comme inactif et ne pourra plus accéder aux fonctionnalités des membres de la plate-forme tant que son compte ne sera pas réactivé."        
         this_may_take_a_while_please_wait: "Attention : ceci peut prendre un certain temps, merci de patienter."
         administrator_successfully_deleted: "L'administrateur a bien été supprimé."
         unable_to_delete_the_administrator: "L'administrateur n'a pas pu être supprimé."

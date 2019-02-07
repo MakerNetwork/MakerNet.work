@@ -418,6 +418,8 @@ en:
         authentication: "Authentication"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Do you really want to delete this administrator? This cannot be undone."
         do_you_really_want_to_remove_this_member: "Do you really want to remove this member? It will be marked as inactive and will be hidden."
+        do_you_really_want_to_pause_this_member: "Do you really want to pause this member account?"
+        warning_account_marked_as_inactive: "It will be marked as inactive and will no longer be able to access the features for members in the platform until its account is reactivated."
         notice_member_projects_will_be_deleted: "All of the user project records will be deleted. This can not be undone."
         warning_if_multiple_period_suscription_is_active: "Warning: If the user has a current enrollment membership with multiple payment periods, the subscription must be stoped from the Stripe account dashboard."
         this_may_take_a_while_please_wait: "Warning: This may take a while, please be patient."
