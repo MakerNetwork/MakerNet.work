@@ -29,7 +29,8 @@
           <tbody>
           <tr ng-repeat="reservation in reservations">
             <td class="text-c">
-              <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
+                <p ng-if="!reservation.exist_user">{{ reservation.user_full_name }} </p>
+                <a ng-if="reservation.exist_user" ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
             <td>

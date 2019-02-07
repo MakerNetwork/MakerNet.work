@@ -1,6 +1,7 @@
 json.id reservation.id
 json.user_id reservation.user_id
-json.user_full_name reservation.user.profile.full_name
+json.exist_user !reservation.user.nil?
+json.user_full_name reservation.get_user_profile_full_name
 json.message reservation.message
 json.slots reservation.slots do |s|
   json.id s.id
