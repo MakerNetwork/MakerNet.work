@@ -83,14 +83,17 @@ class API::MembersController < API::ApiController
 
   def destroy
     authorize User
+    STDERR.puts "IN THE DESTROY FUNCTION"
     @member.soft_destroy
     sign_out(@member) unless current_user.is_admin?
     head :no_content
   end
 
   def activate
-    authorize User
+    @member = User.friendly.find(params[:id])
+    STDERR.puts "IN THE ACTIVATE FUNCTION"
     @member.activate_member
+    head :no_content
   end
 
   # export subscriptions

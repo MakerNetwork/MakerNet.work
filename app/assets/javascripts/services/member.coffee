@@ -25,4 +25,8 @@ Application.Services.factory 'Member', ["$resource", ($resource)->
     mapping:
       method: 'GET'
       url: '/api/members/mapping'
+    activate:
+      method: 'POST'
+      url: '/api/members/activate'   
+      isArray: false 
 ]

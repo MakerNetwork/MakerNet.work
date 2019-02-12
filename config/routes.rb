@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
+      post 'activate', action: 'activate', on: :collection
     end
     resources :reservations, only: [:show, :create, :index, :update]
     resources :notifications, only: [:index, :show, :update] do

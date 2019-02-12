@@ -204,7 +204,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope","$sce", '
           msg: $sce.trustAsHtml(
             _t('member_is_active')
           )
-    , -> # activate confirmed        
+    , -> # activate confirmed 
+      Member.activate id: member.id, (member) ->             
         deactivateMembers.splice(findMemberIdxById(deactivateMembers, member.id), 1)
         growl.success(_t('member_successfully_active'))
       , (error)->
