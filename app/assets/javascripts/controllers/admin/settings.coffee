@@ -80,6 +80,10 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
       name: 'booking_cancel_delay'
       value: parseInt(settingsPromise.booking_cancel_delay, 10)
 
+    $scope.enableReserveSpaces =
+      name: 'reserve_spaces_enable'
+      value: (settingsPromise.reserve_spaces_enable == "true")
+
     $scope.enableReminder =
       name: 'reminder_enable'
       value: (settingsPromise.reminder_enable == 'true')
