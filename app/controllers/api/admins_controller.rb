@@ -24,7 +24,7 @@ class API::AdminsController < API::ApiController
       @admin.add_role(:admin)
       @admin.remove_role(:member)
       UsersMailer.delay.notify_user_account_created(@admin, generated_password)
-      @admin.send_confirmation_instructions
+      #@admin.send_confirmation_instructions
 
       render :create, status: :created
     else
