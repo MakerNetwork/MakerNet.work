@@ -75,6 +75,8 @@ es:
       trainings:
         # track and monitor the trainings
         training: "Formación"
+        trainings_list: "Lista de Talleres"
+        validate_trainings: "Validar Talleres"
         add_a_new_training: "Add a new training"                                                   # translation_missing
         associated_machines: "Associated machines"                                                 # translation_missing
         number_of_tickets: "Number of tickets"                                                     # translation_missing
@@ -107,9 +109,10 @@ es:
 
       events:
         # events tracking and management
-        events_monitoring: "Monitoreo de eventos"
+        events_monitoring: "Lista de eventos"
         manage_filters: "Administrar filtros"
-        fablab_events: "Eventos de Fablab"
+        event_categories: "Categorías de Evento"
+        fablab_events: "Administración de Eventos"
         all_events: "Todos los eventos"
         passed_events: "Eventos pasados"
         events_to_come: "Eventos por venir"
@@ -133,7 +136,7 @@ es:
         at_least_one_category_is_required: "Se requiere por lo menos una categoría."
         unable_to_delete_the_last_one: "No se pudo eliminar el último."
         unable_to_delete_an_error_occured: "No se pudo eliminar: se ha producido un error.."
-        manage_prices_categories: "Gestionar categorías de precios"
+        manage_prices_categories: "Categorías de precios"
         prices_categories: "Categorías de precios"
         add_a_price_category: "Agregar una categoría de precios"
         usages_count: "Cuenta de uso"
