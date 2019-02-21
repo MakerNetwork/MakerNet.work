@@ -179,8 +179,6 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     onPageVisible (state) ->
       $rootScope.toCheckNotifications = (state is 'visible')
 
-    Setting.get { name: 'fablab_name' }, (data)->
-      $scope.fablabName = data.setting.value
     Setting.get { name: 'name_genre' }, (data)->
       $scope.nameGenre = data.setting.value
 

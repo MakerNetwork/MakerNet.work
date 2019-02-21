@@ -1,42 +1,55 @@
 class Setting < ActiveRecord::Base
+  FACILITY_TYPES = %w(
+    fab_lab
+    makerspace
+    hackerspace
+    media_lab
+    biohacking_space
+  )
+
   validates :name, inclusion:
-                    { in: %w(about_title
-                             about_body
-                             about_contacts
-                             twitter_name
-                             home_blogpost
-                             machine_explications_alert
-                             training_explications_alert
-                             training_information_message
-                             subscription_explications_alert
-                             invoice_logo
-                             invoice_reference
-                             invoice_code-active
-                             invoice_code-value
-                             invoice_order-nb
-                             invoice_VAT-active
-                             invoice_VAT-rate
-                             invoice_text
-                             invoice_legals
-                             booking_window_start
-                             booking_window_end
-                             booking_slot_duration
-                             booking_move_enable
-                             booking_move_delay
-                             booking_cancel_enable
-                             booking_cancel_delay
-                             main_color
-                             secondary_color
-                             fablab_name
-                             name_genre
-                             reminder_enable
-                             reminder_delay
-                             event_explications_alert
-                             space_explications_alert
-                             visibility_yearly
-                             visibility_others
-                             display_name_enable )
-                    }
+    { in: %w(
+        about_title
+        about_body
+        about_contacts
+        facility_types
+        facility_type
+        twitter_name
+        home_blogpost
+        machine_explications_alert
+        training_explications_alert
+        training_information_message
+        subscription_explications_alert
+        invoice_logo
+        invoice_reference
+        invoice_code-active
+        invoice_code-value
+        invoice_order-nb
+        invoice_VAT-active
+        invoice_VAT-rate
+        invoice_text
+        invoice_legals
+        booking_window_start
+        booking_window_end
+        booking_slot_duration
+        booking_move_enable
+        booking_move_delay
+        booking_cancel_enable
+        booking_cancel_delay
+        main_color
+        secondary_color
+        fablab_name
+        fablab_type
+        name_genre
+        reminder_enable
+        reminder_delay
+        event_explications_alert
+        space_explications_alert
+        visibility_yearly
+        visibility_others
+        display_name_enable
+      )
+    }
 
   after_update :update_stylesheet if :value_changed?
 
@@ -45,6 +58,4 @@ class Setting < ActiveRecord::Base
       Stylesheet.first.rebuild!
     end
   end
-
-
 end
