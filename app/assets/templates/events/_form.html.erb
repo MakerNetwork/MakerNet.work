@@ -69,10 +69,10 @@
           <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>
       </div>
-
-
     </div>   <!-- ./panel-body  -->
-
+     <div class="panel-footer no-padder">
+      <input type="submit" value="{{ 'save' | translate}}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="eventForm.$invalid || event.category_id === null"/>
+    </div>
     </section>
   </div>
 
@@ -291,11 +291,5 @@
       </div>
     </div>
     </section>
-     <div class="panel-footer no-padder">
-      <input type="submit"
-         ng-value="submitName"
-       class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
-       ng-disabled="eventForm.$invalid || event.category_id === null"/>
-    </div>
   </div>
 </div>
