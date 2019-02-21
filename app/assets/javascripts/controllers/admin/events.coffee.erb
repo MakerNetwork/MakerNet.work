@@ -364,7 +364,6 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   initialize = ->
     paginationCheck(eventsPromise, $scope.events)
 
-
   ##
   # Check if all events are already displayed OR if the button 'load more events'
   # is required
@@ -459,6 +458,11 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", 'C
     {label: _t('every_month'), value: 'month'},
     {label: _t('every_year'), value: 'year'}
   ]
+
+  $scope.$watch 'event.nb_total_places', (newValue, oldValue, scope) ->
+    if newValue == 0
+      $scope.event.amount = 0
+      $scope.event.prices = []
 
   ## Using the EventsController
   new EventsController($scope, $state)
