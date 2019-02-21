@@ -5,7 +5,7 @@
     <div class="panel-body">
         <div class="row m-t-lg">
             <div class="col-md-4">
-                <form role="form" novalidate>
+                <form role="form" novalidate unsaved-warning-form>
                     <label for="fablabName" class="control-label m-r" translate>{{ 'settings.fablab_title' }}</label>
                     <div class="form-group">
                         <div class="input-group">
@@ -20,7 +20,7 @@
 
         <div class="row m-t-lg">
             <div class="col-md-4">
-                <form role="form" novalidate>
+                <form role="form" novalidate unsaved-warning-form>
                     <label for="facilityType" class="control-label m-r" translate>{{ 'settings.facility_type' }}</label>
                     <div class="form-group">
                     <select class="form-control m-t-sm" id="facilityType" ng-model="facilityType.value" ng-options="type as ('settings.' + type | translate) for type in facilityTypes" placeholder="{{ 'settings.add_facility_type' | translate }}" ng-selected="facilityType.value">
@@ -250,7 +250,7 @@
         <div class="row m-t m-l-xs">
             <div class="col-md-4">
                 <h4 translate>{{ 'settings.main_colour' }}</h4>
-                <form role="form" class="form-inline" name="mainColorForm" novalidate>
+                <form role="form" class="form-inline" name="mainColorForm" novalidate unsaved-warning-form>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -266,7 +266,7 @@
             </div>
             <div class="col-md-4">
                 <h4 translate>{{ 'settings.secondary_colour' }}</h4>
-                <form role="form" class="form-inline" name="secondColorForm" novalidate>
+                <form role="form" class="form-inline" name="secondColorForm" novalidate unsaved-warning-form>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
