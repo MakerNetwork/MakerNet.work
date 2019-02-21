@@ -46,9 +46,9 @@
                    ng-model="user.profile_attributes.first_name"
                    class="form-control"
                    placeholder="{{ 'your_first_name' | translate }}"
-                   required>       
+                   required>
           </div>
-          <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>            
+          <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
           </div>
          </div>
           <div class="form-group" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
@@ -61,7 +61,7 @@
                    ng-model="user.profile_attributes.last_name"
                    class="form-control"
                    placeholder="{{ 'your_surname' | translate }}"
-                   required>           
+                   required>
           </div>
            <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
           </div>
@@ -132,17 +132,17 @@
         </div>
 
 
-
         <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
-          <div class="col-sm-12">
-              
-            <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-          </span>
-              <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
-                <option value="" translate>{{ 'your_user_s_profile' }}</option>
-              </select>
-            </div>
+          <div class="col-sm-1">
+            <label for="user_group_id" class="control-label">
+              <span translate>{{ 'group' }}</span>
+              <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            </label>
+          </div>
+          <div class="col-sm-11">
+            <label class="checkbox" ng-repeat="g in groups">
+              <input type="radio" ng-model="user.group_id" ng-value="g.id"> {{ g.name }}
+            </label>
             <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
           </div>
         </div>
