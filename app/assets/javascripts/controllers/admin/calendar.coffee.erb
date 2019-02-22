@@ -259,6 +259,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   calendarSelectCb = (start, end, jsEvent, view) ->
     start = moment.tz(start.toISOString(), Fablab.timezone)
     end = moment.tz(end.toISOString(), Fablab.timezone)
+    start = new Date(start)
+    end = new Date(end)
     # first we check that the selected slot is an N-hours multiple (ie. not decimal)
     if Number.isInteger(parseInt((end.valueOf() - start.valueOf()) / (SLOT_MULTIPLE * 1000), 10)/SLOT_MULTIPLE)
       today = new Date()
@@ -272,6 +274,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   calendarDayClickCb = (date, jsEvent, view) ->
     start = moment.tz(date.toISOString(), Fablab.timezone)
     end = moment.tz(date.toISOString(), Fablab.timezone).add(30, "m")
+    start = new Date(start)
+    end = new Date(end)
     $scope.triggerEventModal(null, start, end)
 
   ##
@@ -286,6 +290,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       $scope.removeSlot()
     # if the user has only clicked on the event, display its reservations
     else
+      $scope.availability = event
+      $scope.selected = event.id
       $scope.selectEvent(jsEvent.target)
       Availability.reservations {id: event.id}, (reservations) ->
         $scope.reservations = reservations
@@ -427,6 +433,8 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       for space in $scope.spaces
         if space.id == availability.space_ids[0]
           $scope.selectedSpace = space
+    $scope.availability.start = new Date($scope.availability.start)
+    $scope.availability.end = new Date($scope.availability.end)
   else
     $scope.availability =
       start: start
@@ -500,8 +508,8 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     if $scope.step == 2
       if $scope.availability.start == null
         today = moment.tz(new Date(), Fablab.timezone)
-        $scope.availability.start = today.startOf('hour').add(1, 'h').clone()
-        $scope.availability.end = today.add(30, 'm').clone()
+        $scope.start = new Date(today.startOf('hour').add(1, 'h').clone())
+        $scope.end = new Date(today.add(30, 'm').clone())
     $scope.step++
 
 
@@ -550,14 +558,14 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     ## When we configure a machine availability, do not let the user change the end time, as the total
     ## time must be dividable by 60 minutes (base slot duration). For training availabilities, the user
     ## can configure any duration as it does not matters.
-    $scope.$watch 'availability.available_type', (newValue, oldValue, scope) ->
-      if newValue == 'machines' or newValue == 'space'
+    ##$scope.$watch 'availability.available_type', (newValue, oldValue, scope) ->
+      ##if newValue == 'machines' or newValue == 'space'
         ##$scope.endDateReadOnly = true
-        diff = moment($scope.end).diff($scope.start, 'hours') # the result is rounded down by moment.js
-        $scope.end = moment($scope.start).add(diff, 'hours').toDate()
-        $scope.availability.end_at = $scope.end
-      else
-        $scope.endDateReadOnly = false
+        ##diff = moment($scope.end).diff($scope.start, 'hours') # the result is rounded down by moment.js
+        ##$scope.end = moment($scope.start).add(diff, 'hours').toDate()
+        ##$scope.availability.end = $scope.end
+      ##else
+        ##$scope.endDateReadOnly = false
 
     ## When the start date is changed, if we are configuring a machine availability,
     ## maintain the relative length of the slot (ie. change the end time accordingly)
@@ -572,7 +580,8 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
         if moment(newValue).add(1, 'hour').isAfter($scope.end)
           $scope.start = oldValue
       # update availability object
-      $scope.availability.start_at = $scope.start
+      ##$scope.availability.start = $scope.start
+      
 
     ## Maintain consistency between the end time and the date object in the availability object
     $scope.$watch 'end', (newValue, oldValue, scope) ->
@@ -580,10 +589,38 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
       if moment($scope.start).add(1, 'hour').isAfter(newValue)
         $scope.end = oldValue
       # update availability object
-      $scope.availability.end_at = $scope.end
-
-
+      ##$scope.availability.end = $scope.end
 
   ## !!! MUST BE CALLED AT THE END of the controller
   initialize()
 ]
+
+
+Application.Directives.directive 'datetimepickerNeutralTimezone', ->
+  {
+    restrict: 'A'
+    priority: 1
+    require: 'ngModel'
+    link: (scope, element, attrs, ctrl) ->
+      ctrl.$formatters.push (value) ->
+        if (value != null)
+          sysdate = moment.tz(Date.parse(value), Fablab.timezone)
+          ## get the difference in hours between Fablab and client zones
+          offset = (value.getTimezoneOffset() - (sysdate.utcOffset() * -1)) / 60
+          date = new Date(Date.parse(value)) 
+          ## adjusts the time shown to match Fablan timezone instead of client's 
+          date.setHours( date.getHours() + offset );
+          date
+        else 
+          value
+      ctrl.$parsers.push (value) ->
+        sysdate = moment.tz(Date.parse(value), Fablab.timezone)
+        ## get the difference in hours between Fablab and client zones
+        offset = (value.getTimezoneOffset() - (sysdate.utcOffset() * -1)) / 60
+        date = new Date(Date.parse(value)) 
+        ## adjusts the time shown to match Fablan timezone instead of client's 
+        date.setHours( date.getHours() - offset );
+        date
+      return
+
+  }
