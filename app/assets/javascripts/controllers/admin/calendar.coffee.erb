@@ -283,8 +283,6 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   # @see http://fullcalendar.io/docs/mouse/eventClick/
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
-    $scope.availability = event
-    $scope.selected = event.id
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
       $scope.removeSlot()
@@ -416,7 +414,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.isChecked = (machine) ->
     if $scope.selectedMachines.indexOf(machine) > -1
       return true
-
+  
   ## replace with availability from params if supplied
   if availability
     $scope.availability = availability
