@@ -422,6 +422,19 @@ class Reservation < ActiveRecord::Base
     total
   end
 
+  def get_user_profile_full_name
+    profile =  Profile.find_by(user_id: self.user_id)
+    full_name = "Unknown"
+    if !profile.nil?
+      full_name = profile.full_name
+    end
+    full_name
+  end
+
+  def get_user
+    self.user
+  end
+
   private
   def machine_not_already_reserved
     already_reserved = false
