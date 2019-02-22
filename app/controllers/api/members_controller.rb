@@ -49,7 +49,7 @@ class API::MembersController < API::ApiController
 
     if @member.save
       @member.generate_admin_invoice
-      @member.send_confirmation_instructions
+      #@member.send_confirmation_instructions
       if !user_params[:password] and !user_params[:password_confirmation]
         UsersMailer.delay.notify_user_account_created(@member, generated_password)
       else
