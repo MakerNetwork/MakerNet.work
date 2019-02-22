@@ -1,3 +1,7 @@
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+<input name="_method" type="hidden" ng-value="method">
+<input name="admin[profile_attributes][id]" type="hidden" ng-value="admin.profile_attributes.id">
+
 <div class="row m-t">
   <div class="col-sm-offset-2 col-sm-8">
    <div class="form-group" ng-class="{'has-error': adminForm.gender.$dirty && adminForm.gender.$invalid}">
@@ -30,7 +34,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.username"
                type="text" 
                name="admin[username]"
@@ -44,7 +48,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][last_name]'].$dirty && adminForm['admin[profile_attributes][last_name]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.profile_attributes.last_name"
                type="text"
                name="admin[profile_attributes][last_name]"
@@ -58,7 +62,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][first_name]'].$dirty && adminForm['admin[profile_attributes][first_name]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.profile_attributes.first_name"
                type="text"
                name="admin[profile_attributes][first_name]"
@@ -72,14 +76,15 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
-        <input ng-model="admin.email"
-               type="email"
+        <span class="input-group-addon"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input type="email"
                name="admin[email]"
+               ng-model="admin.email"
                class="form-control"
                id="user_email"
                placeholder="{{ 'email_address' | translate }}"
-               required>
+               ng-disabled="preventField['admin.email'] && admin.email && !adminForm['admin[email]'].$dirty"
+               required/>
       </div>
       <span class="help-block" ng-show="adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$error.required" translate>{{ 'email_is_required' }}</span>
     </div>
@@ -120,13 +125,19 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][phone]'].$dirty && adminForm['admin[profile_attributes][phone]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
-        <input ng-model="admin.profile_attributes.phone"
+        <span class="input-group-addon"><i class="fa fa-phone"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+        <input ng-model="admin.profile_attributes.phone"s
                type="text"
                name="admin[profile_attributes][phone]"
-               class="form-control" id="user_phone"
-               placeholder="{{ 'phone_number' | translate }}">
+               ng-pattern=/^\+?\d{7,12}$/
+               class="form-control"
+               id="user_phone"
+               placeholder="{{' +5555555555' | translate }}"
+               ng-disabled="preventField['profile.phone'] && user.profile.phone && !userForm['user[profile_attributes][phone]'].$dirty"
+               required/>
       </div>
+      <span class="help-block" ng-show="adminForm['admin[profile_attributes][phone]'].$dirty && adminForm['admin[profile_attributes][phone]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
+
     </div>
   </div>
 

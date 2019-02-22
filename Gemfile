@@ -14,7 +14,6 @@ gem 'responders', '~> 2.0' # Rails flash responders to dry up your application
 gem 'bootstrap-sass' # Sass-powered version of Bootstrap 3
 gem 'font-awesome-sass' #  Font-Awesome web fonts and stylesheets
 gem 'chroma' # Color manipulation and palette generation
-#gem 'angularjs-rails' #using bower instead
 
 gem 'puma' # Web server built for concurrency
 gem 'foreman' # Manage Procfile-based applications

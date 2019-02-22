@@ -41,7 +41,8 @@ en:
           previous: "< Previous"
           select_some_machines: "Select machines"
           number_of_tickets: "Number of tickets: "
-          adjust_the_opening_hours: "Adjust the slot hours"
+          adjust_the_slot_date: "Adjust the slot date"
+          adjust_the_slot_hours: "Adjust the slot hours"
           to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
           restrict_this_slot_with_labels_(optional): "Restrict this slot with labels (optional)"
           the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
