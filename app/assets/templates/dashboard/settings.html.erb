@@ -89,7 +89,7 @@
         <div class="panel-heading b-b">
           <h1 class="red text-u-c" translate>{{ 'edit_my_profile' }}</h1>
         </div>
-        <form role="form" name="userForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+        <form role="form" name="userForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
           <div class="widget-content no-bg auto">
               <section class="panel panel-default bg-light m p-lg row" ng-if="hasSsoFields()">
                   <div class="panel-heading">
