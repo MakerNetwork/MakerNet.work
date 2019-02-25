@@ -52,7 +52,7 @@
                 </div>
                 <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
                   <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
-                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fas fa-trash"></i></a>
               </div>
             </div>
             <div class="col-md-1 m-t-xs">
@@ -64,7 +64,7 @@
       </div>
 
       <div class="form-group" ng-class="{'has-error': projectForm['project[description]'].$dirty && projectForm['project[description]'].$invalid}">
-        <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
+        <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }}*</label>
         <div class="col-sm-10">
           <input type="hidden" name="project[description]" ng-value="project.description" />
           <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOpts" name="project[description]" required></summernote>
@@ -126,7 +126,7 @@
               </div>
 
               <div class="m-t">
-                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'delete_the_step' | translate }}</a>
+                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fas fa-trash m-r-xs"></i> {{ 'delete_the_step' | translate }}</a>
               </div>
             </div>
           </div>

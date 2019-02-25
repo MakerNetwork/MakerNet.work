@@ -133,6 +133,10 @@
   }
 }
 
+.fc-event.selected {
+  box-shadow: rgba(63,199,255,.5) 0px 0px 20px;
+}
+
 
 
 
@@ -421,4 +425,17 @@
 
 .slider-nav__item--current {
   background: #ccc;
+}
+
+/*home calendar tweaks*/
+.fc-event.fc-start.fc-not-end .panel {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fc-event.fc-not-start.fc-end .panel {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

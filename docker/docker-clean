@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Delete unused resources
+docker system prune -f

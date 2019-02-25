@@ -4,7 +4,7 @@
     <div class="row no-gutter">
       <div class="col-md-1 hidden-xs">
         <section class="heading-btn">
-          <a ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left"></i></a>
+          <a ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
         </section>
       </div>
       <div class="col-md-8 b-l b-r">
@@ -42,7 +42,7 @@
             </div>
           </section>
 
-          <form role="form" name="userForm" class="form-horizontal col-md-8" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+          <form role="form" name="userForm" class="form-horizontal col-md-8" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
 
             <section class="panel panel-default bg-light m-lg">
               <div class="panel-body m-r">
@@ -209,10 +209,10 @@
                 <td>
                   <div class="buttons">
                     <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
-                      <i class="fa fa-file-pdf-o"></i> {{ 'download_the_invoice' | translate }}
+                      <i class="fas fa-file-invoice"></i> {{ 'download_the_invoice' | translate }}
                     </a>
                     <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
-                      <i class="fa fa-file-pdf-o"></i> {{ 'download_the_refund_invoice' | translate }}
+                      <i class="fas fa-file-invoice"></i> {{ 'download_the_refund_invoice' | translate }}
                     </a>
                   </div>
                 </td>

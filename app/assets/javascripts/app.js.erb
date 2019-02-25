@@ -45,6 +45,8 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
     // Custom messages for angular-unsavedChanges
     unsavedWarningsConfigProvider.navigateMessage = Fablab.translations.app.shared.messages.you_will_lose_any_unsaved_modification_if_you_quit_this_page;
     unsavedWarningsConfigProvider.reloadMessage = Fablab.translations.app.shared.messages.you_will_lose_any_unsaved_modification_if_you_reload_this_page;
+    //Defaults to ['$locationChangeStart' ,'$stateChangeStart'] which supports ui router by default.
+    unsavedWarningsConfigProvider.routeEvent = '$stateChangeStart';
 
     // Set how long the popup messages (growl) will remain
     growlProvider.globalTimeToLive(5000);
@@ -86,12 +88,13 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page
       $rootScope.backPrevLocation = function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        if($state.prevState.name == ""){
-          $state.prevState = "app.public.home";
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-        $state.go($state.prevState, $state.prevParams);
+        
+        /*Changed to use browser's back button functionality instead*/
+        window.history.back();
       };
 
       // Configuration of the summernote editor (used in project edition)

@@ -12,9 +12,8 @@ gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease
 gem 'jbuilder_cache_multi' # Retrieve fragments for a collection of objects from the cache
 gem 'responders', '~> 2.0' # Rails flash responders to dry up your application
 gem 'bootstrap-sass' # Sass-powered version of Bootstrap 3
-gem 'font-awesome-rails' #  Font-Awesome web fonts and stylesheets as a Rails engine
+gem 'font-awesome-sass' #  Font-Awesome web fonts and stylesheets
 gem 'chroma' # Color manipulation and palette generation
-#gem 'angularjs-rails' #using bower instead
 
 gem 'puma' # Web server built for concurrency
 gem 'foreman' # Manage Procfile-based applications
@@ -35,7 +34,7 @@ gem 'sinatra', require: false # DSL for quickly creating web applications
 gem 'recurrence' # A simple library that handles recurring events
 
 gem 'devise', '~> 3' # Flexible authentication solution
-gem 'devise-async' # Send Devise's emails in background
+gem 'devise-async', '~> 0.10.2' # Send Devise's emails in background
 gem 'omniauth' # Standardized Multi-Provider Authentication
 gem 'omniauth-oauth2' # Generic OAuth2 strategy for OmniAuth
 gem 'rolify' # Role management with resource scoping

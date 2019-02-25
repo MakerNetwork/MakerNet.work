@@ -12,7 +12,7 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates :gender, presence: true, length: { maximum: 10}
+  validates :gender, presence: false, length: { maximum: 10}
   validates :birthday, presence: false
   validates :phone, presence: true
   validates :member_id, presence: false, length: { maximum: 20}
@@ -33,12 +33,6 @@ class Profile < ActiveRecord::Base
       ''
     end
   end
-
-=begin
-  def str_gender
-    gender ? 'male' : 'female'
-  end
-=end
 
   def self.mapping
     # we protect some fields as they are designed to be managed by the system and must not be updated externally

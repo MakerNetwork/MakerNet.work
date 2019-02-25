@@ -5,15 +5,29 @@
     <div class="panel-body">
         <div class="row m-t-lg">
             <div class="col-md-4">
-                <form role="form" novalidate>
+                <form role="form" novalidate unsaved-warning-form>
                     <label for="fablabName" class="control-label m-r" translate>{{ 'settings.fablab_title' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-font"></i></div>
                             <input type="text" id="fablabName" ng-model="fablabName.value" class="form-control" placeholder="{{ 'settings.fablab_name' | translate }}"/>
                         </div>
-                    </div>
+                    </div>                              
                     <button name="button" class="btn btn-warning" ng-click="save(fablabName)" translate>{{ 'save' }}</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row m-t-lg">
+            <div class="col-md-4">
+                <form role="form" novalidate unsaved-warning-form>
+                    <label for="facilityType" class="control-label m-r" translate>{{ 'settings.facility_type' }}</label>
+                    <div class="form-group">
+                    <select class="form-control m-t-sm" id="facilityType" ng-model="facilityType.value" ng-options="type as ('settings.' + type | translate) for type in facilityTypes" placeholder="{{ 'settings.add_facility_type' | translate }}" ng-selected="facilityType.value">
+                        <option value="" translate>{{ 'settings.add_facility_type' }}</option>
+                    </select>                     
+                    </div>
+                      <button name="button" class="btn btn-warning" ng-click="save(facilityType)" translate>{{ 'save' }}</button>
                 </form>
             </div>
         </div>
@@ -88,7 +102,7 @@
         <span class="font-sbold" translate>{{ 'settings.legal_documents'}}</span>
     </div>
     <div class="panel-body">
-        <div class="alert alert-warning m-t" translate>
+        <div class="msg msg-warning m-t" translate>
             {{ 'settings.if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user' }}
         </div>
         <div class="row">
@@ -147,7 +161,7 @@
         <span class="font-sbold" translate>{{ 'settings.customize_the_graphics' }}</span>
     </div>
     <div class="panel-body">
-        <div class="alert alert-warning m-t">
+        <div class="msg msg-warning m-t">
             <span translate>{{ 'settings.for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height' }}</span><br/>
             <span translate>{{ 'settings.concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels' }}</span><br/>
             <br/>
@@ -236,7 +250,7 @@
         <div class="row m-t m-l-xs">
             <div class="col-md-4">
                 <h4 translate>{{ 'settings.main_colour' }}</h4>
-                <form role="form" class="form-inline" name="mainColorForm" novalidate>
+                <form role="form" class="form-inline" name="mainColorForm" novalidate unsaved-warning-form>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -252,7 +266,7 @@
             </div>
             <div class="col-md-4">
                 <h4 translate>{{ 'settings.secondary_colour' }}</h4>
-                <form role="form" class="form-inline" name="secondColorForm" novalidate>
+                <form role="form" class="form-inline" name="secondColorForm" novalidate unsaved-warning-form>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">

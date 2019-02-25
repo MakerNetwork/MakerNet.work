@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011125217) do
+ActiveRecord::Schema.define(version: 20181127161253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -408,7 +408,7 @@ ActiveRecord::Schema.define(version: 20171011125217) do
     t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "gender"
+    t.string   "gender"
     t.date     "birthday"
     t.string   "phone"
     t.text     "interest"
@@ -431,6 +431,7 @@ ActiveRecord::Schema.define(version: 20171011125217) do
     t.string   "lastfm"
     t.string   "flickr"
     t.string   "job"
+    t.string   "member_id"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -532,10 +533,11 @@ ActiveRecord::Schema.define(version: 20171011125217) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "settings", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",        null: false
     t.text     "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "fablab_type"
   end
 
   add_index "settings", ["name"], name: "index_settings_on_name", unique: true, using: :btree

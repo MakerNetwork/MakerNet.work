@@ -41,12 +41,14 @@ en:
           previous: "< Previous"
           select_some_machines: "Select machines"
           number_of_tickets: "Number of tickets: "
-          adjust_the_opening_hours: "Adjust the slot hours"
+          adjust_the_slot_date: "Adjust the slot date"
+          adjust_the_slot_hours: "Adjust the slot hours"
           to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
           restrict_this_slot_with_labels_(optional): "Restrict this slot with labels (optional)"
           the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
+          the_start_time_must_be_less_than_the_end_time: "The start time must be earlier than the end time"
           export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
           actions: "Actions"
           block_reservations: "Block reservations"
@@ -63,6 +65,7 @@ en:
           do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
           cancelled: "Cancelled"
           add_slot: "Add slot"
+          edit_slot: "Edit this slot"
 
       project_elements:
         # management of the projects' components
@@ -75,6 +78,8 @@ en:
       trainings:
         # track and monitor the trainings
         training: "Workshops"
+        trainings_list: "Workshops List"
+        validate_trainings: "Validate Workshops"
         add_a_new_training: "Add new workshop"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
@@ -107,9 +112,10 @@ en:
 
       events:
         # events tracking and management
-        events_monitoring: "Events Management"
+        events_monitoring: "Events List"
         manage_filters: "Manage filters"
-        fablab_events: "Events"
+        event_categories: "Event Categories"
+        fablab_events: "Events Management"
         all_events: "All events"
         passed_events: "Past Events"
         events_to_come: "Future Events"
@@ -133,8 +139,8 @@ en:
         at_least_one_category_is_required: "At least one category is required."
         unable_to_delete_the_last_one: "Unable to delete the last one."
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
-        manage_prices_categories: "Manage price categories"
-        prices_categories: "Price categories"
+        manage_prices_categories: "Price Categories"
+        prices_categories: "Price Categories"
         add_a_price_category: "Add a price category"
         usages_count: "Usages count"
         price_category: "Price category"
@@ -669,6 +675,13 @@ en:
           display_machine_reservation_user_name: "Publicy display machine reservation user name"
           display_name: "Display Name"
           display_name_enable: "Display the name"
+          facility_type: "Facility Type"  
+          fab_lab: "FabLab"
+          makerspace: "Makerspace"
+          hackerspace: "Hackerspace"
+          media_lab: "MediaLab"
+          biohacking_space: "BioHacking Space"
+          add_facility_type: "- Select the Facility Type -"
 
       open_api_clients:
         add_new_client: "Create new API client"

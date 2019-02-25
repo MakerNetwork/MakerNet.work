@@ -640,8 +640,11 @@ Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'A
       growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', {GENDER:getGender($scope.admin)}, "messageformat"))
       $state.go('app.admin.members')
     , (error)->
-      console.log(error)
-
+      $scope.alerts = []
+      angular.forEach error.data, (v, k)->
+        $scope.alerts.push
+          msg: v,
+          type: 'danger'
 
 
   ### PRIVATE SCOPE ###

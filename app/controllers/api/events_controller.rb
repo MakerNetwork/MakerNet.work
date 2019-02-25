@@ -28,14 +28,16 @@ class API::EventsController < API::ApiController
     @events = @events.page(@page).per(12)
   end
 
-  # GET /events/upcoming/:limit
+  # GET api/events/upcoming
   def upcoming
-    limit = params[:limit]
+    today = Time.now.to_date
+    start_of_current_week = today.beginning_of_week
+    end_of_next_week = start_of_current_week.next_day(15)
     @events = Event.includes(:event_image, :event_files, :availability, :category)
-                   .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
-                   .where('availabilities.start_at >= ?', Time.now)
-                   .order('availabilities.start_at ASC').references(:availabilities)
-                   .limit(limit)
+      .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
+      .where('availabilities.start_at >= ?', start_of_current_week)
+      .where('availabilities.start_at <= ?', end_of_next_week)
+      .order('availabilities.start_at ASC').references(:availabilities)
   end
 
   def show

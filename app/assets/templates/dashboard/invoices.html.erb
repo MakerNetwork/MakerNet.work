@@ -30,10 +30,10 @@
           <td>
             <div class="buttons">
               <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
-                <i class="fa fa-file-pdf-o"></i> {{ 'download_the_invoice' | translate }}
+                <i class="fas fa-file-invoice"></i> {{ 'download_the_invoice' | translate }}
               </a>
               <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
-                <i class="fa fa-file-pdf-o"></i> {{ 'download_the_credit_note' | translate }}
+                <i class="fas fa-file-invoice"></i> {{ 'download_the_credit_note' | translate }}
               </a>
             </div>
           </td>

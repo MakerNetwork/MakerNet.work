@@ -14,52 +14,64 @@
               <input type="radio"
                      name="gender_man"
                      ng-model="user.profile_attributes.gender"
-                     value="man"
-                     required/> {{ 'man' | translate }}
+                     value="man"/>
+                     <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_woman"
                      ng-model="user.profile_attributes.gender"
-                     value="woman"/> {{ 'woman' | translate }}
+                     value="woman"/>
+                     <i class="fa fa-female m-l-sm"></i>  {{ 'woman' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender_non"
                      ng-model="user.profile_attributes.gender"
-                     value="non-binary"/> {{ 'non_binary' | translate }}
+                     value="non-binary"/>
+                     <i class="fas fa-genderless m-l-sm"></i>
+                     {{ 'non_binary' | translate }}
             </label>
-            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
 
-          <div class="col-sm-6" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
+          <div class="col-sm-12">
+             <div class="input-group">
+               <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
             <input type="text"
                    name="first_name"
                    ng-model="user.profile_attributes.first_name"
                    class="form-control"
                    placeholder="{{ 'your_first_name' | translate }}"
                    required>
-            <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
           </div>
-          <div class="m-b visible-xs"></div>
-          <div class="col-sm-6" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
+          <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
+          </div>
+         </div>
+          <div class="form-group" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
+          <div class="col-sm-12">
+             <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
             <input type="text"
                    name="last_name"
                    ng-model="user.profile_attributes.last_name"
                    class="form-control"
                    placeholder="{{ 'your_surname' | translate }}"
                    required>
-            <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
+          </div>
+           <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
           </div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': signupForm.username.$dirty && signupForm.username.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            </span>
               <input type="text"
                      name="username"
                      ng-model="user.username"
@@ -73,7 +85,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <span class="input-group-addon"><i class="fa fa-envelope"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
               <input type="email"
                      name="email"
                      ng-model="user.email"
@@ -118,16 +130,19 @@
             <span class="help-block" ng-show="signupForm.password_confirmation.$error.match" translate>{{ 'password_does_not_match_with_confirmation' }}</span>
           </div>
         </div>
-        
-       
-        
+
+
         <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
-          <div class="col-sm-12">
-            <div>
-              <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
-                <option value="" translate>{{ 'your_user_s_profile' }}</option>
-              </select>
-            </div>
+          <div class="col-sm-1">
+            <label for="user_group_id" class="control-label">
+              <span translate>{{ 'group' }}</span>
+              <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            </label>
+          </div>
+          <div class="col-sm-11">
+            <label class="checkbox" ng-repeat="g in groups">
+              <input type="radio" ng-model="user.group_id" ng-value="g.id"> {{ g.name }}
+            </label>
             <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
           </div>
         </div>
@@ -135,7 +150,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.birthday.$dirty && signupForm.birthday.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
+              <span class="input-group-addon"><i class="fa fa-birthday-cake"></i><span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span> </span>
               <input type="text"
                      class="form-control"
                      name="birthday"
@@ -154,7 +169,7 @@
         <div class="form-group" ng-class="{'has-error': signupForm.phone.$dirty && signupForm.phone.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+              <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span> </span>
               <input  class="form-control"
                       ng-pattern="phoneNumbr"
 

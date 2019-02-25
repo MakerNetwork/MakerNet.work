@@ -2,7 +2,7 @@
   <div class="row no-gutter">
     <div class="col-xs-2 col-sm-2 col-md-1">
       <section class="heading-btn">
-        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
       </section>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
@@ -163,7 +163,7 @@
           <div class="font-sbold">{{ 'subscription_price' | translate }} {{paid.plan.amount | currency}}</div>
         </div>
 
-        <div class="alert alert-success">{{ 'thank_you_your_subscription_is_successful' | translate }}<br>
+        <div class="msg msg-success">{{ 'thank_you_your_subscription_is_successful' | translate }}<br>
         {{ 'your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a></div>
 
       </div>

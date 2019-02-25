@@ -18,8 +18,8 @@ es:
       unconfirmed: "Debe confirmar su cuenta antes de continuar."
     mailer:
       confirmation_instructions:
-        action:
-        instruction:
+        action: "Confirme su dirección de correo electrónico"
+        instruction: "Puede finalizar su registro confirmando su dirección de correo electrónico, haciendo clic en el siguiente enlace:"
         subject: "Instrucciones de confirmación"
       reset_password_instructions:
         action:

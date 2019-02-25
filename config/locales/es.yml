@@ -56,6 +56,7 @@ es:
     not_available: "No disponible"
     i_ve_reserved: "He reservado"
     must_be_at_least_1_hour_after_the_start_date: "Debe ser al menos 1 hora después de la fecha de inicio"
+    must_be_at_least_30_minutes_after_the_start_date: "Debe ser al menos 30 minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
 
   members:
@@ -218,7 +219,7 @@ es:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "una <strong><em>%{RESERVABLE}</em></strong> reserva fue hecha por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_Desde_PROVIDER_(UID)_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER} </strong> (%{UID})</em> ha completado su información."
+        account_imported_Desde_PROVIDER_(UID)_has_completed_its_information_html: "El perfil ha sido completado."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La reserva de <strong><em>%{USER}</em></strong>, hecha el %{DATE} ha sido cancelada. Recuerda reclamar una devolución si está disponible."
       notify_admin_slot_is_modified:

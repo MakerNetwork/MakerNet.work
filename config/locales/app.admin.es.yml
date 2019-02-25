@@ -47,6 +47,7 @@ es:
           the_slot_START-END_has_been_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "No se puede eliminar la ranura {{START}} - {{END}} porque ya está reservada por un miembror"  # angular interpolation
           you_should_select_at_least_a_machine: "Debe seleccionar al menos una máquina en esta ranura."
+          the_start_time_must_be_less_than_the_end_time: "La hora de inicio debe ser antes que a la hora de termino."
           export_is_running_you_ll_be_notified_when_its_ready: "La exportación se está ejecutando. Se le notificará cuando esté listo."
           actions: "Acciones"
           block_reservations: "Reservas de bloques"
@@ -74,6 +75,8 @@ es:
       trainings:
         # track and monitor the trainings
         training: "Formación"
+        trainings_list: "Lista de Talleres"
+        validate_trainings: "Validar Talleres"
         add_a_new_training: "Add a new training"                                                   # translation_missing
         associated_machines: "Associated machines"                                                 # translation_missing
         number_of_tickets: "Number of tickets"                                                     # translation_missing
@@ -106,9 +109,10 @@ es:
 
       events:
         # events tracking and management
-        events_monitoring: "Monitoreo de eventos"
+        events_monitoring: "Lista de eventos"
         manage_filters: "Administrar filtros"
-        fablab_events: "Eventos de Fablab"
+        event_categories: "Categorías de Evento"
+        fablab_events: "Administración de Eventos"
         all_events: "Todos los eventos"
         passed_events: "Eventos pasados"
         events_to_come: "Eventos por venir"
@@ -132,7 +136,7 @@ es:
         at_least_one_category_is_required: "Se requiere por lo menos una categoría."
         unable_to_delete_the_last_one: "No se pudo eliminar el último."
         unable_to_delete_an_error_occured: "No se pudo eliminar: se ha producido un error.."
-        manage_prices_categories: "Gestionar categorías de precios"
+        manage_prices_categories: "Categorías de precios"
         prices_categories: "Categorías de precios"
         add_a_price_category: "Agregar una categoría de precios"
         usages_count: "Cuenta de uso"
@@ -590,7 +594,7 @@ es:
           terms_of_service_(TOS): "Términos de servicio (TOS)"
           customize_the_graphics: "Personalizar los gráficos"
           for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height: "Para una representación óptima, la imagen del logotipo debe estar en el formato PNG con un fondo transparente y una relación de aspecto 3,5 más ancha que la altura."
-          concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "En cuanto al favicon, debe estar en formato ICO con un tamaño de 16x16 píxeles." 
+          concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "En cuanto al favicon, debe estar en formato ICO con un tamaño de 16x16 píxeles."
           remember_to_refresh_the_page_for_the_changes_to_take_effect: "Recuerde actualizar la página para que los cambios surtan efecto."
           logo_(white_background): "Logo (fondo blanco)"
           change_the_logo: "Cambiar el logotipo"
@@ -658,6 +662,13 @@ es:
           default_value_is_24_hours: "Si el campo es dejado vacio: 24 horas."
           visibility_yearly: "máxima visibilidad para suscriptores anuales"
           visibility_others: "máxima visibilidad para otros miembros"
+          facility_type: "Facility Type"  
+          fab_lab: "FabLab"
+          makerspace: "Makerspace"
+          hackerspace: "Hackerspace"
+          media_lab: "MediaLab"
+          biohacking_space: "BioHacking Space"
+          add_facility_type: "- Select the Facility Type -"
 
       open_api_clients:
         add_new_client: "Crear un nuevo cliente de API"

@@ -47,6 +47,7 @@ pt:
           the_slot_START-END_has_been_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
+          the_start_time_must_be_less_than_the_end_time: "O horário de início deve ser menor que o horário de término."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
           actions: "Ações"
           block_reservations: "Impedir reservas"
@@ -74,6 +75,8 @@ pt:
       trainings:
         # track and monitor the trainings
         training: "Treinamento"
+        trainings_list: "Lista de treinamentos"
+        validate_trainings: "Validar treinamentos"
         add_a_new_training: "Adicionar um novo treinamento"
         associated_machines: "Máquinas associadas"
         number_of_tickets: "Número de vagas"
@@ -106,9 +109,10 @@ pt:
 
       events:
         # events tracking and management
-        events_monitoring: "Monitoramento de eventos"
+        events_monitoring: "Lista de Eventos"
         manage_filters: "Gerenciar filtros"
-        fablab_events: "Eventos do FabLab"
+        event_categories: "Categorias de Eventos"
+        fablab_events: "Gestão de Eventos"
         all_events: "Todos eventos"
         passed_events: "Eventos anteriores"
         events_to_come: "Eventos futuros"
@@ -132,7 +136,7 @@ pt:
         at_least_one_category_is_required: "Pelo menos uma categoria é desejada."
         unable_to_delete_the_last_one: "Não é possível excluir o último."
         unable_to_delete_an_error_occured: "Impossível deletar: um erro ocorreu."
-        manage_prices_categories: "Gerenciar preços categorias"
+        manage_prices_categories: "Categorias de preço"
         prices_categories: "Preços de categoria"
         add_a_price_category: "Adicionar um preço de categoria"
         usages_count: "Contagem de uso"

@@ -91,8 +91,11 @@ angular.module('application.router', ['ui.router']).
           lastProjectsPromise: ['Project', (Project)->
             Project.lastPublished().$promise
           ]
+          upcomingTrainingsPromise: ['Training', (Training)->
+            Training.upcoming().$promise
+          ]
           upcomingEventsPromise: ['Event', (Event)->
-            Event.upcoming(limit: 3).$promise
+            Event.upcoming().$promise
           ]
           homeBlogpostPromise: ['Setting', (Setting)->
             Setting.get(name: 'home_blogpost').$promise
@@ -1176,6 +1179,7 @@ angular.module('application.router', ['ui.router']).
               'main_color',
               'secondary_color',
               'fablab_name',
+              'facility_type',
               'name_genre',
               'reminder_enable',
               'reminder_delay',
