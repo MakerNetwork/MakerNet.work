@@ -583,6 +583,8 @@ en:
           fablab_title: "Venue title"
           fablab_name: "Venue name"
           title_concordance: "Title concordance"
+          active_reserve_spaces_option: "Reserve Spaces"
+          reserve_spaces: "Reserve Spaces"
           male: "Male."
           female: "Female."
           eg: "eg:"
@@ -643,6 +645,7 @@ en:
           ability_for_the_users_to_cancel_their_reservations: "Ability for the users to cancel their reservations"
           reservations_cancelling: "Reservations cancelling"
           reservations_reminders: "Reservations reminders"
+          spaces: "Spaces"
           notification_sending_before_the_reservation_occurs: "Notification sending before the reservation occurs"
           customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation
           file_successfully_updated: "File successfully updated."

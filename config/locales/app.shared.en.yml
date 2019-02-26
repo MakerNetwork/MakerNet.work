@@ -431,6 +431,7 @@ en:
           default_places: "Default maximum tickets"
           default_places_is_required: "Default maximum tickets is required."
           disable_space: "Disable Space"
+          spaces_reservation_is_not_enable: "This option is not activate"
 
       cart:
         # module de panier d'achat de réservations
