@@ -41,6 +41,7 @@ class MembersController
       subscription_date_opened: false
       options:
         startingDay: Fablab.weekStartingDay
+        datepickerMode: 'year'
 
     ##
     # Shows the birth day datepicker
@@ -50,8 +51,20 @@ class MembersController
       $event.preventDefault()
       $event.stopPropagation()
       $scope.datePicker.opened = true
+    
+    today = new Date()
+    currentYear = today.getFullYear()
+    console.log(currentYear)
+    $scope.years = [1900...currentYear]
+    $scope.months = [1...13]
+    $scope.days = [1...32]
+  
+    console.log($scope.days)
+    console.log($scope.months)
+    console.log($scope.years)
 
-
+    $scope.birthdayChanged = () ->
+      $scope.user.profile.birthday = new Date($scope.year + "-" + $scope.mont + "-" + $scope.day)
 
     ##
     # Shows the end of subscription datepicker
@@ -620,8 +633,7 @@ Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'A
     opened: false
     options:
       startingDay: Fablab.weekStartingDay
-
-
+      datepickerMode: 'year'
 
   ##
   # Shows the birth day datepicker

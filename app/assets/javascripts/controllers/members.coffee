@@ -107,6 +107,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
     opened: false # default: datePicker is not shown
     options:
       startingDay: Fablab.weekStartingDay
+      datepickerMode: 'year'
 
 
 

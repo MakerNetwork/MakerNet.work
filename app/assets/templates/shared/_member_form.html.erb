@@ -218,11 +218,36 @@
                  placeholder="{{ 'date_of_birth' | translate }}"
                  ng-click="openDatePicker($event)"
                  ng-disabled="preventField['profile.birthday'] && user.profile.birthday && !userForm['user[profile_attributes][birthday]'].$dirty"
-                 ng-required = "user.role != 'admin'" />
+                 ng-required = "user.role != 'admin'" 
+                 datepicker-mode = "year"/>
           <input type="hidden"
                  name="user[profile_attributes][birthday]"
                  value="{{user.profile.birthday | toIsoDate}}" />
         </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
+          <label for="date_of_birth" translate>{{ 'date_of_birth' }}</label>
+          <!--input type="date" ng-model="profile.birthday"-->
+          <div class="row">
+            <div class="col-sm-4">
+              <select class="form-control" ng-model="day" ng-change="birthdayChanged()">
+                <option ng-repeat="day in days">{{ day }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <select class="form-control" ng-model="month" ng-change="birthdayChanged()">
+                <option ng-repeat="month in months">{{ month }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <select class="form-control" ng-model="year" ng-change="birthdayChanged()">
+                <option ng-repeat="year in years">{{ year }}</option>
+              </select>
+            </div>
+          </div>
+
         <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
       </div>
 
