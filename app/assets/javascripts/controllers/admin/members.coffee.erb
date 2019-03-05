@@ -54,17 +54,13 @@ class MembersController
     
     today = new Date()
     currentYear = today.getFullYear()
-    console.log(currentYear)
-    $scope.years = [1900...currentYear]
+    $scope.years = [currentYear-100...currentYear-10]
     $scope.months = [1...13]
     $scope.days = [1...32]
-  
-    console.log($scope.days)
-    console.log($scope.months)
-    console.log($scope.years)
 
     $scope.birthdayChanged = () ->
-      $scope.user.profile.birthday = new Date($scope.year + "-" + $scope.mont + "-" + $scope.day)
+      $scope.user.profile.birthday = moment($scope.user.profile.birthYear + "-" + $scope.user.profile.birthMonth + "-" + $scope.user.profile.birthDay, 'YYYY-MM-DD')
+
 
     ##
     # Shows the end of subscription datepicker
@@ -552,7 +548,10 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
 
     # init the birth date to JS object
     if $scope.user.profile.birthday?
-      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
+      $scope.user.profile.birthday = moment($scope.user.profile.birthday)
+      $scope.user.profile.birthDay = $scope.user.profile.birthday.date()
+      $scope.user.profile.birthMonth = $scope.user.profile.birthday.month() + 1
+      $scope.user.profile.birthYear = $scope.user.profile.birthday.year()
     else
       $scope.user.profile.birthday = ""
     ## the user subscription
@@ -642,6 +641,15 @@ Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'A
   $scope.openDatePicker = ($event)->
     $scope.datePicker.opened = true
 
+
+  today = new Date()
+  currentYear = today.getFullYear()
+  $scope.years = [currentYear-100...currentYear-10]
+  $scope.months = [1...13]
+  $scope.days = [1...32]
+
+  $scope.birthdayChanged = () ->
+    $scope.admin.profile_attributes.birthday = moment($scope.admin.profile_attributes.birthYear + "-" + $scope.admin.profile_attributes.birthMonth + "-" + $scope.admin.profile_attributes.birthDay, 'YYYY-MM-DD')
 
 
   ##

@@ -38,7 +38,7 @@ en:
         no_invoices_for_now: "No invoices for now."
         email_address: "Email Address"
         user: "User"
-        pseudonym: "Pseudonym"
+        pseudonym: "Username"
         all_day: "All Day"
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
         title: "Title"
@@ -57,7 +57,7 @@ en:
         no_passed_events: "No past events"
         dates: "Dates:"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
-        surname: "Surname"
+        surname: "Last Name"
         first_name: "First Name"
         address: "Address"
         interests: "Interests"
@@ -108,7 +108,7 @@ en:
       user:
         # user edition form
         add_an_avatar: "Add Avatar"
-        pseudonym: "Nickname"
+        pseudonym: "Username"
         email_address_is_required: "E-mail address is required."
         change_password: "Change password"
         new_password: "New password"
