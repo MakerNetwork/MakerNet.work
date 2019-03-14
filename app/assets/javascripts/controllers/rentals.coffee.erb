@@ -114,7 +114,7 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$state', '
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
-  $scope.actionUrl = "/api/rentals/"
+  $scope.actionUrl = "/api/spaces/"
 
   ## Form action on the above URL
   $scope.method = "post"
@@ -135,7 +135,7 @@ Application.Controllers.controller 'EditRentalController', ['$scope', '$state', 
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
-  $scope.actionUrl = "/api/rentals/" + $stateParams.id
+  $scope.actionUrl = "/api/spaces/" + $stateParams.id
 
   ## Form action on the above URL
   $scope.method = "put"
