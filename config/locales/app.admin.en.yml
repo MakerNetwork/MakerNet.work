@@ -711,3 +711,18 @@ en:
         space_edit:
           edit_the_space_NAME: "Edit the space: {{NAME}}"  # angular interpolation
           validate_the_changes: "Validate the changes"
+
+      rental_new:
+        # create a new rental
+        rental_new:
+          add_a_new_rental: "Add a new rental"
+          watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new rental, its prices are initialized at 0 for all subscriptions."
+          consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
+          add_this_rental: "Add this rental"
+
+      rental_edit:
+        # modify an exiting rental
+        rental_edit:
+          edit_the_rental_NAME: "Edit the rental: {{NAME}}"  # angular interpolation
+          validate_the_changes: "Validate the changes"
+

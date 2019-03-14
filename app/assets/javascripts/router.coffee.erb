@@ -492,6 +492,96 @@ angular.module('application.router', ['ui.router']).
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
 
+      # rentals
+      .state 'app.public.rentals_list',
+        url: '/rentals'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/index.html" %>'
+            controller: 'RentalsController'
+        resolve:
+          spacesPromise: ['Space', (Space)->
+            Space.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.rentals_list']).$promise
+          ]
+      .state 'app.admin.rental_new',
+        url: '/rentals/new'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/new.html" %>'
+            controller: 'NewRentalController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rental_new', 'app.shared.space']).$promise
+          ]
+      .state 'app.public.rental_show',
+        url: '/rentals/:id'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/show.html" %>'
+            controller: 'ShowRentalController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.rental_show']).$promise
+          ]
+      .state 'app.admin.rental_edit',
+        url: '/rentals/:id/edit'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/edit.html" %>'
+            controller: 'EditRentalController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rental_edit', 'app.shared.space']).$promise
+          ]
+      .state 'app.logged.rental_reserve',
+        url: '/rentals/:id/reserve'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/reserve.html" %>'
+            controller: 'ReserveRentalController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.spaces({spaceId: $stateParams.id}).$promise
+          ]
+          plansPromise: ['Plan', (Plan)->
+            Plan.query().$promise
+          ]
+          groupsPromise: ['Group', (Group)->
+            Group.query().$promise
+          ]
+          settingsPromise: ['Setting', (Setting)->
+            Setting.query(names: "['booking_window_start',
+                                   'booking_window_end',
+                                   'booking_move_enable',
+                                   'booking_move_delay',
+                                   'booking_cancel_enable',
+                                   'booking_cancel_delay',
+                                   'subscription_explications_alert',
+                                   'space_explications_alert']").$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.rental_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
+          ]
+
       # trainings
       .state 'app.public.trainings_list',
         url: '/trainings'
