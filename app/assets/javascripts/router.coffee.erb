@@ -412,7 +412,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'SpacesController'
         resolve:
           spacesPromise: ['Space', (Space)->
-            Space.query().$promise
+            Space.query({is_rental: false}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.spaces_list']).$promise
@@ -502,7 +502,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'RentalsController'
         resolve:
           spacesPromise: ['Space', (Space)->
-            Space.query().$promise
+            Space.query({is_rental: true}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.rentals_list']).$promise

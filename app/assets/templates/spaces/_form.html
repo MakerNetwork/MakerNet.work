@@ -3,6 +3,7 @@
 <div class="form-group m-b-lg" ng-class="{'has-error': spaceForm['space[name]'].$dirty && spaceForm['space[name]'].$invalid}">
     <label for="space_name" class="col-sm-2 control-label">{{ 'space.name' | translate }} *</label>
     <div class="col-sm-4">
+        <input type="hidden" name="space[is_rental]" ng-model="space.is_rental" id="space_is_rental" ng-value="false">
         <input ng-model="space.name"
                type="text"
                name="space[name]"
