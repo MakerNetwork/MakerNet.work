@@ -3,7 +3,7 @@ class API::SpacesController < API::ApiController
   respond_to :json
 
   def index
-    @spaces = Space.includes(:space_image)
+    @spaces = Space.includes(:space_image).friendly.where(:is_rental => params[:is_rental])
   end
 
   def show
