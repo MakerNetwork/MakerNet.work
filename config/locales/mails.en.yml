@@ -3,7 +3,7 @@ en:
     notifications_mailer:
       see_you_later: "See you soon at"  # messageFormat interpolation
       sincerely: "Sincerely,"
-      signature: "The MakerNet.work team."
+      signature: "The MakerNet team."
       do_not_reply: "Please do not reply to this email."
 
   users_mailer:
@@ -28,7 +28,7 @@ en:
         intro: " You recently requested to reset your password for your {FABLAB} website acount."  # messageFormat interpolation
         not request: "If you did not request a password reset, please ignore this email."
         valid for: "This password reset is only valid for the next 6 hours."
-        signature: "The MakerNet.work team."
+        signature: "The MakerNet team."
         do_not_reply: "Please do not reply to this email."
 
   notifications_mailer:
@@ -148,7 +148,7 @@ en:
         this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
 
     notify_member_avoir_ready:
-      subject: "Your %{FABLAB} MakerNet.work's refund invoice"
+      subject: "Your %{FABLAB} MakerNet's refund invoice"
       body:
         please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
@@ -218,7 +218,7 @@ en:
         message: "Your account informations has been correctly updated, you now have access to the whole website."
 
     notify_user_auth_migration:
-      subject: "Important change on your %{FABLAB} MakerNet.work's account"
+      subject: "Important change on your %{FABLAB} MakerNet's account"
       body:
         the_platform: "the website"
         is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
