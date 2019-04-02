@@ -52,6 +52,7 @@
                ng-model="space.default_places"
                id="default_places"
                class="form-control"
+               min=0
                required>
         <span class="help-block" ng-show="spaceForm['space[default_places]'].$dirty && spaceForm['space[default_places]'].$error.required" translate>{{ 'space.default_places_is_required' }}</span>
     </div>

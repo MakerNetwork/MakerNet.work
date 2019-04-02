@@ -33,13 +33,13 @@ class RentalsController
               msg: k+': '+err
               type: 'danger'
       else
-        $state.go('app.public.spaces_list')
+        $state.go('app.public.rentals_list')
 
     ##
     # Changes the current user's view, redirecting him to the spaces list
     ##
     $scope.cancel = ->
-      $state.go('app.public.spaces_list')
+      $state.go('app.public.rentals_list')
 
     ##
     # For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -168,19 +168,19 @@ Application.Controllers.controller 'ShowRentalController', ['$scope', '$state', 
     event.preventDefault()
     # check the permissions
     if $scope.currentUser.role isnt 'admin'
-      console.error _t('space_show.unauthorized_operation')
+      console.error _t('rental_show.unauthorized_operation')
     else
       dialogs.confirm
         resolve:
           object: ->
-            title: _t('space_show.confirmation_required')
-            msg: _t('space_show.do_you_really_want_to_delete_this_space')
+            title: _t('rental_show.confirmation_required')
+            msg: _t('rental_show.do_you_really_want_to_delete_this_rental')
       , -> # deletion confirmed
         # delete the machine then redirect to the machines listing
         $scope.space.$delete ->
           $state.go('app.public.rentals_list')
         , (error)->
-          growl.warning(_t('space_show.the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+          growl.warning(_t('rental_show.the_rental_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
 ]
 
 
