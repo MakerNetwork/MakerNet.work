@@ -58,7 +58,12 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
       state: 'app.public.spaces_list'
       linkText: 'reserve_a_space'
       linkIcon: 'rocket'
-    })
+    },{
+      state: 'app.public.rentals_list'
+      linkText: 'rentals'
+      linkIcon: 'store'
+    }
+    )
 
 
   Fablab.adminNavLinks = Fablab.adminNavLinks || []
@@ -127,5 +132,9 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
       state: 'app.public.spaces_list'
       linkText: 'manage_the_spaces'
       linkIcon: 'rocket'
+    },{
+      state: 'app.public.rentals_list'
+      linkText: 'manage_rentals'
+      linkIcon: 'store'
     })
 ]

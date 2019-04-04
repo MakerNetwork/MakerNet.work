@@ -432,6 +432,24 @@ en:
           default_places_is_required: "Default maximum tickets is required."
           disable_space: "Disable Space"
 
+      rentals:
+        # form to create/edit a rental
+        rental:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Illustration"
+          add_an_illustration: "Add Illustration"
+          description: "Description"
+          description_is_required: "Description is required."
+          characteristics: "Characteristics"
+          characteristics_are_required: "Characteristics are required."
+          attached_files_(pdf): "Attached files (pdf)"
+          attach_a_file: "Attach a file"
+          add_an_attachment: "Add an attachment"
+          default_places: "Default maximum tickets"
+          default_places_is_required: "Default maximum tickets is required."
+          disable_space: "Disable Rental"
+
       cart:
         # module de panier d'achat de réservations
         cart:
