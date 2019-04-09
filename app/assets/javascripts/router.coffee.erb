@@ -68,6 +68,16 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.about').$promise
           ]
+      .state 'app.public.checkin',
+        url: '/checkin'
+        views:
+          'content@':
+            templateUrl: '<%= asset_path "shared/checkin_form.html" %>'
+            controller: 'CheckInController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.public.checkin').$promise
+          ]
       .state 'app.public.signup',
         url: '/signup'
         views:
