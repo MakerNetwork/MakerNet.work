@@ -505,7 +505,7 @@ angular.module('application.router', ['ui.router']).
             Space.query({is_rental: true}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.rentals_list']).$promise
+            Translations.query(['app.public.rentals_list', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
       .state 'app.admin.rental_new',
         url: '/rentals/new'
