@@ -49,24 +49,8 @@
             <span class="help-block" translate>{{ 'student_id_is_required' }}</span>
           </div>
         </div>
-             
-               <div class="form-group">
-          <div class="col-sm-12">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-key"></i></span>
-              <input type="password"
-                     name="password"
-                     ng-model="user.password"
-                     class="form-control"
-                     placeholder="{{ 'your_password' | translate }}"
-                     required
-                     ng-minlength="8">
-            </div>
-            <span class="help-block" translate>{{ 'password_is_required' }}</span>
-            <span class="help-block" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
-          </div>
-        </div>
-          <div class="modal-footer no-padder">
+        {{user}}
+    <div class="modal-footer no-padder">
     <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="checkinForm.$invalid" translate>{{ 'Check In' }}</button>
   </div>
 </div>
