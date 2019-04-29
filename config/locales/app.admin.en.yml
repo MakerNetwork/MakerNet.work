@@ -250,6 +250,7 @@ en:
           forever: "Each use"
           valid_until: "Valid until (included)"
           spaces: "Spaces"
+          rentals: "Rentals"
           these_prices_match_space_hours_rates_: "These prices match space hours rates"
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
