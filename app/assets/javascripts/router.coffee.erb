@@ -78,7 +78,7 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.checkin').$promise
           ]
-          
+
       .state 'app.public.signup',
         url: '/signup'
         views:
