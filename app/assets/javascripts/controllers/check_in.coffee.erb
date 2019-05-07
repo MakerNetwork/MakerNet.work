@@ -1,9 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "CheckInController", ['$scope',  ($scope)->
-
-
-$ ->
+Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
+, ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
   actualizarHora = ->
     fecha = new Date
     hora = fecha.getHours()
@@ -69,10 +67,42 @@ $ ->
     else
       $pSegundos.text segundos
     $pAMPM.text ampm
-    return
-
-  actualizarHora()
+  
+  is_auth = $scope.is_auth = false
+  is_checked= $scope.is_checked
+  user = $scope.user = {} 
+  $scope.login = () -> 
+      
+    Auth.login(user).then (user) ->
+    # Authentification succeeded ...
+        is_auth = $scope.is_auth = true
+        console.log user
+        url= 'api/checkin/'+user.id+'/is_checked'
+        $.get url, (response)->
+          is_checked = response
+          console.log is_checked
+        
+        Auth.logout(user)
+        $scope.id = user.id
+    , (error) ->
+        # Authentication failed...
+        $scope.alerts = []
+        $scope.alerts.push
+        msg: _t('wrong_email_or_password')
+        type: 'danger'
+        console.log error
+        console.log 'failed'
+  
+  $scope.check = () -> 
+      console.log $scope.id
+      url= 'api/checkin/'+$scope.id+'/check'
+      $.post url, (response)->
+        user = null
+        is_auth = false
+     
   intervalo = setInterval(actualizarHora, 1000)
-  return
+  actualizarHora()
+
 
 ]
+

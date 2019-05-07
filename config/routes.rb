@@ -132,6 +132,11 @@ Rails.application.routes.draw do
     resources :open_api_clients, only: [:index, :create, :update, :destroy] do
       patch :reset_token, on: :member
     end
+    #Check
+    resources :checkin do
+     get ':id/is_checked', action: 'ischecked', on: :collection
+     post ':id/check', action: 'check', on: :collection
+    end
     resources :price_categories
     resources :spaces
 
@@ -144,8 +149,9 @@ Rails.application.routes.draw do
 
     # Fab-manager's version
     get 'version' => 'version#show'
-  end
 
+    
+  end
   # rss
 
   namespace :rss, as: nil, defaults: { format: :xml } do
