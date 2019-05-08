@@ -1,0 +1,107 @@
+'use strict'
+
+Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
+, ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
+  actualizarHora = ->
+    fecha = new Date
+    hora = fecha.getHours()
+    minutos = fecha.getMinutes()
+    segundos = fecha.getSeconds()
+    diaSemana = fecha.getDay()
+    dia = fecha.getDate()
+    mes = fecha.getMonth()
+    anio = fecha.getFullYear()
+    ampm = undefined
+    $pHoras = $('#horas')
+    $pSegundos = $('#segundos')
+    $pMinutos = $('#minutos')
+    $pAMPM = $('#ampm')
+    $pDiaSemana = $('#diaSemana')
+    $pDia = $('#dia')
+    $pMes = $('#mes')
+    $pAnio = $('#anio')
+    semana = [
+      'Domingo'
+      'Lunes'
+      'Martes'
+      'Miercoles'
+      'Jueves'
+      'Viernes'
+      'Sabado'
+    ]
+    meses = [
+      'Enero'
+      'Febrero'
+      'Marzo'
+      'Abril'
+      'Mayo'
+      'Junio'
+      'Julio'
+      'Agosto'
+      'Septiembre'
+      'Octubre'
+      'Noviembre'
+      'Diciembre'
+    ]
+    $pDiaSemana.text semana[diaSemana]
+    $pDia.text dia
+    $pMes.text meses[mes]
+    $pAnio.text anio
+    if hora >= 12
+      hora = hora - 12
+      ampm = 'PM'
+    else
+      ampm = 'AM'
+    if hora == 0
+      hora = 12
+    if hora < 10
+      $pHoras.text '0' + hora
+    else
+      $pHoras.text hora
+    if minutos < 10
+      $pMinutos.text '0' + minutos
+    else
+      $pMinutos.text minutos
+    if segundos < 10
+      $pSegundos.text '0' + segundos
+    else
+      $pSegundos.text segundos
+    $pAMPM.text ampm
+  
+  is_auth = $scope.is_auth = false
+  is_checked= $scope.is_checked
+  user = $scope.user = {} 
+  $scope.login = () -> 
+      
+    Auth.login(user).then (user) ->
+    # Authentification succeeded ...
+        is_auth = $scope.is_auth = true
+        console.log user
+        url= 'check_ins/'+user.id+'/is_checked'
+        $.get url, (response)->
+          is_checked = response
+          console.log is_checked
+        
+        Auth.logout(user)
+        $scope.id = user.id
+    , (error) ->
+        # Authentication failed...
+        $scope.alerts = []
+        $scope.alerts.push
+        msg: _t('wrong_email_or_password')
+        type: 'danger'
+        console.log error
+        console.log 'failed'
+  
+  $scope.check = () -> 
+      console.log $scope.id
+      url= 'check_ins/'+$scope.id+'/check'
+      $.post url, (response)->
+        user = null
+        is_auth = false
+     
+  intervalo = setInterval(actualizarHora, 1000)
+  actualizarHora()
+
+
+]
