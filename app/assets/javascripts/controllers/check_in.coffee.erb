@@ -1,7 +1,8 @@
 'use strict'
 
-Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
-, ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
+Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t','CSRF'
+, ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t,CSRF) ->
+  
   actualizarHora = ->
     fecha = new Date
     hora = fecha.getHours()
@@ -69,40 +70,37 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
     $pAMPM.text ampm
   $scope.login = () -> 
     user=$scope.user
-    console.log user
     Auth.login(user).then (user) ->
     # Authentification succeeded ...
-        
-        console.log user
         url= 'check_ins/'+user.id+'/is_checked'
         $.get url, (response)->
           $scope.is_checked = response.message
           is_auth = $scope.is_auth = true
-          console.log $scope.is_checked
           $scope.lastcheck=response.lastCheck
           $scope.lastcheck.check_in = new Date($scope.lastcheck.check_in).toLocaleString()
           if $scope.lastcheck.check_out
              $scope.lastcheck.check_out = new Date($scope.lastcheck.check_out).toLocaleString()
-          console.log $scope.lastcheck
         Auth.logout(user)
         $scope.id = user.id
     , (error) ->
         # Authentication failed...
+        console.log error
+        console.log 'failed'
         $scope.alerts = []
         $scope.alerts.push
         msg: _t('wrong_email_or_password')
         type: 'danger'
-        console.log error
-        console.log 'failed'
+        
   
   $scope.check = () -> 
-      console.log $scope.id
+      CSRF.setMetaTags()
       url= 'check_ins/'+$scope.id+'/check'
       $.post url, (response)->
         initialize()
   $scope.cancel =()->
     initialize()
   initialize = ->
+   Auth.logout(user)
    user = $scope.user = {}
    is_auth = $scope.is_auth = false
    is_checked = $scope.is_checked = false

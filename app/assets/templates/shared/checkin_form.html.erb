@@ -50,6 +50,7 @@
     <body>
     <div ng-if="!is_auth">
       <div class="well m-b-n">
+        
        <form role="form" name="checkinForm" class="form-horizontal" novalidate autocomplete="off">
 
         <div class="form-group">
@@ -94,11 +95,12 @@
 
 <div ng-if="is_checked && is_auth">
 
+
   <div class="well m-b-n" id = "check">
       <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
-        
+        <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
           <div class="modal-footer no-padder">
-          
+             
              <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkout' }}</button>
             <!-- ng-click="login()" -->
           
@@ -111,7 +113,7 @@
 <div ng-if="!is_checked && is_auth">
   <div class="well m-b-n" id = "check">
       <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
-        
+        <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
           <div class="modal-footer no-padder">
           
             <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkin' }}</button>
