@@ -69,49 +69,49 @@ def ischecked
     @checked = false
 
 
-    begin
-       lastCheck = CheckIn.where(student_id = id).last
-    rescue
-      lastCheck = nil
-    end
-        puts lastCheck
+    
+       lastCheck = CheckIn.where("student_id = ?",id).last
+    
+        puts lastCheck.check_out
 
 
-    if not lastCheck.nil? and lastCheck.checkout
+    if not lastCheck.nil? and !lastCheck.check_out
       @checked = true
     end
-
-    render json: @checked
+    puts @checked
+    render :status => "200", :json => {:message => @checked ,:lastCheck => lastCheck}.to_json
   end
   def check
-    id = params[:id]
-    puts "EN EL CHEKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
-
+    id = params[:id].to_s
+    puts id
     @checked = false
 
-
-    begin
-       lastCheck = CheckIn.where(student_id = id).last
-    rescue
-      lastCheck = nil
-    end
-        
+    user= User.where("id='1'")
+    puts user
+    lastCheck = CheckIn.where("student_id = ?",id).last
+    puts lastCheck
+      
     
     #is checkin
-    if lastCheck.nil? or lastCheck.checkout
+    if lastCheck.nil? or lastCheck.check_out
       puts 'is checkin'
       puts CheckIn.new
       newCheckin = CheckIn.new(student_id: id, check_in: Time.new , check_out: nil)
-      puts newCheckin
+      puts newCheckin.student_id 
+      puts newCheckin.check_in
       newCheckin.save
+      puts 'was checkin'
     #is checkout
     else 
       puts 'is checkout'
-      lastCheck.check_out= Date.now
+      lastCheck.check_out= Time.new
       puts 'was checkout'
       lastCheck.save
       puts 'was checkout'
     end
+    
+    render :status => "200", :json => {:message => "success"}.to_json
+end
   end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -123,4 +123,4 @@ def ischecked
     def check_in_params
       params.require(:check_in).permit(:student_id, :check_in, :check_out)
     end
-end
+

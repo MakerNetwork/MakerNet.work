@@ -1,32 +1,50 @@
 <div class="about-fablab scrollable">
   <div class="row padder">
     <header class="about-picture">
-      <div class="col-sm-offset-2 col-md-offset-3 col-sm-10 col-md-8">
+      <div class="col-sm-offset-2 col-md-offset-2 col-sm-10 col-md-8">
  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
             <div class="well m-b-n">
       <div class="form-group">
       <div class="widget">
-      <div class="fecha">
-      <p id="diaSemana" class="diaSemana"></p>
-      <p id="dia" class="dia"></p>
-      <p>de</p>
-      <p id="mes" class="mes"></p>
-      <p>del</p>
-      <p id="anio" class="anio"></p>
+      <div class="fecha" style="text-align: center;">
+      <p style="text-align: center;"> <span id="diaSemana" class="diaSemana"></span>
+      <span id="dia" class="dia"></span>
+      <span>de</span>
+      <span id="mes" class="mes"></span>
+      <span>del</span>
+      <span id="anio" class="anio"></span>
+      </p>
       </div>
       <div class="reloj">
-      <p id="horas" class="horas"></p>
-      <p>:</p>
-      <p id="minutos" class="minutos"></p>
-      <p>:</p>
-      <div class="cajaSegundos">
-        <p id="ampm" class="ampm"></p>
-        <p id="segundos" class="segundos"></p>
-      </div>
+      <p style="text-align: center;"> <span id="horas" class="horas"></span>
+      <span>:</span>
+      <span id="minutos" class="minutos"></span>
+      <span>:</span>
+      <span class="cajaSegundos">
+        <span id="segundos" class="segundos"></span>
+        <span id="ampm" class="ampm"></span>
+      </span>
+    </p>
     </div>
+
   </div>
 </div>
 </div>
+<div ng-if ="is_auth" class="Last Check">
+   <div class="well m-b-n">
+      <div class="form-group">
+      <div class="widget" style="text-align: center;">
+      <h2 >LAST CHECK</h2>
+      <p style="text-align: center; "> <span>Checkin :</span>
+      <span>{{lastcheck.check_in}}</span>
+    </p>
+      <p style="text-align: center;">
+      <span>Checkout :</span>
+        <span >{{lastcheck.check_out}}</span>
+      
+    </p>
+    </div>
+  </div></div></div>
 </div>
     </header>
     <body>
@@ -73,25 +91,49 @@
   </form>
  </div>
 </div>
-<div ng-if="is_auth">
+
+<div ng-if="is_checked && is_auth">
+
   <div class="well m-b-n" id = "check">
       <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
         
           <div class="modal-footer no-padder">
-          <div ng-if = "!is_checked">
-            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkin' }}</button>
+          
+             <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkout' }}</button>
             <!-- ng-click="login()" -->
-          </div>
+          
         </div>
-        <div ng-if = "is_checked">
-            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkout' }}</button>
-            <!-- ng-click="login()" -->
-          </div>
+       </form>
         </div>
-      </form>
+    
 
   </div>
-</div>
+<div ng-if="!is_checked && is_auth">
+  <div class="well m-b-n" id = "check">
+      <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
+        
+          <div class="modal-footer no-padder">
+          
+            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkin' }}</button>
+            <!-- ng-click="login()" -->
+          
+        </div>
+       </form>
+        </div>
+    
+
+  </div>
+  <div class="well m-b-n" id = "cancel" ng-if ="is_auth">
+      <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
+        
+          <div class="modal-footer no-padder">
+          
+            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="cancel()" ng-disabled="checkinForm.$invalid" translate>{{ 'Cancel' }}</button>
+            <!-- ng-click="login()" -->
+          
+        </div>
+       </form>
+        </div>
   
     </body>
   </div>
