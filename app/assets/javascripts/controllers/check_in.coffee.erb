@@ -1,5 +1,5 @@
 'use strict'
-
+#controller used in checkin view
 Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t','CSRF'
 , ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t,CSRF) ->
   
@@ -68,6 +68,7 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
     else
       $pSegundos.text segundos
     $pAMPM.text ampm
+  #when click on find user
   $scope.login = () -> 
     user=$scope.user
     Auth.login(user).then (user) ->
@@ -84,21 +85,21 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
         $scope.id = user.id
     , (error) ->
         # Authentication failed...
-        console.log error
-        console.log 'failed'
         $scope.alerts = []
         $scope.alerts.push
         msg: _t('wrong_email_or_password')
         type: 'danger'
         
-  
+  #when click check in or checkout
   $scope.check = () -> 
       CSRF.setMetaTags()
       url= 'check_ins/'+$scope.id+'/check'
       $.post url, (response)->
         initialize()
+  #when click cancel
   $scope.cancel =()->
     initialize()
+  #initialization
   initialize = ->
    Auth.logout(user)
    user = $scope.user = {}
