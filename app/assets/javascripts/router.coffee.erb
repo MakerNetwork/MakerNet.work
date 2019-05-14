@@ -980,7 +980,10 @@ angular.module('application.router', ['ui.router']).
             Coupon.query().$promise
           ]
           spacesPromise: ['Space', (Space) ->
-            Space.query().$promise
+            Space.query({is_rental: false}).$promise
+          ]
+          rentalsPromise: ['Space', (Space) ->
+            Space.query({is_rental: true}).$promise
           ]
           spacesPricesPromise: ['Price', (Price)->
             Price.query(priceable_type: 'Space', plan_id: 'null').$promise
