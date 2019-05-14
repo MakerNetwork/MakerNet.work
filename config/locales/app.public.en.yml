@@ -315,6 +315,9 @@ en:
           status_disabled: "Disabled"
           status_all: "All"
           book: "Book"
+          select: "Select"
+          rental_confirmation: "Rental confirmation"
+          here_is_the_NAME_rental_summary: "Here is the {{NAME}}'s rental summary:"  # angular interpolation
 
       rental_show:
         # display the details of a rental

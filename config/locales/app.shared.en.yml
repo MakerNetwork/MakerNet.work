@@ -50,6 +50,7 @@ en:
         summary: "Summary"
         you_ve_just_selected_a_: "You've just selected a"  # you_ve_just_selected_a_ + _subscription
         _subscription: "subscription"
+        _rental: "Rental"
         confirm_and_pay: "Confirm and pay"
         your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
         add_an_event: "Add an event"
@@ -74,6 +75,7 @@ en:
         year: "Year"
         month: "Month"
         subscription_price: "Subscription Price"
+        rental_price: "Rental Price"
         model: "Model"
         from_date: "From" # context: date. eg: "from 01/01 to 01/05"
         from_time: "From" # context: time. eg. "from 18:00 to 21:00"
@@ -230,6 +232,7 @@ en:
           week: "Week"
           period_is_required: "Period is required."
           subscription_price: "Subscription price"
+          rental_price: "Rental Price"
           price_is_required: "Price is required."
           visual_prominence_of_the_subscription: "Visual prominence of the subscription"
           on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "On the subscriptions page, the most prominent subscriptions will be placed at the top of the list."
@@ -454,7 +457,8 @@ en:
         # module de panier d'achat de réservations
         cart:
           summary: "Summary"
-          select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"  # messageFormat interpolation
+          select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar" # messageFormat interpolation
+          select_one_rental_from_list: "Select one Rental from list"
           you_ve_just_selected_the_slot: "You've just selected the slot:"
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
@@ -466,6 +470,7 @@ en:
           or: "or"
           you_ve_just_selected_a_: "You've just selected a"
           _subscription: "subscription"
+          _rental: "rental"
           cost_of_the_subscription: "Subscription Cost"
           confirm: "Confirm"
           confirm_and_pay: "Confirm Payment"
