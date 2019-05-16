@@ -73,8 +73,7 @@
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-              <input type="password "
-                     ng-minlength="8"
+              <input type="password"
                      name="password"
                      ng-model="user.password"
                      class="form-control"
@@ -83,6 +82,10 @@
                      ng-minlength="8">
             </div>
             <span class="help-block" ng-show = "checkinForm.password.$dirty && checkinForm.password.$error.required " translate>{{ 'password_is_required' }}</span>
+            <div class="msg msg-warning m-t-sm m-b-none text-xs text-center p-sm" ng-show='isCapsLockOn' role="alert">
+                  <i class="fa fa-warning"></i>
+                  {{ 'caps_lock_is_on' | translate }}
+          </div>
               
           </div>
         </div>
