@@ -3,71 +3,72 @@
 Application.Controllers.controller "CheckInController",["$rootScope", "$scope", "$window", '$locale', "Session", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t','CSRF'
 , ($rootScope, $scope, $window, $locale, Session, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t,CSRF) ->
   
-  actualizarHora = ->
-    fecha = new Date
-    hora = fecha.getHours()
-    minutos = fecha.getMinutes()
-    segundos = fecha.getSeconds()
-    diaSemana = fecha.getDay()
-    dia = fecha.getDate()
-    mes = fecha.getMonth()
-    anio = fecha.getFullYear()
+  dateUpdate = ->
+    date = new Date
+    hour = date.getHours()
+    minutes = date.getMinutes()
+    seconds = date.getSeconds()
+    dayofweek = date.getDay()
+    day = date.getDate()
+    month = date.getMonth()
+    year = date.getFullYear()
     ampm = undefined
-    $pHoras = $('#horas')
-    $pSegundos = $('#segundos')
-    $pMinutos = $('#minutos')
+    $pHours = $('#hours')
+    $pSeconds = $('#seconds')
+    $pMinutes = $('#minutes')
     $pAMPM = $('#ampm')
-    $pDiaSemana = $('#diaSemana')
-    $pDia = $('#dia')
-    $pMes = $('#mes')
-    $pAnio = $('#anio')
-    semana = [
-      'Domingo'
-      'Lunes'
-      'Martes'
-      'Miercoles'
-      'Jueves'
-      'Viernes'
-      'Sabado'
+    $pDayofweek = $('#dayofweek')
+    $pDay = $('#day')
+    $pMonth = $('#month')
+    $pYear = $('#year')
+    week = [
+      'Sunday'
+      'Monday'
+      'Tuesday'
+      'Wednesday'
+      'Thursday'
+      'Friday'
+      'Saturdays'
     ]
-    meses = [
-      'Enero'
-      'Febrero'
-      'Marzo'
-      'Abril'
-      'Mayo'
-      'Junio'
-      'Julio'
-      'Agosto'
-      'Septiembre'
-      'Octubre'
-      'Noviembre'
-      'Diciembre'
+    months = [
+      'January'
+      'February'
+      'March'
+      'April'
+      'May'
+      'June'
+      'July'
+      'August'
+      'September'
+      'Octuber'
+      'November'
+      'December'
     ]
-    $pDiaSemana.text semana[diaSemana]
-    $pDia.text dia
-    $pMes.text meses[mes]
-    $pAnio.text anio
-    if hora >= 12
-      hora = hora - 12
+    $pDayofweek.text week[dayofweek]
+    $pDay.text day
+    $pMonth.text months[month]
+    $pYear.text year
+    if hour >= 12
+      hour = hour - 12
       ampm = 'PM'
     else
       ampm = 'AM'
-    if hora == 0
-      hora = 12
-    if hora < 10
-      $pHoras.text '0' + hora
+    if hour == 0
+      hour = 12
+    if hour < 10
+      $pHours.text '0' + hour
     else
-      $pHoras.text hora
-    if minutos < 10
-      $pMinutos.text '0' + minutos
+      $pHours.text hour
+    if minutes < 10
+      $pMinutes.text '0' + minutes
     else
-      $pMinutos.text minutos
-    if segundos < 10
-      $pSegundos.text '0' + segundos
+      $pMinutes.text minutes
+    if seconds < 10
+      $pSeconds.text '0' + seconds
     else
-      $pSegundos.text segundos
+      $pSeconds.text seconds
     $pAMPM.text ampm
+
   #when click on find user
   $scope.login = () -> 
     user=$scope.user
@@ -105,8 +106,8 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
    user = $scope.user = {}
    is_auth = $scope.is_auth = false
    is_checked = $scope.is_checked = false
-  intervalo = setInterval(actualizarHora, 1000)
-  actualizarHora()
+  interval = setInterval(dateUpdate, 1000)
+  dateUpdate()
   initialize()
  
 ]
