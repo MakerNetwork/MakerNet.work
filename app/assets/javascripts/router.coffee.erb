@@ -1038,6 +1038,52 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise
           ]
 
+      # rentals
+      .state 'app.admin.rentals',
+        abstract: true
+        resolve:
+          prices: ['Pricing', (Pricing) ->
+            Pricing.query().$promise
+          ]
+          groups: ['Group', (Group) ->
+            Group.query().$promise
+          ]
+          partners: ['User', (User) ->
+            User.query({role: 'partner'}).$promise
+          ]
+      .state 'app.admin.rentals.new',
+        url: '/admin/rentals/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/rentals/new.html" %>'
+            controller: 'NewRentalController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rentals.new', 'app.shared.rental']).$promise
+          ]
+      .state 'app.admin.rentals.edit',
+        url: '/admin/rentals/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/rentals/edit.html" %>'
+            controller: 'EditRentalController'
+        resolve:
+          spaces: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          machines: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          Rentals: ['Rental', (Rental) ->
+            Rental.query().$promise
+          ]
+          rentalPromise: ['Rental', '$stateParams', (Rental, $stateParams) ->
+            Rental.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rentals.edit', 'app.shared.rental']).$promise
+          ]
+
       # coupons
       .state 'app.admin.coupons_new',
         url: '/admin/coupons/new'

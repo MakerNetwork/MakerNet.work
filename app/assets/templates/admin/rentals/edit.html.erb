@@ -1,0 +1,106 @@
+<section class="heading b-b">
+    <div class="row no-gutter">
+        <div class="col-xs-2 col-sm-2 col-md-1">
+            <section class="heading-btn">
+                <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
+            </section>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+            <section class="heading-title">
+                <h1>{{ 'edit_rental.subscription_rental' | translate }} {{ rental.base_name }}</h1>
+            </section>
+        </div>
+
+        <div class="col-md-3">
+            <section class="heading-actions wrapper">
+                <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'cancel' }}</a>
+            </section>
+
+        </div>
+
+
+    </div>
+</section>
+
+<div class="row no-gutter">
+    <div class=" col-sm-12 col-md-9 b-r nopadding">
+
+        <div id="rentalForm">
+            <form name="rentalForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
+
+              <ng-include src="'<%= asset_path 'admin/rentals/_form.html' %>'"></ng-include>
+
+              <div class="input-group m-t-md">
+                <label for="rental[disabled]" class="control-label m-r-md">{{ 'rental_form.disabled' | translate }}</label>
+                <input bs-switch
+                       ng-model="rental.disabled"
+                       id="rental[disabled]"
+                       type="checkbox"
+                       class="form-control"
+                       switch-on-text="{{ 'yes' | translate }}"
+                       switch-off-text="{{ 'no' | translate }}"
+                       switch-animate="true"
+                       ng-true-value="'true'"
+                       ng-false-value="'false'"/>
+                <input type="hidden" name="rental[disabled]" value="{{rental.disabled}}"/>
+                <span class="help-block" translate>{{ 'rental_form.disable_rental_will_not_unsubscribe_users' }}</span>
+              </div>
+
+              <h2 class="m-t-xl" translate>{{ 'edit_rental.prices' }}</h2>
+              <div class="form-group col-md-6 col-lg-offset-6">
+                  <input type="hidden" ng-model="rental.parent" name="rental[parent_id]" ng-value="rental.parent"/>
+                  <label for="parentRental" translate>{{ 'edit_rental.copy_prices_from' }}</label>
+                  <select id="parentRental" ng-options="rental.id as humanReadableRentalName(rental, groups) for rental in rentals" ng-model="rental.parent" ng-change="copyPricesFromRental()" class="form-control">
+                      <option value=""></option>
+                  </select>
+              </div>
+              <h3 translate>{{ 'edit_rental.machines' }}</h3>
+              <table class="table">
+                  <thead>
+                      <th translate>{{ 'edit_rental.machine' }}</th>
+                      <th translate>{{ 'edit_rental.hourly_rate' }}</th>
+                  </thead>
+                  <tbody>
+
+                  <tr ng-repeat="price in rental.prices" ng-if="price.priceable_type === 'Machine'" ng-hide="getMachine(price.priceable_id).disabled">
+                      <td style="width: 60%;">{{ getMachine(price.priceable_id).name }} (id {{ price.priceable_id }}) *</td>
+                      <td>
+                          <div class="input-group" ng-class="{'has-error': rentalForm['rental[prices_attributes][][amount]'].$dirty && rentalForm['rental[prices_attributes][][amount]'].$invalid}">
+                              <span class="input-group-addon">{{currencySymbol}}</span>
+                              <input type="number" class="form-control" name="rental[prices_attributes][][amount]" ng-value="price.amount" required="required"/>
+                              <input type="hidden" class="form-control" name="rental[prices_attributes][][id]" ng-value="price.id"/>
+                          </div>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+
+              <h3 ng-hide="fablabWithoutSpaces" translate>{{ 'edit_rental.spaces' }}</h3>
+              <table class="table" ng-hide="fablabWithoutSpaces">
+                <thead>
+                  <th translate>{{ 'edit_rental.space' }}</th>
+                  <th translate>{{ 'edit_rental.hourly_rate' }}</th>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="price in rental.prices" ng-if="price.priceable_type === 'Space'" ng-hide="getSpace(price.priceable_id).disabled">
+                  <td style="width: 60%;">{{ getSpace(price.priceable_id).name }} *</td>
+                  <td>
+                    <div class="input-group" ng-class="{'has-error': rentalForm['rental[prices_attributes][][amount]'].$dirty && rentalForm['rental[prices_attributes][][amount]'].$invalid}">
+                      <span class="input-group-addon">{{currencySymbol}}</span>
+                      <input type="number" class="form-control" name="rental[prices_attributes][][amount]" ng-value="price.amount" required="required"/>
+                      <input type="hidden" class="form-control" name="rental[prices_attributes][][id]" ng-value="price.id"/>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="panel-footer no-padder">
+                  <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="rentalForm.$invalid"/>
+              </div>
+            </form>
+        </div>
+
+    </div>
+</div>
