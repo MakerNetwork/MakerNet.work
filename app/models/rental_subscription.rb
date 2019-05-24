@@ -13,51 +13,51 @@ class RentalSubscription < ActiveRecord::Base
  attr_accessor :card_token
 
    # creation
-  after_save :notify_member_subscribed_rental_space, if: :is_new?
-  after_save :notify_admin_subscribed_rental_space, if: :is_new?
-  after_save :notify_partner_subscribed_rental_space, if: :of_partner_plan?
+  after_save :notify_member_subscribed_rental, if: :is_new?
+  after_save :notify_admin_subscribed_rental, if: :is_new?
+  after_save :notify_partner_subscribed_rental, if: :of_partner_rental?
 
 
  private
-  def notify_member_subscribed_rental_space
-    NotificationCenter.call type: 'notify_member_subscribed_rental_space',
+  def notify_member_subscribed_rental
+    NotificationCenter.call type: 'notify_member_subscribed_rental',
                             receiver: user,
                             attached_object: self
   end
 
-  def notify_admin_subscribed_rental_space
-    NotificationCenter.call type: 'notify_admin_subscribed_rental_space',
+  def notify_admin_subscribed_rental
+    NotificationCenter.call type: 'notify_admin_subscribed_rental',
                             receiver: User.admins,
                             attached_object: self
   end
 
-  def notify_admin_rental_space_subscription_canceled
-    NotificationCenter.call type: 'notify_admin_rental_space_subscription_canceled',
+  def notify_admin_rental_ubscription_canceled
+    NotificationCenter.call type: 'notify_admin_rental_subscription_canceled',
                             receiver: User.admins,
                             attached_object: self
   end
 
-  def notify_member_rental_space_subscription_canceled
-    NotificationCenter.call type: 'notify_member_rental_space_subscription_canceled',
+  def notify_member_rental_subscription_canceled
+    NotificationCenter.call type: 'notify_member_rental_subscription_canceled',
                             receiver: user,
                             attached_object: self
   end
 
-  def notify_partner_subscribed_rental_space
-    NotificationCenter.call type: 'notify_partner_subscribed_rental_space',
-                            receiver: plan.partners,
+  def notify_partner_subscribed_rental
+    NotificationCenter.call type: 'notify_partner_subscribed_rental',
+                            receiver: rental.partners,
                             attached_object: self
   end
 
-  def notify_rental_space_subscription_extended(free_days)
+  def notify_rental_subscription_extended(free_days)
     meta_data = {}
     meta_data[:free_days] = true if free_days == true
     notification = Notification.new(meta_data: meta_data)
-    notification.send_notification(type: :notify_member_rental_space_subscription_extended, attached_object: self).to(user).deliver_later
+    notification.send_notification(type: :notify_member_rental_subscription_extended, attached_object: self).to(user).deliver_later
 
     User.admins.each do |admin|
       notification = Notification.new(meta_data: meta_data)
-      notification.send_notification(type: :notify_admin_rental_space_subscription_extended, attached_object: self).to(admin).deliver_later
+      notification.send_notification(type: :notify_admin_rental_subscription_extended, attached_object: self).to(admin).deliver_later
   	end
   end
 
@@ -78,9 +78,9 @@ class RentalSubscription < ActiveRecord::Base
     expired_at_was.nil?
   end
   
-  #def of_partner_plan?
-  #  space.is_a?(PartnerPlan)
-  #end
+  def of_partner_rental?
+    space.is_a?(PartnerRental)
+  end
 
   def get_wallet_amount_debit
     total = rental.amount

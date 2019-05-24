@@ -1,6 +1,6 @@
 <h2 translate>{{ 'rental_form.general_information' }}</h2>
 <input type="hidden" name="_method" value="{{method}}">
-
+{{rentalForm}}
 <div class="form-group" ng-class="{'has-error': rentalForm['rental[base_name]'].$dirty && rentalForm['rental[base_name]'].$invalid}">
     <label for="rental[base_name]">{{ 'rental_form.name' | translate }} *</label>
     <input type="text" id="rental[base_name]"
@@ -111,13 +111,12 @@
            ng-true-value="'true'"
            ng-false-value="'false'"/>
     <span ng-if="method == 'PATCH'">{{ (rental.is_rolling ? 'yes' : 'no') | translate }}</span>
-    <input type="hidden" name="rental[is_rolling]" value="{{rental.is_rolling}}"/>
+    <input type="hidden" ng-model="rental.is_rolling" name="rental[is_rolling]" ng-value="rental.is_rolling"/>
     <span class="help-block">
       {{ 'rental_form.a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
       {{ 'rental_form.otherwise_it_will_begin_as_soon_as_it_is_bought' | translate }}
     </span>
 </div>
-
 
 
 
