@@ -9,7 +9,7 @@ class RentalController
   constructor: ($scope, groups, prices, partners, CSRF) ->
     # protection against request forgery
     CSRF.setMetaTags()
-
+    console.log " REntal Controller"
 
 
     ## groups list
@@ -56,7 +56,7 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
   NEW_PARTNER_ID: null
 
   ### PUBLIC SCOPE ###
-
+  console.log "NEW REntal Controller"
   ## current form is used to create a new plan
   $scope.mode = 'creation'
 
@@ -136,21 +136,8 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
         if content.id?
           $state.go('app.admin.rentals.edit', {id: content.id})
 
-
-
-
-
-  ### PRIVATE SCOPE ###
-
-  ##
-  # Kind of constructor: these actions will be realized first when the controller is loaded
-  ##
-  initialize = ->
-    # Using the RentalsController
-    new NewRentalController($scope, groups, prices, partners, CSRF)
-
-  ## !!! MUST BE CALLED AT THE END of the controller
-  initialize()
+          
+  new RentalController($scope, groups, prices, partners, CSRF)
 ]
 
 

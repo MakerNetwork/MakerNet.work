@@ -23,7 +23,7 @@
                 <ng-include src="'<%= asset_path 'admin/rentals/_form.html' %>'"></ng-include>
 {{rentalForm.$invalid}}
 {{!partnerIsValid()}}
-{{prices}}
+{{rental}}
                 <div class="panel-footer no-padder">
                     <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="rentalForm.$invalid || !partnerIsValid()"/>
                 </div>
