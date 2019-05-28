@@ -2,7 +2,7 @@
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rentals = rental.includes(:rental_file)
+    @rentals = Rental.includes(:rental_file)
     @rentals = @rentals.where(group_id: params[:group_id]) if params[:group_id]
     render :index
   end
@@ -38,7 +38,7 @@
         end
       else
         if rental_params[:group_id] == 'all'
-          rentals = rental.create_for_all_groups(rental_params)
+          rentals = Rental.create_for_all_groups(rental_params)
           if rentals
             render json: { rental_ids: rentals.map(&:id) }, status: :created
           else

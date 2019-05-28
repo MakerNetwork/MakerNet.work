@@ -1,6 +1,5 @@
 <h2 translate>{{ 'rental_form.general_information' }}</h2>
 <input type="hidden" name="_method" value="{{method}}">
-{{rentalForm}}
 <div class="form-group" ng-class="{'has-error': rentalForm['rental[base_name]'].$dirty && rentalForm['rental[base_name]'].$invalid}">
     <label for="rental[base_name]">{{ 'rental_form.name' | translate }} *</label>
     <input type="text" id="rental[base_name]"
