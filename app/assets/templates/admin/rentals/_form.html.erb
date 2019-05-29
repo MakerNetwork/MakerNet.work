@@ -19,7 +19,7 @@
             ng-model="rental.type"
             required="required"
             ng-disabled="method == 'PATCH'">
-        <option value="rental" ng-selected="rental.type == 'rental'" translate>{{ 'standard' }}</option>
+        <option value="Rental" ng-selected="rental.type == 'Rental'" translate>{{ 'standard' }}</option>
         <option value="PartnerRental" ng-selected="rental.type == 'PartnerRental'" translate>{{ 'partner' }}</option>
     </select>
     <span class="help-block error" ng-show="rentalForm['rental[type]'].$dirty && rentalForm['rental[type]'].$error.required" translate>{{ 'rental_form.type_is_required' }}</span>
