@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :check_in
   post 'webhooks' => 'webhooks#create'
 
+  post 'stripe-webhook' => 'webhooks#stripe'
+
   if AuthProvider.active.providable_type == DatabaseProvider.name
     # with local authentification we do not use omniAuth so we must differentiate the config
     devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions',
