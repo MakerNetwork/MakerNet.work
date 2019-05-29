@@ -2,17 +2,26 @@
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rentals = Rental.includes(:rental_file)
+    puts "1"
+    @rentals = Rental.includes(:plan_file)
     @rentals = @rentals.where(group_id: params[:group_id]) if params[:group_id]
     render :index
   end
 
+  def new 
+    @rentals = Rental.new
+
+  end
+
   def show
+     puts "RENTALS SHOW METHOD CONTROLLER"
     @rental = Rental.find(params[:id])
   end
 
   def create
+       puts "RENTALS CREATE METHOD CONTROLLER"
     authorize Rental
+ 
     begin
       if rental_params[:type] and rental_params[:type] == 'PartnerRental'
 
@@ -59,6 +68,7 @@
   end
 
   def update
+    puts "UPDATE RENTAL MERTHOD CONTROLLER"
     @rental = Rental.find(params[:id])
     authorize @rental
     if @rental.update(rental_params)
@@ -77,6 +87,7 @@
 
   private
     def rental_params
+      puts "2"
       if @parameters
         @parameters
       else

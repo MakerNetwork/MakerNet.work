@@ -6,21 +6,18 @@ class Rental < ActiveRecord::Base
   has_many :machine_credits, -> {where(creditable_type: 'Machine')}, class_name: 'Credit'
   has_many :space_credits, -> {where(creditable_type: 'Space')}, class_name: 'Credit'
   has_many :rental_subscriptions
-  has_one :rental_image, as: :viewable, dependent: :destroy
-  has_one :rental_file, as: :viewable, dependent: :destroy
+  has_one :plan_image, as: :viewable, dependent: :destroy
+  has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
 
   extend FriendlyId
   friendly_id :base_name, use: :slugged
 
   accepts_nested_attributes_for :prices
-  accepts_nested_attributes_for :rental_file, allow_destroy: true, reject_if: :all_blank
+  #accepts_nested_attributes_for :plan_file_file, allow_destroy: true, reject_if: :all_blank
 
   after_update :update_stripe_rental, if: :amount_changed?
   after_create :create_stripe_rental, unless: :skip_create_stripe_rental
-  after_create :create_machines_prices
-  after_create :create_spaces_prices
-  after_create :create_statistic_type
   after_destroy :delete_stripe_rental
 
   attr_accessor :skip_create_stripe_rental
@@ -56,17 +53,6 @@ class Rental < ActiveRecord::Base
     rental_subscriptions.empty?
   end
 
-  def create_machines_prices
-    Machine.all.each do |machine|
-      Price.create(priceable: machine, rental: self, group_id: self.group_id, amount: 0)
-    end
-  end
-
-  def create_spaces_prices
-    Space.all.each do |space|
-      Price.create(priceable: space, rental: self, group_id: self.group_id, amount: 0)
-    end
-  end
 
   def duration
     interval_count.send(interval)
@@ -83,21 +69,10 @@ class Rental < ActiveRecord::Base
     result + " - #{human_readable_duration}"
   end
 
- # must be publicly accessible for the migration
-  def create_statistic_type
-    stat_index = StatisticIndex.where({es_type_key: 'rental_subscription'})
-    type = StatisticType.find_by(statistic_index_id: stat_index.first.id, key: self.duration.to_i)
-    if type == nil
-      label_fragment = I18n.t('app.admin.statistics.duration') + ': '
-      type = StatisticType.create!({statistic_index_id: stat_index.first.id, key: self.duration.to_i, label: label_fragment + self.human_readable_duration, graph: true, simple: true})
-    end
-    subtype = create_statistic_subtype
-    create_statistic_association(type, subtype)
-  end
 
   private
   def create_stripe_rental
-    stripe_rental = Stripe::Rental.create(
+    stripe_rental = Stripe::Plan.create(
       amount: amount,
       interval: interval,
       interval_count: interval_count,
@@ -123,13 +98,13 @@ class Rental < ActiveRecord::Base
   end
 
   def update_stripe_rental
-    old_stripe_rental = Stripe::Rental.retrieve(stp_rental_id)
+    old_stripe_rental = Stripe::Plan.retrieve(stp_rental_id)
     old_stripe_rental.delete
     create_stripe_rental
   end
 
   def delete_stripe_rental
-    Stripe::Rental.retrieve(stp_rental_id).delete
+    Stripe::Plan.retrieve(stp_rental_id).delete
   end
 
 

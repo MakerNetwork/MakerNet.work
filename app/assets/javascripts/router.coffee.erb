@@ -1074,7 +1074,7 @@ angular.module('application.router', ['ui.router']).
           machines: ['Machine', (Machine) ->
             Machine.query().$promise
           ]
-          Rentals: ['Rental', (Rental) ->
+          rentals: ['Rental', (Rental) ->
             Rental.query().$promise
           ]
           rentalPromise: ['Rental', '$stateParams', (Rental, $stateParams) ->

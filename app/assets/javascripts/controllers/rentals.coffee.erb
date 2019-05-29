@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers'
-, ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) ->
+Application.Controllers.controller "RentalsIndexController", ["$scope", "$rootScope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'rentalsPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers'
+, ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, rentalsPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) ->
 
 
 
@@ -20,7 +20,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     $scope.plansClassifiedByGroup = []
     for group in $scope.groups
       groupObj = { id: group.id, name: group.name, plans: [] }
-      for plan in plansPromise
+      for plan in rentalsPromise
         groupObj.plans.push(plan) if plan.group_id == group.id
       $scope.plansClassifiedByGroup.push(groupObj)
 
