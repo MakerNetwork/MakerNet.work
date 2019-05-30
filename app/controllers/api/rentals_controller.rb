@@ -20,7 +20,7 @@
 
   def create
        puts "RENTALS CREATE METHOD CONTROLLER"
-    authorize Rental
+    authorize :admin
  
     begin
       if rental_params[:type] and rental_params[:type] == 'PartnerRental'

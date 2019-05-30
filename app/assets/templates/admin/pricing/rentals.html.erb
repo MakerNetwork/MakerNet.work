@@ -34,13 +34,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="rentals in rentals | filterDisabled:rentalFiltering | orderBy:orderRentals"
+  <tr ng-repeat="rental in rentals | filterDisabled:rentalFiltering | orderBy:orderRentals"
       ng-class="{'disabled-line' : rental.disabled && rentalFiltering === 'all'}"
       ng-init="group = getGroupFromId(groups, rental.group_id)"
       ng-hide="group.disabled">
     <td>{{getRentalType(rental.type)}}</td>
     <td>{{rental.base_name}}</td>
-    <td>{{ rental.interval | rentalIntervalFilter:rental.interval_count }}</td>
+    <td>{{rental.interval | rentalIntervalFilter:rental.interval_count }}</td>
     <td>{{group.name}}</td>
     <td class="hidden-xs">{{rental.ui_weight}}</td>
     <td>{{rental.amount | currency}}</td>

@@ -120,16 +120,23 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
       $scope.partners.push(partner)
       $scope.plan.partnerId = partner.id
 
-  $scope.submited = (content) ->
-    if !content.id?
-      $scope.alerts = []
-      angular.forEach content, (v, k)->
-        angular.forEach v, (err)->
-          $scope.alerts.push
-            msg: k+': '+err
-            type: 'danger'
+##
+  # Display some messages and redirect the user, once the form was submitted, depending on the result status
+  # (failed/succeeded).
+  # @param content {Object}
+  ##
+  $scope.afterSubmit = (content) ->
+    console.log "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE " + content
+    if !content.id? and !content.rental_ids?
+      growl.error(_t('new_rental.unable_to_create_the_subscription_please_try_again'))
     else
-      $state.go('app.admin.rental_new')
+      growl.success(_t('new_rental.successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
+      if content.rental_ids?
+        $state.go('app.admin.pricing')
+      else
+        if content.id?
+          $state.go('app.admin.rentals.edit', {id: content.id})
+
 
   new RentalController($scope, groups, prices, partners, CSRF)
 ]
