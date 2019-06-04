@@ -20,15 +20,12 @@
     </div>
   </div>
 </div>
-
 <table class="table">
   <thead>
   <tr>
-    <th><a href="" ng-click="setOrderRentals('type')">{{ 'pricing.type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderRentals=='type', 'fa fa-sort-alpha-desc': orderRentals=='-type', 'fa fa-arrows-v': orderRentals }"></i></a></th>
     <th><a href="" ng-click="setOrderRentals('name')">{{ 'pricing.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderRentals=='name', 'fa fa-sort-alpha-desc': orderRentals=='-name', 'fa fa-arrows-v': orderRentals }"></i></a></th>
     <th><a href="" ng-click="setOrderRentals('interval')">{{ 'pricing.duration' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-amount-asc': orderRentals=='interval', 'fa fa-sort-amount-desc': orderRentals=='-interval', 'fa fa-arrows-v': orderRentals }"></i></a></th>
     <th><a href="" ng-click="setOrderRentals('group_id')">{{ 'pricing.group' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderRentals=='group_id', 'fa fa-sort-alpha-desc': orderRentals=='-group_id', 'fa fa-arrows-v': orderRentals }"></i></a></th>
-    <th class="hidden-xs"><a href="" ng-click="setOrderRentals('pricing.ui_weight')">{{ 'pricing.prominence' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderRentals=='ui_weight', 'fa fa-sort-numeric-desc': orderRentals=='-ui_weight', 'fa fa-arrows-v': orderRentals }"></i></a></th>
     <th><a href="" ng-click="setOrderRentals('amount')">{{ 'pricing.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderRentals=='amount', 'fa fa-sort-numeric-desc': orderRentals=='-amount', 'fa fa-arrows-v': orderRentals }"></i></a></th>
     <th></th>
   </tr>
@@ -38,11 +35,9 @@
       ng-class="{'disabled-line' : rental.disabled && rentalFiltering === 'all'}"
       ng-init="group = getGroupFromId(groups, rental.group_id)"
       ng-hide="group.disabled">
-    <td>{{getRentalType(rental.type)}}</td>
     <td>{{rental.base_name}}</td>
     <td>{{rental.interval | rentalIntervalFilter:rental.interval_count }}</td>
     <td>{{group.name}}</td>
-    <td class="hidden-xs">{{rental.ui_weight}}</td>
     <td>{{rental.amount | currency}}</td>
     <td>
       <div class="buttons">
@@ -53,36 +48,6 @@
           <i class="fas fa-trash"></i>
         </button>
       </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-
-
-<!--div class="msg msg-warning m-t">
-  {{ 'pricing.these_prices_match_space_hours_rates_' | translate }} <span class="font-bold" translate>{{ 'pricing._without_subscriptions' }}</span>.
-</div-->
-<table class="table">
-  <thead>
-  <tr>
-    <th style="width:20%"  translate>{{ 'pricing.rentals' }}</th>
-    <th style="width:20%" ng-repeat="group in enabledGroups">
-      <span class="text-u-c text-sm">{{group.name}}</span>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="space in enabledRentals">
-    <td>
-      {{ space.name }}
-    </td>
-    <td ng-repeat="group in enabledGroups">
-      <span editable-number="findPriceBy(spacesPrices, space.id, group.id).amount"
-            e-step="any"
-            onbeforesave="updatePrice($data, findPriceBy(spacesPrices, space.id, group.id))">
-          {{ findPriceBy(spacesPrices, space.id, group.id).amount | currency}}
-      </span>
     </td>
   </tr>
   </tbody>

@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'rentalsPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t'
-, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, rentalsPromise, spacesPricesPromise, spacesCreditsPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Rental', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'rentalsPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t'
+, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Rental, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, rentalsPromise, spacesPricesPromise, spacesCreditsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -45,7 +45,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.enabledSpaces = spacesPromise.filter (s) -> !s.disabled
 
   ##List of rentals
-  $scope.rentals = rentalsPromise
+  $scope.rentals =  Rental.query()
   $scope.enabledRentals = rentalsPromise.filter (s) -> !s.disabled
 
   ## Associate free space hours with subscriptions
