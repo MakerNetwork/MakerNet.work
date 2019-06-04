@@ -89,7 +89,6 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
   # @returns {boolean}
   ##
   $scope.partnerIsValid = ->
-    console.log "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
     ($scope.rental.type == "Rental") or ($scope.rental.partnerId or ($scope.rental.partnerContact and $scope.rental.partnerContact.email))
 
 
@@ -126,7 +125,6 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
   # @param content {Object}
   ##
   $scope.afterSubmit = (content) ->
-    console.log "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE " + content
     if !content.id? and !content.rental_ids?
       growl.error(_t('new_rental.unable_to_create_the_subscription_please_try_again'))
     else

@@ -416,6 +416,30 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
           growl.error(_t('pricing.unable_to_delete_the_specified_subscription_an_error_occurred'))
 
 
+  ##
+  # Delete the specified subcription plan
+  # @param id {number} plan id
+  ##
+  $scope.deleteRental = (rentals, id) ->
+    if typeof id != 'number'
+      console.error('[EditPricingController::deleteRental] Error: invalid id parameter')
+    else
+      # open a confirmation dialog
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('pricing.confirmation_required')
+            msg: _t('pricing.do_you_really_want_to_delete_this_subscription_rental')
+      , ->
+        # the admin has confirmed, delete the plan
+        Rental.delete {id: id}, (res) ->
+          growl.success(_t('pricing.subscription_rental_was_successfully_deleted'))
+          $scope.rentals.splice(findItemIdxById(rentals, id), 1)
+        , (error) ->
+          console.error('[EditPricingController::deleteRental] Error: '+error.statusText) if error.statusText
+          growl.error(_t('pricing.unable_to_delete_the_specified_subscription_an_error_occurred'))
+
+
 
   ##
   # Generate a string identifying the given plan by literal humain-readable name

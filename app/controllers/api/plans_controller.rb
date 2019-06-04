@@ -2,19 +2,16 @@
   before_action :authenticate_user!, except: [:index]
 
   def index 
-    puts "Paln 1"
     @plans = Plan.includes(:plan_file)
     @plans = @plans.where(group_id: params[:group_id]) if params[:group_id]
     render :index
   end
 
   def show
-    puts "Paln 2"
     @plan = Plan.find(params[:id])
   end
 
   def create
-    puts "Paln 3"
     authorize Plan
     begin
       if plan_params[:type] and plan_params[:type] == 'PartnerPlan'
@@ -62,7 +59,6 @@
   end
 
   def update
-    puts "Paln 4"
     @plan = Plan.find(params[:id])
     authorize @plan
     if @plan.update(plan_params)
@@ -73,7 +69,6 @@
   end
 
   def destroy
-    puts "Paln 5"
     @plan = Plan.find(params[:id])
     authorize @plan
     @plan.destroy
@@ -82,7 +77,6 @@
 
   private
     def plan_params
-      puts "Paln 6"
       if @parameters
         @parameters
       else

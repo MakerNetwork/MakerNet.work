@@ -14,12 +14,10 @@
   end
 
   def show
-     puts "RENTALS SHOW METHOD CONTROLLER"
     @rental = Rental.find(params[:id])
   end
 
   def create
-       puts "RENTALS CREATE METHOD CONTROLLER"
     authorize :admin
  
     begin
@@ -68,9 +66,7 @@
   end
 
   def update
-    puts "UPDATE RENTAL MERTHOD CONTROLLER"
     @rental = Rental.find(params[:id])
-    authorize @rental
     if @rental.update(rental_params)
       render :show, status: :ok
     else
@@ -80,14 +76,13 @@
 
   def destroy
     @rental = Rental.find(params[:id])
-    authorize @rental
+
     @rental.destroy
     head :no_content
   end
 
   private
     def rental_params
-      puts "2"
       if @parameters
         @parameters
       else
