@@ -154,7 +154,19 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     $scope.filterDisabledPlans = (plan) ->
       !plan.disabled
 
-
+    
+    $scope.cancelSubscription = (subscription)->
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_cancel_this_subscription')
+        , -> # cancel confirmed
+          Subscription.cancel { id: subscription.id }, (status, subscription) ->
+            growl.success(_t('subscription_successfully_canceled'))
+            $scope.ctrl.member.subscription.canceled = true
+          , (error)->
+            growl.error(_t('unable_to_cancel_the_subscription'))
 
     ### PRIVATE SCOPE ###
 
@@ -253,6 +265,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
                 $scope.attempting = false
         ]
       .result['finally'](null).then (subscription)->
+        $scope.ctrl.member.subscription = subscription
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
         $scope.paid.plan = angular.copy($scope.selectedPlan)
