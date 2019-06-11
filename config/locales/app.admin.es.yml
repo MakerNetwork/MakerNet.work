@@ -293,8 +293,8 @@ es:
         new:
           # add a subscription plan on the platform
           new_rental:
-            add_a_subscription_rental: "Añadir un plan de subscription de espacio en renta"
-             unable_to_create_the_subscription_please_try_again: "No se puede crear el plan de suscripción del espacio en renta. Por favor, inténtelo de nuevo."
+            add_a_subscription_rental: "Añadir un plan de subscription de espacio en renta."
+            unable_to_create_the_subscription_please_try_again: "No se puede crear el plan de suscripción del espacio en renta. Por favor, inténtelo de nuevo."
             successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Suscripción(es) creada correctamente. No olvide redefinir los precios."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "No se puede guardar este usuario. Compruebe que no hay un usuario ya definido con el mismo nombre."
         edit:
