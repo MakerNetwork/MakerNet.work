@@ -90,7 +90,7 @@ en:
       subject: "Your %{FABLAB}'s subscription has been successfully purchased"
       body:
         plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Your subscription plan will renewed on  %{DATE}"
+        subscription_stops_on: "Your subscription plan will be renewed on  %{DATE}"
 
     notify_member_create_reservation:
       subject: "Your %{FABLAB}'s reservation has been successfully saved"
