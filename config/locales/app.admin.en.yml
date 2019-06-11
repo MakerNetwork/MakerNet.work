@@ -221,6 +221,7 @@ en:
           credit_was_successfully_saved: "Credit was successfully saved."
           error_creating_credit: "Unable to create credit, an error occurred"
           do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
+          do_you_really_want_to_delete_this_subscription_rental: "Do you really want to delete this subscription rental?"
           subscription_plan_was_successfully_deleted: "Subscription plan was successfully deleted."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
           coupons: "Coupons"
@@ -251,6 +252,7 @@ en:
           valid_until: "Valid until (included)"
           spaces: "Spaces"
           rentals: "Rentals"
+          add_a_new_subscription_rental: "Add a new subscription rental"
           these_prices_match_space_hours_rates_: "These prices match space hours rates"
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
@@ -294,14 +296,14 @@ en:
         new:
           # add a subscription plan on the platform
           new_rental:
-            add_a_subscription_rental: "Add a subscription plan"
+            add_a_subscription_rental: "Add a subscription rental space"
             unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
             successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
         edit:
           # edit a subscription plan / machine hours prices
-          edit_plan:
-            subscription_plan: "Subscription plan:"
+          edit_rental:
+            subscription_rental: "Subscription rental:"
             prices: "Prices"
             copy_prices_from: "Copy prices from"
             machines: "Machines"
@@ -309,8 +311,8 @@ en:
             hourly_rate: "Hourly rate"
             spaces: "Spaces"
             space: "Space"
-            unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
-            subscription_successfully_changed: "Subscription successfully changed."            
+            unable_to_save_subscription_changes_please_try_again: "Unable to save subscription rental changes. Please try again."
+            subscription_successfully_changed: "Subscription rental successfully changed."            
 
       invoices:
         # list of all invoices & invoicing parameters
@@ -737,11 +739,10 @@ en:
 
       rental_new:
         # create a new rental
-        rental_new:
-          add_a_new_rental: "Add a new rental"
-          watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new rental, its prices are initialized at 0 for all subscriptions."
-          consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
-          add_this_rental: "Add this rental"
+        add_a_new_subscription_rental: "Add a new rental"
+        watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new rental, its prices are initialized at 0 for all subscriptions."
+        consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
+        add_this_rental: "Add this rental"
 
       rental_edit:
         # modify an exiting rental

@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-10 col-sm-10 col-md-8 b-l">
             <section class="heading-title">
-                <h1 translate>{{ 'new_rental.add_a_subscription_plan' }}</h1>
+                <h1 translate>{{ 'new_rental.add_a_subscription_rental' }}</h1>
             </section>
         </div>
 
@@ -21,9 +21,6 @@
             <form name="planForm" novalidate="novalidate" class="col-lg-10 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
 
                 <ng-include src="'<%= asset_path 'admin/rentals/_form.html' %>'"></ng-include>
-
-             {{content}}
-                {{plan}}
 
                 <div class="panel-footer no-padder">
                     <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>

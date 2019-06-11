@@ -218,6 +218,7 @@ pt:
           credit_was_successfully_saved: "Crédito salvo com sucesso."
           error_creating_credit: "Não foi possível criar crédito, um erro ocorreu"
           do_you_really_want_to_delete_this_subscription_plan: "Você realmente deletar esse plano de assinatura?"
+          do_you_really_want_to_delete_this_subscription_rental: "Você realmente deletar esse plano de assinatura?"
           subscription_plan_was_successfully_deleted: "Plano de assinatura foi deletado com sucesso."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Não é possível deletar a assinatura específicada, um erro ocorreu."
           coupons: "Cupons"
@@ -276,6 +277,28 @@ pt:
           # edit a subscription plan / machine hours prices
           edit_plan:
             subscription_plan: "Plano de assinatura:"
+            prices: "Preços"
+            copy_prices_from: "Copiar preços de"
+            machines: "Máquinas"
+            machine: "Máquina"
+            hourly_rate: "Taxa horária"
+            spaces: "Espaços"
+            space: "Espaço"
+            unable_to_save_subscription_changes_please_try_again: "Impossível salvar mudanças da assinatura. Por favor tente novamente."
+            subscription_successfully_changed: "Assinatura alterada com sucesso."
+
+      rentals:
+        new:
+          # add a subscription plan on the platform
+          new_rental:
+            add_a_subscription_rental: "Adicionar plano de assinatura"
+            unable_to_create_the_subscription_please_try_again: "Não é possível criar plano de assinatura. por favor tente novamente."
+            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Assinaturas criadas com sucesso. Não se esqueça de redefinir os preços."
+            unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossível salvar este usuário. Certifique-se que ele não possui o mesmo nome de outro usuário."
+        edit:
+          # edit a subscription plan / machine hours prices
+          edit_rental:
+            subscription_rental: "Plano de assinatura:"
             prices: "Preços"
             copy_prices_from: "Copiar preços de"
             machines: "Máquinas"
