@@ -130,7 +130,6 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
   # @param content {Object}
   ##
   $scope.afterSubmit = (content) ->
-    console.log "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE " + content
     if !content.id? and !content.plan_ids?
       growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'))
     else
