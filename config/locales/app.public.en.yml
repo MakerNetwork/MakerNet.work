@@ -331,3 +331,8 @@ en:
       innovation_map:
         # show data from places displayed in the map
         innovation_map: 'Atlas of Innovation'
+      checkin:
+        # checkin/ out in  makerspace
+        you_have_checked_in_successfully: 'You have checked in successfully'
+        you_have_checked_out_successfully: 'You have checked out successfully'
+    
