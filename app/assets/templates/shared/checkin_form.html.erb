@@ -1,0 +1,146 @@
+<div class="about-fablab scrollable">
+  <div class="row padder">
+    <header class="about-picture">
+      <div class="col-sm-offset-2 col-md-offset-2 col-sm-10 col-md-8">
+ <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <div class="well m-b-n">
+      <div class="form-group">
+      <div class="widget">
+      <div class="date" style="text-align: center;">
+      <p style="text-align: center;"> <span id="dayofweek" class="dayofweek"></span>
+      <span id="day" class="day"></span>
+      <span> of </span>
+      <span id="month" class="month"></span>
+      <span> </span>
+      <span id="year" class="year"></span>
+      </p>
+      </div>
+      <div class="clock">
+      <p style="text-align: center;"> 
+        <span id="hours" class="hours"></span>
+      <span>:</span>
+      <span id="minutes" class="minutes"></span>
+      <span>:</span>
+      <span class="Secondsbox">
+        <span id="seconds" class="seconds"></span>
+        <span id="ampm" class="ampm"></span>
+      </span>
+    </p>
+    </div>
+
+  </div>
+</div>
+</div>
+<div ng-if="is_auth && lastcheck != null" class="Last Check">
+   <div class="well m-b-n">
+      <div class="form-group">
+      <div class="widget" style="text-align: center;">
+      <h2 >LAST CHECK</h2>
+      <p style="text-align: center; "> <span>Checkin :</span>
+      <span>{{lastcheck.check_in}}</span>
+    </p>
+      <p style="text-align: center;">
+      <span>Checkout :</span>
+        <span >{{lastcheck.check_out}}</span>
+      
+    </p>
+    </div>
+  </div></div></div>
+</div>
+    </header>
+    <body>
+    <div ng-if="!is_auth">
+      <div class="well m-b-n">
+        
+       <form role="form" name="checkinForm" class="form-horizontal" novalidate autocomplete="off">
+       <div class="form-group" ng-class="{'has-error': checkinForm.email.$dirty && checkinForm.email.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i><span class="exponent"></span>
+            </span>
+              <input type="email"
+                     name="email"
+                     ng-model="user.email"
+                     class="form-control"
+                     placeholder="{{ 'your_email_address' | translate }}"
+                     required>
+            </div>
+            <span class="help-block"  ng-show="checkinForm.email.$dirty && checkinForm.email.$error.required"translate>{{ 'email_is_required' }}</span>
+          </div>
+        </div>
+             
+         <div class="form-group" ng-class="{'has-error': checkinForm.password.$dirty && checkinForm.password.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              <input type="password"
+                     name="password"
+                     ng-model="user.password"
+                     class="form-control"
+                     placeholder="{{ 'your_password' | translate }}"
+                     required
+                     ng-minlength="8">
+            </div>
+            <span class="help-block" ng-show = "checkinForm.password.$dirty && checkinForm.password.$error.required " translate>{{ 'password_is_required' }}</span>
+            <div class="msg msg-warning m-t-sm m-b-none text-xs text-center p-sm" ng-show='isCapsLockOn' role="alert">
+                  <i class="fa fa-warning"></i>
+                  {{ 'caps_lock_is_on' | translate }}
+          </div>
+              
+          </div>
+        </div>
+          <div class="modal-footer no-padder">
+    <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="login()" ng-disabled="checkinForm.$invalid" translate>{{ 'Find user' }}</button>
+    <!-- ng-click="login()" -->
+  </div>
+  </form>
+ </div>
+</div>
+
+<div ng-if="is_checked && is_auth">
+
+
+  <div class="well m-b-n" id = "check">
+      <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
+        <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
+          <div class="modal-footer no-padder">
+             
+             <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkout' }}</button>
+            <!-- ng-click="login()" -->
+          
+        </div>
+       </form>
+        </div>
+    
+
+  </div>
+<div ng-if="!is_checked && is_auth">
+  <div class="well m-b-n" id = "check">
+      <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
+        <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
+          <div class="modal-footer no-padder">
+          
+            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" id ="look_for_user" ng-click="check()" ng-disabled="checkinForm.$invalid" translate>{{ 'Checkin' }}</button>
+            <!-- ng-click="login()" -->
+          
+        </div>
+       </form>
+        </div>
+    
+
+  </div>
+  <div class="well m-b-n" id = "cancel" ng-if ="is_auth">
+      <form role="form" name="checkForm" class="form-horizontal" novalidate autocomplete="off">        
+        
+          <div class="modal-footer no-padder">
+          
+            <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="cancel()" ng-disabled="checkinForm.$invalid" translate>{{ 'Cancel' }}</button>
+            <!-- ng-click="login()" -->
+          
+        </div>
+       </form>
+        </div>
+  
+    </body>
+  </div>
+</div>
