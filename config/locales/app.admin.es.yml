@@ -218,6 +218,7 @@ es:
           credit_was_successfully_saved: "El crédito se ha guardado correctamente."
           error_creating_credit: "Unable to create credit, an error occurred"                      # translation_missing
           do_you_really_want_to_delete_this_subscription_plan: "¿Realmente desea eliminar este plan de suscripción?"
+          do_you_really_want_to_delete_this_subscription_rental: "¿Realmente desea eliminar este plan de suscripción?"
           subscription_plan_was_successfully_deleted: "Plan de suscripción eliminado correctamente."
           unable_to_delete_the_specified_subscription_an_error_occurred: "No se pudo eliminar la suscripción especificada, se produjo un error.."
           coupons: "Cupones"
@@ -247,6 +248,8 @@ es:
           forever: "Cada uso"
           valid_until: "Válido hasta (incluido)"
           spaces: "Espacios"
+          rentals: "Espacios en renta"
+          add_a_new_subscription_rental: "Añadir un espacio en renta"
           these_prices_match_space_hours_rates_: "Estos precios coinciden con las tarifas de espacio por horas"
           add_a_space_credit: "Añadir un crédito de espacio"
           space: "Espacio"
@@ -285,6 +288,29 @@ es:
             space: "Espacio"
             unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."
             subscription_successfully_changed: "Suscripción cambiada correctamente."
+
+      rentals:
+        new:
+          # add a subscription plan on the platform
+          new_rental:
+            add_a_subscription_rental: "Añadir un plan de subscription de espacio en renta."
+            unable_to_create_the_subscription_please_try_again: "No se puede crear el plan de suscripción del espacio en renta. Por favor, inténtelo de nuevo."
+            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Suscripción(es) creada correctamente. No olvide redefinir los precios."
+            unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "No se puede guardar este usuario. Compruebe que no hay un usuario ya definido con el mismo nombre."
+        edit:
+          # edit a subscription plan / machine hours prices
+          edit_rental:
+            subscription_rental: "Suscripción de espacio en renta:"
+            prices: "Precios"
+            copy_prices_from: "Copia los precios desde"
+            machines: "Máquinas"
+            machine: "Máquina"
+            hourly_rate: "Tarifa por hora"
+            spaces: "Espacios"
+            space: "Espacio"
+            unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."
+            subscription_successfully_changed: "Suscripción cambiada correctamente."
+         
 
       invoices:
         # list of all invoices & invoicing parameters

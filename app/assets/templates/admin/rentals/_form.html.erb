@@ -1,0 +1,142 @@
+<h2 translate>{{ 'rental_form.general_information' }}</h2>
+<input type="hidden" name="_method" value="{{method}}">
+<div class="form-group" ng-class="{'has-error': rentalForm['rental[base_name]'].$dirty && rentalForm['rental[base_name]'].$invalid}">
+    <label for="rental[base_name]">{{ 'rental_form.name' | translate }} *</label>
+    <input type="text" id="rental[base_name]"
+           name="rental[base_name]"
+           class="form-control"
+           ng-maxlength="24"
+           ng-model="rental.base_name"
+           required="required"/>
+    <span class="help-block error" ng-show="rentalForm['rental[base_name]'].$dirty && rentalForm['rental[base_name]'].$error.required" translate>{{ 'rental_form.name_is_required' }}</span>
+    <span class="help-block error" ng-show="rentalForm['rental[base_name]'].$dirty && rentalForm['rental[base_name]'].$error.maxlength" translate>{{ 'rental_form.name_length_must_be_less_than_24_characters' }}</span>
+</div>
+<div class="form-group" ng-class="{'has-error': rentalForm['rental[type]'].$dirty && rentalForm['rental[type]'].$invalid}">
+    <label for="rental[type]">{{ 'rental_form.type' | translate }} *</label>
+    <select id="rental[type]"
+            name="rental[type]"
+            class="form-control"
+            ng-model="rental.type"
+            required="required"
+            ng-disabled="method == 'PATCH'">
+        <option value="Rental" ng-selected="rental.type == 'Rental'" translate>{{ 'standard' }}</option>
+        <option value="PartnerRental" ng-selected="rental.type == 'PartnerRental'" translate>{{ 'partner' }}</option>
+    </select>
+    <span class="help-block error" ng-show="rentalForm['rental[type]'].$dirty && rentalForm['rental[type]'].$error.required" translate>{{ 'rental_form.type_is_required' }}</span>
+</div>
+<div class="form-group" ng-class="{'has-error': rentalForm['rental[group_id]'].$dirty && rentalForm['rental[group_id]'].$invalid}">
+    <label for="rental[group_id]">{{ 'rental_form.group' | translate }} *</label>
+    <select id="rental[group_id]"
+            name="rental[group_id]"
+            class="form-control"
+            ng-model="rental.group_id"
+            required="required"
+            ng-disabled="method == 'PATCH'">
+        <option value="all" translate>{{ 'rental_form.transversal_(all_groups)' }}</option>
+        <optgroup label="Groupes">
+            <option ng-repeat="group in groups" ng-value="group.id" ng-selected="rental.group_id == group.id">{{group.name}}</option>
+        </optgroup>
+    </select>
+    <span class="help-block" ng-show="rentalForm['rental[group_id]'].$dirty && rentalForm['rental[group_id]'].$error.required" translate>{{ 'rental_form.group_is_required' }}</span>
+</div>
+
+<div class="form-group" ng-class="{'has-error': rentalForm['rental[interval]'].$dirty && rentalForm['rental[interval]'].$invalid}">
+    <label for="rental[interval]">{{ 'rental_form.period' | translate }} *</label>
+    <select id="rental[interval]"
+            name="rental[interval]"
+            class="form-control"
+            ng-model="rental.interval"
+            ng-disabled="method == 'PATCH'"
+            required="required">
+        <option value="week" ng-selected="rental.interval == 'week'" translate>{{ 'rental_form.week' }}</option>
+        <option value="month" ng-selected="rental.interval == 'month'" translate>{{ 'rental_form.month' }}</option>
+        <option value="year" ng-selected="rental.interval == 'year'" translate>{{ 'rental_form.year' }}</option>
+    </select>
+    <span class="help-block" ng-show="rentalForm['rental[interval]'].$dirty && rentalForm['rental[interval]'].$error.required" translate>{{ 'rental_form.period_is_required' }}</span>
+</div>
+
+<div class="form-group" ng-class="{'has-error': rentalForm['rental[interval_count]'].$dirty && rentalForm['rental[interval_count]'].$invalid}">
+  <label for="rental[interval]">{{ 'rental_form.number_of_periods' | translate }} *</label>
+  <input id="rental[interval_count]"
+         name="rental[interval_count]"
+         class="form-control"
+         type="number"
+         ng-model="rental.interval_count"
+         ng-disabled="method == 'PATCH'"
+         required="required"
+         min="1"/>
+  <span class="help-block" ng-show="rentalForm['rental[interval_count]'].$dirty && rentalForm['rental[interval_count]'].$error.required" translate>{{ 'rental_form.number_of_periods_is_required' }}</span>
+</div>
+
+<div class="form-group">
+  <div class="input-group" ng-class="{'has-error': rentalForm['rental[amount]'].$dirty && rentalForm['rental[amount]'].$invalid}">
+      <label for="rental[amount]">{{ 'rental_form.subscription_price' | translate }} *</label>
+      <div class="input-group">
+          <span class="input-group-addon">{{currencySymbol}}</span>
+          <input id="rental[amount]"
+                 name="rental[amount]"
+                 type="number"
+                 class="form-control"
+                 ng-required="true"
+                 ng-model="rental.amount"/>
+      </div>
+      <span class="help-block" ng-show="rentalForm['rental[amount]'].$dirty && rentalForm['rental[amount]'].$error.required" translate>{{ 'rental_form.price_is_required' }}</span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label translate>{{ 'rental_form.visual_prominence_of_the_subscription' }}</label>
+    <input ng-model="rental.ui_weight"
+           type="number"
+           name="rental[ui_weight]"
+           class="form-control">
+    <span class="help-block">
+      {{ 'rental_form.on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list' | translate }}
+      {{ 'rental_form.an_evelated_number_means_a_higher_prominence' | translate }}
+    </span>
+</div>
+
+<div class="form-group m-t-md">
+    <label for="rental[is_rolling]" class="control-label m-r-md">{{ 'rental_form.rolling_subscription' | translate }} *</label>
+    <input bs-switch
+           ng-model="rental.is_rolling"
+           id="rental[is_rolling]"
+           ng-if="method != 'PATCH'"
+           type="checkbox"
+           class="form-control"
+           switch-on-text="{{ 'yes' | translate }}"
+           switch-off-text="{{ 'no' | translate }}"
+           switch-animate="true"
+           ng-true-value="'true'"
+           ng-false-value="'false'"/>
+    <span ng-if="method == 'PATCH'">{{ (rental.is_rolling ? 'yes' : 'no') | translate }}</span>
+    <input type="hidden" ng-model="rental.is_rolling" name="rental[is_rolling]" ng-value="rental.is_rolling"/>
+    <span class="help-block">
+      {{ 'rental_form.a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
+      {{ 'rental_form.otherwise_it_will_begin_as_soon_as_it_is_bought' | translate }}
+    </span>
+</div>
+
+<div class="form-group m-t-md" ng-show="rental.type == 'PartnerRental' && method != 'PATCH'">
+    <input type="hidden" ng-model="rental.partnerId" name="rental[partner_id]" ng-value="rental.partnerId" />
+    <label for="rental[partner_id]">{{ 'rental_form.notified_partner' | translate }} *</label>
+    <div class="input-group">
+        <select class="form-control"
+                ng-model="rental.partnerId"
+                ng-options="p.id as (p.name + ' <'+p.email+'>') for p in partners"
+                id="rental[partner_id]">
+            <option value=""></option>
+        </select>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="openPartnerNewModal()"><i class="fa fa-user-plus"></i> {{ 'rental_form.new_user' | translate }}</button>
+        </span>
+    </div>
+    <span class="help-block" translate>{{ 'rental_form.as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user' }}</span>
+</div>
+
+<div class="form-group" ng-show="rental.partners">
+  <label>Partenaire notifié</label>
+  <span ng-repeat="partner in rental.partners">
+    <input type="text" class="form-control" disabled value="{{ partner.first_name}} {{partner.last_name }}">
+  </span>
+</div>

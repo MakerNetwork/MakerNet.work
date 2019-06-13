@@ -106,6 +106,7 @@ Rails.application.routes.draw do
       put ':id/cancel', action: 'cancel', on: :collection
     end
     resources :plans, only: [:index, :create, :update, :destroy, :show]
+    resources :rentals, only: [:index, :create, :update, :destroy, :show]
     resources :slots, only: [:update] do
       put 'cancel', on: :member
     end
