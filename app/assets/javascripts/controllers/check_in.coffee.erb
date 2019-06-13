@@ -75,8 +75,11 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
     Auth.login(user).then (user) ->
     # Authentification succeeded ...
         url= 'check_ins/'+user.id+'/is_checked'
+        $('.page-alert').alert 'close'
         $.get url, (response)->
           $scope.is_checked = response.message
+          if $scope.is_checked
+           $scope.messages = _t('you_have_checked_out_successfully')
           is_auth = $scope.is_auth = true
           $scope.lastcheck=response.lastCheck
           $scope.lastcheck.check_in = new Date($scope.lastcheck.check_in).toLocaleString()
@@ -86,26 +89,45 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
         $scope.id = user.id
     , (error) ->
         # Authentication failed...
-        $scope.alerts = []
-        $scope.alerts.push
-        msg: _t('wrong_email_or_password')
-        type: 'danger'
+        $('.page-alert').alert 'close'
+        createNoty _t('wrong_email_or_password'), 'danger'
+        $('#my-alert').fadeTo(50000, 500).slideUp 500, ->
+          $(this).alert 'close'
+        $('.page-alert .close').click (e) ->
+         e.preventDefault()
+         $(this).closest('.page-alert').slideUp()
         
   #when click check in or checkout
   $scope.check = () -> 
       CSRF.setMetaTags()
       url= 'check_ins/'+$scope.id+'/check'
       $.post url, (response)->
+        createNoty $scope.messages, 'success'
+        #close the alert after some time
+        $('#my-alert').fadeTo(5000, 500).slideUp 500, ->
+          $(this).alert 'close'
+        $('.page-alert .close').click (e) ->
+         e.preventDefault()
+         $(this).closest('.page-alert').slideUp()
         initialize()
   #when click cancel
   $scope.cancel =()->
     initialize()
+  #create the notifiacations
+  createNoty = (message, type) ->
+    html = '<div class="alert alert-' + type + ' alert-dismissable page-alert" id= "my-alert" style="text-align: center;">'
+    html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>'
+    html += message
+    html += '</div>'
+    $(html).hide().prependTo('#noty-holder').slideDown()
   #initialization
   initialize = ->
    Auth.logout(user)
    user = $scope.user = {}
    is_auth = $scope.is_auth = false
    is_checked = $scope.is_checked = false
+   messages = $scope.messages= _t('you_have_checked_in_successfully')
+
   interval = setInterval(dateUpdate, 1000)
   dateUpdate()
   initialize()

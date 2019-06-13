@@ -2,7 +2,8 @@
   <div class="row padder">
     <header class="about-picture">
       <div class="col-sm-offset-2 col-md-offset-2 col-sm-10 col-md-8">
- <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+        <div id="noty-holder"></div><!-- HERE IS WHERE THE NOTY WILL APPEAR-->
+ 
             <div class="well m-b-n">
       <div class="form-group">
       <div class="widget">

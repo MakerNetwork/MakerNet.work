@@ -299,3 +299,7 @@ fr:
           characteristics: "Caractéristiques"
           files_to_download: "Fichiers à télécharger"
           projects_using_the_space: "Projets utilisant l'espace"
+      checkin:
+        # checkin/ out in  makerspace
+        you_have_checked_in_successfully: 'Vous avez enregistré votre entrée correctement'
+        you_have_checked_out_successfully: 'Vous avez correctement enregistré votre sortie'
