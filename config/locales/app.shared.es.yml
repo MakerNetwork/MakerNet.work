@@ -416,7 +416,26 @@ es:
           add_an_attachment: "Añadir adjunto"
           default_places: "Máximo de entradas predeterminado"
           default_places_is_required: "Se requiere un máximo de entradas predeterminado."
-          disable_space: "Disable space"                                                            #translation_missing
+          disable_space: "Desactivar espacio"
+          is_rental: "Es Espacio en Renta" 
+      rentals:
+        # form to create/edit a rental
+        rental:
+          name: "Nombre"
+          name_is_required: "Se requiere un nombre."
+          illustration: "Ilustración"
+          add_an_illustration: "añadir una ilustración"
+          description: "descripción"
+          description_is_required: "Se requiere una descripción."
+          characteristics: "Características"
+          characteristics_are_required: "Las características son obligatorias."
+          attached_files_(pdf): "Archivos adjuntos (pdf)"
+          attach_a_file: "Adjuntar archvo"
+          add_an_attachment: "Añadir adjunto"
+          default_places: "Máximo de entradas predeterminado"
+          default_places_is_required: "Se requiere un máximo de entradas predeterminado."
+          disable_space: "Desactivar Espacio"
+          is_rental: "Es Espacio en Renta"                                                           #translation_missing
 
       cart:
         # module de panier d'achat de réservations

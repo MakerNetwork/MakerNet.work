@@ -36,6 +36,15 @@ class API::SpacesController < API::ApiController
     @space.destroy
     head :no_content
   end
+  def to_rental
+    @space = get_space
+    authorize @space
+    if @space.update(is_rental: true)
+        render :show, status: :ok, location: @space
+    else
+      render json: @space.errors, status: :unprocessable_entity
+    end
+  end
 
   private
     def get_space
