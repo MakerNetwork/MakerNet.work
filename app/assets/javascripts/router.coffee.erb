@@ -509,7 +509,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "rentals/index.html" %>'
-            controller: 'RentalsController'
+            controller: 'RentalSpacesController'
         resolve:
           spacesPromise: ['Space', (Space)->
             Space.query({is_rental: true}).$promise
@@ -523,7 +523,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "rentals/new.html" %>'
-            controller: 'NewRentalController'
+            controller: 'NewRentalSpaceController'
         resolve:
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.rental_new', 'app.shared.space']).$promise
@@ -534,7 +534,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "rentals/show.html" %>'
-            controller: 'ShowRentalController'
+            controller: 'ShowRentalSpaceController'
         resolve:
           spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
             Space.get(id: $stateParams.id).$promise
@@ -548,7 +548,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "rentals/edit.html" %>'
-            controller: 'EditRentalController'
+            controller: 'EditRentalSpaceController'
         resolve:
           spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
             Space.get(id: $stateParams.id).$promise
