@@ -2,7 +2,6 @@
   before_action :authenticate_user!, except: [:index]
 
   def index
-    puts "1"
     @rentals = Rental.includes(:plan_file)
     @rentals = @rentals.where(group_id: params[:group_id]) if params[:group_id]
     render :index

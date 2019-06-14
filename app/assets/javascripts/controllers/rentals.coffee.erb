@@ -15,7 +15,7 @@
 #  - $scope.space.space_files_attributes = []
 #  - $state (Ui-Router) [ 'app.public.spaces_list' ]
 ##
-class RentalsController
+class RentalSpacesController
   constructor: ($scope, $state) ->
     ##
     # For use with ngUpload (https://github.com/twilson63/ngUpload).
@@ -75,7 +75,7 @@ class RentalsController
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller 'RentalsController', ['$scope', '$state', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, spacesPromise, $uibModal, _t, Wallet, helpers) ->
+Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, spacesPromise, $uibModal, _t, Wallet, helpers) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
@@ -327,7 +327,7 @@ Application.Controllers.controller 'RentalsController', ['$scope', '$state', 'sp
 ##
 # Controller used in the space creation page (admin)
 ##
-Application.Controllers.controller 'NewRentalController', ['$scope', '$state', 'CSRF',($scope, $state, CSRF) ->
+Application.Controllers.controller 'NewRentalSpaceController', ['$scope', '$state', 'CSRF',($scope, $state, CSRF) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -341,14 +341,14 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$state', '
     space_files_attributes: []
 
   ## Using the SpacesController
-  new RentalsController($scope, $state)
+  new RentalSpacesController($scope, $state)
 ]
 
 
 ##
 # Controller used in the space edition page (admin)
 ##
-Application.Controllers.controller 'EditRentalController', ['$scope', '$state', '$stateParams', 'spacePromise', 'CSRF',($scope, $state, $stateParams, spacePromise, CSRF) ->
+Application.Controllers.controller 'EditRentalSpaceController', ['$scope', '$state', '$stateParams', 'spacePromise', 'CSRF',($scope, $state, $stateParams, spacePromise, CSRF) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -361,10 +361,10 @@ Application.Controllers.controller 'EditRentalController', ['$scope', '$state', 
   $scope.space = spacePromise
 
   ## Using the SpacesController
-  new RentalsController($scope, $state)
+  new RentalSpacesController($scope, $state)
 ]
 
-Application.Controllers.controller 'ShowRentalController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', 'growl', ($scope, $state, spacePromise, _t, dialogs, growl) ->
+Application.Controllers.controller 'ShowRentalSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', 'growl', ($scope, $state, spacePromise, _t, dialogs, growl) ->
 
   ## Details of the space witch id/slug is provided in the URL
   $scope.space = spacePromise
