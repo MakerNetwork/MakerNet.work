@@ -255,7 +255,7 @@ en:
           add_a_new_subscription_rental: "Add a new subscription rental"
           these_prices_match_space_hours_rates_: "These prices match space hours rates"
           add_a_space_credit: "Add a Space credit"
-          space: "Espace"
+          space: "Space"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error : a credit linking this space with that subscription already exists."
           status_enabled: "Enabled"
           status_disabled: "Disabled"
@@ -296,7 +296,7 @@ en:
         new:
           # add a subscription plan on the platform
           new_rental:
-            add_a_subscription_rental: "Add a subscription rental space"
+            add_a_new_rental: "Add a subscription rental space"
             unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
             successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
@@ -739,10 +739,11 @@ en:
 
       rental_new:
         # create a new rental
-        add_a_new_subscription_rental: "Add a new rental"
-        watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new rental, its prices are initialized at 0 for all subscriptions."
-        consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
-        add_this_rental: "Add this rental"
+        rental_new:
+          add_a_new_rental: "Add a new rental"
+          watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new rental, its prices are initialized at 0 for all subscriptions."
+          consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
+          add_this_rental: "Add this rental"
 
       rental_edit:
         # modify an exiting rental

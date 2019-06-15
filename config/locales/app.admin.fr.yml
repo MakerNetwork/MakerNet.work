@@ -708,7 +708,7 @@ fr:
       space_new:
         # créer un nouvel espace
         space_new:
-          add_a_new_space: "Ajouter un nouvel espace"
+          add_a_new_space: "Ajouter un nouvel espace "
           watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'un espace, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
           consider_changing_its_prices_before_creating_any_reservation_slot: "Pensez à modifier ces prix avant de créer des créneaux pour cet espace."
           add_this_space: "Ajouter cet espace"
@@ -718,3 +718,19 @@ fr:
         space_edit:
           edit_the_space_NAME: "Modifier l'espace : {{NAME}}"  # angular interpolation
           validate_the_changes: "Valider les modifications"
+
+
+
+      rental_new:
+        # créer un nouvel rental
+        rental_new:
+          add_a_new_rental: "Ajouter un nouvel espace de location"
+          watch_out_when_creating_a_new_rental_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'un espace, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
+          consider_changing_its_prices_before_creating_any_reservation_slot: "Pensez à modifier ces prix avant de créer des créneaux pour cet espace."
+          add_this_rental: "Ajouter cet espace de location"
+
+      rental_edit:
+        # modifier un espacede location existant
+        rental_edit:
+          edit_the_rental_NAME: "Modifier l'espace de location : {{NAME}}"  # angular interpolation
+          validate_the_changes: "Valider les modifications"          
