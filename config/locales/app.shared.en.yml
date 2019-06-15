@@ -50,6 +50,7 @@ en:
         summary: "Summary"
         you_ve_just_selected_a_: "You've just selected a"  # you_ve_just_selected_a_ + _subscription
         _subscription: "subscription"
+        _rental: "Rental"
         confirm_and_pay: "Confirm and pay"
         your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
         add_an_event: "Add an event"
@@ -74,6 +75,7 @@ en:
         year: "Year"
         month: "Month"
         subscription_price: "Subscription Price"
+        rental_price: "Rental Price"
         model: "Model"
         from_date: "From" # context: date. eg: "from 01/01 to 01/05"
         from_time: "From" # context: time. eg. "from 18:00 to 21:00"
@@ -230,6 +232,7 @@ en:
           week: "Week"
           period_is_required: "Period is required."
           subscription_price: "Subscription price"
+          rental_price: "Rental Price"
           price_is_required: "Price is required."
           visual_prominence_of_the_subscription: "Visual prominence of the subscription"
           on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "On the subscriptions page, the most prominent subscriptions will be placed at the top of the list."
@@ -246,7 +249,44 @@ en:
           email_address_is_required: "Email address is required."
           disabled: "Disable subscription"
           disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
-
+      
+      rental:
+        # subscription plan edition form
+        rental_form:
+          general_information: "General information"
+          name: "Name"
+          name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
+          type: "Type"
+          type_is_required: "Type is required."
+          group: "Group"
+          transversal_(all_groups): "All groups"
+          group_is_required: "Group is required."
+          number_of_periods: "Number of periods"
+          number_of_periods_is_required: "Number of periods is required."
+          period: "Period"
+          year: "Year"
+          month: "Month"
+          week: "Week"
+          period_is_required: "Period is required."
+          subscription_price: "Subscription price"
+          rental_price: "Rental Price"
+          price_is_required: "Price is required."
+          visual_prominence_of_the_subscription: "Visual prominence of the subscription"
+          on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "On the subscriptions page, the most prominent subscriptions will be placed at the top of the list."
+          an_evelated_number_means_a_higher_prominence: "An elevated number means a higher prominence."
+          rolling_subscription: "Rolling subscription?"
+          a_rolling_subscription_will_begin_the_day_of_the_first_training: "A rolling subscription will begin the day of the first trainings."
+          otherwise_it_will_begin_as_soon_as_it_is_bought: "Otherwise, it will begin as soon as it is bought."
+          information_sheet: "Information sheet"
+          attach_an_information_sheet: "Attach an information sheet"
+          notified_partner: "Notified partner"
+          new_user: "New user ..."
+          as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
+          new_partner: "New partner"
+          email_address_is_required: "Email address is required."
+          disabled: "Disable subscription"
+          disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
+   
       trainings:
         # training edition form
         trainings_form:
@@ -431,12 +471,32 @@ en:
           default_places: "Default maximum tickets"
           default_places_is_required: "Default maximum tickets is required."
           disable_space: "Disable Space"
+          is_rental: "Is Rental"
 
+      rentals:
+        # form to create/edit a rental
+        rental:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Illustration"
+          add_an_illustration: "Add Illustration"
+          description: "Description"
+          description_is_required: "Description is required."
+          characteristics: "Characteristics"
+          characteristics_are_required: "Characteristics are required."
+          attached_files_(pdf): "Attached files (pdf)"
+          attach_a_file: "Attach a file"
+          add_an_attachment: "Add an attachment"
+          default_places: "Default maximum tickets"
+          default_places_is_required: "Default maximum tickets is required."
+          disable_space: "Disable Rental"
+          is_rental: "Is Rental"
       cart:
         # module de panier d'achat de réservations
         cart:
           summary: "Summary"
-          select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar"  # messageFormat interpolation
+          select_one_or_more_slots_in_the_calendar: "Select one {SINGLE, select, true{slot} other{or more slots}} in the calendar" # messageFormat interpolation
+          select_one_rental_from_list: "Select one Rental from list"
           you_ve_just_selected_the_slot: "You've just selected the slot:"
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
@@ -448,6 +508,7 @@ en:
           or: "or"
           you_ve_just_selected_a_: "You've just selected a"
           _subscription: "subscription"
+          _rental: "rental"
           cost_of_the_subscription: "Subscription Cost"
           confirm: "Confirm"
           confirm_and_pay: "Confirm Payment"

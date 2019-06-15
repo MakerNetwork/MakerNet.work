@@ -80,7 +80,7 @@ es:
       subject: "Su suscripción ha sido correctamente comprada"
       body:
         plan_subscribed_html: "Se ha suscrito al plan: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Su suscripción terminará el %{DATE}"
+        subscription_stops_on: "Su suscripción se renovará el %{DATE}"
 
     notify_member_create_reservation:
       subject: "Su reserva se ha registrado correctamente"

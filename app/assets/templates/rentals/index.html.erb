@@ -1,0 +1,150 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fas fa-long-arrow-alt-left"></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'rentals_list.the_rentals' }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
+      <section class="heading-actions wrapper">
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.rental_new" role="button" translate>{{ 'rentals_list.add_a_rental' }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+<div class="row no-gutter training-reserve">
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <div class="form-group row m-t-lg">
+      <div class="input-group col-md-3 m-l-lg m-b">
+        <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+        <select ng-model="spaceFiltering" class="form-control">
+          <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'rentals_list.status_'+status }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 reservable-card gallery-item" ng-class="{'disabled-reservable' : space.disabled && spaceFiltering === 'all'}" ng-repeat="space in spaces | filterDisabled:spaceFiltering">
+      <div class="widget panel panel-default">
+        <div class="panel-heading picture" ng-if="!space.space_image" ng-click="showSpace(space)">
+          <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
+        </div>
+        <div class="panel-heading picture" style="background-image:url({{space.space_image}})" ng-if="space.space_image" ng-click="selectRental(space)">
+        </div>
+        <div class="panel-body">
+          <h1 class="text-center m-b">{{space.name}}</h1>
+        </div>
+        <div class="panel-footer no-padder">
+
+          <div class="text-center clearfix">
+            <div class="col-sm-6 b-r no-padder">
+              <div class="btn btn-default btn-block no-b padder-v red" ng-class="{ 'bg-yellow': selectedRental==space }" ng-click="selectRental(space)" ng-hide="space.disabled">
+                <i class="fa fa-bookmark m-r-xs"></i>
+                <span class="hidden-sm" translate>{{ 'rentals_list.select' }}</span>
+              </div>
+            </div>
+            <div class="no-padder" ng-class="{'col-sm-6': !space.disabled}">
+              <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
+                <i class="fa fa-eye m-r-xs"></i>
+                <span class="hidden-sm" translate>{{ 'consult' }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-3">
+    <div ng-if="currentUser.role === 'admin'">
+      <select-member></select-member>
+    </div>
+
+    <!--cart slot="selectedRental"
+          slot-selection-time="selectionTime"
+          events="events"
+          user="ctrl.member"
+          mode-plans="plansAreShown"
+          plan="selectedPlan"
+          plan-selection-time="planSelectionTime"
+          settings="settings"
+          on-slot-added-to-cart="markSlotAsAdded"
+          on-slot-removed-from-cart="markSlotAsRemoved"
+          on-slot-start-to-modify="markSlotAsModifying"
+          on-slot-modify-success="modifyTrainingSlot"
+          on-slot-modify-cancel="cancelModifyTrainingSlot"
+          on-slot-modify-unselect="changeModifyTrainingSlot"
+          on-slot-cancel-success="slotCancelled"
+          after-payment="afterPayment"
+          reservable-id="{{space.id}}"
+          reservable-type="Space"
+          reservable-name="{{space.name}}"></cart-->
+
+    <div class="widget panel b-a m m-t-lg" ng-if="ctrl.member">
+
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'cart.summary'}}</h3>
+      </div>
+
+      <div class="widget-content no-bg auto wrapper" ng-if="!selectedRental">
+        <!--p class="font-felt fleche-left text-lg"><%= image_tag('fleche-left.png', class: 'fleche-left visible-lg') %>
+          {{ 'cart.select_one_rental_from_list' }}</p-->
+      </div>
+
+      <section class="widget panel b-a m m-t-lg" ng-if="selectedRental">
+
+      <div class="widget-content no-bg auto wrapper">
+        {{ 'you_ve_just_selected_a_' | translate }} <strong translate>{{ '_rental' }}</strong> :
+
+        <div class="well well-warning m-t-sm">
+          <i class="font-sbold">{{ selectedRental.name }}</i>
+          <div class="font-sbold">{{ 'rental_price' | translate }} {{ selectedRental.amount | currency}}</div>
+        </div>
+
+        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" total="selectedRental.amount" user-id="{{ctrl.member.id}}"></coupon>
+      </div>
+
+      <div class="widget-footer">
+        <button class="btn btn-valid btn-info btn-block p-l text-u-c r-b" ng-click="openSubscribePlanModal()" ng-if="!ctrl.member.subscribed_plan">{{ 'confirm_and_pay' | translate }} {{cart.total | currency}}</button>
+      </div>
+    </section>
+
+
+    <section class="widget panel b-a m m-t-lg" ng-if="paid.plan">
+      <div class="panel-heading b-b">
+        <h3 translate>{{ 'summary' }}</h3>
+      </div>
+
+      <div class="widget-content no-bg auto wrapper">
+       {{ 'you_ve_just_payed_the_' | translate }} <strong translate>{{ '_subscription' }}</strong> :
+
+        <div class="well well-warning m-t-sm">
+          <i class="font-sbold">{{ paid.plan | humanReadablePlanName }}</i>
+          <div class="font-sbold">{{ 'subscription_price' | translate }} {{paid.plan.amount | currency}}</div>
+        </div>
+
+        <div class="msg msg-success">{{ 'thank_you_your_subscription_is_successful' | translate }}<br>
+        {{ 'your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a></div>
+
+      </div>
+    </section>
+
+
+    <!--uib-alert type="warning m">
+      <p class="text-sm">
+        <span ng-bind-html="subscriptionExplicationsAlert"></span>
+      </p>
+    </uib-alert-->
+
+    
+  </div>
+</div>
+

@@ -1,7 +1,7 @@
   class API::PlansController < API::ApiController
   before_action :authenticate_user!, except: [:index]
 
-  def index
+  def index 
     @plans = Plan.includes(:plan_file)
     @plans = @plans.where(group_id: params[:group_id]) if params[:group_id]
     render :index
