@@ -17,10 +17,10 @@
       {{ space.name }}
     </td>
     <td ng-repeat="group in enabledGroups">
-      <span editable-number="findPriceBy(spacesPrices, space.id, group.id).amount"
+      <span editable-number="findPriceBy(rentalsPrices, space.id, group.id).amount"
             e-step="any"
-            onbeforesave="updatePrice($data, findPriceBy(spacesPrices, space.id, group.id))">
-          {{ findPriceBy(spacesPrices, space.id, group.id).amount | currency}}
+            onbeforesave="updatePrice($data, findPriceBy(rentalsPrices, space.id, group.id))">
+          {{ findPriceBy(rentalsPrices, space.id, group.id).amount | currency}}
       </span>
     </td>
   </tr>

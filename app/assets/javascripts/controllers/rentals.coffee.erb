@@ -163,7 +163,7 @@ Application.Controllers.controller 'RentalsController', ['$scope', '$state', 'sp
   ##
   payByStripe = ->
     $uibModal.open
-      templateUrl: '<%= asset_path "stripe/payment_modal.html" %>'
+      templateUrl: '<%= asset_path "stripe/payment_modal.html" %>'##
       size: 'md'
       resolve:
         selectedRental: -> $scope.selectedRental
@@ -587,19 +587,13 @@ Application.Controllers.controller "ReserveRentalController", ["$scope", '$state
     # reservations. (admins only)
     ##
     $scope.updateMember = ->
-      if $scope.ctrl.member
-        Member.get {id: $scope.ctrl.member.id}, (member) ->
-          $scope.ctrl.member = member
-          Availability.spaces {spaceId: $scope.space.id, member_id: $scope.ctrl.member.id}, (spaces) ->
-            uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents'
-            $scope.eventSources.splice(0, 1,
-              events: spaces
-              textColor: 'black'
-            )
-      # as the events are re-fetched for the new user, we must re-init the cart
-      $scope.events.reserved = []
       $scope.selectedRental = null
-      $scope.plansAreShown = false
+      $scope.paid.plan = null
+      $scope.group.change = false
+      Member.get {id: $scope.ctrl.member.id}, (member) ->
+        $scope.ctrl.member = member
+        $scope.group.id = $scope.ctrl.member.group_id
+
 
 
 
