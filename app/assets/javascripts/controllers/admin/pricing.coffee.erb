@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Rental', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'rentalsPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t'
-, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Rental, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, rentalsPromise, spacesPricesPromise, spacesCreditsPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Rental', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'rentalsPromise', 'spacesPricesPromise', 'rentalsPricesPromise','spacesCreditsPromise', 'rentalsCreditsPromise', '_t'
+, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Rental, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, rentalsPromise, spacesPricesPromise, rentalsPricesPromise, spacesCreditsPromise,rentalsCreditsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -53,6 +53,12 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
   ## List of spaces prices (not considering any plan)
   $scope.spacesPrices = spacesPricesPromise
+
+    ## Associate free space hours with subscriptions
+  $scope.rentalCredits = rentalsCreditsPromise
+
+  ## List of spaces prices (not considering any plan)
+  $scope.rentalsPrices = rentalsPricesPromise
 
   ## The plans list ordering. Default: by group
   $scope.orderPlans = 'group_id'
