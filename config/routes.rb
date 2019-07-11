@@ -1,7 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  
+  resources :check_in
   post 'webhooks' => 'webhooks#create'
+
+  post 'stripe-webhook' => 'webhooks#stripe'
 
   if AuthProvider.active.providable_type == DatabaseProvider.name
     # with local authentification we do not use omniAuth so we must differentiate the config
@@ -17,7 +21,10 @@ Rails.application.routes.draw do
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
 
-
+    resources :check_ins do
+     get ':id/is_checked', action: 'ischecked', on: :collection
+     post ':id/check', action: 'check', on: :collection
+    end
   constraints :user_agent => /facebookexternalhit\/[0-9]|Twitterbot|Pinterest|Google.*snippet/ do
     root :to => 'social_bot#share', as: :bot_root
   end
@@ -95,8 +102,11 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
-    resources :subscriptions, only: [:show, :create, :update]
+    resources :subscriptions, only: [:show, :create, :update] do
+      put ':id/cancel', action: 'cancel', on: :collection
+    end
     resources :plans, only: [:index, :create, :update, :destroy, :show]
+    resources :rentals, only: [:index, :create, :update, :destroy, :show]
     resources :slots, only: [:update] do
       put 'cancel', on: :member
     end
@@ -153,6 +163,7 @@ Rails.application.routes.draw do
     resources :events, only: [:index], as: 'rss_events'
   end
 
+ 
   # open_api
 
   namespace :open_api do
@@ -164,9 +175,10 @@ Rails.application.routes.draw do
         resources :reservations
         resources :machines
         resources :bookable_machines
+    
         resources :invoices do
           get :download, on: :member
-        end
+        end       
         resources :events
         resources :availabilities
       end

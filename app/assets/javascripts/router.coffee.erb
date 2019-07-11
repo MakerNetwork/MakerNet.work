@@ -68,6 +68,16 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.about').$promise
           ]
+      .state 'app.public.checkin',
+        url: '/checkin'
+        views:
+          'content@':
+            templateUrl: '<%= asset_path "shared/checkin_form.html.erb" %>'
+            controller: 'CheckInController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.public.checkin').$promise
+          ]
       .state 'app.public.signup',
         url: '/signup'
         views:
@@ -412,7 +422,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'SpacesController'
         resolve:
           spacesPromise: ['Space', (Space)->
-            Space.query().$promise
+            Space.query({is_rental: false}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.spaces_list']).$promise
@@ -488,6 +498,96 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.space_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
+          ]
+
+      # rental
+      .state 'app.public.rentals_list',
+        url: '/rentals'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/index.html" %>'
+            controller: 'RentalSpacesController'
+        resolve:
+          spacesPromise: ['Space', (Space)->
+            Space.query({is_rental: true}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.rentals_list', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
+          ]
+      .state 'app.admin.rental_new',
+        url: '/rentals/new'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/new.html" %>'
+            controller: 'NewRentalSpaceController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rental_new', 'app.shared.space']).$promise
+          ]
+      .state 'app.public.rental_show',
+        url: '/rentals/:id'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/show.html" %>'
+            controller: 'ShowRentalSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.rental_show']).$promise
+          ]
+      .state 'app.admin.rental_edit',
+        url: '/rentals/:id/edit'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/edit.html" %>'
+            controller: 'EditRentalSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rental_edit', 'app.shared.space']).$promise
+          ]
+      .state 'app.logged.rental_reserve',
+        url: '/rentals/:id/reserve'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "rentals/reserve.html" %>'
+            controller: 'ReserveRentalController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.spaces({spaceId: $stateParams.id}).$promise
+          ]
+          plansPromise: ['Plan', (Plan)->
+            Plan.query().$promise
+          ]
+          groupsPromise: ['Group', (Group)->
+            Group.query().$promise
+          ]
+          settingsPromise: ['Setting', (Setting)->
+            Setting.query(names: "['booking_window_start',
+                                   'booking_window_end',
+                                   'booking_move_enable',
+                                   'booking_move_delay',
+                                   'booking_cancel_enable',
+                                   'booking_cancel_delay',
+                                   'subscription_explications_alert',
+                                   'space_explications_alert']").$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.rental_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
@@ -890,14 +990,24 @@ angular.module('application.router', ['ui.router']).
             Coupon.query().$promise
           ]
           spacesPromise: ['Space', (Space) ->
-            Space.query().$promise
+            Space.query({is_rental: false}).$promise
+          ]
+          rentalsPromise: ['Space', (Space) ->
+            Space.query({is_rental: true}).$promise
           ]
           spacesPricesPromise: ['Price', (Price)->
             Price.query(priceable_type: 'Space', plan_id: 'null').$promise
           ]
+          rentalsPricesPromise: ['Price', (Price)->
+            Price.query(priceable_type: 'Rental', plan_id: 'null').$promise
+          ]
           spacesCreditsPromise: ['Credit', (Credit) ->
             Credit.query({creditable_type: 'Space'}).$promise
           ]
+          rentalsCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Rental'}).$promise
+          ]
+
 
       # plans
       .state 'app.admin.plans',
@@ -943,6 +1053,52 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise
+          ]
+
+      # rentals
+      .state 'app.admin.rentals',
+        abstract: true
+        resolve:
+          prices: ['Pricing', (Pricing) ->
+            Pricing.query().$promise
+          ]
+          groups: ['Group', (Group) ->
+            Group.query().$promise
+          ]
+          partners: ['User', (User) ->
+            User.query({role: 'partner'}).$promise
+          ]
+      .state 'app.admin.rentals.new',
+        url: '/admin/rentals/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/rentals/new.html" %>'
+            controller: 'NewRentalController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rentals.new', 'app.shared.rental']).$promise
+          ]
+      .state 'app.admin.rentals.edit',
+        url: '/admin/rentals/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/rentals/edit.html" %>'
+            controller: 'EditRentalController'
+        resolve:
+          spaces: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          machines: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          rentals: ['Rental', (Rental) ->
+            Rental.query().$promise
+          ]
+          rentalPromise: ['Rental', '$stateParams', (Rental, $stateParams) ->
+            Rental.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.rentals.edit', 'app.shared.rental']).$promise
           ]
 
       # coupons

@@ -1,7 +1,7 @@
 class API::SubscriptionsController < API::ApiController
   include FablabConfiguration
 
-  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :set_subscription, only: [:show, :edit, :update, :cancel, :destroy]
   before_action :authenticate_user!
 
   def show
@@ -41,6 +41,13 @@ class API::SubscriptionsController < API::ApiController
     else
       render status: :unprocessable_entity
     end
+  end
+
+  def cancel
+
+    @subscription.cancel
+    
+    render :show, status: :ok, location: @subscription
   end
 
   private

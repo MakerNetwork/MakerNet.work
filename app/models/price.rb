@@ -1,6 +1,7 @@
 class Price < ActiveRecord::Base
   belongs_to :group
   belongs_to :plan
+  belongs_to :rental
   belongs_to :priceable, polymorphic: true
 
   validates :priceable, :group_id, :amount, presence: true

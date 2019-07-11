@@ -1,6 +1,6 @@
 {
-  "name": "MakerNetwork",
-  "description": "The Maker Network connects Makers with tools, Makerspaces with Makers, and makes the curious into the capable.",
+  "name": "MakerNet",
+  "description": "MakerNet connects Makers with tools, Makerspaces with Makers, and makes the curious into the capable.",
   "version": "1.0.0",
   "engines": {
     "node": "8.9.3"
