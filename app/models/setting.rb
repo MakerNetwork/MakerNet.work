@@ -41,6 +41,7 @@ class Setting < ActiveRecord::Base
         fablab_name
         fablab_type
         name_genre
+        reserve_spaces_enable
         reminder_enable
         reminder_delay
         event_explications_alert

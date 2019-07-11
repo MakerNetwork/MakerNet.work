@@ -76,10 +76,13 @@ class SpacesController
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller 'SpacesController', ['$scope', '$state', 'spacesPromise', ($scope, $state, spacesPromise) ->
+Application.Controllers.controller 'SpacesController', ['$scope', '$state', 'spacesPromise','Setting', ($scope, $state, spacesPromise, Setting) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
+
+  Setting.get { name: 'reserve_spaces_enable'}, (data)->
+    $scope.enableReserveSpaces = data.setting.value
 
   ##
   # Redirect the user to the space details page
