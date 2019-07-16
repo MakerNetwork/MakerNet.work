@@ -700,6 +700,7 @@ en:
           visibility_yearly: "maximum visibility for annual subscribers"
           visibility_others: "maximum visibility for other members"
           confidentiality: "Privacy"
+          reserve_spaces_enable: "rental spaces enabling"
           display_machine_reservation_user_name: "Publicy display machine reservation user name"
           display_name: "Display Name"
           display_name_enable: "Display the name"
