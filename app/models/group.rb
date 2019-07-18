@@ -3,7 +3,8 @@ class Group < ActiveRecord::Base
   has_many :users
   has_many :trainings_pricings, dependent: :destroy
   has_many :machines_prices, ->{ where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy
-  has_many :spaces_prices, ->{ where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy
+  has_many :spaces_prices, ->{ where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy 
+  #has_many :rentals_prices, ->{ where(priceable_type: 'Rental') }, class_name: 'Price', dependent: :destroy
 
   extend FriendlyId
   friendly_id :name, use: :slugged

@@ -40,24 +40,26 @@
         <div class="panel-body">
           <h1 class="text-center m-b">{{space.name}}</h1>
         </div>
-        <div class="panel-footer no-padder">
+        
+      <div class="panel-footer no-padder">
 
-          <div class="text-center clearfix">
-            <div class="col-sm-6 b-r no-padder">
-              <div class="btn btn-default btn-block no-b padder-v red" ng-class="{ 'bg-yellow': selectedRental==space }" ng-click="selectRental(space)" ng-hide="space.disabled">
-                <i class="fa fa-bookmark m-r-xs"></i>
-                <span class="hidden-sm" translate>{{ 'rentals_list.select' }}</span>
-              </div>
-            </div>
-            <div class="no-padder" ng-class="{'col-sm-6': !space.disabled}">
-              <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
-                <i class="fa fa-eye m-r-xs"></i>
-                <span class="hidden-sm" translate>{{ 'consult' }}</span>
-              </div>
+        <div class="text-center clearfix">
+           <div class="col-sm-6 b-r no-padder">
+             <div class="btn btn-default btn-block no-b padder-v red" ng-class="{ 'bg-yellow': selectedRental==space }" ng-click="selectRental(space)" ng-hide="space.disabled">
+
+              <i class="fa fa-bookmark m-r-xs"></i>
+              <span class="hidden-sm" translate>{{ 'spaces_list.book' }}</span>
             </div>
           </div>
-
+          <div class="no-padder" ng-class="{'col-sm-6': !space.disabled}">
+            <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
+              <i class="fa fa-eye m-r-xs"></i>
+              <span class="hidden-sm" translate>{{ 'consult' }}</span>
+            </div>
+          </div>
         </div>
+
+      </div>
       </div>
     </div>
 

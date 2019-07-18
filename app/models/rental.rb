@@ -18,6 +18,7 @@ class Rental < ActiveRecord::Base
 
   after_update :update_stripe_rental, if: :amount_changed?
   after_create :create_stripe_rental, unless: :skip_create_stripe_rental
+  after_create :create_rentals_prices
   after_destroy :delete_stripe_rental
 
   attr_accessor :skip_create_stripe_rental
@@ -53,6 +54,12 @@ class Rental < ActiveRecord::Base
     rental_subscriptions.empty?
   end
 
+
+  def create_rentals_prices
+    Space.all.each do |space|
+      Price.create(priceable: space, plan: self, group_id: self.group_id, amount: 0)
+    end
+  end
 
   def duration
     interval_count.send(interval)
