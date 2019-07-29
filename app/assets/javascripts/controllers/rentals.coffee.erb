@@ -75,7 +75,7 @@ class RentalSpacesController
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, spacesPromise, $uibModal, _t, Wallet, helpers) ->
+Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'rentalsPricesPromise', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, rentalsPricesPromise, spacesPromise, $uibModal, _t, Wallet, helpers) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
@@ -113,19 +113,30 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
   
   $scope.coupon =
     applied: null
-
+ 
+  $scope.rentalsPrices = rentalsPricesPromise
   $scope.selectedRental = null
 
   $scope.selectRental = (rental) ->
     if $scope.isAuthenticated()
       if $scope.selectedRental != rental
         $scope.selectedRental = rental
-        $scope.selectedRental.amount = 10 ## temporal
+        $scope.selectedRental.amount = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id).amount
         updateCartPrice()
       else
         $scope.selectedRental = null
     else
       $scope.login()
+
+
+  ##
+  # Retrieve a price from prices array by a spaceId and a groupId
+  ##
+  findPriceBy = (prices, spaceId, groupId)->
+    for price in prices
+      if price.priceable_id == spaceId and price.group_id == groupId
+        return price
+  
 
   ##
   # Callback to trigger the payment process of the subscription
@@ -307,7 +318,7 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
     if $scope.currentUser
       if $scope.currentUser.role isnt 'admin'
         $scope.ctrl.member = $scope.currentUser
-        ##$scope.paid.plan = $scope.currentUser.subscribed_plan
+        ##  $scope.paid.plan = $scope.currentUser.subscribed_plan
         ##$scope.group.id = $scope.currentUser.group_id
 
     $scope.$on 'devise:new-session', (event, user)->
