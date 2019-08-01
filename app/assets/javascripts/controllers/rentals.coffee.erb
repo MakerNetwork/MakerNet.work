@@ -125,7 +125,7 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         price = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
        # rentalPlan = createRentalPlan(price)
         $scope.selectedRental.amount = price.amount
-        $scope.selectedRental.plan_id = 2
+        $scope.selectedRental.plan_id = price.plan_id
         updateCartPrice()
       else
         $scope.selectedRental = null
