@@ -75,7 +75,7 @@ class RentalSpacesController
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'rentalsPricesPromise', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, rentalsPricesPromise, spacesPromise, $uibModal, _t, Wallet, helpers) ->
+Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'rentalsPricesPromise', 'spacesPromise', '$uibModal', '_t', 'CSRF', 'Wallet', 'helpers', ($scope, $state, rentalsPricesPromise, spacesPromise, $uibModal, _t, CSRF, Wallet, helpers) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
@@ -117,17 +117,42 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
   $scope.rentalsPrices = rentalsPricesPromise
   $scope.selectedRental = null
 
+
   $scope.selectRental = (rental) ->
     if $scope.isAuthenticated()
       if $scope.selectedRental != rental
-        $scope.selectedRental = rental
-        $scope.selectedRental.amount = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id).amount
+        $scope.selectedRental = rental       
+        price = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
+       # rentalPlan = createRentalPlan(price)
+        $scope.selectedRental.amount = price.amount
+        $scope.selectedRental.plan_id = 2
         updateCartPrice()
       else
         $scope.selectedRental = null
     else
       $scope.login()
 
+
+
+  createRentalPlan = (price)->
+    ## form inputs bindings
+    $scope.plan =
+      type: null
+      group_id: price.group_id
+      interval: "month"
+      intervalCount: 1
+      amount: price.amount
+      is_rolling: false
+      partnerId: null
+      partnerContact: null
+      ui_weight: 0
+    CSRF.setMetaTags()  
+    url= "/api/plans/"
+    $.post url, (response)->
+      console.log("saved")
+      return response.id
+    
+  
 
   ##
   # Retrieve a price from prices array by a spaceId and a groupId
@@ -281,11 +306,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         # Save the subscription to the API
         ##
         $scope.ok = ->
+
           $scope.attempting = true
           Subscription.save
             coupon_code: (coupon.code if coupon)
             subscription:
-              plan_id: selectedRental.id
+              plan_id: plan.plan_id
               user_id: member.id
           , (data, status) -> # success
             $uibModalInstance.close(data)
