@@ -71,31 +71,31 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
 
   #when click on find user
   $scope.login = () -> 
-    user=$scope.user
-    Auth.login(user).then (user) ->
-    # Authentification succeeded ...
-        url= 'check_ins/'+user.id+'/is_checked'
-        $('.page-alert').alert 'close'
-        $.get url, (response)->
-          $scope.is_checked = response.message
-          if $scope.is_checked
-           $scope.messages = _t('you_have_checked_out_successfully')
-          is_auth = $scope.is_auth = true
-          $scope.lastcheck=response.lastCheck
-          $scope.lastcheck.check_in = new Date($scope.lastcheck.check_in).toLocaleString()
-          if $scope.lastcheck.check_out
-             $scope.lastcheck.check_out = new Date($scope.lastcheck.check_out).toLocaleString()
-        Auth.logout(user)
-        $scope.id = user.id
-    , (error) ->
-        # Authentication failed...
-        $('.page-alert').alert 'close'
-        createNoty _t('wrong_email_or_password'), 'danger'
-        $('#my-alert').fadeTo(50000, 500).slideUp 500, ->
-          $(this).alert 'close'
-        $('.page-alert .close').click (e) ->
-         e.preventDefault()
-         $(this).closest('.page-alert').slideUp()
+      user=$scope.user
+      Auth.login(user).then (user) ->
+      # Authentification succeeded ...
+          url= 'check_ins/'+user.id+'/is_checked'
+          $('.page-alert').alert 'close'
+          $.get url, (response)->
+            $scope.is_checked = response.message
+            if $scope.is_checked
+             $scope.messages = _t('you_have_checked_out_successfully')
+            is_auth = $scope.is_auth = true
+            $scope.lastcheck=response.lastCheck
+            $scope.lastcheck.check_in = new Date($scope.lastcheck.check_in).toLocaleString()
+            if $scope.lastcheck.check_out
+               $scope.lastcheck.check_out = new Date($scope.lastcheck.check_out).toLocaleString()
+          Auth.logout(user)
+          $scope.id = user.id
+      , (error) ->
+          # Authentication failed...
+          $('.page-alert').alert 'close'
+          createNoty _t('wrong_email_or_password'), 'danger'
+          $('#my-alert').fadeTo(50000, 500).slideUp 500, ->
+            $(this).alert 'close'
+          $('.page-alert .close').click (e) ->
+           e.preventDefault()
+           $(this).closest('.page-alert').slideUp()
         
   #when click check in or checkout
   $scope.check = () -> 
@@ -110,6 +110,7 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
          e.preventDefault()
          $(this).closest('.page-alert').slideUp()
         initialize()
+
   #when click cancel
   $scope.cancel =()->
     initialize()
@@ -127,9 +128,14 @@ Application.Controllers.controller "CheckInController",["$rootScope", "$scope", 
    is_auth = $scope.is_auth = false
    is_checked = $scope.is_checked = false
    messages = $scope.messages= _t('you_have_checked_in_successfully')
-
+  saveAdmin = ->
+   Admin = Auth._currentUser
+   if Admin.role == 'admin'
+    is_admin = $scope.is_admin = true
   interval = setInterval(dateUpdate, 1000)
   dateUpdate()
+  saveAdmin()
   initialize()
+  
  
 ]
