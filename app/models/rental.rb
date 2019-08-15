@@ -68,7 +68,7 @@ class Rental < ActiveRecord::Base
 
   private
   def create_stripe_rental
-    stripe_rental = Stripe::Plan.create(
+    stripe_rental = Stripe::Rental.create(
       amount: amount,
       interval: interval,
       interval_count: interval_count,
@@ -94,13 +94,13 @@ class Rental < ActiveRecord::Base
   end
 
   def update_stripe_rental
-    old_stripe_rental = Stripe::Plan.retrieve(stp_rental_id)
+    old_stripe_rental = Stripe::Rental.retrieve(stp_rental_id)
     old_stripe_rental.delete
     create_stripe_rental
   end
 
   def delete_stripe_rental
-    Stripe::Plan.retrieve(stp_rental_id).delete
+    Stripe::Rental.retrieve(stp_rental_id).delete
   end
 
 

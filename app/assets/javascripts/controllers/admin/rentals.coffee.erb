@@ -93,7 +93,7 @@ Application.Controllers.controller 'NewRentalController', ['$scope', '$uibModal'
   ##
   # Open a modal dialog allowing the admin to create a new partner user
   ##
-  $scope.openPartnerNewModal = (subscription)->
+  $scope.openPartnerNewModal = (rental_subscription)->
     modalInstance = $uibModal.open
       animation: true,
       templateUrl: '<%= asset_path "shared/_partner_new_modal.html" %>'

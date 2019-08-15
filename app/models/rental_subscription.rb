@@ -40,7 +40,7 @@ class RentalSubscription < ActiveRecord::Base
         unless coupon_code.nil?
           @coupon = Coupon.find_by(code: coupon_code)
           if not @coupon.nil? and @coupon.status(user.id) == 'active'
-            total = plan.amount
+            total = rental.amount
 
             discount = 0
             if @coupon.type == 'percent_off'
@@ -76,12 +76,12 @@ class RentalSubscription < ActiveRecord::Base
           end
         end
 
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
+        new_subscription = customer.subscriptions.create(plan: rental.stp_rental_id, source: card_token)
         # very important to set expired_at to nil that can allow method is_new? to return true
         # for send the notification
         # TODO: Refactoring
         update_column(:expired_at, nil) unless new_record?
-        self.stp_subscription_id = new_subscription.id
+        self.stp_rental_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
         save!
@@ -151,7 +151,7 @@ class RentalSubscription < ActiveRecord::Base
       # for send the notification
       # TODO: Refactoring
       update_column(:expired_at, nil) unless new_record?
-      self.stp_subscription_id = nil
+      self.stp_rental_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
       if save
@@ -182,19 +182,19 @@ class RentalSubscription < ActiveRecord::Base
 
   def generate_invoice(stp_invoice_id = nil, coupon_code = nil)
     coupon_id = nil
-    total = plan.amount
+    total = rental.amount
 
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
 
       unless @coupon.nil?
-        total = CouponService.new.apply(plan.amount, @coupon, user.id)
+        total = CouponService.new.apply(rental.amount, @coupon, user.id)
         coupon_id = @coupon.id
       end
     end
 
     invoice = Invoice.new(invoiced_id: id, invoiced_type: 'RentalSubscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id)
-    invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
+    invoice.invoice_items.push InvoiceItem.new(amount: rental.amount, stp_invoice_item_id: stp_rental_subscription_id, description: rental.name, subscription_id: self.id)
     invoice
   end
 
@@ -205,7 +205,7 @@ class RentalSubscription < ActiveRecord::Base
   def generate_and_save_offer_day_invoice(offer_day_start_at)
     od = offer_days.create(start_at: offer_day_start_at, end_at: expired_at)
     invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: self.id)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: rental.name, subscription_id: self.id)
     invoice.save
   end
 
@@ -216,20 +216,20 @@ class RentalSubscription < ActiveRecord::Base
   def generate_and_save_offer_day_invoice(offer_day_start_at)
     od = offer_days.create(start_at: offer_day_start_at, end_at: expired_at)
     invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: self.id)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: rental.name, subscription_id: self.id)
     invoice.save
   end
 
  def cancel
-    if stp_subscription_id.present?
-      stp_subscription = stripe_subscription
-      stp_subscription.delete(at_period_end: true)
+    if stp_rental_subscription_id.present?
+      stp_rental_subscription = stripe_subscription
+      stp_rental_subscription.delete(at_period_end: true)
       update_columns(canceled_at: Time.now)
     end
   end
 
   def stripe_subscription
-    user.stripe_customer.subscriptions.retrieve(stp_subscription_id) if stp_subscription_id.present?
+    user.stripe_customer.subscriptions.retrieve(stp_rental_subscription_id) if stp_rental_subscription_id.present?
   end
 
   def expire(time)

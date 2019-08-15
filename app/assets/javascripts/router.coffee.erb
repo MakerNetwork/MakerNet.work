@@ -517,6 +517,9 @@ angular.module('application.router', ['ui.router']).
           rentalsPricesPromise: ['Price', (Price)->
             Price.query(priceable_type: 'Space', plan_id: 'null').$promise
           ]
+          rentalsPromise: ['Rental', (Rental)->
+            Rental.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.rentals_list', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
@@ -573,8 +576,8 @@ angular.module('application.router', ['ui.router']).
           availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
             Availability.spaces({spaceId: $stateParams.id}).$promise
           ]
-          plansPromise: ['Plan', (Plan)->
-            Plan.query().$promise
+          rentalsPromise: ['Rental', (Rental)->
+            Rental.query().$promise
           ]
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
