@@ -44,11 +44,12 @@ class Space < ActiveRecord::Base
 
   def create_space_prices
     Group.all.each do |group|
-      Price.create(priceable: self, group: group, amount: 0)
+      rental = nil
       if self.is_rental
         rental = Rental.new(name: self.name, amount: 0, interval: "month", group_id: group.id, base_name: self.name.to_s, space_id: self.id)
-        rental.save
+        rental.save        
       end
+      Price.create(priceable: self, group: group, amount: 0, plan_id: rental)
     end
 
     Plan.all.includes(:group).each do |plan|

@@ -124,9 +124,10 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
       if $scope.selectedRental != space
         $scope.selectedRental = space       
         price = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
-        rental =  findRentalBy($scope.rentals, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
+        rental = findRentalBy($scope.rentals, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
+        rental = (rental) ? rental : createRentalPlan(space, price)
         $scope.selectedRental.amount = price.amount
-        $scope.selectedRental.plan_id = rental.id
+        $scope.selectedRental.rental = rental
         updateCartPrice()
       else
         $scope.selectedRental = null
@@ -135,9 +136,9 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
 
 
 
-  createRentalPlan = (price)->
+  createRentalPlan = (space, price)->
     ## form inputs bindings
-    $scope.plan =
+    $scope.rental =
       type: null
       group_id: price.group_id
       interval: "month"
@@ -213,11 +214,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         selectedRental: -> $scope.selectedRental
         member: -> $scope.ctrl.member
         price: -> $scope.cart.total
+        rental: -> $scope.selectedRental.rental
         wallet: ->
           Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
         coupon: -> $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, CustomAsset, wallet, helpers, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'rental', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, rental, CustomAsset, wallet, helpers, $filter, coupon) ->
         # User's wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -229,7 +231,9 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
+        $scope.member = member
 
+        $scope.rental = rental
         # retrieve the CGV
         CustomAsset.get {name: 'cgv-file'}, (cgv) ->
           $scope.cgv = cgv.custom_asset
@@ -247,7 +251,7 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
             RentalSubscription.save
               coupon_code: (coupon.code if coupon)
               rental_subscription:
-                rental_id: selectedRental.id
+                rental_id: rental.id
                 user_id: member.id
                 card_token: response.id
             , (data, status) -> # success
@@ -264,8 +268,6 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
       $scope.selectedRental = null
       $scope.coupon.applied = null
 
-
-
   ##
   # Open a modal window which trigger the local payment process
   ##
@@ -277,11 +279,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         selectedRental: -> $scope.selectedRental
         member: -> $scope.ctrl.member
         price: -> $scope.cart.total
+        rental: -> $scope.selectedRental.rental
         wallet: ->
           Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
         coupon: -> $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'wallet', 'helpers', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, wallet, helpers, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'rental', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, rental, wallet, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -297,10 +300,11 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         # The plan that the user is about to subscribe
         $scope.selectedRental = selectedRental
 
-        $scope.rental = 
-
         # The member who is subscribing a plan
         $scope.member = member
+
+        $scope.rental = rental
+
 
         # Button label
         if $scope.amount > 0
@@ -316,7 +320,6 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         # Save the subscription to the API
         ##
         $scope.ok = ->
-    
           $scope.attempting = true
           RentalSubscription.save
             coupon_code: (coupon.code if coupon)
