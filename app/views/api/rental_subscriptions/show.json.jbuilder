@@ -1,0 +1,1 @@
+json.partial! 'api/rental_subscriptions/subscription', subscription: @subscription

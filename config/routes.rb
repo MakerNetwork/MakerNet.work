@@ -102,7 +102,10 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
-    resources :subscriptions, only: [:show, :create, :update] do
+    resources :subscriptions, only: [:index, :show, :create, :update] do
+      put ':id/cancel', action: 'cancel', on: :collection
+    end
+    resources :rental_subscriptions, only: [:show, :create, :update] do
       put ':id/cancel', action: 'cancel', on: :collection
     end
     resources :plans, only: [:index, :create, :update, :destroy, :show]
