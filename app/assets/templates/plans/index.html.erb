@@ -82,7 +82,7 @@
   <div class="col-sm-12 col-md-12 col-lg-3">
 
     <div ng-if="currentUser.role === 'admin'">
-      <select-member></select-member>
+      <select-member subscription="false"></select-member>
     </div>
 
     <section class="widget panel b-a m m-t-lg" ng-show="ctrl.member">
@@ -167,19 +167,6 @@
         {{ 'your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a></div>
 
       </div>
-    </section>
-
-    <section class="widget planel b-a m m-t-lg" ng-if="ctrl.member.subscription">
-
-      <div class="widget-content no-bg auto wrapper">
-
-        <button class="btn btn-danger bg-red rounded" ng-if="!ctrl.member.subscription.canceled_at && !ctrl.member.subscription.canceled" ng-click="cancelSubscription(ctrl.member.subscription)" translate>{{ 'cancel_subscription' }}</button>
-
-        <p ng-if="ctrl.member.subscription.canceled_at || ctrl.member.subscription.canceled">
-        {{ 'your_subscription_was_canceled_and_will_be_valid_until_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'LL')} }}</p>
-
-      </div>
-
     </section>
 
 

@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_plan
-    return nil if subscription.nil? or (subscription.expired_at and subscription.expired_at < Time.now)
+    return nil if subscription.nil? or subscription.expired_at < Time.now
     subscription.plan
   end
 

@@ -145,27 +145,6 @@ Application.Filters.filter "humanReadablePlanName", ['$filter', ($filter)->
       result
 ]
 
-Application.Filters.filter "rentalIntervalFilter", [ ->
-  (interval, intervalCount) ->
-    moment.duration(intervalCount, interval).humanize()
-]
-
-Application.Filters.filter "humanReadableRentalName", ['$filter', ($filter)->
-  (rental, groups, short) ->
-    if rental?
-      result = rental.base_name
-      if groups?
-        for group in groups
-          if group.id == rental.group_id
-            if short?
-              result += " - #{group.slug}"
-            else
-              result += " - #{group.name}"
-      result += " - #{$filter('rentalIntervalFilter')(rental.interval, rental.interval_count)}"
-      result
-]
-
-
 Application.Filters.filter "trainingReservationsFilter", [ ->
   (elements, selectedScope) ->
     if !angular.isUndefined(elements) and !angular.isUndefined(selectedScope) and elements? and selectedScope?

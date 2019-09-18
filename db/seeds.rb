@@ -183,7 +183,7 @@ end
 
 unless Setting.find_by(name: 'about_body').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_body')
-  setting.value = "MakerNet is about helping Makers and Makerspaces thrive and evolve into an interconnected ecosystem of skills, tools, resources, and ideas. We want to see the maker movement flourish all over the world, and believe that the tools to do so look something like this."
+  setting.value = "The Maker Network is about helping Makers and Makerspaces thrive and evolve into an interconnected ecosystem of skills, tools, resources, and ideas. We want to see the maker movement flourish all over the world, and believe that the tools to do so look something like this."
   setting.save
 end
 
@@ -352,7 +352,7 @@ end
 
 unless Setting.find_by(name: 'fablab_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'fablab_name')
-  setting.value = 'MakerNet'
+  setting.value = 'The Maker Network'
   setting.save
 end
 

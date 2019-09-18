@@ -113,7 +113,7 @@ pt:
           # about page
           read_the_fablab_policy: "Ler a política do FabLab"
           read_the_fablab_s_general_terms_and_conditions: "Ler os termos e condições do FabLab"
-          your_fablab_s_contacts: "Contatos"
+          your_fablab_s_contacts: "Nossos contatos"
 
         home:
           # home page
@@ -297,9 +297,3 @@ pt:
             characteristics: "Características"
             files_to_download: "Arquivo para download"
             projects_using_the_space: "Projetos usando espaço"
-
-        checkin:
-          # checkin/ out in  makerspace
-          you_have_checked_in_successfully: 'Você registrou sua entrada corretamente'
-          you_have_checked_out_successfully: 'Você registrou sua saída corretamente'
-

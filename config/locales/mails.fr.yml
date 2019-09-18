@@ -80,7 +80,7 @@ fr:
       subject: "Votre abonnement a bien été souscrit"
       body:
         plan_subscribed_html: "Vous avez souscrit à l'abonnement : <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Votre abonnement sera renouvelé le%{DATE}"
+        subscription_stops_on: "Votre abonnement s'arrêtera automatiquement le %{DATE}"
 
     notify_member_create_reservation:
       subject: "Votre réservation a bien été enregistrée"

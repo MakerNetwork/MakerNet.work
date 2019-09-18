@@ -38,7 +38,7 @@ json.subscribed_plan do
 end if member.subscribed_plan
 json.subscription do
   json.id member.subscription.id
-  json.expired_at member.subscription.expired_at.iso8601 if member.subscription.expired_at
+  json.expired_at member.subscription.expired_at.iso8601
   json.canceled_at member.subscription.canceled_at.iso8601 if member.subscription.canceled_at
   json.stripe member.subscription.stp_subscription_id.present?
   json.plan do

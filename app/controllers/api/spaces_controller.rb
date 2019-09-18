@@ -3,7 +3,7 @@ class API::SpacesController < API::ApiController
   respond_to :json
 
   def index
-    @spaces = Space.includes(:space_image).friendly.where(:is_rental => params[:is_rental])
+    @spaces = Space.includes(:space_image)
   end
 
   def show
@@ -36,15 +36,6 @@ class API::SpacesController < API::ApiController
     @space.destroy
     head :no_content
   end
-  def to_rental
-    @space = get_space
-    authorize @space
-    if @space.update(is_rental: true)
-        render :show, status: :ok, location: @space
-    else
-      render json: @space.errors, status: :unprocessable_entity
-    end
-  end
 
   private
     def get_space
@@ -52,7 +43,7 @@ class API::SpacesController < API::ApiController
     end
 
     def space_params
-      params.require(:space).permit(:name, :description, :characteristics, :default_places, :disabled, :is_rental, space_image_attributes: [:attachment],
+      params.require(:space).permit(:name, :description, :characteristics, :default_places, :disabled, space_image_attributes: [:attachment],
                                       space_files_attributes: [:id, :attachment, :_destroy])
     end
 end
