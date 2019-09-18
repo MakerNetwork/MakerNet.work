@@ -37,10 +37,6 @@
           <ng-include src="'<%= asset_path 'admin/pricing/spaces.html' %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'pricing.rentals' | translate }}" ng-hide="fablabWithoutSpaces">
-          <ng-include src="'<%= asset_path 'admin/pricing/rentals.html' %>'"></ng-include>
-        </uib-tab>
-
         <uib-tab heading="{{ 'pricing.credits' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/credits.html' %>'"></ng-include>
         </uib-tab>

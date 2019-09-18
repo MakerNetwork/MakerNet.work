@@ -17,17 +17,6 @@ class Subscription < ActiveRecord::Base
   after_save :notify_admin_subscribed_plan, if: :is_new?
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
-  def renew(period)
-    case period
-    when 'week'
-      update_attribute :expired_at, expired_at + 1.week
-    when 'month'
-      update_attribute :expired_at, expired_at + 1.month
-    when 'year'
-      update_attribute :expired_at, expired_at + 1.year
-    end
-  end
-
   # Stripe subscription payment
   # @params [invoice] if true then subscription pay itself, dont pay with reservation
   #                   if false then subscription pay with reservation
@@ -101,6 +90,7 @@ class Subscription < ActiveRecord::Base
           invoc.save
         end
         # cancel subscription after create
+        cancel
         return true
       rescue Stripe::CardError => card_error
         clear_wallet_and_goupon_invoice_items(invoice_items)
@@ -165,7 +155,7 @@ class Subscription < ActiveRecord::Base
           if !self.user.invoicing_disabled?
             invoc = generate_invoice(nil, coupon_code)
             if wallet_transaction
-              invoc.wallet_amount = @wallet_amount_debit 
+              invoc.wallet_amount = @wallet_amount_debit
               invoc.wallet_transaction_id = wallet_transaction.id
             end
             invoc.save

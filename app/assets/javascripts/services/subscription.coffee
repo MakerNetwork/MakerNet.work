@@ -5,7 +5,4 @@ Application.Services.factory 'Subscription', ["$resource", ($resource)->
     {id: "@id"},
     update:
       method: 'PUT'
-    cancel:
-      method: 'PUT'
-      url: '/api/subscriptions/:id/cancel'
 ]

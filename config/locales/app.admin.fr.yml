@@ -218,7 +218,6 @@ fr:
           credit_was_successfully_saved: "Le crédit a bien été enregistré."
           error_creating_credit: "Impossible de créer le credit, une erreur est survenue"
           do_you_really_want_to_delete_this_subscription_plan: "Êtes-vous sûr(e) de vouloir supprimer cette formule d'abonnement ?"
-          do_you_really_want_to_delete_this_subscription_rental: "Êtes-vous sûr(e) de vouloir supprimer cette formule d'abonnement ?"
           subscription_plan_was_successfully_deleted: "La formule d'abonnement a bien été supprimée."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Impossible de supprimer l'abonnement spécifié, une erreur s'est produite."
           coupons: "Codes promotionnels"
@@ -286,28 +285,6 @@ fr:
             space: "Espace"
             unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."
             subscription_successfully_changed: "Modification de l'abonnement réussie."
-
-      rentals:
-        new:
-          # ajouter une formule d'abonnement sur la plate-forme
-          new_rental:
-            add_a_subscription_rental: "Ajouter un espace de location d'abonnement"
-            unable_to_create_the_subscription_please_try_again: "L'abonnement n'a pas pu être créé. Veuillez réessayer."
-            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
-            unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer cet utilisateur. Vérifiez qu'il n'existe pas déjà un utilisateur du même nom."
-        edit:
-          # modifier une formule d'abonnement / les prix des heures machines
-          edit_rental:
-            subscription_rental: "Formule espace de location d'abonnement :"
-            prices: "Tarifs"
-            copy_prices_from: "Copier les prix depuis"
-            machines: "Machines"
-            machine: "Machine"
-            hourly_rate: "Tarif horaire"
-            spaces: "Espaces"
-            space: "Espace"
-            unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."
-            subscription_successfully_changed: "Modification de l'abonnement réussie."           
 
       invoices:
         # liste de toutes les factures & paramètres de facturation
