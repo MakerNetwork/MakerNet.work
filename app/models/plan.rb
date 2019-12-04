@@ -98,13 +98,12 @@ class Plan < ActiveRecord::Base
   def create_stripe_plan
     stripe_plan = Stripe::Plan.create(
       amount: amount,
+      currency: Rails.application.secrets.stripe_currency,
       interval: interval,
       interval_count: interval_count,
-      name: "#{base_name} - #{group.name} - #{interval}",
-      currency: Rails.application.secrets.stripe_currency,
-      id: "#{base_name.parameterize}-#{group.slug}-#{interval}-#{DateTime.now.to_s(:number)}"
+      product: { name: "#{base_name} - #{group.name} - #{interval}"}
     )
-    update_columns(stp_plan_id: stripe_plan.id, name: stripe_plan.name)
+    update_columns(stp_plan_id: stripe_plan.id, name: stripe_plan.product)
     stripe_plan
   end
 
@@ -128,6 +127,7 @@ class Plan < ActiveRecord::Base
   end
 
   def delete_stripe_plan
-    Stripe::Plan.retrieve(stp_plan_id).delete
+    delete_stripe_plan = Stripe::Plan.retrieve(stp_plan_id)
+    delete_stripe_plan.delete
   end
 end

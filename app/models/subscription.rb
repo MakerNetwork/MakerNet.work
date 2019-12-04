@@ -64,8 +64,22 @@ class Subscription < ActiveRecord::Base
             )
           end
         end
+        #new_subscription = customer.subscriptions.create({items: [plan: plan.stp_plan_id, source: card_token],})
+        new_card = Stripe::Customer.create_source(
+                            user.stp_customer_id,
+                              {source: card_token},)
 
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
+        new_subscription = Stripe::Subscription.create({
+                           customer: user.stp_customer_id,
+                           default_source: new_card,
+                           items: [
+                                {
+                                  plan: plan.stp_plan_id
+                                }
+                             ],
+                           })
+
+
         # very important to set expired_at to nil that can allow method is_new? to return true
         # for send the notification
         # TODO: Refactoring
@@ -90,7 +104,7 @@ class Subscription < ActiveRecord::Base
           invoc.save
         end
         # cancel subscription after create
-        cancel
+        # cancel
         return true
       rescue Stripe::CardError => card_error
         clear_wallet_and_goupon_invoice_items(invoice_items)
