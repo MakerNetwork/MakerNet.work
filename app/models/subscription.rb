@@ -41,10 +41,10 @@ class Subscription < ActiveRecord::Base
             end
 
             invoice_items << Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: -discount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: "coupon #{@coupon.code} - subscription"
+              customer: user.stp_customer_id,
+              amount: -discount,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "coupon #{@coupon.code} - subscription"
             )
           else
             raise InvalidCouponError
