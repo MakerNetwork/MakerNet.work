@@ -440,6 +440,8 @@ es:
         groups: "Grupos"
         authentication: "Autenticación"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "¿Desea realmente eliminar este administrador? Esto no se puede deshacer."
+        do_you_really_want_to_pause_this_member: "¿Desea realmente pausar este usuario?."
+        warning_account_marked_as_inactive: "Se marcará como inactivo y ya no podrá acceder a las funciones para los usuarios de la plataforma hasta que se reactive su cuenta."
         this_may_take_a_while_please_wait: "Advertencia: esto puede tomar un tiempo, por favor, tenga paciencia."
         administrator_successfully_deleted: "Administrador eliminado correctamente."
         unable_to_delete_the_administrator: "No se puede eliminar el administrador."

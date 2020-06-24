@@ -83,8 +83,16 @@ class API::MembersController < API::ApiController
 
   def destroy
     authorize User
+    STDERR.puts "IN THE DESTROY FUNCTION"
     @member.soft_destroy
     sign_out(@member) unless current_user.is_admin?
+    head :no_content
+  end
+
+  def activate
+    @member = User.friendly.find(params[:id])
+    STDERR.puts "IN THE ACTIVATE FUNCTION"
+    @member.activate_member
     head :no_content
   end
 
@@ -168,7 +176,7 @@ class API::MembersController < API::ApiController
   def list
     authorize User
 
-    p = params.require(:query).permit(:search, :order_by, :page, :size)
+    p = params.require(:query).permit(:search, :order_by, :page, :size, :is_active)
 
     unless p[:page].is_a? Integer
       render json: {error: 'page must be an integer'}, status: :unprocessable_entity
@@ -201,7 +209,7 @@ class API::MembersController < API::ApiController
 
     @query = User.includes(:profile, :group, :subscriptions)
                .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
-               .where("users.is_active = 'true' AND roles.name = 'member'")
+               .where("users.is_active = #{p[:is_active]} AND roles.name = 'member'")
                .order("#{order_key} #{direction}")
                .page(p[:page])
                .per(p[:size])

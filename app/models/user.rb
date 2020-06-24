@@ -135,7 +135,11 @@ class User < ActiveRecord::Base
 
   def soft_destroy
     update_attribute(:is_active, false)
-    uninvolve_from_projects
+   # uninvolve_from_projects
+  end
+
+  def activate_member
+    update_attribute(:is_active, true)
   end
 
   def uninvolve_from_projects

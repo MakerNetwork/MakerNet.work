@@ -437,6 +437,8 @@ pt:
         groups: "Grupos"
         authentication: "Autenticação"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Você realmente deseja excluir este administrador? Isso não pode ser revertido."
+        do_you_really_want_to_pause_this_member: "Você realmente deseja pausar essa conta de membro?"
+        warning_account_marked_as_inactive: "Ele será marcado como inativo e não poderá mais acessar os recursos dos membros da plataforma até que sua conta seja reativada."
         this_may_take_a_while_please_wait: "Atenção: Isso pode demorar um pouco, por favor, seja paciente."
         administrator_successfully_deleted: "Administrator excluído com sucesso."
         unable_to_delete_the_administrator: "Impossível excluir administrador."

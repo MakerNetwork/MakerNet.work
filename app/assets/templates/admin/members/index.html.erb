@@ -8,7 +8,7 @@
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
         <h1 translate>{{ 'users_management' }}</h1>
-      </section>
+      </
     </div>
 
   </div>
@@ -38,6 +38,11 @@
         <uib-tab heading="{{ 'authentication' | translate }}">
           <div ui-view="authentification"></div>
         </uib-tab>
+
+        <uib-tab heading="{{ 'deactivate_members' | translate }}">
+          <div ui-view="deactivateMembers"></div>
+        </uib-tab>
+
       </uib-tabset>
     </div>
   </div>

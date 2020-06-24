@@ -1,26 +1,4 @@
-<div class="col-md-5 m-t-lg">
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-      <input type="text" ng-model="member.searchText" class="form-control" placeholder="{{ 'search_for_an_user' | translate }}" ng-change="updateTextSearch()">
-    </div>
-  </div>
-</div>
-
 <div class="col-md-12">
-  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new" translate>{{ 'add_a_new_member' }}</button>
-  <div class="pull-right">
-    <a class="btn btn-default" ng-href="api/members/export_members.xlsx" target="export-frame" ng-click="alertExport('members')">
-      <i class="fas fa-file-excel"></i> {{ 'members' | translate }}
-    </a>
-    <a class="btn btn-default" ng-href="api/members/export_subscriptions.xlsx" target="export-frame" ng-if="!fablabWithoutPlans" ng-click="alertExport('subscriptions')">
-      <i class="fas fa-file-excel"></i> {{ 'subscriptions' | translate }}
-    </a>
-    <a class="btn btn-default" ng-href="api/members/export_reservations.xlsx" target="export-frame" ng-click="alertExport('reservations')">
-      <i class="fas fa-file-excel"></i> {{ 'reservations' | translate }}
-    </a>
-    <iframe name="export-frame" height="0" width="0" class="none"></iframe>
-  </div>
   <table class="table">
     <thead>
       <tr>
@@ -65,7 +43,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="_member in members">
+      <tr ng-repeat="_member in deactivateMembers">
         <td class="text-c">{{ _member.profile.last_name }}</td>
         <td class="text-c">{{ _member.profile.first_name }}</td>
         <td class="hidden-xs">{{ _member.email }}</td>
@@ -81,8 +59,8 @@
           </div>
         </td>
         <td>
-          <button class="btn btn-danger" ng-click="destroyMember(members, _member)">
-            <i class="fas fa-pause"></i>
+          <button class="btn btn-success" ng-click="activateMember(deactivateMembers, _member)">
+            <i class="fas fa-play"></i>
           </button>
         </td>
       </tr>
