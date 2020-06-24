@@ -21,6 +21,15 @@ Application.Controllers.controller "SignUpController", ['$scope', '$state', 'Gro
           $event.stopPropagation()
           $scope.datePicker.opened = true
 
+        today = new Date()
+        currentYear = today.getFullYear()
+        $scope.years = [currentYear-100...currentYear-10]
+        $scope.months = [1...13]
+        $scope.days = [1...32]
+
+        $scope.birthdayChanged = () ->
+          $scope.user.profile_attributes.birthday = moment($scope.user.profile_attributes.birthYear + "-" + $scope.user.profile_attributes.birthMonth + "-" + $scope.user.profile_attributes.birthDay, 'YYYY-MM-DD')
+
         # retrieve the groups (standard, student ...)
         Group.query (groups) ->
           $scope.groups = groups

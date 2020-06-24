@@ -134,7 +134,7 @@ en:
     # members list export to EXCEL format
     members: "Members"
     id: "ID"
-    surname: "Surname"
+    surname: "Last Name"
     first_name: "First name"
     email: "E-mail"
     newsletter: "Newsletter"
