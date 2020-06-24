@@ -1,24 +1,13 @@
 class Rental < ActiveRecord::Base
   belongs_to :group
 
-  has_many :credits, dependent: :destroy
-  #has_many :training_credits, -> {where(creditable_type: 'Training')}, class_name: 'Credit'
-  #has_many :machine_credits, -> {where(creditable_type: 'Machine')}, class_name: 'Credit'
-  #has_many :space_credits, -> {where(creditable_type: 'Space')}, class_name: 'Credit'
   has_many :rental_subscriptions
-  #has_one :plan_image, as: :viewable, dependent: :destroy
-  has_one :plan_file, as: :viewable, dependent: :destroy
-  has_many :prices, dependent: :destroy
 
   extend FriendlyId
   friendly_id :base_name, use: :slugged
 
-  accepts_nested_attributes_for :prices
-  #accepts_nested_attributes_for :plan_file_file, allow_destroy: true, reject_if: :all_blank
-
   after_update :update_stripe_rental, if: :amount_changed?
   after_create :create_stripe_rental, unless: :skip_create_stripe_rental
-  after_create :create_rentals_prices
   after_destroy :delete_stripe_rental
 
   attr_accessor :skip_create_stripe_rental
@@ -79,7 +68,7 @@ class Rental < ActiveRecord::Base
 
   private
   def create_stripe_rental
-    stripe_rental = Stripe::Plan.create(
+    stripe_rental = Stripe::Rental.create(
       amount: amount,
       interval: interval,
       interval_count: interval_count,
@@ -105,13 +94,13 @@ class Rental < ActiveRecord::Base
   end
 
   def update_stripe_rental
-    old_stripe_rental = Stripe::Plan.retrieve(stp_rental_id)
+    old_stripe_rental = Stripe::Rental.retrieve(stp_rental_id)
     old_stripe_rental.delete
     create_stripe_rental
   end
 
   def delete_stripe_rental
-    Stripe::Plan.retrieve(stp_rental_id).delete
+    Stripe::Rental.retrieve(stp_rental_id).delete
   end
 
 

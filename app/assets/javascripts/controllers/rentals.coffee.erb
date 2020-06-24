@@ -75,7 +75,7 @@ class RentalSpacesController
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'spacesPromise', '$uibModal', '_t', 'Wallet', 'helpers', ($scope, $state, spacesPromise, $uibModal, _t, Wallet, helpers) ->
+Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state', 'rentalsPricesPromise', 'rentalsPromise', 'spacesPromise', '$uibModal', '_t', 'CSRF', 'Wallet', 'helpers', ($scope, $state, rentalsPricesPromise, rentalsPromise, spacesPromise, $uibModal, _t, CSRF, Wallet, helpers) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
@@ -113,19 +113,64 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
   
   $scope.coupon =
     applied: null
-
+ 
+  $scope.rentalsPrices = rentalsPricesPromise
+  $scope.rentals = rentalsPromise
   $scope.selectedRental = null
 
-  $scope.selectRental = (rental) ->
+
+  $scope.selectRental = (space) ->
     if $scope.isAuthenticated()
-      if $scope.selectedRental != rental
-        $scope.selectedRental = rental
-        $scope.selectedRental.amount = 10 ## temporal
+      if $scope.selectedRental != space
+        $scope.selectedRental = space       
+        price = findPriceBy($scope.rentalsPrices, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
+        rental = findRentalBy($scope.rentals, $scope.selectedRental.id,  $scope.ctrl.member.group_id)
+        rental = (rental) ? rental : createRentalPlan(space, price)
+        $scope.selectedRental.amount = price.amount
+        $scope.selectedRental.rental = rental
         updateCartPrice()
       else
         $scope.selectedRental = null
     else
       $scope.login()
+
+
+
+  createRentalPlan = (space, price)->
+    ## form inputs bindings
+    $scope.rental =
+      type: null
+      group_id: price.group_id
+      interval: "month"
+      intervalCount: 1
+      amount: price.amount
+      is_rolling: false
+      partnerId: null
+      partnerContact: null
+      ui_weight: 0
+    CSRF.setMetaTags()  
+    url= "/api/plans/"
+    $.post url, (response)->
+      console.log("saved")
+      return response.id
+  
+    ##
+  # Retrieve a rental from rentals array by a spaceId and a groupId
+  ##
+  findRentalBy = (rentals, spaceId, groupId)->
+    for rental in rentals
+      if rental.space_id == spaceId and rental.group_id == groupId
+        return rental  
+  
+
+  ##
+  # Retrieve a price from prices array by a spaceId and a groupId
+  ##
+  findPriceBy = (prices, spaceId, groupId)->
+    for price in prices
+      if price.priceable_id == spaceId and price.group_id == groupId
+        return price
+  
 
   ##
   # Callback to trigger the payment process of the subscription
@@ -169,11 +214,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         selectedRental: -> $scope.selectedRental
         member: -> $scope.ctrl.member
         price: -> $scope.cart.total
+        rental: -> $scope.selectedRental.rental
         wallet: ->
           Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
         coupon: -> $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, selectedRental, member, price, Subscription, CustomAsset, wallet, helpers, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'rental', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, rental, CustomAsset, wallet, helpers, $filter, coupon) ->
         # User's wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -185,7 +231,9 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
+        $scope.member = member
 
+        $scope.rental = rental
         # retrieve the CGV
         CustomAsset.get {name: 'cgv-file'}, (cgv) ->
           $scope.cgv = cgv.custom_asset
@@ -200,10 +248,10 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
             growl.error(response.error.message)
           else
             $scope.attempting = true
-            Subscription.save
+            RentalSubscription.save
               coupon_code: (coupon.code if coupon)
-              subscription:
-                plan_id: selectedRental.id
+              rental_subscription:
+                rental_id: rental.id
                 user_id: member.id
                 card_token: response.id
             , (data, status) -> # success
@@ -213,14 +261,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
               $scope.alerts.push({msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
               $scope.attempting = false
       ]
-    .result['finally'](null).then (subscription)->
+    .result['finally'](null).then (rental_subscription)->
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedRental)
       Auth._currentUser.subscribed_plan = angular.copy($scope.selectedRental)
       $scope.paid.plan = angular.copy($scope.selectedRental)
       $scope.selectedRental = null
       $scope.coupon.applied = null
-
-
 
   ##
   # Open a modal window which trigger the local payment process
@@ -233,11 +279,12 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         selectedRental: -> $scope.selectedRental
         member: -> $scope.ctrl.member
         price: -> $scope.cart.total
+        rental: -> $scope.selectedRental.rental
         wallet: ->
           Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
         coupon: -> $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, selectedRental, member, price, Subscription, wallet, helpers, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'selectedRental', 'member', 'price', 'RentalSubscription', 'rental', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, selectedRental, member, price, RentalSubscription, rental, wallet, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -251,10 +298,13 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         $scope.numberFilter = $filter('number')
 
         # The plan that the user is about to subscribe
-        $scope.plan = selectedRental
+        $scope.selectedRental = selectedRental
 
         # The member who is subscribing a plan
         $scope.member = member
+
+        $scope.rental = rental
+
 
         # Button label
         if $scope.amount > 0
@@ -271,10 +321,10 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
         ##
         $scope.ok = ->
           $scope.attempting = true
-          Subscription.save
+          RentalSubscription.save
             coupon_code: (coupon.code if coupon)
-            subscription:
-              plan_id: selectedRental.id
+            rental_subscription:
+              rental_id: rental.id
               user_id: member.id
           , (data, status) -> # success
             $uibModalInstance.close(data)
@@ -307,7 +357,7 @@ Application.Controllers.controller 'RentalSpacesController', ['$scope', '$state'
     if $scope.currentUser
       if $scope.currentUser.role isnt 'admin'
         $scope.ctrl.member = $scope.currentUser
-        ##$scope.paid.plan = $scope.currentUser.subscribed_plan
+        ##  $scope.paid.plan = $scope.currentUser.subscribed_plan
         ##$scope.group.id = $scope.currentUser.group_id
 
     $scope.$on 'devise:new-session', (event, user)->

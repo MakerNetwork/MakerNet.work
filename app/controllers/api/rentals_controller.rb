@@ -2,7 +2,7 @@
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rentals = Rental.includes(:plan_file)
+    @rentals = Rental.all
     @rentals = @rentals.where(group_id: params[:group_id]) if params[:group_id]
     render :index
   end
@@ -69,7 +69,7 @@
     if @rental.update(rental_params)
       render :show, status: :ok
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @rental.errors, status: :unprocessablse_entity
     end
   end
 
@@ -92,7 +92,7 @@
         end if @parameters[:rental][:prices_attributes]
 
         @parameters = @parameters.require(:rental).permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
-            :training_credit_nb, :ui_weight, :disabled,
+            :training_credit_nb, :ui_weight, :disabled, :space_id,
             rental_file_attributes: [:id, :attachment, :_destroy],
             prices_attributes: [:id, :amount]
         )
