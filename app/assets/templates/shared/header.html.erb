@@ -22,9 +22,12 @@
 
   <!-- Top Nav -->
   <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
+    <li ng-if="isAuthenticated() && isAuthorized('admin')"><a href="/#!/checkin" class="font-sbold text-md" >CheckIn-Out</a></li>
     <li class="notification-open" ng-if="isAuthenticated()">
+
       <a ui-sref="app.logged.notifications"><i class="fa fa-bell fa-2x black"></i> <span class="badge" ng-class="{'bg-red': notifications.unread > 0}">{{notifications.unread}}</span></a>
     </li>
+
     <li class="dropdown user-profile-nav" ng-if="isAuthenticated()" uib-dropdown>
       <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
         <span class="avatar text-center">
